@@ -1,0 +1,81 @@
+{
+  "name": "lexflow-web",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "start:staff-portal": "ng serve staff-portal",
+    "start:client-portal": "ng serve client-portal",
+    "build": "ng build",
+    "build:staff-portal:i18n": "ng build staff-portal --localize",
+    "build:client-portal:i18n": "ng build client-portal --localize",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "test:staff-portal": "ng test staff-portal --watch=false",
+    "test:client-portal": "ng test client-portal --watch=false",
+    "test:shared": "ng test shared --watch=false",
+    "lint": "eslint projects",
+    "lint:fix": "eslint projects --fix",
+    "lint:styles": "stylelint \"projects/**/*.scss\"",
+    "lint:styles:fix": "stylelint \"projects/**/*.scss\" --fix",
+    "format": "prettier --write \"projects/**/*.{ts,html,scss,json}\"",
+    "format:check": "prettier --check \"projects/**/*.{ts,html,scss,json}\"",
+    "i18n:extract:staff-portal": "ng extract-i18n staff-portal --output-path projects/staff-portal/src/locale --format xlf2",
+    "i18n:extract:client-portal": "ng extract-i18n client-portal --output-path projects/client-portal/src/locale --format xlf2",
+    "e2e": "playwright test --config=e2e/playwright.config.ts"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^20.3.25",
+    "@angular/cdk": "^20.2.14",
+    "@angular/common": "^20.3.0",
+    "@angular/compiler": "^20.3.0",
+    "@angular/core": "^20.3.0",
+    "@angular/forms": "^20.3.0",
+    "@angular/localize": "^20.3.25",
+    "@angular/material": "^20.2.14",
+    "@angular/platform-browser": "^20.3.0",
+    "@angular/router": "^20.3.0",
+    "@angular/service-worker": "^20.3.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^20.3.31",
+    "@angular/cli": "^20.3.31",
+    "@angular/compiler-cli": "^20.3.0",
+    "@eslint/js": "^9.39.4",
+    "@playwright/test": "^1.61.1",
+    "@tailwindcss/postcss": "^4.3.2",
+    "@types/jasmine": "~5.1.0",
+    "angular-eslint": "21.0.1",
+    "eslint": "^9.39.1",
+    "jasmine-core": "~5.9.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-packagr": "^20.3.0",
+    "postcss": "^8.5.16",
+    "prettier": "^3.9.4",
+    "stylelint": "^17.14.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "tailwindcss": "^4.3.2",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "8.46.4"
+  }
+}

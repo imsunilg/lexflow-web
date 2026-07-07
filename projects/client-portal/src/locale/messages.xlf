@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
+  <file id="ngi18n" original="ng.template">
+    <unit id="shell.account.profile">
+      <notes>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:15,16</note>
+      </notes>
+      <segment>
+        <source>Profile</source>
+      </segment>
+    </unit>
+    <unit id="shell.account.signOut">
+      <notes>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:16,18</note>
+      </notes>
+      <segment>
+        <source>Sign out</source>
+      </segment>
+    </unit>
+  </file>
+</xliff>

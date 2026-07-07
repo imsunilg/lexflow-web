@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en" trgLang="hi">
+  <file id="ngi18n" original="ng.template">
+    <unit id="shell.search.ariaLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/shell/shell.component.html:35,36</note>
+      </notes>
+      <segment>
+        <source>Global search</source>
+        <target>वैश्विक खोज</target>
+      </segment>
+    </unit>
+    <unit id="shell.search.label">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/shell/shell.component.html:39,41</note>
+      </notes>
+      <segment>
+        <source>Search…</source>
+        <target>खोजें…</target>
+      </segment>
+    </unit>
+    <unit id="shell.quickAdd.newLead">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/shell/shell.component.html:54,55</note>
+      </notes>
+      <segment>
+        <source>New Lead</source>
+        <target>नया लीड</target>
+      </segment>
+    </unit>
+    <unit id="shell.quickAdd.newMatter">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/shell/shell.component.html:55,56</note>
+      </notes>
+      <segment>
+        <source>New Matter</source>
+        <target>नया मैटर</target>
+      </segment>
+    </unit>
+    <unit id="shell.quickAdd.newTask">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/shell/shell.component.html:56,57</note>
+      </notes>
+      <segment>
+        <source>New Task</source>
+        <target>नया कार्य</target>
+      </segment>
+    </unit>
+    <unit id="shell.quickAdd.newTimeEntry">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/shell/shell.component.html:57,60</note>
+      </notes>
+      <segment>
+        <source>New Time Entry</source>
+        <target>नई समय प्रविष्टि</target>
+      </segment>
+    </unit>
+    <unit id="shell.account.profile">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/shell/shell.component.html:68,69</note>
+      </notes>
+      <segment>
+        <source>Profile</source>
+        <target>प्रोफ़ाइल</target>
+      </segment>
+    </unit>
+    <unit id="shell.account.signOut">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/shell/shell.component.html:69,71</note>
+      </notes>
+      <segment>
+        <source>Sign out</source>
+        <target>साइन आउट</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

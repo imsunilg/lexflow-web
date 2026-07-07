@@ -1,0 +1,99 @@
+.shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.shell__rail {
+  width: var(--lf-nav-rail-collapsed);
+  background: var(--lf-surface);
+  border-right: 1px solid var(--lf-surface-variant);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: var(--lf-space-1) 0;
+  transition: width var(--lf-motion-slow);
+  overflow-x: hidden;
+  flex-shrink: 0;
+}
+
+.shell--rail-expanded .shell__rail {
+  width: var(--lf-nav-rail-expanded);
+}
+
+.shell__rail-toggle {
+  align-self: center;
+  margin-bottom: var(--lf-space-1);
+}
+
+.shell__rail-item {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+  padding: var(--lf-space-1) var(--lf-space-2);
+  color: var(--lf-on-surface-variant);
+  text-decoration: none;
+  border-radius: var(--lf-radius);
+  margin: 2px var(--lf-space-1);
+  white-space: nowrap;
+  transition: background-color var(--lf-motion-fast);
+}
+
+.shell__rail-item:hover {
+  background: var(--lf-surface-variant);
+}
+
+.shell__rail-item--active {
+  background: var(--lf-primary-container);
+  color: var(--lf-primary);
+}
+
+.shell__rail-label {
+  font-size: var(--lf-text-sm);
+}
+
+.shell__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.shell__topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+  padding: var(--lf-space-1) var(--lf-space-2);
+  border-bottom: 1px solid var(--lf-surface-variant);
+  flex-shrink: 0;
+}
+
+.shell__search {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+  color: var(--lf-on-surface-variant);
+}
+
+.shell__search kbd {
+  font-size: var(--lf-text-xs);
+  border: 1px solid var(--lf-outline);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+.shell__spacer {
+  flex: 1;
+}
+
+.shell__timer-chip {
+  font-variant-numeric: tabular-nums;
+}
+
+.shell__content {
+  flex: 1;
+  overflow: auto;
+  max-width: var(--lf-content-max-width);
+  width: 100%;
+  margin: 0 auto;
+}

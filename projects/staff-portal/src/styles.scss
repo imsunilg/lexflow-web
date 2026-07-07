@@ -1,0 +1,43 @@
+@use 'tokens';
+@use 'material-theme' as theme;
+
+// Tailwind utilities without Preflight — Angular Material already supplies a
+// base reset, and running both resets fights over margin/border/box-sizing on
+// the same elements. `@source` widens Tailwind's class scanner to the shared
+// component library, which lives outside this app's own src tree.
+@import 'tailwindcss/theme.css';
+@import 'tailwindcss/utilities.css';
+@source '../../shared/src';
+
+@theme {
+  --color-primary: var(--lf-primary);
+  --color-primary-container: var(--lf-primary-container);
+  --color-accent: var(--lf-accent);
+  --color-accent-container: var(--lf-accent-container);
+  --color-success: var(--lf-success);
+  --color-warn: var(--lf-warn);
+  --color-error: var(--lf-error);
+  --color-info: var(--lf-info);
+  --color-surface: var(--lf-surface);
+  --color-surface-variant: var(--lf-surface-variant);
+  --font-ui: var(--lf-font-ui);
+  --font-portal-heading: var(--lf-font-portal-heading);
+  --radius-lf: var(--lf-radius);
+}
+
+html {
+  @include theme.lexflow-theme;
+}
+
+body {
+  background-color: var(--lf-surface);
+  color: var(--lf-on-surface);
+  font: var(--mat-sys-body-medium);
+  font-family: var(--lf-font-ui);
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}

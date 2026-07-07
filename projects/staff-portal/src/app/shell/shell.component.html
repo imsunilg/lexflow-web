@@ -1,0 +1,77 @@
+<div class="shell" [class.shell--rail-expanded]="railExpanded()">
+  <nav class="shell__rail" aria-label="Primary navigation">
+    <button
+      mat-icon-button
+      type="button"
+      class="shell__rail-toggle"
+      [attr.aria-label]="railExpanded() ? 'Collapse navigation' : 'Expand navigation'"
+      (click)="toggleRail()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    @for (item of navItems(); track item.path) {
+      <a
+        class="shell__rail-item"
+        [routerLink]="[item.path]"
+        routerLinkActive="shell__rail-item--active"
+        [matTooltip]="railExpanded() ? '' : item.label"
+        matTooltipPosition="right"
+      >
+        <mat-icon>{{ item.icon }}</mat-icon>
+        @if (railExpanded()) {
+          <span class="shell__rail-label">{{ item.label }}</span>
+        }
+      </a>
+    }
+  </nav>
+
+  <div class="shell__main">
+    <header class="shell__topbar">
+      <button
+        mat-stroked-button
+        type="button"
+        class="shell__search"
+        aria-label="Global search"
+        i18n-aria-label="@@shell.search.ariaLabel"
+      >
+        <mat-icon>search</mat-icon>
+        <span i18n="@@shell.search.label">Search…</span>
+        <kbd>⌘K</kbd>
+      </button>
+
+      <span class="shell__spacer"></span>
+
+      <button mat-stroked-button type="button" class="shell__timer-chip" aria-label="Timer">
+        <mat-icon>timer</mat-icon>
+        <span>00:00:00</span>
+      </button>
+
+      <button mat-icon-button type="button" [matMenuTriggerFor]="quickAdd" aria-label="Quick add">
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-menu #quickAdd="matMenu">
+        <button mat-menu-item i18n="@@shell.quickAdd.newLead">New Lead</button>
+        <button mat-menu-item i18n="@@shell.quickAdd.newMatter">New Matter</button>
+        <button mat-menu-item i18n="@@shell.quickAdd.newTask">New Task</button>
+        <button mat-menu-item i18n="@@shell.quickAdd.newTimeEntry">New Time Entry</button>
+      </mat-menu>
+
+      <button mat-icon-button type="button" aria-label="Notifications">
+        <mat-icon>notifications</mat-icon>
+      </button>
+
+      <button mat-icon-button type="button" [matMenuTriggerFor]="avatarMenu" aria-label="Account">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #avatarMenu="matMenu">
+        <button mat-menu-item i18n="@@shell.account.profile">Profile</button>
+        <button mat-menu-item i18n="@@shell.account.signOut">Sign out</button>
+      </mat-menu>
+    </header>
+
+    <main class="shell__content">
+      <router-outlet />
+    </main>
+  </div>
+</div>

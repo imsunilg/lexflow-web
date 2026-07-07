@@ -1,0 +1,91 @@
+// Design tokens per LexFlow_PRD.md §12 — single source of truth, consumed by both
+// staff-portal and client-portal. Values are CSS custom properties so they're
+// usable from plain CSS, SCSS, Angular Material system-variable overrides, and
+// Tailwind's `@theme` mapping alike.
+:root {
+  // --- Brand colors ---
+  --lf-primary: #1e3a5f; // deep juridical blue
+  --lf-primary-container: #d7e3f5;
+  --lf-accent: #c9a227; // brass
+  --lf-accent-container: #f4e8c1;
+
+  // --- Semantic colors ---
+  --lf-success: #1e7d43;
+  --lf-warn: #b8860b;
+  --lf-error: #b3261e;
+  --lf-info: #0b6bb3;
+
+  // --- Neutral surfaces (light) ---
+  --lf-surface: #fff;
+  --lf-surface-variant: #f2f4f7;
+  --lf-on-surface: #1a1c1e;
+  --lf-on-surface-variant: #44474a;
+  --lf-outline: #74777a;
+
+  // --- Spacing grid (8px) ---
+  --lf-space-1: 8px;
+  --lf-space-2: 16px;
+  --lf-space-3: 24px;
+  --lf-space-4: 32px;
+  --lf-space-5: 40px;
+  --lf-space-6: 48px;
+
+  // --- Radius ---
+  --lf-radius: 10px;
+
+  // --- Elevation (levels 0-3) ---
+  --lf-elevation-0: none;
+  --lf-elevation-1: 0 1px 2px rgb(0 0 0 / 8%), 0 1px 3px rgb(0 0 0 / 6%);
+  --lf-elevation-2: 0 2px 4px rgb(0 0 0 / 10%), 0 4px 8px rgb(0 0 0 / 6%);
+  --lf-elevation-3: 0 4px 8px rgb(0 0 0 / 12%), 0 8px 16px rgb(0 0 0 / 8%);
+
+  // --- Typography ---
+  --lf-font-ui: 'Inter', 'Noto Sans Devanagari', sans-serif;
+  --lf-font-portal-heading: 'Lora', 'Noto Sans Devanagari', serif;
+  --lf-text-xs: 12px;
+  --lf-text-sm: 14px;
+  --lf-text-md: 16px;
+  --lf-text-lg: 20px;
+  --lf-text-xl: 24px;
+  --lf-text-2xl: 32px;
+
+  // --- Layout ---
+  --lf-nav-rail-collapsed: 72px;
+  --lf-nav-rail-expanded: 280px;
+  --lf-content-max-width: 1440px;
+
+  // --- Motion ---
+  --lf-motion-fast: 150ms ease;
+  --lf-motion-slow: 200ms ease;
+
+  color-scheme: light;
+}
+
+// System-preference dark mode (default), overridable by an explicit
+// data-theme="light" attribute (e.g. a user preference toggle).
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --lf-surface: #111318;
+    --lf-surface-variant: #1c1f24;
+    --lf-on-surface: #e2e2e6;
+    --lf-on-surface-variant: #c4c6cf;
+    --lf-outline: #8e9099;
+    --lf-primary-container: #274a78;
+    --lf-accent-container: #5c4a12;
+
+    color-scheme: dark;
+  }
+}
+
+// Explicit opt-in to dark mode regardless of system preference.
+:root[data-theme='dark'] {
+  --lf-surface: #111318;
+  --lf-surface-variant: #1c1f24;
+  --lf-on-surface: #e2e2e6;
+  --lf-on-surface-variant: #c4c6cf;
+  --lf-outline: #8e9099;
+  --lf-primary-container: #274a78;
+  --lf-accent-container: #5c4a12;
+
+  color-scheme: dark;
+}
