@@ -1,0 +1,26 @@
+.refund-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  min-width: 420px;
+}
+
+.refund-dialog__payment {
+  color: var(--lf-on-surface-variant);
+  margin: 0;
+}
+
+.refund-dialog__error {
+  color: var(--lf-error);
+  margin: 0;
+}
+
+.refund-dialog__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+}
+
+.refund-dialog__field {
+  width: 100%;
+}

@@ -1,0 +1,64 @@
+<div class="aging">
+  <header class="aging__header">
+    <h1>Aging report</h1>
+    <div class="aging__controls">
+      <mat-form-field appearance="outline">
+        <mat-label>As of</mat-label>
+        <input matInput [matDatepicker]="asOfPicker" [formControl]="asOfControl" />
+        <mat-datepicker-toggle matIconSuffix [for]="asOfPicker" />
+        <mat-datepicker #asOfPicker />
+      </mat-form-field>
+      <button mat-flat-button color="primary" type="button" [disabled]="loading()" (click)="load()">
+        @if (loading()) {
+          <mat-spinner diameter="20" />
+        } @else {
+          Refresh
+        }
+      </button>
+    </div>
+  </header>
+
+  @if (errorMessage()) {
+    <p class="aging__error" role="alert">{{ errorMessage() }}</p>
+  }
+
+  @if (report(); as r) {
+    <table class="aging__table">
+      <caption class="sr-only">
+        Accounts receivable aging bucket amounts
+      </caption>
+      <tbody>
+        @for (bucket of buckets; track bucket.key) {
+          <tr>
+            <th scope="row">{{ bucket.label }}</th>
+            <td class="aging__bar-cell">
+              <div class="aging__bar-track">
+                <div
+                  class="aging__bar-fill"
+                  [attr.data-tone]="bucket.tone"
+                  [style.width.%]="widthPct(r[bucket.key])"
+                ></div>
+              </div>
+            </td>
+            <td class="aging__amount">{{ r[bucket.key] | lfCurrency }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <section class="aging__total">
+      <div class="aging__total-row">
+        <span>Total AR</span>
+        <strong>{{ r.total | lfCurrency }}</strong>
+      </div>
+      <p class="aging__check" [class.aging__check--fail]="!reconciles()">
+        Buckets sum to {{ bucketsSum() | lfCurrency }}
+        @if (reconciles()) {
+          — matches total (AC-B6 ✓)
+        } @else {
+          — does NOT match total ({{ r.total | lfCurrency }})
+        }
+      </p>
+    </section>
+  }
+</div>

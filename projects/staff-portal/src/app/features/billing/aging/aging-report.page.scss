@@ -1,0 +1,120 @@
+.aging {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-3);
+  padding: var(--lf-space-3);
+}
+
+.aging__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--lf-space-2);
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.aging__controls {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--lf-space-1);
+}
+
+.aging__error {
+  color: var(--lf-error);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.aging__table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: var(--lf-space-1) var(--lf-space-1);
+    vertical-align: middle;
+  }
+
+  th {
+    text-align: left;
+    width: 140px;
+    color: var(--lf-on-surface-variant);
+    font-weight: 600;
+    font-size: var(--lf-text-sm);
+  }
+}
+
+.aging__bar-cell {
+  width: 100%;
+}
+
+.aging__bar-track {
+  width: 100%;
+  height: 22px;
+  background: var(--lf-surface-variant);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.aging__bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width var(--lf-motion-slow);
+
+  &[data-tone='success'] {
+    background: var(--lf-success);
+  }
+  &[data-tone='info'] {
+    background: var(--lf-info);
+  }
+  &[data-tone='warn'] {
+    background: var(--lf-warn);
+  }
+  &[data-tone='warn-deep'] {
+    background: color-mix(in srgb, var(--lf-warn) 60%, var(--lf-error) 40%);
+  }
+  &[data-tone='error'] {
+    background: var(--lf-error);
+  }
+}
+
+.aging__amount {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  width: 160px;
+}
+
+.aging__total {
+  padding: var(--lf-space-2);
+  background: var(--lf-surface-variant);
+  border-radius: var(--lf-radius);
+}
+
+.aging__total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--lf-text-lg);
+}
+
+.aging__check {
+  margin: var(--lf-space-1) 0 0;
+  color: var(--lf-on-surface-variant);
+  font-size: var(--lf-text-sm);
+}
+
+.aging__check--fail {
+  color: var(--lf-error);
+  font-weight: 600;
+}

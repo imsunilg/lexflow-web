@@ -1,0 +1,58 @@
+:host {
+  display: block;
+}
+
+.lf-gallery-content {
+  min-width: 480px;
+  max-height: 70vh;
+}
+
+.lf-gallery-state {
+  display: flex;
+  justify-content: center;
+  padding: var(--lf-space-5);
+}
+
+.lf-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--lf-space-2);
+}
+
+.lf-gallery-card {
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+}
+
+.lf-gallery-card:hover,
+.lf-gallery-card:focus-visible {
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.2);
+  outline: none;
+}
+
+.lf-gallery-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lf-space-1);
+}
+
+.lf-gallery-card__name {
+  font-weight: 600;
+  font-size: var(--lf-text-sm);
+}
+
+.lf-gallery-card__badge {
+  font-size: var(--lf-text-xs);
+  background: var(--lf-surface-variant);
+  border-radius: 4px;
+  padding: 2px 6px;
+  white-space: nowrap;
+}
+
+.lf-gallery-card__version {
+  display: block;
+  margin-top: var(--lf-space-1);
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+}

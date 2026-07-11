@@ -1,0 +1,86 @@
+<div class="case-detail">
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (error() || !courtCase()) {
+    <lf-empty-state
+      icon="error_outline"
+      title="Couldn't load this case"
+      ctaLabel="Retry"
+      (cta)="load()"
+    />
+  } @else {
+    <header class="case-detail__header">
+      <div class="case-detail__header-main">
+        <h1>
+          {{ courtCase()!.caseType }} {{ courtCase()!.caseNumber }}/{{ courtCase()!.caseYear }}
+        </h1>
+        <lf-status-chip [label]="courtCase()!.stage || 'No stage'" toneOverride="info" />
+        <lf-status-chip [label]="courtCase()!.status" />
+      </div>
+
+      @if (nextHearingCountdown(); as countdown) {
+        <span class="case-detail__countdown" [attr.data-tone]="countdown.tone">
+          Next hearing: {{ countdown.label }}
+        </span>
+      }
+    </header>
+
+    <mat-tab-group>
+      <mat-tab label="Hearings">
+        <div class="case-detail__tab-content">
+          <lf-case-hearings-tab
+            [caseId]="courtCase()!.id"
+            (outcomeRequested)="onOutcomeRequested($event)"
+          />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Orders">
+        <div class="case-detail__tab-content">
+          <lf-case-orders-tab [caseId]="courtCase()!.id" />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Parties & Advocates">
+        <div class="case-detail__tab-content">
+          <lf-case-parties-tab [caseId]="courtCase()!.id" />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Evidence">
+        <div class="case-detail__tab-content">
+          <lf-case-evidence-tab [caseId]="courtCase()!.id" />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Witnesses">
+        <div class="case-detail__tab-content">
+          <lf-case-witnesses-tab [caseId]="courtCase()!.id" />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Arguments">
+        <div class="case-detail__tab-content">
+          <lf-case-arguments-tab [caseId]="courtCase()!.id" />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Timeline">
+        <div class="case-detail__tab-content">
+          @if (timelineRows().length === 0) {
+            <lf-empty-state icon="timeline" title="No timeline entries yet" />
+          } @else {
+            <ul class="case-detail__timeline">
+              @for (row of timelineRows(); track $index) {
+                <li>
+                  <strong>{{ row.at | date: 'mediumDate' }}</strong>
+                  {{ row.label }}
+                </li>
+              }
+            </ul>
+          }
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  }
+</div>

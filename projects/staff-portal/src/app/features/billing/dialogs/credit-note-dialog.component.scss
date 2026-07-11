@@ -1,0 +1,26 @@
+.credit-note-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  min-width: 420px;
+}
+
+.credit-note-dialog__invoice {
+  color: var(--lf-on-surface-variant);
+  margin: 0;
+}
+
+.credit-note-dialog__error {
+  color: var(--lf-error);
+  margin: 0;
+}
+
+.credit-note-dialog__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+}
+
+.credit-note-dialog__field {
+  width: 100%;
+}

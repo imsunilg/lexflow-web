@@ -1,0 +1,165 @@
+@if (document(); as doc) {
+  <div
+    class="lf-detail-drawer__backdrop"
+    role="button"
+    tabindex="0"
+    aria-label="Close detail drawer"
+    (click)="close()"
+    (keydown.enter)="close()"
+    (keydown.space)="close()"
+  ></div>
+
+  <aside class="lf-detail-drawer" [class.lf-detail-drawer--open]="true">
+    <header class="lf-detail-drawer__header">
+      <h2 class="lf-detail-drawer__title">{{ doc.title }}</h2>
+      <button mat-icon-button type="button" aria-label="Close" (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </header>
+
+    <div class="lf-detail-drawer__quick-actions">
+      <button mat-stroked-button type="button" (click)="requestPreview()">
+        <mat-icon>visibility</mat-icon> Preview
+      </button>
+      <button mat-stroked-button type="button" (click)="requestShare()">
+        <mat-icon>share</mat-icon> Share
+      </button>
+      <button mat-stroked-button type="button" (click)="requestSign()">
+        <mat-icon>draw</mat-icon> Send for signature
+      </button>
+    </div>
+
+    <mat-tab-group class="lf-detail-drawer__tabs">
+      <mat-tab label="Metadata">
+        <div class="lf-detail-drawer__tab-content">
+          <form [formGroup]="form" class="lf-detail-drawer__form">
+            <mat-form-field appearance="outline">
+              <mat-label>Title</mat-label>
+              <input matInput formControlName="title" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Document type</mat-label>
+              <mat-select formControlName="docType">
+                @for (type of docTypes; track type) {
+                  <mat-option [value]="type">{{ type }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Confidentiality</mat-label>
+              <mat-select formControlName="confidentiality">
+                @for (level of confidentialityLevels; track level) {
+                  <mat-option [value]="level">{{ level }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+
+            @if (errorMessage()) {
+              <p class="lf-detail-drawer__error" role="alert">{{ errorMessage() }}</p>
+            }
+
+            <div class="lf-detail-drawer__form-actions">
+              <button
+                mat-flat-button
+                color="primary"
+                type="button"
+                [disabled]="saving() || form.invalid"
+                (click)="saveMetadata()"
+              >
+                Save
+              </button>
+              <button
+                mat-button
+                color="warn"
+                type="button"
+                [disabled]="deleting()"
+                (click)="deleteDocument()"
+              >
+                Delete
+              </button>
+            </div>
+          </form>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Versions">
+        <div class="lf-detail-drawer__tab-content">
+          <lf-file-uploader
+            (filesSelected)="uploadNewVersion($event)"
+            [progress]="uploadProgress()"
+          />
+
+          @if (versionsLoading()) {
+            <p class="lf-detail-drawer__hint">Loading versions…</p>
+          } @else if (versions().length === 0) {
+            <lf-empty-state
+              icon="history"
+              title="No versions yet"
+              message="Upload a file above to create the first version."
+            />
+          } @else {
+            <ul class="lf-detail-drawer__versions">
+              @for (version of versions(); track version.id) {
+                <li class="lf-detail-drawer__version-row">
+                  <div class="lf-detail-drawer__version-main">
+                    <span class="lf-detail-drawer__version-no">
+                      v{{ version.versionNo }}
+                      @if (isCurrentVersion(version)) {
+                        <lf-status-chip label="Current" [toneOverride]="'success'" />
+                      }
+                    </span>
+                    <span class="lf-detail-drawer__version-meta">
+                      {{ formatSize(version.sizeBytes) }} ·
+                      {{ version.uploadedBy ?? 'Unknown uploader' }} ·
+                      {{ version.createdAt | date: 'medium' }}
+                    </span>
+                  </div>
+                  <lf-status-chip [label]="version.ocrStatus" />
+                  <div class="lf-detail-drawer__version-actions">
+                    <a mat-button [href]="downloadUrl(doc.id)" target="_blank" rel="noopener"
+                      >Download</a
+                    >
+                    @if (!isCurrentVersion(version)) {
+                      <button mat-button type="button" (click)="restoreVersion(version.versionNo)">
+                        Restore
+                      </button>
+                    }
+                  </div>
+                </li>
+              }
+            </ul>
+          }
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Activity">
+        <div class="lf-detail-drawer__tab-content">
+          <lf-empty-state
+            icon="history_toggle_off"
+            title="Activity history isn't available yet"
+            message="There is no document-activity endpoint on the backend yet, so per-view/download/print history can't be shown here. This is a confirmed backend gap, not a bug."
+          />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Sharing">
+        <div class="lf-detail-drawer__tab-content">
+          <div class="lf-detail-drawer__sharing-summary">
+            <span class="lf-detail-drawer__sharing-label">Client portal</span>
+            <lf-status-chip
+              [label]="doc.portalPublished ? 'Published' : 'Not published'"
+              [toneOverride]="doc.portalPublished ? 'success' : 'neutral'"
+            />
+          </div>
+          <p class="lf-detail-drawer__hint">
+            There is no publish/unpublish toggle endpoint yet, so this reflects the current value
+            read-only. Use "Manage sharing" for external links.
+          </p>
+          <button mat-stroked-button type="button" (click)="requestShare()">Manage sharing</button>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </aside>
+}

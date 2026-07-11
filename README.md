@@ -28,8 +28,16 @@ npm run start:staff-portal    # http://localhost:4200
 npm run start:client-portal   # http://localhost:4200 (run one at a time, or pass --port)
 ```
 
-Both apps are currently a routed shell with placeholder pages per feature —
-real module UI lands per the Build Playbook's Phase D prompts.
+Both `start:*` scripts pass `--proxy-config proxy.conf.json`, which forwards `/api`
+and `/hubs` (SignalR) to `lexflow-api` on `http://localhost:5000` — the default port
+from that repo's own README. Run `dotnet run --project src/LexFlow.Api` there first
+(or point `proxy.conf.json`'s `target` at wherever it's actually running) for any
+screen that calls the API, which by this point (auth screens, nav permission
+trimming, search overlay, timer chip, notification bell) is most of the shell.
+
+Most feature pages are still placeholders — real module UI lands per the Build
+Playbook's Phase D prompts — but the app shell itself (auth, nav, ⌘K search,
+timer, notifications) is real, not a placeholder.
 
 ## Design system
 

@@ -1,0 +1,106 @@
+.calendar-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-3);
+  height: 100%;
+}
+
+.calendar-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--lf-space-2);
+}
+
+.calendar-page__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+
+  h1 {
+    margin: 0 0 0 var(--lf-space-1);
+    font-size: var(--lf-text-lg, 20px);
+  }
+}
+
+.calendar-page__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+  flex-wrap: wrap;
+}
+
+.calendar-page__filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.calendar-page__filter-chip {
+  opacity: 0.5;
+}
+
+.calendar-page__filter-chip--active {
+  opacity: 1;
+  border-color: var(--lf-primary);
+  color: var(--lf-primary);
+}
+
+.month-view {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--lf-surface-variant);
+  border-radius: 8px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.month-view__weekday-row,
+.month-view__week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.month-view__weekday {
+  padding: 6px;
+  text-align: center;
+  font-size: var(--lf-text-xs);
+  font-weight: 600;
+  color: var(--lf-on-surface-variant);
+  background: var(--lf-surface-variant);
+}
+
+.month-view__cell {
+  min-height: 110px;
+  border: 1px solid var(--lf-surface-variant);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  cursor: pointer;
+}
+
+.month-view__cell--outside {
+  opacity: 0.4;
+}
+
+.month-view__cell-date {
+  font-size: var(--lf-text-xs);
+  font-weight: 600;
+}
+
+.month-view__cell-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.month-view__more {
+  font-size: var(--lf-text-xs);
+  min-width: unset;
+  padding: 0 4px;
+  line-height: 1.6;
+}

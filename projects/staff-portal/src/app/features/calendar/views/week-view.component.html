@@ -1,0 +1,57 @@
+<div class="week-view">
+  <div class="week-view__header">
+    <div class="week-view__gutter"></div>
+    @for (day of days(); track day.getTime()) {
+      <div class="week-view__day-header">{{ day | date: 'EEE d' }}</div>
+    }
+  </div>
+
+  <div class="week-view__all-day-row" cdkDropListGroup>
+    <div class="week-view__gutter">All-day</div>
+    @for (day of days(); track day.getTime()) {
+      <div
+        class="week-view__all-day-cell"
+        cdkDropList
+        [cdkDropListData]="day"
+        (cdkDropListDropped)="dropped.emit($event)"
+      >
+        @for (item of allDayItemsByDay().get(dayKey(day)) ?? []; track item.id) {
+          <div cdkDrag [cdkDragData]="item" [cdkDragDisabled]="item.isLocked">
+            <lf-event-chip
+              [item]="item"
+              (viewRequested)="viewRequested.emit($event)"
+              (editRequested)="editRequested.emit($event)"
+              (deleteRequested)="deleteRequested.emit($event)"
+            />
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  <cdk-virtual-scroll-viewport itemSize="48" class="week-view__body" cdkDropListGroup>
+    <div class="week-view__row" *cdkVirtualFor="let hour of hours">
+      <div class="week-view__gutter week-view__gutter--hour">{{ hour }}:00</div>
+      @for (day of days(); track day.getTime()) {
+        <div
+          class="week-view__hour-cell"
+          cdkDropList
+          [cdkDropListData]="slotDate(day, hour)"
+          (cdkDropListDropped)="dropped.emit($event)"
+          (dblclick)="itemsFor(day, hour).length === 0 && createRequested.emit(slotDate(day, hour))"
+        >
+          @for (item of itemsFor(day, hour); track item.id) {
+            <div cdkDrag [cdkDragData]="item" [cdkDragDisabled]="item.isLocked">
+              <lf-event-chip
+                [item]="item"
+                (viewRequested)="viewRequested.emit($event)"
+                (editRequested)="editRequested.emit($event)"
+                (deleteRequested)="deleteRequested.emit($event)"
+              />
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </cdk-virtual-scroll-viewport>
+</div>

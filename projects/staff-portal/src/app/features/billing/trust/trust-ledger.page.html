@@ -1,0 +1,139 @@
+<div class="trust-ledger">
+  <header class="trust-ledger__header">
+    <div>
+      <h1>Trust ledger</h1>
+      <p class="trust-ledger__subtitle">
+        {{ client()?.displayName ?? client()?.legalName ?? clientId }}
+      </p>
+    </div>
+
+    @if (account(); as a) {
+      <div class="trust-ledger__balance">
+        <span class="trust-ledger__balance-label">Current balance</span>
+        <span class="trust-ledger__balance-value">{{ a.currentBalance | lfCurrency }}</span>
+        @if (a.bankRef) {
+          <span class="trust-ledger__bank-ref">Bank ref: {{ a.bankRef }}</span>
+        }
+      </div>
+    }
+  </header>
+
+  @if (errorMessage()) {
+    <p class="trust-ledger__error" role="alert">{{ errorMessage() }}</p>
+  }
+
+  <p class="trust-ledger__notice">
+    Trust ledger entries are append-only (DB trigger blocks UPDATE/DELETE per AC-B7) — there is no
+    edit action. Corrections are made only via a reversing entry.
+  </p>
+
+  <div class="trust-ledger__actions">
+    <button mat-stroked-button type="button" (click)="depositFormOpen.set(!depositFormOpen())">
+      <mat-icon>add_circle</mat-icon> Deposit
+    </button>
+    <button mat-stroked-button type="button" (click)="disburseFormOpen.set(!disburseFormOpen())">
+      <mat-icon>remove_circle</mat-icon> Disburse
+    </button>
+  </div>
+
+  @if (depositFormOpen()) {
+    <form [formGroup]="depositForm" class="trust-ledger__form">
+      <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" formControlName="amount" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Purpose</mat-label>
+        <input matInput formControlName="purpose" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Authorization ref (optional)</mat-label>
+        <input matInput formControlName="authorizationRef" />
+      </mat-form-field>
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        [disabled]="submitting()"
+        (click)="submitDeposit()"
+      >
+        @if (submitting()) {
+          <mat-spinner diameter="20" />
+        } @else {
+          Record deposit
+        }
+      </button>
+    </form>
+  }
+
+  @if (disburseFormOpen()) {
+    <form [formGroup]="disburseForm" class="trust-ledger__form">
+      <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" formControlName="amount" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Purpose</mat-label>
+        <input matInput formControlName="purpose" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Invoice ID (optional — trust-to-invoice application)</mat-label>
+        <input matInput formControlName="invoiceId" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Authorization ref (required)</mat-label>
+        <input matInput formControlName="authorizationRef" />
+      </mat-form-field>
+      <button
+        mat-flat-button
+        color="warn"
+        type="button"
+        [disabled]="submitting()"
+        (click)="confirmAndDisburse()"
+      >
+        @if (submitting()) {
+          <mat-spinner diameter="20" />
+        } @else {
+          Disburse
+        }
+      </button>
+    </form>
+  }
+
+  @if (entries().length === 0 && !loading()) {
+    <lf-empty-state icon="account_balance" title="No trust ledger entries yet" />
+  } @else {
+    <table class="trust-ledger__table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Kind</th>
+          <th>Amount</th>
+          <th>Running balance</th>
+          <th>Purpose</th>
+          <th>Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (entry of entries(); track entry.id) {
+          <tr>
+            <td>{{ entry.entryNo }}</td>
+            <td>
+              <span class="trust-ledger__kind" [attr.data-kind]="entry.kind">{{ entry.kind }}</span>
+            </td>
+            <td>{{ entry.amount | lfCurrency }}</td>
+            <td>{{ entry.runningBalance | lfCurrency }}</td>
+            <td>{{ entry.purpose ?? '—' }}</td>
+            <td>{{ entry.createdAt | date: 'medium' }}</td>
+            <td>
+              @if (entry.kind !== 'Reversal') {
+                <button mat-button type="button" (click)="reverse(entry)">Reverse</button>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

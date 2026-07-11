@@ -1,0 +1,59 @@
+.lf-signature-wizard {
+  min-width: 480px;
+}
+
+.lf-signature-wizard__providers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+  padding: var(--lf-space-2) 0;
+}
+
+.lf-signature-wizard__signers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+  padding: var(--lf-space-2) 0;
+}
+
+.lf-signature-wizard__signer-row {
+  display: flex;
+  gap: var(--lf-space-1);
+  align-items: center;
+}
+
+.lf-signature-wizard__order {
+  width: 80px;
+}
+
+.lf-signature-wizard__step-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--lf-space-2) 0;
+}
+
+.lf-signature-wizard__review,
+.lf-signature-wizard__result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+  padding: var(--lf-space-2) 0;
+}
+
+.lf-signature-wizard__label {
+  margin: 0;
+  font-weight: 600;
+  font-size: var(--lf-text-sm);
+}
+
+.lf-signature-wizard__signer-status {
+  margin: 0;
+  padding-left: var(--lf-space-2);
+  font-size: var(--lf-text-sm);
+}
+
+.lf-signature-wizard__error {
+  margin: 0;
+  color: var(--lf-error);
+  font-size: var(--lf-text-sm);
+}

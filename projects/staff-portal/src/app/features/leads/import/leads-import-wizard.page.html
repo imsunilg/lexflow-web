@@ -1,0 +1,127 @@
+<div class="import-page">
+  <lf-leads-tabs />
+
+  <h1 class="import-page__title">Import leads</h1>
+
+  @if (phase() === 'upload') {
+    <lf-file-uploader accept=".csv,.xlsx" (filesSelected)="onFilesSelected($event)" />
+  }
+
+  @if (errorMessage()) {
+    <p class="import-page__error" role="alert">{{ errorMessage() }}</p>
+  }
+
+  @if (phase() === 'mapping') {
+    <div class="import-mapping">
+      <p>{{ file()?.name }}</p>
+
+      @if (isCsv()) {
+        <p class="import-mapping__hint">Map each column in your file to a lead field.</p>
+        <table class="import-mapping__table">
+          <thead>
+            <tr>
+              <th>Lead field</th>
+              <th>Column in your file</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (field of targetFields; track field) {
+              <tr>
+                <td>{{ field }}</td>
+                <td>
+                  <mat-select
+                    [value]="mapping()[field]"
+                    (selectionChange)="setMapping(field, $event.value)"
+                  >
+                    <mat-option [value]="null">(none)</mat-option>
+                    @for (header of sourceHeaders(); track $index) {
+                      <mat-option [value]="$index">{{ header }}</mat-option>
+                    }
+                  </mat-select>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        @if (previewRows().length > 0) {
+          <p class="import-mapping__hint">Preview (first {{ previewRows().length }} rows):</p>
+          <table class="import-mapping__preview">
+            <thead>
+              <tr>
+                @for (header of sourceHeaders(); track $index) {
+                  <th>{{ header }}</th>
+                }
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of previewRows(); track $index) {
+                <tr>
+                  @for (cell of row; track $index) {
+                    <td>{{ cell }}</td>
+                  }
+                </tr>
+              }
+            </tbody>
+          </table>
+        }
+      } @else {
+        <p class="import-mapping__hint">
+          .xlsx files are uploaded as-is; columns named FirstName, LastName, Company, Email, Phone,
+          IssueSummary are detected automatically.
+        </p>
+      }
+
+      <div class="import-page__actions">
+        <button mat-button type="button" (click)="startOver()">Back</button>
+        <button mat-flat-button color="primary" type="button" (click)="confirmAndUpload()">
+          Upload
+        </button>
+      </div>
+    </div>
+  }
+
+  @if (phase() === 'uploading') {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  @if (phase() === 'progress' && batch()) {
+    <div class="import-progress">
+      <p>Importing {{ batch()!.fileName }}…</p>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="((batch()!.successCount + batch()!.errorCount) / (batch()!.totalRows || 1)) * 100"
+      />
+      <p>
+        {{ batch()!.successCount + batch()!.errorCount }} / {{ batch()!.totalRows }} rows processed
+      </p>
+    </div>
+  }
+
+  @if (phase() === 'done' && batch()) {
+    <div class="import-result">
+      @if (batch()!.status === 'Completed') {
+        <p class="import-result__success">
+          <mat-icon>check_circle</mat-icon>
+          Imported {{ batch()!.successCount }} of {{ batch()!.totalRows }} rows.
+        </p>
+      } @else {
+        <p class="import-result__failure" role="alert">
+          <mat-icon>error</mat-icon>
+          Import failed{{ batch()!.failureReason ? ': ' + batch()!.failureReason : '.' }}
+        </p>
+      }
+
+      @if (batch()!.errorCount > 0) {
+        <button mat-stroked-button type="button" (click)="downloadErrorFile()">
+          <mat-icon>download</mat-icon>
+          Download error file ({{ batch()!.errorCount }} rows)
+        </button>
+      }
+
+      <div class="import-page__actions">
+        <button mat-button type="button" (click)="startOver()">Import another file</button>
+      </div>
+    </div>
+  }
+</div>

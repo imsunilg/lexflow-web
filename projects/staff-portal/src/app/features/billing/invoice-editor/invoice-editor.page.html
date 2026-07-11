@@ -1,0 +1,205 @@
+<div class="invoice-editor">
+  <header class="invoice-editor__header">
+    <h1>{{ isNew() ? 'New invoice' : (invoice()?.number ?? 'Invoice') }}</h1>
+    @if (invoice(); as inv) {
+      <lf-status-chip [label]="inv.status" />
+    }
+    <div class="invoice-editor__actions">
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        [disabled]="saving() || !canEdit()"
+        (click)="save()"
+      >
+        @if (saving()) {
+          <mat-spinner diameter="18" />
+        } @else {
+          Save
+        }
+      </button>
+      @if (invoice()?.status === 'Draft') {
+        <button mat-stroked-button type="button" (click)="submitInvoice()">
+          Submit for approval
+        </button>
+      }
+      @if (invoice()?.status === 'Approved') {
+        <button mat-stroked-button type="button" (click)="sendInvoice()">Send</button>
+      }
+    </div>
+  </header>
+
+  @if (errorMessage()) {
+    <p class="invoice-editor__error" role="alert">{{ errorMessage() }}</p>
+  }
+
+  <div class="invoice-editor__body">
+    <section class="invoice-editor__form-pane">
+      <form [formGroup]="form" class="invoice-editor__form">
+        <mat-form-field appearance="outline" class="invoice-editor__matter-field">
+          <mat-label>Matter</mat-label>
+          <input
+            matInput
+            [formControl]="matterControl"
+            [matAutocomplete]="matterAuto"
+            [readonly]="!canEdit()"
+          />
+          <mat-autocomplete
+            #matterAuto="matAutocomplete"
+            (optionSelected)="onMatterSelected($event)"
+          >
+            @for (matter of matterResults(); track matter.id) {
+              <mat-option [value]="matter.number + ' — ' + matter.title">
+                {{ matter.number }} — {{ matter.title }}
+              </mat-option>
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Issue date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="issuePicker"
+            [formControl]="issueDateControl"
+            [readonly]="!canEdit()"
+          />
+          <mat-datepicker-toggle matIconSuffix [for]="issuePicker" />
+          <mat-datepicker #issuePicker />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Due in (days)</mat-label>
+          <input matInput type="number" formControlName="dueInDays" [readonly]="!canEdit()" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Flat discount</mat-label>
+          <input matInput type="number" formControlName="discount" [readonly]="!canEdit()" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="invoice-editor__time-entries">
+          <mat-label>Unbilled time-entry IDs (comma-separated)</mat-label>
+          <input matInput formControlName="timeEntryIdsCsv" [readonly]="!canEdit()" />
+          <mat-hint>No WIP picker exists yet — paste IDs from the Time module manually.</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="invoice-editor__notes">
+          <mat-label>Notes</mat-label>
+          <textarea matInput formControlName="notes" rows="2" [readonly]="!canEdit()"></textarea>
+        </mat-form-field>
+      </form>
+
+      <div class="invoice-editor__line-grid">
+        <div class="invoice-editor__line-grid-header">
+          <h2>Lines</h2>
+          @if (canEdit()) {
+            <button mat-button type="button" (click)="addLine()">
+              <mat-icon>add</mat-icon> Add line
+            </button>
+          }
+        </div>
+
+        <table class="invoice-editor__lines-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Qty</th>
+              <th>Unit</th>
+              <th>Rate</th>
+              <th>Amount</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of extraLines.controls; track $index) {
+              <tr [formGroup]="row">
+                <td><input matInput formControlName="type" [readOnly]="!canEdit()" /></td>
+                <td><input matInput formControlName="description" [readOnly]="!canEdit()" /></td>
+                <td>
+                  <input matInput type="number" formControlName="qty" [readOnly]="!canEdit()" />
+                </td>
+                <td><input matInput formControlName="unit" [readOnly]="!canEdit()" /></td>
+                <td>
+                  <input matInput type="number" formControlName="rate" [readOnly]="!canEdit()" />
+                </td>
+                <td>{{ lineAmount($index) | lfCurrency }}</td>
+                <td>
+                  @if (canEdit()) {
+                    <button mat-icon-button type="button" (click)="removeLine($index)">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        @if (invoice(); as inv) {
+          <div class="invoice-editor__saved-lines">
+            <h3>Saved lines (from last save)</h3>
+            <table class="invoice-editor__lines-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Qty</th>
+                  <th>Rate</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (line of inv.lines; track line.id) {
+                  <tr>
+                    <td>{{ line.lineNo }}</td>
+                    <td>{{ line.type }}</td>
+                    <td>{{ line.description }}</td>
+                    <td>{{ line.qty }}</td>
+                    <td>{{ line.rate | lfCurrency }}</td>
+                    <td>{{ line.amount | lfCurrency }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+
+      @if (invoice(); as inv) {
+        <div class="invoice-editor__tax-panel">
+          <h3>Totals (as of last save)</h3>
+          <dl>
+            <dt>Subtotal</dt>
+            <dd>{{ inv.subTotal | lfCurrency }}</dd>
+            <dt>Discount</dt>
+            <dd>-{{ inv.discountTotal | lfCurrency }}</dd>
+            @for (tax of inv.taxes; track tax.name) {
+              <dt>{{ tax.name }} ({{ tax.ratePct }}%)</dt>
+              <dd>{{ tax.amount | lfCurrency }}</dd>
+            }
+            <dt><strong>Total</strong></dt>
+            <dd>
+              <strong>{{ inv.grandTotal | lfCurrency }}</strong>
+            </dd>
+            <dt>Paid</dt>
+            <dd>{{ inv.amountPaid | lfCurrency }}</dd>
+          </dl>
+        </div>
+      }
+    </section>
+
+    <section class="invoice-editor__preview-pane">
+      <h2>PDF preview</h2>
+      @if (isNew()) {
+        <p class="invoice-editor__preview-hint">Save the invoice to generate a PDF preview.</p>
+      } @else if (pdfPreviewUrl(); as url) {
+        <iframe [src]="url" class="invoice-editor__pdf-frame" title="Invoice PDF preview"></iframe>
+      } @else {
+        <p class="invoice-editor__preview-hint">PDF preview unavailable.</p>
+      }
+    </section>
+  </div>
+</div>

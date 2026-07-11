@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { tap } from 'rxjs';
+import { map, tap } from 'rxjs';
+import { ApiSuccessEnvelope } from '../models/api-envelope.models';
 import { CurrentUser, PermissionCatalogEntry } from '../models/auth.models';
 import { API_BASE_URL } from './api-base-url.token';
 
@@ -23,19 +24,44 @@ export class PermissionService {
   readonly permissionSet = computed(() => new Set(this.currentUserSignal()?.permissions ?? []));
 
   loadSession() {
-    return this.http
-      .get<CurrentUser>(`${this.baseUrl}/auth/me`)
-      .pipe(tap((user) => this.currentUserSignal.set(user)));
+    return this.http.get<ApiSuccessEnvelope<CurrentUser>>(`${this.baseUrl}/auth/me`).pipe(
+      map((envelope) => envelope.data),
+      tap((user) => this.currentUserSignal.set(user)),
+    );
   }
 
   loadCatalog() {
     return this.http
-      .get<PermissionCatalogEntry[]>(`${this.baseUrl}/permissions/catalog`)
-      .pipe(tap((catalog) => this.catalogSignal.set(catalog)));
+      .get<ApiSuccessEnvelope<PermissionCatalogEntry[]>>(`${this.baseUrl}/permissions/catalog`)
+      .pipe(
+        map((envelope) => envelope.data),
+        tap((catalog) => this.catalogSignal.set(catalog)),
+      );
   }
 
+  /**
+   * True if the user holds `permissionKey` outright, OR — when `permissionKey` is
+   * the coarser `module.action` form nav items and route guards use (PRD §13: "nav
+   * items hidden without read permission", no particular scope named) — holds it at
+   * *any* scope (own/team/branch/all). Real granted permissions are always the full
+   * `module.action.scope` triple (§20(4)/§21), so an exact-only match would make
+   * every 2-segment nav/guard check permanently false regardless of what the user
+   * was actually granted.
+   */
   has(permissionKey: string): boolean {
-    return this.permissionSet().has(permissionKey);
+    const set = this.permissionSet();
+    if (set.has(permissionKey)) {
+      return true;
+    }
+
+    const prefix = `${permissionKey}.`;
+    for (const granted of set) {
+      if (granted.startsWith(prefix)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   hasAny(permissionKeys: string[]): boolean {

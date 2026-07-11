@@ -1,0 +1,121 @@
+.invoice-editor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-3);
+}
+
+.invoice-editor__header {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-2);
+  flex-wrap: wrap;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.invoice-editor__actions {
+  margin-left: auto;
+  display: flex;
+  gap: var(--lf-space-1);
+}
+
+.invoice-editor__error {
+  color: var(--lf-error);
+}
+
+.invoice-editor__body {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: var(--lf-space-3);
+}
+
+@media (max-width: 1024px) {
+  .invoice-editor__body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.invoice-editor__form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 var(--lf-space-2);
+}
+
+.invoice-editor__matter-field,
+.invoice-editor__time-entries,
+.invoice-editor__notes {
+  grid-column: 1 / -1;
+}
+
+.invoice-editor__line-grid {
+  margin-top: var(--lf-space-2);
+}
+
+.invoice-editor__line-grid-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.invoice-editor__lines-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    text-align: left;
+    padding: 4px var(--lf-space-1);
+    border-bottom: 1px solid var(--lf-surface-variant);
+  }
+
+  input {
+    width: 100%;
+  }
+}
+
+.invoice-editor__saved-lines {
+  margin-top: var(--lf-space-2);
+}
+
+.invoice-editor__tax-panel {
+  margin-top: var(--lf-space-2);
+  padding: var(--lf-space-2);
+  background: var(--lf-surface-variant);
+  border-radius: 8px;
+
+  dl {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px var(--lf-space-2);
+    margin: 0;
+  }
+
+  dt {
+    color: var(--lf-on-surface-variant);
+  }
+
+  dd {
+    margin: 0;
+    text-align: right;
+  }
+}
+
+.invoice-editor__preview-pane {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+}
+
+.invoice-editor__pdf-frame {
+  width: 100%;
+  height: 720px;
+  border: 1px solid var(--lf-surface-variant);
+  border-radius: 8px;
+}
+
+.invoice-editor__preview-hint {
+  color: var(--lf-on-surface-variant);
+}

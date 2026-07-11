@@ -1,0 +1,158 @@
+<div class="reconciliation">
+  <header class="reconciliation__header">
+    <h1>Trust reconciliation</h1>
+  </header>
+
+  @if (errorMessage()) {
+    <p class="reconciliation__error" role="alert">{{ errorMessage() }}</p>
+  }
+
+  <section class="reconciliation__step">
+    <h2>1. Import bank statement CSV</h2>
+    <lf-file-uploader accept=".csv" (filesSelected)="onCsvSelected($event)" />
+    @if (csvFileName()) {
+      <p class="reconciliation__filename">
+        {{ csvFileName() }} — {{ lines().length }} row(s) parsed
+      </p>
+    }
+    @if (parseError()) {
+      <p class="reconciliation__error">{{ parseError() }}</p>
+    }
+
+    @if (lines().length > 0) {
+      <table class="reconciliation__table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (line of lines(); track $index) {
+            <tr>
+              <td>{{ line.date }}</td>
+              <td>{{ line.description ?? '—' }}</td>
+              <td>{{ line.amount | lfCurrency }}</td>
+              <td>
+                <button
+                  mat-icon-button
+                  type="button"
+                  (click)="removeLine($index)"
+                  aria-label="Remove row"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </section>
+
+  <section class="reconciliation__step">
+    <h2>2. Period &amp; bank statement balance</h2>
+    <div class="reconciliation__fields">
+      <mat-form-field appearance="outline">
+        <mat-label>Period start</mat-label>
+        <input matInput [matDatepicker]="startPicker" [formControl]="periodStartControl" />
+        <mat-datepicker-toggle matIconSuffix [for]="startPicker" />
+        <mat-datepicker #startPicker />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Period end</mat-label>
+        <input matInput [matDatepicker]="endPicker" [formControl]="periodEndControl" />
+        <mat-datepicker-toggle matIconSuffix [for]="endPicker" />
+        <mat-datepicker #endPicker />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Bank statement balance</mat-label>
+        <input matInput type="number" [formControl]="bankStatementBalanceControl" />
+      </mat-form-field>
+    </div>
+  </section>
+
+  <section class="reconciliation__step">
+    <h2>3. Submit for auto-match</h2>
+    <p class="reconciliation__hint">
+      There is no separate auto-match endpoint — submitting compares these lines against the trust
+      ledger server-side and returns the balanced/exception result directly.
+    </p>
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      [disabled]="!canSubmit()"
+      (click)="submit()"
+    >
+      @if (submitting()) {
+        <mat-spinner diameter="20" />
+      } @else {
+        Submit reconciliation
+      }
+    </button>
+  </section>
+
+  @if (reconciliation(); as r) {
+    <section class="reconciliation__step">
+      <h2>4. Result</h2>
+      <div class="reconciliation__result" [class.reconciliation__result--balanced]="r.isBalanced">
+        <p>Ledger balance: {{ r.ledgerBalance | lfCurrency }}</p>
+        <p>Bank statement balance: {{ r.bankStatementBalance | lfCurrency }}</p>
+        <p>Status: {{ r.status }} — {{ r.isBalanced ? 'Balanced' : 'Not balanced' }}</p>
+        <p>Exceptions: {{ r.exceptionCount }}</p>
+      </div>
+
+      @if (r.exceptionCount > 0) {
+        <h3>Exceptions</h3>
+        @if (loadingExceptions()) {
+          <mat-spinner diameter="24" />
+        } @else if (exceptions().length === 0) {
+          <lf-empty-state icon="fact_check" title="No exception details returned" />
+        } @else {
+          <table class="reconciliation__table">
+            <thead>
+              <tr>
+                <th>Bank line date</th>
+                <th>Description</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of exceptions(); track item.id) {
+                <tr [class.reconciliation__exception-row]="item.isException">
+                  <td>{{ item.bankLineDate }}</td>
+                  <td>{{ item.bankLineDescription ?? '—' }}</td>
+                  <td>{{ item.bankLineAmount | lfCurrency }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        }
+      }
+
+      <section class="reconciliation__step">
+        <h2>5. Sign off</h2>
+        <mat-form-field appearance="outline" class="reconciliation__notes">
+          <mat-label>Notes (optional)</mat-label>
+          <textarea matInput [formControl]="notesControl" rows="2"></textarea>
+        </mat-form-field>
+        @if (signedOff()) {
+          <p class="reconciliation__signed-off">Signed off.</p>
+        } @else {
+          <button
+            mat-flat-button
+            color="primary"
+            type="button"
+            [disabled]="submitting()"
+            (click)="signOff()"
+          >
+            Sign off
+          </button>
+        }
+      </section>
+    </section>
+  }
+</div>

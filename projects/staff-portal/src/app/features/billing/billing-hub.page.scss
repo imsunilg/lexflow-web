@@ -1,0 +1,80 @@
+.billing-hub {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-3);
+}
+
+.billing-hub__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--lf-space-2);
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.billing-hub__actions {
+  display: flex;
+  gap: var(--lf-space-1);
+  flex-wrap: wrap;
+}
+
+.billing-hub__table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--lf-space-2);
+
+  th,
+  td {
+    text-align: left;
+    padding: var(--lf-space-1) var(--lf-space-2);
+    border-bottom: 1px solid var(--lf-surface-variant);
+  }
+}
+
+.billing-hub__link {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--lf-primary);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.billing-hub__row-actions {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.billing-hub__payments-tab,
+.billing-hub__trust-tab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  padding-top: var(--lf-space-2);
+}
+
+.billing-hub__client-search {
+  width: 320px;
+}
+
+.billing-hub__client-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: var(--lf-space-1);
+  }
+}

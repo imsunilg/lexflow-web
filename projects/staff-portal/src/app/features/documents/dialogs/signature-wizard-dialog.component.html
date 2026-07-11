@@ -1,0 +1,113 @@
+<h2 mat-dialog-title>Send "{{ data.document.title }}" for signature</h2>
+<mat-dialog-content>
+  <mat-stepper orientation="horizontal" linear="false" class="lf-signature-wizard">
+    <mat-step [completed]="canProceedToSigners()" label="Provider">
+      <mat-radio-group [formControl]="providerControl" class="lf-signature-wizard__providers">
+        @for (provider of providers; track provider) {
+          <mat-radio-button [value]="provider">{{ provider }}</mat-radio-button>
+        }
+      </mat-radio-group>
+      <div class="lf-signature-wizard__step-actions">
+        <button mat-flat-button color="primary" matStepperNext type="button">Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step [completed]="canProceedToReview()" label="Signers">
+      <div class="lf-signature-wizard__signers">
+        @for (signer of signers.controls; track signer; let i = $index) {
+          <div class="lf-signature-wizard__signer-row" [formGroup]="signer">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" formControlName="email" />
+              @if (signer.controls.email.hasError('email')) {
+                <mat-error>Enter a valid email.</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="lf-signature-wizard__order">
+              <mat-label>Order</mat-label>
+              <input matInput type="number" min="1" formControlName="orderNo" />
+            </mat-form-field>
+            <button
+              mat-icon-button
+              type="button"
+              aria-label="Remove signer"
+              [disabled]="signers.length === 1"
+              (click)="removeSigner(i)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        }
+        <button mat-stroked-button type="button" (click)="addSigner()">
+          <mat-icon>add</mat-icon> Add signer
+        </button>
+      </div>
+      <div class="lf-signature-wizard__step-actions">
+        <button mat-button matStepperPrevious type="button">Back</button>
+        <button
+          mat-flat-button
+          color="primary"
+          matStepperNext
+          type="button"
+          [disabled]="!canProceedToReview()"
+        >
+          Next
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step label="Review & send">
+      @if (envelope(); as sent) {
+        <div class="lf-signature-wizard__result">
+          <p class="lf-signature-wizard__label">Envelope status: {{ sent.status }}</p>
+          <ul class="lf-signature-wizard__signer-status">
+            @for (signer of sent.signers; track signer.id) {
+              <li>
+                {{ signer.name }} ({{ signer.email }}) — {{ signer.status }}
+                @if (signer.signedAt) {
+                  · signed {{ signer.signedAt }}
+                }
+              </li>
+            }
+          </ul>
+        </div>
+      } @else {
+        <div class="lf-signature-wizard__review">
+          <p><strong>Provider:</strong> {{ providerControl.value }}</p>
+          <ul>
+            @for (signer of signers.controls; track signer) {
+              <li>
+                {{ signer.value.name }} ({{ signer.value.email }}) — order
+                {{ signer.value.orderNo }}
+              </li>
+            }
+          </ul>
+
+          @if (errorMessage()) {
+            <p class="lf-signature-wizard__error" role="alert">{{ errorMessage() }}</p>
+          }
+
+          <div class="lf-signature-wizard__step-actions">
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button
+              mat-flat-button
+              color="primary"
+              type="button"
+              [disabled]="sending() || !canProceedToReview()"
+              (click)="send()"
+            >
+              Send
+            </button>
+          </div>
+        </div>
+      }
+    </mat-step>
+  </mat-stepper>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" [mat-dialog-close]="envelope() ?? undefined">Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,126 @@
+<div class="clients-list-page">
+  <header class="clients-list-page__toolbar">
+    <h1 class="clients-list-page__title">Clients</h1>
+    <div class="clients-list-page__toolbar-actions">
+      <mat-button-toggle-group
+        [value]="viewMode()"
+        (change)="setViewMode($event.value)"
+        aria-label="View mode"
+      >
+        <mat-button-toggle value="table">
+          <mat-icon>table_rows</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle value="card">
+          <mat-icon>grid_view</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+      <button mat-flat-button color="primary" type="button" (click)="createClient()">
+        <mat-icon>add</mat-icon>
+        New client
+      </button>
+    </div>
+  </header>
+
+  <form class="clients-list-page__filters" [formGroup]="form">
+    <mat-form-field appearance="outline" class="clients-list-page__search">
+      <mat-label>Search</mat-label>
+      <input matInput formControlName="q" placeholder="Name, number, email, phone" />
+      <mat-icon matIconSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type" (selectionChange)="load()">
+        <mat-option value="">All types</mat-option>
+        @for (type of types; track type) {
+          <mat-option [value]="type">{{ type }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status" (selectionChange)="load()">
+        <mat-option value="">All statuses</mat-option>
+        @for (status of statuses; track status) {
+          <mat-option [value]="status">{{ status }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-button type="button" (click)="clearFilters()">
+      <mat-icon>filter_alt_off</mat-icon>
+      Clear filters
+    </button>
+  </form>
+
+  <div class="clients-list-page__body">
+    <nav class="clients-list-page__alpha-index" aria-label="Jump to letter">
+      <button
+        mat-icon-button
+        type="button"
+        class="clients-list-page__alpha-btn"
+        [class.clients-list-page__alpha-btn--active]="activeLetter() === null"
+        (click)="clearLetter()"
+      >
+        All
+      </button>
+      @for (letter of alphabet; track letter) {
+        <button
+          mat-icon-button
+          type="button"
+          class="clients-list-page__alpha-btn"
+          [class.clients-list-page__alpha-btn--active]="activeLetter() === letter"
+          [disabled]="!lettersWithMatches().has(letter)"
+          (click)="selectLetter(letter)"
+        >
+          {{ letter }}
+        </button>
+      }
+    </nav>
+
+    <div class="clients-list-page__content">
+      @if (error()) {
+        <lf-empty-state
+          icon="error_outline"
+          title="Couldn't load clients"
+          ctaLabel="Retry"
+          (cta)="load()"
+        />
+      } @else if (!loading() && rows().length === 0) {
+        <lf-empty-state
+          icon="person_search"
+          title="No clients match these filters"
+          message="Try adjusting or clearing your filters."
+          ctaLabel="Clear filters"
+          (cta)="clearFilters()"
+        />
+      } @else if (viewMode() === 'table') {
+        <lf-data-table
+          [columns]="columns"
+          [rows]="rows()"
+          [loading]="loading()"
+          (rowClick)="openClient($event)"
+        />
+      } @else {
+        <div class="clients-list-page__cards">
+          @for (client of filteredClients(); track client.id) {
+            <button type="button" class="clients-list-page__card" (click)="openClient(client)">
+              <div class="clients-list-page__card-header">
+                <span class="clients-list-page__card-name">{{ displayName(client) }}</span>
+                <lf-status-chip [label]="client.status" />
+              </div>
+              <div class="clients-list-page__card-number">{{ client.number }}</div>
+              <div class="clients-list-page__card-type">{{ client.type }}</div>
+              <div class="clients-list-page__card-contact">{{ client.email ?? '—' }}</div>
+              <div class="clients-list-page__card-contact">{{ client.phoneE164 ?? '—' }}</div>
+              <div class="clients-list-page__card-portal">
+                Portal: {{ client.portalEnabled ? '✓' : '—' }}
+              </div>
+            </button>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

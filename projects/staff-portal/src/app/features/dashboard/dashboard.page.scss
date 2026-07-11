@@ -1,0 +1,121 @@
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-3);
+  padding: var(--lf-space-3);
+}
+
+.dashboard-page__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--lf-space-2);
+}
+
+.dashboard-page__title {
+  margin: 0;
+}
+
+.dashboard-page__toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-2);
+  flex-wrap: wrap;
+}
+
+.dashboard-page__live-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+  padding: var(--lf-space-1) var(--lf-space-2);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--lf-warn) 14%, transparent);
+  color: var(--lf-warn);
+  font-size: var(--lf-text-sm);
+  width: fit-content;
+}
+
+.dashboard-page__empty {
+  color: var(--lf-on-surface-variant);
+  text-align: center;
+  padding: var(--lf-space-5);
+}
+
+.dashboard-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--lf-space-2);
+}
+
+.dashboard-grid__item {
+  position: relative;
+  flex: 1 1 100%;
+  min-width: 280px;
+}
+
+.dashboard-grid__item--small {
+  flex-basis: calc(33.333% - var(--lf-space-2));
+}
+
+.dashboard-grid__item--medium {
+  flex-basis: calc(50% - var(--lf-space-2));
+}
+
+.dashboard-grid__item--large {
+  flex-basis: 100%;
+}
+
+@media (max-width: 720px) {
+  .dashboard-grid__item,
+  .dashboard-grid__item--small,
+  .dashboard-grid__item--medium,
+  .dashboard-grid__item--large {
+    flex-basis: 100%;
+  }
+}
+
+.dashboard-grid__drag-handle {
+  position: absolute;
+  top: var(--lf-space-1);
+  left: var(--lf-space-1);
+  z-index: 1;
+  cursor: grab;
+  color: var(--lf-on-surface-variant);
+  opacity: 0.5;
+}
+
+.dashboard-grid__drag-handle:hover {
+  opacity: 1;
+}
+
+.cdk-drag-preview {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
+}
+
+.widget-skeleton {
+  min-height: 160px;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    var(--lf-surface-variant) 25%,
+    color-mix(in srgb, var(--lf-surface-variant) 60%, transparent) 37%,
+    var(--lf-surface-variant) 63%
+  );
+  background-size: 400% 100%;
+  animation: dashboard-skeleton-shimmer 1.4s ease infinite;
+}
+
+@keyframes dashboard-skeleton-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}

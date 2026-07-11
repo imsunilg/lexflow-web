@@ -1,0 +1,27 @@
+.calendar-settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-3);
+}
+
+.calendar-settings__header {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-2);
+  padding-bottom: var(--lf-space-2);
+  border-bottom: 1px solid var(--lf-surface-variant);
+}
+
+.calendar-settings__header h1 {
+  margin: 0;
+  font-size: var(--lf-text-lg, 20px);
+}
+
+.calendar-settings__tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-3) 0;
+  max-width: 720px;
+}

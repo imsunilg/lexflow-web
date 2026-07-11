@@ -34,6 +34,7 @@
         class="shell__search"
         aria-label="Global search"
         i18n-aria-label="@@shell.search.ariaLabel"
+        (click)="openSearch()"
       >
         <mat-icon>search</mat-icon>
         <span i18n="@@shell.search.label">Search…</span>
@@ -42,9 +43,15 @@
 
       <span class="shell__spacer"></span>
 
-      <button mat-stroked-button type="button" class="shell__timer-chip" aria-label="Timer">
+      <button
+        mat-stroked-button
+        type="button"
+        class="shell__timer-chip"
+        [class.shell__timer-chip--running]="runningTimer() && !runningTimer()!.isPaused"
+        aria-label="Timer"
+      >
         <mat-icon>timer</mat-icon>
-        <span>00:00:00</span>
+        <span>{{ timerDisplay() }}</span>
       </button>
 
       <button mat-icon-button type="button" [matMenuTriggerFor]="quickAdd" aria-label="Quick add">
@@ -57,16 +64,50 @@
         <button mat-menu-item i18n="@@shell.quickAdd.newTimeEntry">New Time Entry</button>
       </mat-menu>
 
-      <button mat-icon-button type="button" aria-label="Notifications">
-        <mat-icon>notifications</mat-icon>
+      <button
+        mat-icon-button
+        type="button"
+        [matMenuTriggerFor]="notificationsMenu"
+        aria-label="Notifications"
+      >
+        <mat-icon [matBadge]="unreadCount() || null" matBadgeColor="warn" matBadgeSize="small">
+          notifications
+        </mat-icon>
       </button>
+      <mat-menu #notificationsMenu="matMenu" class="shell__notifications-menu">
+        @if (notifications().length === 0) {
+          <p class="shell__notifications-empty">You're all caught up.</p>
+        } @else {
+          <mat-nav-list>
+            @for (notification of notifications(); track notification.id) {
+              <button
+                mat-list-item
+                type="button"
+                [class.shell__notification--unread]="!notification.readAt"
+                (click)="markNotificationRead(notification.id)"
+              >
+                <span matListItemTitle>{{ notification.title }}</span>
+                @if (notification.body) {
+                  <span matListItemLine>{{ notification.body }}</span>
+                }
+              </button>
+            }
+          </mat-nav-list>
+        }
+      </mat-menu>
 
       <button mat-icon-button type="button" [matMenuTriggerFor]="avatarMenu" aria-label="Account">
         <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #avatarMenu="matMenu">
+        @if (currentUser(); as user) {
+          <div class="shell__account-summary">
+            <strong>{{ user.name }}</strong>
+            <span>{{ user.email }}</span>
+          </div>
+        }
         <button mat-menu-item i18n="@@shell.account.profile">Profile</button>
-        <button mat-menu-item i18n="@@shell.account.signOut">Sign out</button>
+        <button mat-menu-item (click)="signOut()" i18n="@@shell.account.signOut">Sign out</button>
       </mat-menu>
     </header>
 

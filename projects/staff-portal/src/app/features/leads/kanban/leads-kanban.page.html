@@ -1,0 +1,65 @@
+<div class="kanban-page">
+  <lf-leads-tabs />
+
+  <header class="kanban-page__toolbar">
+    <h1 class="kanban-page__title">Leads</h1>
+    <button mat-flat-button color="primary" type="button" (click)="createLead()">
+      <mat-icon>add</mat-icon>
+      New lead
+    </button>
+  </header>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (leads().length === 0) {
+    <lf-empty-state
+      icon="person_add"
+      title="No leads yet"
+      message="Capture your first lead to start the pipeline."
+      ctaLabel="New lead"
+      (cta)="createLead()"
+    />
+  } @else {
+    <div class="kanban-board" cdkDropListGroup>
+      @for (column of columns(); track column.stage) {
+        <div class="kanban-column">
+          <header class="kanban-column__header">
+            <span class="kanban-column__title">{{ column.stage }}</span>
+            <span class="kanban-column__count">{{ column.leads.length }}</span>
+          </header>
+
+          <div
+            class="kanban-column__list"
+            [id]="dropListId(column.stage)"
+            cdkDropList
+            [cdkDropListData]="column.leads"
+            [cdkDropListConnectedTo]="connectedDropListIds()"
+            (cdkDropListDropped)="onDrop($event, column.stage)"
+          >
+            @for (lead of column.leads; track lead.id) {
+              <div
+                class="kanban-card"
+                [attr.data-aging]="aging(lead).tone"
+                cdkDrag
+                [cdkDragData]="lead"
+                role="button"
+                tabindex="0"
+                (click)="openLead(lead)"
+                (keydown.enter)="openLead(lead)"
+              >
+                <div class="kanban-card__name">{{ lead.firstName }} {{ lead.lastName }}</div>
+                @if (lead.company) {
+                  <div class="kanban-card__company">{{ lead.company }}</div>
+                }
+                <div class="kanban-card__meta">
+                  <span>{{ lead.number }}</span>
+                  <span class="kanban-card__aging">{{ aging(lead).days }}d in stage</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

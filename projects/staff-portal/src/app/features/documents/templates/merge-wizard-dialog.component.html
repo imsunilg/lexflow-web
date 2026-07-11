@@ -1,0 +1,103 @@
+<h2 mat-dialog-title>Generate "{{ data.template.name }}"</h2>
+
+<mat-dialog-content class="lf-merge-content">
+  <mat-stepper orientation="horizontal" linear #stepper>
+    <mat-step [completed]="canProceedToReview" label="Fill in details">
+      <div class="lf-merge-step">
+        <mat-form-field appearance="outline">
+          <mat-label>Matter</mat-label>
+          <input
+            matInput
+            [formControl]="matterControl"
+            [matAutocomplete]="matterAuto"
+            placeholder="Search matters by number or title…"
+          />
+          <mat-autocomplete
+            #matterAuto="matAutocomplete"
+            [displayWith]="matterDisplay"
+            (optionSelected)="onMatterSelected($event.option.value)"
+          >
+            @for (matter of matterOptions(); track matter.id) {
+              <mat-option [value]="matter">{{ matter.number }} — {{ matter.title }}</mat-option>
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+
+        @for (field of data.template.fields; track field.name) {
+          <mat-form-field appearance="outline">
+            <mat-label>
+              {{ field.label }}
+              @if (field.required) {
+                <span aria-hidden="true">*</span>
+              }
+            </mat-label>
+            <input matInput [formControl]="fieldsForm.controls[field.name]" />
+          </mat-form-field>
+        }
+
+        <div class="lf-merge-step__actions">
+          <button
+            mat-flat-button
+            color="primary"
+            type="button"
+            [disabled]="!canProceedToReview"
+            matStepperNext
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+    <mat-step label="Review & generate">
+      <div class="lf-merge-step">
+        <div class="lf-merge-review">
+          <div class="lf-merge-review__row">
+            <span class="lf-merge-review__label">Matter</span>
+            <span>{{ matterDisplay(selectedMatter()) }}</span>
+          </div>
+          @for (field of data.template.fields; track field.name) {
+            <div class="lf-merge-review__row">
+              <span class="lf-merge-review__label">{{ field.label }}</span>
+              <span>{{ fieldsForm.controls[field.name].value || '—' }}</span>
+            </div>
+          }
+        </div>
+
+        @if (errorMessage()) {
+          <div class="lf-merge-error">
+            <p>{{ errorMessage() }}</p>
+            @if (missingFieldLabels().length > 0) {
+              <ul>
+                @for (label of missingFieldLabels(); track label) {
+                  <li>{{ label }}</li>
+                }
+              </ul>
+            }
+          </div>
+        }
+
+        <div class="lf-merge-step__actions">
+          <button mat-button type="button" matStepperPrevious>Back</button>
+          <button
+            mat-flat-button
+            color="primary"
+            type="button"
+            [disabled]="submitting()"
+            (click)="generate()"
+          >
+            @if (submitting()) {
+              <mat-spinner diameter="18"></mat-spinner>
+            } @else {
+              Generate
+            }
+          </button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+</mat-dialog-actions>

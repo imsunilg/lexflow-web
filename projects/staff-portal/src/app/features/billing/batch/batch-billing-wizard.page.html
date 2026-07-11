@@ -1,0 +1,116 @@
+<div class="batch-billing-wizard">
+  <header class="batch-billing-wizard__header">
+    <h1>Batch billing wizard</h1>
+    <a mat-stroked-button routerLink="/billing"><mat-icon>arrow_back</mat-icon> Back to Billing</a>
+  </header>
+
+  <mat-stepper orientation="horizontal" linear>
+    <mat-step [stepControl]="filterForm" label="Filter">
+      <form [formGroup]="filterForm" class="batch-billing-wizard__form">
+        <mat-form-field appearance="outline" class="batch-billing-wizard__field">
+          <mat-label>Minimum WIP</mat-label>
+          <input matInput type="number" formControlName="minWip" min="0" step="0.01" />
+          @if (filterForm.controls.minWip.hasError('required')) {
+            <mat-error>Minimum WIP is required.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="batch-billing-wizard__field">
+          <mat-label>Branch id (optional)</mat-label>
+          <input matInput formControlName="branchId" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="batch-billing-wizard__field">
+          <mat-label>Matter type id (optional)</mat-label>
+          <input matInput formControlName="matterTypeId" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="batch-billing-wizard__field">
+          <mat-label>As of</mat-label>
+          <input matInput [matDatepicker]="asOfPicker" [formControl]="asOfControl" />
+          <mat-datepicker-toggle matSuffix [for]="asOfPicker" />
+          <mat-datepicker #asOfPicker />
+        </mat-form-field>
+      </form>
+
+      <div class="batch-billing-wizard__step-actions">
+        <button mat-flat-button color="primary" type="button" matStepperNext>Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step label="Review">
+      <div class="batch-billing-wizard__review">
+        <dl>
+          <dt>Minimum WIP</dt>
+          <dd>{{ filterForm.controls.minWip.value }}</dd>
+          <dt>Branch</dt>
+          <dd>{{ filterForm.controls.branchId.value || '(any)' }}</dd>
+          <dt>Matter type</dt>
+          <dd>{{ filterForm.controls.matterTypeId.value || '(any)' }}</dd>
+          <dt>As of</dt>
+          <dd>{{ asOfLabel() }}</dd>
+        </dl>
+      </div>
+
+      <div class="batch-billing-wizard__step-actions">
+        <button mat-button type="button" matStepperPrevious>Back</button>
+        <button mat-flat-button color="primary" type="button" (click)="generate()" matStepperNext>
+          Generate
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step label="Result">
+      @if (generating()) {
+        <div class="batch-billing-wizard__loading">
+          <mat-spinner diameter="32" />
+          <p>Generating drafts — this can take up to a minute for large batches.</p>
+        </div>
+      } @else if (errorMessage()) {
+        <p class="batch-billing-wizard__error">{{ errorMessage() }}</p>
+      } @else if (createdInvoices()) {
+        <p class="batch-billing-wizard__summary">
+          {{ createdInvoices()!.length }} draft{{
+            createdInvoices()!.length === 1 ? '' : 's'
+          }}
+          created, total {{ totalGenerated() | lfCurrency }}
+        </p>
+
+        <table class="batch-billing-wizard__table">
+          <thead>
+            <tr>
+              <th>Number</th>
+              <th>Matter</th>
+              <th>Grand total</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (invoice of createdInvoices(); track invoice.id) {
+              <tr>
+                <td>
+                  <a [routerLink]="['/billing/invoices', invoice.id]">
+                    {{ invoice.number ?? '(unnumbered)' }}
+                  </a>
+                </td>
+                <td>{{ invoice.matterId }}</td>
+                <td>{{ invoice.grandTotal | lfCurrency }}</td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="3">No matters matched this filter.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      } @else {
+        <p class="batch-billing-wizard__hint">
+          Click Generate on the previous step to run the batch.
+        </p>
+      }
+
+      <div class="batch-billing-wizard__step-actions">
+        <button mat-button type="button" matStepperPrevious>Back</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

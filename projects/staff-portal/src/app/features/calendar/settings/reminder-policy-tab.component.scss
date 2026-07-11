@@ -1,0 +1,87 @@
+.reminder-policy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-3);
+}
+
+.reminder-policy__banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--lf-space-1);
+  padding: var(--lf-space-2);
+  background: var(--lf-surface-variant);
+  border-radius: 8px;
+  font-size: var(--lf-text-sm);
+}
+
+.reminder-policy__toolbar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.reminder-policy__kind {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+  padding: var(--lf-space-2);
+  background: var(--lf-surface-variant);
+  border-radius: 8px;
+}
+
+.reminder-policy__kind-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reminder-policy__kind-header h2 {
+  margin: 0;
+  font-size: var(--lf-text-sm);
+}
+
+.reminder-policy__empty {
+  margin: 0;
+  color: var(--lf-on-surface-variant);
+  font-size: var(--lf-text-xs);
+}
+
+.reminder-policy__rule {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--lf-space-1);
+  padding: var(--lf-space-1);
+  background: var(--lf-surface);
+  border-radius: 8px;
+}
+
+.reminder-policy__offset {
+  width: 120px;
+}
+
+.reminder-policy__time {
+  width: 110px;
+}
+
+.reminder-policy__channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.reminder-policy__channel-chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--lf-surface-variant);
+  background: transparent;
+  font-size: var(--lf-text-xs);
+  cursor: pointer;
+  color: var(--lf-on-surface-variant);
+}
+
+.reminder-policy__channel-chip[data-active='true'] {
+  background: color-mix(in srgb, var(--lf-warn) 16%, transparent);
+  border-color: var(--lf-warn);
+  color: var(--lf-warn);
+  font-weight: 600;
+}

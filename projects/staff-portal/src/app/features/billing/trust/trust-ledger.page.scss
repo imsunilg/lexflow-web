@@ -1,0 +1,110 @@
+.trust-ledger {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-3);
+}
+
+.trust-ledger__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--lf-space-2);
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.trust-ledger__subtitle {
+  margin: 0;
+  color: var(--lf-on-surface-variant);
+}
+
+.trust-ledger__balance {
+  display: flex;
+  flex-direction: column;
+  padding: var(--lf-space-2);
+  background: var(--lf-surface-variant);
+  border-radius: var(--lf-radius);
+  min-width: 220px;
+}
+
+.trust-ledger__balance-label {
+  color: var(--lf-on-surface-variant);
+  font-size: var(--lf-text-sm);
+}
+
+.trust-ledger__balance-value {
+  font-size: var(--lf-text-xl);
+  font-weight: 600;
+}
+
+.trust-ledger__bank-ref {
+  color: var(--lf-on-surface-variant);
+  font-size: var(--lf-text-xs);
+}
+
+.trust-ledger__error {
+  color: var(--lf-error);
+}
+
+.trust-ledger__notice {
+  margin: 0;
+  color: var(--lf-on-surface-variant);
+  font-size: var(--lf-text-sm);
+}
+
+.trust-ledger__actions {
+  display: flex;
+  gap: var(--lf-space-1);
+}
+
+.trust-ledger__form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--lf-space-1);
+  padding: var(--lf-space-2);
+  background: var(--lf-surface-variant);
+  border-radius: var(--lf-radius);
+}
+
+.trust-ledger__table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    text-align: left;
+    padding: 6px var(--lf-space-1);
+    border-bottom: 1px solid var(--lf-surface-variant);
+  }
+
+  th {
+    color: var(--lf-on-surface-variant);
+    font-weight: 600;
+    font-size: var(--lf-text-sm);
+  }
+}
+
+.trust-ledger__kind {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: var(--lf-text-xs);
+  font-weight: 600;
+
+  &[data-kind='Deposit'] {
+    background: color-mix(in srgb, var(--lf-success) 18%, transparent);
+    color: var(--lf-success);
+  }
+  &[data-kind='Disbursement'] {
+    background: color-mix(in srgb, var(--lf-warn) 18%, transparent);
+    color: var(--lf-warn);
+  }
+  &[data-kind='Reversal'] {
+    background: var(--lf-surface-variant);
+    color: var(--lf-on-surface-variant);
+  }
+}

@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:staff-portal": "ng serve staff-portal",
-    "start:client-portal": "ng serve client-portal",
+    "start:staff-portal": "ng serve staff-portal --proxy-config proxy.conf.json",
+    "start:client-portal": "ng serve client-portal --proxy-config proxy.conf.json",
     "build": "ng build",
     "build:staff-portal:i18n": "ng build staff-portal --localize",
     "build:client-portal:i18n": "ng build client-portal --localize",
@@ -49,6 +49,8 @@
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
     "@angular/service-worker": "^20.3.0",
+    "@microsoft/signalr": "^8.0.17",
+    "pdfjs-dist": "^6.1.200",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

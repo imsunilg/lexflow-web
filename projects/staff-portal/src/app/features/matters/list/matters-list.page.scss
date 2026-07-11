@@ -1,0 +1,45 @@
+.matters-list-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-3);
+  height: 100%;
+}
+
+.matters-list-page__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.matters-list-page__toolbar-actions {
+  display: flex;
+  gap: var(--lf-space-1);
+}
+
+.matters-list-page__title {
+  margin: 0;
+}
+
+.matters-list-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--lf-space-2);
+}
+
+.matters-list-page__search {
+  flex: 1 1 240px;
+  min-width: 200px;
+}
+
+.matters-list-page__saved-views {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--lf-space-1);
+}
+
+.matters-list-page__save-view-input {
+  width: 200px;
+}

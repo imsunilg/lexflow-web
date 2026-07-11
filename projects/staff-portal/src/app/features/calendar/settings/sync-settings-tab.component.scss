@@ -1,0 +1,72 @@
+.sync-settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-3);
+}
+
+.sync-settings__banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--lf-space-1);
+  padding: var(--lf-space-2);
+  background: var(--lf-surface-variant);
+  border-radius: 8px;
+  font-size: var(--lf-text-sm);
+}
+
+.sync-settings__error {
+  margin: 0;
+  color: var(--lf-error);
+  font-size: var(--lf-text-sm);
+}
+
+.sync-settings__cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+}
+
+.sync-settings__card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-2);
+  background: var(--lf-surface-variant);
+  border-radius: 8px;
+}
+
+.sync-settings__card-header h2 {
+  margin: 0;
+  font-size: var(--lf-text-sm);
+}
+
+.sync-settings__card-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+}
+
+.sync-settings__privacy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+}
+
+.sync-settings__privacy h2 {
+  margin: 0;
+  font-size: var(--lf-text-sm);
+}
+
+.sync-settings__hint {
+  margin: 0;
+  color: var(--lf-on-surface-variant);
+  font-size: var(--lf-text-xs);
+}
+
+.sync-settings__privacy-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+}

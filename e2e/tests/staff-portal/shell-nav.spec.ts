@@ -7,7 +7,7 @@ test.describe('staff-portal shell', () => {
     await expect(page.getByRole('heading', { name: 'Sign in' })).toBeVisible();
   });
 
-  test('login placeholder renders', async ({ page }) => {
+  test('login page renders', async ({ page }) => {
     await page.goto('/login');
     await expect(page.getByRole('heading', { name: 'Sign in' })).toBeVisible();
   });

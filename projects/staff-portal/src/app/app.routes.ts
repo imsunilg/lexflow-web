@@ -1,11 +1,19 @@
 import { Routes } from '@angular/router';
 import { authGuard, permissionGuard } from 'shared';
+import { AcceptInvitationPage } from './features/auth/accept-invitation.page';
 import { ForbiddenPage } from './features/auth/forbidden.page';
+import { ForgotPasswordPage } from './features/auth/forgot-password.page';
 import { LoginPage } from './features/auth/login.page';
+import { ResetPasswordPage } from './features/auth/reset-password.page';
+import { TwoFaChallengePage } from './features/auth/two-fa-challenge.page';
 import { ShellComponent } from './shell/shell.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginPage },
+  { path: '2fa', component: TwoFaChallengePage },
+  { path: 'forgot-password', component: ForgotPasswordPage },
+  { path: 'reset-password', component: ResetPasswordPage },
+  { path: 'accept-invitation', component: AcceptInvitationPage },
   { path: 'forbidden', component: ForbiddenPage },
   {
     path: '',
@@ -21,34 +29,32 @@ export const routes: Routes = [
       },
       {
         path: 'leads',
-        loadComponent: () => import('./features/leads/leads.page').then((m) => m.LeadsPage),
-        data: { permission: 'leads.read' },
+        loadChildren: () => import('./features/leads/leads.routes').then((m) => m.LEADS_ROUTES),
       },
       {
         path: 'clients',
-        loadComponent: () => import('./features/clients/clients.page').then((m) => m.ClientsPage),
-        data: { permission: 'clients.read' },
+        loadChildren: () =>
+          import('./features/clients/clients.routes').then((m) => m.CLIENTS_ROUTES),
       },
       {
         path: 'matters',
-        loadComponent: () => import('./features/matters/matters.page').then((m) => m.MattersPage),
-        data: { permission: 'matters.read' },
+        loadChildren: () =>
+          import('./features/matters/matters.routes').then((m) => m.MATTERS_ROUTES),
       },
       {
         path: 'calendar',
-        loadComponent: () =>
-          import('./features/calendar/calendar.page').then((m) => m.CalendarPage),
+        loadChildren: () =>
+          import('./features/calendar/calendar.routes').then((m) => m.CALENDAR_ROUTES),
       },
       {
         path: 'documents',
-        loadComponent: () =>
-          import('./features/documents/documents.page').then((m) => m.DocumentsPage),
-        data: { permission: 'documents.read' },
+        loadChildren: () =>
+          import('./features/documents/documents.routes').then((m) => m.DOCUMENTS_ROUTES),
       },
       {
         path: 'billing',
-        loadComponent: () => import('./features/billing/billing.page').then((m) => m.BillingPage),
-        data: { permission: 'billing.read' },
+        loadChildren: () =>
+          import('./features/billing/billing.routes').then((m) => m.BILLING_ROUTES),
       },
       {
         path: 'time',

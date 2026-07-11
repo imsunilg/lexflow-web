@@ -1,0 +1,67 @@
+.payment-record-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  min-width: 480px;
+}
+
+.payment-record-dialog__error {
+  color: var(--lf-error);
+}
+
+.payment-record-dialog__client-locked {
+  color: var(--lf-on-surface-variant);
+}
+
+.payment-record-dialog__form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 var(--lf-space-2);
+}
+
+.payment-record-dialog__field {
+  width: 100%;
+}
+
+.payment-record-dialog__on-account {
+  grid-column: 1 / -1;
+}
+
+.payment-record-dialog__allocations {
+  padding: var(--lf-space-2);
+  background: var(--lf-surface-variant);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+}
+
+.payment-record-dialog__allocations-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h3 {
+    margin: 0;
+    font-size: var(--lf-text-lg);
+  }
+}
+
+.payment-record-dialog__hint {
+  color: var(--lf-on-surface-variant);
+  font-size: var(--lf-text-xs);
+  margin: 0;
+}
+
+.payment-record-dialog__allocation-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: center;
+  gap: var(--lf-space-1);
+}
+
+.payment-record-dialog__allocation-total {
+  font-size: var(--lf-text-sm);
+  text-align: right;
+  margin: 0;
+}

@@ -1,0 +1,233 @@
+<div class="billing-hub">
+  <header class="billing-hub__header">
+    <h1>Billing</h1>
+    <div class="billing-hub__actions">
+      <a mat-stroked-button routerLink="/billing/aging"
+        ><mat-icon>bar_chart</mat-icon> Aging report</a
+      >
+      <a mat-stroked-button routerLink="/billing/reconciliation">
+        <mat-icon>fact_check</mat-icon> Reconciliation
+      </a>
+      <a mat-stroked-button routerLink="/billing/batch"
+        ><mat-icon>playlist_add_check</mat-icon> Batch bill</a
+      >
+      <button mat-flat-button color="primary" type="button" (click)="newInvoice()">
+        <mat-icon>add</mat-icon> New invoice
+      </button>
+    </div>
+  </header>
+
+  <mat-tab-group>
+    <mat-tab label="WIP">
+      <lf-empty-state
+        icon="pending_actions"
+        title="WIP detail isn't available here yet"
+        message="There's no dedicated unbilled-time/expense listing endpoint. Check a matter's Financial Summary tab for its current WIP total, or use Batch bill to invoice everything above a WIP threshold."
+      />
+    </mat-tab>
+
+    <mat-tab [label]="'Draft Invoices (' + draftInvoices().length + ')'">
+      <table class="billing-hub__table">
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Matter</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (invoice of draftInvoices(); track invoice.id) {
+            <tr>
+              <td>
+                <button type="button" class="billing-hub__link" (click)="openInvoice(invoice)">
+                  {{ invoice.number ?? '(unnumbered)' }}
+                </button>
+              </td>
+              <td>{{ invoice.matterId }}</td>
+              <td>{{ invoice.grandTotal | lfCurrency }}</td>
+              <td class="billing-hub__row-actions">
+                <button mat-button type="button" (click)="submit(invoice)">Submit</button>
+                <button mat-button color="warn" type="button" (click)="voidInvoice(invoice)">
+                  Void
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="4"><lf-empty-state icon="description" title="No draft invoices" /></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </mat-tab>
+
+    <mat-tab [label]="'Approvals (' + submittedInvoices().length + ')'">
+      <table class="billing-hub__table">
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Matter</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (invoice of submittedInvoices(); track invoice.id) {
+            <tr>
+              <td>
+                <button type="button" class="billing-hub__link" (click)="openInvoice(invoice)">
+                  {{ invoice.number ?? '(unnumbered)' }}
+                </button>
+              </td>
+              <td>{{ invoice.matterId }}</td>
+              <td>{{ invoice.grandTotal | lfCurrency }}</td>
+              <td class="billing-hub__row-actions">
+                <button mat-button color="primary" type="button" (click)="approve(invoice)">
+                  Approve
+                </button>
+                <button mat-button color="warn" type="button" (click)="reject(invoice)">
+                  Reject
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="4">
+                <lf-empty-state icon="task_alt" title="Nothing awaiting approval" />
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </mat-tab>
+
+    <mat-tab [label]="'Sent (' + sentInvoices().length + ')'">
+      <table class="billing-hub__table">
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Matter</th>
+            <th>Total</th>
+            <th>Paid</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (invoice of sentInvoices(); track invoice.id) {
+            <tr>
+              <td>
+                <button type="button" class="billing-hub__link" (click)="openInvoice(invoice)">
+                  {{ invoice.number ?? '(unnumbered)' }}
+                </button>
+              </td>
+              <td>{{ invoice.matterId }}</td>
+              <td>{{ invoice.grandTotal | lfCurrency }}</td>
+              <td>{{ invoice.amountPaid | lfCurrency }}</td>
+              <td class="billing-hub__row-actions">
+                <button mat-button type="button" (click)="recordPayment(invoice)">
+                  Record payment
+                </button>
+                <button mat-button type="button" (click)="createCreditNote(invoice)">
+                  Credit note
+                </button>
+                <button mat-button type="button" (click)="muteReminders(invoice)">
+                  Mute reminders
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5">
+                <lf-empty-state icon="mark_email_read" title="No sent invoices" />
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </mat-tab>
+
+    <mat-tab [label]="'Overdue (' + overdueInvoices().length + ')'">
+      <table class="billing-hub__table">
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Matter</th>
+            <th>Due</th>
+            <th>Outstanding</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (invoice of overdueInvoices(); track invoice.id) {
+            <tr>
+              <td>
+                <button type="button" class="billing-hub__link" (click)="openInvoice(invoice)">
+                  {{ invoice.number ?? '(unnumbered)' }}
+                </button>
+              </td>
+              <td>{{ invoice.matterId }}</td>
+              <td>{{ invoice.dueDate }}</td>
+              <td>{{ invoice.grandTotal - invoice.amountPaid | lfCurrency }}</td>
+              <td class="billing-hub__row-actions">
+                <button mat-button type="button" (click)="recordPayment(invoice)">
+                  Record payment
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5"><lf-empty-state icon="event_busy" title="Nothing overdue" /></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </mat-tab>
+
+    <mat-tab label="Payments">
+      <div class="billing-hub__payments-tab">
+        <button mat-flat-button color="primary" type="button" (click)="recordPayment()">
+          <mat-icon>payments</mat-icon> Record payment
+        </button>
+        <lf-empty-state
+          icon="receipt_long"
+          title="Payment history isn't listable in aggregate yet"
+          message="There's no aggregate payments-list endpoint. Open a client's Statement (search below) to see their payment history."
+        />
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Credit Notes">
+      <lf-empty-state
+        icon="request_quote"
+        title="Credit notes aren't listable in aggregate yet"
+        message="There's no aggregate credit-notes endpoint. Issue one from an invoice's row action; it applies against that invoice directly."
+      />
+    </mat-tab>
+
+    <mat-tab label="Trust">
+      <div class="billing-hub__trust-tab">
+        <mat-form-field appearance="outline" class="billing-hub__client-search">
+          <mat-label>Find a client</mat-label>
+          <input matInput [formControl]="clientSearchControl" placeholder="Search by name" />
+          <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+
+        @if (clientResults().length > 0) {
+          <ul class="billing-hub__client-results">
+            @for (client of clientResults(); track client.id) {
+              <li>
+                <button mat-button type="button" (click)="openTrustLedger(client)">
+                  {{ client.displayName ?? client.legalName ?? client.id }}
+                </button>
+                <button mat-button type="button" (click)="openStatement(client)">
+                  View statement
+                </button>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

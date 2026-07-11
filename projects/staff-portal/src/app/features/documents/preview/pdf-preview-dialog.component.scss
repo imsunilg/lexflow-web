@@ -1,0 +1,116 @@
+:host {
+  display: block;
+}
+
+.lf-preview-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lf-preview-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  min-height: 60vh;
+  max-height: 80vh;
+}
+
+.lf-preview-state {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lf-space-2);
+  color: var(--lf-on-surface-variant);
+}
+
+.lf-preview-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-2);
+  flex-wrap: wrap;
+}
+
+.lf-preview-search {
+  flex: 1;
+  min-width: 200px;
+}
+
+.lf-preview-match-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+}
+
+.lf-preview-match-count {
+  font-size: var(--lf-text-sm);
+  color: var(--lf-on-surface-variant);
+  white-space: nowrap;
+}
+
+.lf-preview-pager {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+  font-size: var(--lf-text-sm);
+}
+
+.lf-preview-canvas-wrap {
+  flex: 1;
+  overflow: auto;
+  background: var(--lf-surface-variant);
+  display: flex;
+  justify-content: center;
+  padding: var(--lf-space-3);
+}
+
+.lf-preview-page {
+  position: relative;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.2);
+  height: fit-content;
+}
+
+.lf-preview-page canvas {
+  display: block;
+}
+
+.lf-preview-text-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  line-height: 1;
+  opacity: 1;
+}
+
+:host ::ng-deep .lf-preview-text-layer span {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0 0;
+}
+
+.lf-preview-text-layer ::selection {
+  background: rgb(0 100 255 / 0.3);
+}
+
+:host ::ng-deep .lf-search-hit {
+  background: rgb(255 235 59 / 0.5);
+  border-radius: 2px;
+}
+
+:host ::ng-deep .lf-search-hit--active {
+  background: rgb(255 152 0 / 0.7);
+}
+
+@media (prefers-color-scheme: dark) {
+  :host ::ng-deep .lf-search-hit {
+    background: rgb(255 235 59 / 0.35);
+  }
+
+  :host ::ng-deep .lf-search-hit--active {
+    background: rgb(255 152 0 / 0.55);
+  }
+}

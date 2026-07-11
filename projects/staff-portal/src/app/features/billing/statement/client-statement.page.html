@@ -1,0 +1,121 @@
+<div class="statement">
+  <header class="statement__header">
+    <div>
+      <h1>Client statement</h1>
+      <p class="statement__subtitle">
+        {{ client()?.displayName ?? client()?.legalName ?? clientId }}
+      </p>
+    </div>
+
+    <form [formGroup]="range" class="statement__range">
+      <mat-form-field appearance="outline">
+        <mat-label>From</mat-label>
+        <input matInput [matDatepicker]="fromPicker" formControlName="from" />
+        <mat-datepicker-toggle matIconSuffix [for]="fromPicker" />
+        <mat-datepicker #fromPicker />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>To</mat-label>
+        <input matInput [matDatepicker]="toPicker" formControlName="to" />
+        <mat-datepicker-toggle matIconSuffix [for]="toPicker" />
+        <mat-datepicker #toPicker />
+      </mat-form-field>
+      <button mat-flat-button color="primary" type="button" [disabled]="loading()" (click)="load()">
+        @if (loading()) {
+          <mat-spinner diameter="20" />
+        } @else {
+          Refresh
+        }
+      </button>
+    </form>
+  </header>
+
+  @if (errorMessage()) {
+    <p class="statement__error" role="alert">{{ errorMessage() }}</p>
+  }
+
+  @if (statement(); as s) {
+    <section class="statement__balances">
+      <div class="statement__balance">
+        <span class="statement__balance-label">Opening balance</span>
+        <span class="statement__balance-value">{{ s.openingBalance | lfCurrency }}</span>
+      </div>
+      <div class="statement__balance">
+        <span class="statement__balance-label">Closing balance</span>
+        <span class="statement__balance-value">{{ s.closingBalance | lfCurrency }}</span>
+      </div>
+    </section>
+
+    <section class="statement__section">
+      <h2>Invoices</h2>
+      @if (s.invoices.length === 0) {
+        <lf-empty-state icon="receipt_long" title="No invoices in this range" />
+      } @else {
+        <table class="statement__table">
+          <thead>
+            <tr>
+              <th>Number</th>
+              <th>Date</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (invoice of s.invoices; track invoice.id) {
+              <tr>
+                <td>
+                  <a [routerLink]="['/billing/invoices', invoice.id]">{{
+                    invoice.number ?? invoice.id
+                  }}</a>
+                </td>
+                <td>{{ invoice.issueDate }}</td>
+                <td>{{ invoice.grandTotal | lfCurrency }}</td>
+                <td>{{ invoice.status }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    </section>
+
+    <section class="statement__section">
+      <h2>Payments</h2>
+      @if (s.payments.length === 0) {
+        <lf-empty-state icon="payments" title="No payments in this range" />
+      } @else {
+        <table class="statement__table">
+          <thead>
+            <tr>
+              <th>Receipt</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Mode</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (payment of s.payments; track payment.id) {
+              <tr>
+                <td>{{ payment.receiptNumber ?? payment.id }}</td>
+                <td>{{ payment.receivedOn }}</td>
+                <td>{{ payment.amount | lfCurrency }}</td>
+                <td>{{ payment.mode }}</td>
+                <td>
+                  <button mat-stroked-button type="button" (click)="refund(payment)">
+                    <mat-icon>undo</mat-icon> Refund
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    </section>
+  } @else if (!loading() && !errorMessage()) {
+    <lf-empty-state
+      icon="description"
+      title="No statement loaded"
+      message="Pick a date range and refresh."
+    />
+  }
+</div>

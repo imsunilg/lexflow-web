@@ -1,0 +1,109 @@
+.client-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-3);
+}
+
+.client-detail__header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--lf-surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--lf-space-2);
+  padding-bottom: var(--lf-space-2);
+  border-bottom: 1px solid var(--lf-surface-variant);
+}
+
+.client-detail__header-main {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+}
+
+.client-detail__header-main h1 {
+  margin: 0;
+}
+
+.client-detail__header-chips {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-2);
+}
+
+.client-detail__chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--lf-surface-variant);
+  font-size: var(--lf-text-sm);
+  font-weight: 600;
+}
+
+.client-detail__tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-3);
+  padding: var(--lf-space-3) 0;
+}
+
+.client-detail__profile-grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--lf-space-1) var(--lf-space-2);
+  margin: 0;
+}
+
+.client-detail__profile-grid dt {
+  font-weight: 600;
+  color: var(--lf-on-surface-variant);
+}
+
+.client-detail__profile-grid dd {
+  margin: 0;
+}
+
+.client-detail__hint {
+  color: var(--lf-on-surface-variant);
+  font-size: var(--lf-text-sm);
+}
+
+.client-detail__address-list {
+  list-style: none;
+  margin: 0 0 var(--lf-space-1);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+}
+
+.client-detail__address-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--lf-space-1);
+  align-items: flex-start;
+  margin-top: var(--lf-space-1);
+}
+
+.client-detail__form-actions {
+  display: flex;
+  gap: var(--lf-space-1);
+}
+
+.client-detail__comm-filter {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+}
+
+.client-detail__comm-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+}

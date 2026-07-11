@@ -1,0 +1,157 @@
+<div class="dashboard-page">
+  <header class="dashboard-page__toolbar">
+    <h1 class="dashboard-page__title">Dashboard</h1>
+    <div class="dashboard-page__toolbar-actions">
+      <lf-dashboard-date-range-selector
+        [range]="analyticsRange()"
+        (rangeChange)="onRangeChange($event)"
+      />
+      <button mat-stroked-button type="button" (click)="openCatalogDialog()">
+        <mat-icon>tune</mat-icon>
+        Customize
+      </button>
+    </div>
+  </header>
+
+  @if (liveUpdatesPaused()) {
+    <div class="dashboard-page__live-banner" role="status">
+      <mat-icon>cloud_off</mat-icon>
+      Live updates paused — refreshing periodically instead.
+    </div>
+  }
+
+  @if (loadingLayout()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else {
+    <div
+      cdkDropList
+      cdkDropListOrientation="mixed"
+      class="dashboard-grid"
+      (cdkDropListDropped)="onDrop($event)"
+    >
+      @for (entry of visibleLayout(); track entry.widgetId) {
+        <div
+          cdkDrag
+          class="dashboard-grid__item"
+          [class.dashboard-grid__item--small]="entry.size === 'small'"
+          [class.dashboard-grid__item--medium]="entry.size === 'medium'"
+          [class.dashboard-grid__item--large]="entry.size === 'large'"
+        >
+          <div
+            class="dashboard-grid__drag-handle"
+            cdkDragHandle
+            [attr.aria-label]="'Reorder ' + catalogEntry(entry.widgetId).title"
+          >
+            <mat-icon>drag_indicator</mat-icon>
+          </div>
+
+          @switch (entry.widgetId) {
+            @case ('hearings-today') {
+              @defer (on viewport) {
+                <lf-hearings-today-widget [refreshTrigger]="refreshTrigger()" />
+              } @placeholder {
+                <div class="widget-skeleton"></div>
+              }
+            }
+            @case ('tasks-pending') {
+              @defer (on viewport) {
+                <lf-tasks-pending-widget [refreshTrigger]="refreshTrigger()" />
+              } @placeholder {
+                <div class="widget-skeleton"></div>
+              }
+            }
+            @case ('revenue') {
+              @defer (on viewport) {
+                <lf-revenue-widget [refreshTrigger]="refreshTrigger()" [range]="analyticsRange()" />
+              } @placeholder {
+                <div class="widget-skeleton"></div>
+              }
+            }
+            @case ('outstanding') {
+              @defer (on viewport) {
+                <lf-outstanding-widget [refreshTrigger]="refreshTrigger()" />
+              } @placeholder {
+                <div class="widget-skeleton"></div>
+              }
+            }
+            @case ('deadlines') {
+              @defer (on viewport) {
+                <lf-deadlines-widget [refreshTrigger]="refreshTrigger()" />
+              } @placeholder {
+                <div class="widget-skeleton"></div>
+              }
+            }
+            @case ('activity') {
+              @defer (on viewport) {
+                <lf-activity-widget [refreshTrigger]="refreshTrigger()" />
+              } @placeholder {
+                <div class="widget-skeleton"></div>
+              }
+            }
+            @case ('case-stats') {
+              @defer (on viewport) {
+                <lf-case-stats-widget
+                  [refreshTrigger]="refreshTrigger()"
+                  [range]="analyticsRange()"
+                />
+              } @placeholder {
+                <div class="widget-skeleton"></div>
+              }
+            }
+            @case ('lawyer-performance') {
+              @defer (on viewport) {
+                <lf-lawyer-performance-widget
+                  [refreshTrigger]="refreshTrigger()"
+                  [range]="analyticsRange()"
+                />
+              } @placeholder {
+                <div class="widget-skeleton"></div>
+              }
+            }
+            @case ('matter-summary') {
+              @defer (on viewport) {
+                <lf-matter-summary-widget
+                  [refreshTrigger]="refreshTrigger()"
+                  [range]="analyticsRange()"
+                />
+              } @placeholder {
+                <div class="widget-skeleton"></div>
+              }
+            }
+            @case ('client-summary') {
+              @defer (on viewport) {
+                <lf-client-summary-widget
+                  [refreshTrigger]="refreshTrigger()"
+                  [range]="analyticsRange()"
+                />
+              } @placeholder {
+                <div class="widget-skeleton"></div>
+              }
+            }
+            @case ('lead-pipeline') {
+              @defer (on viewport) {
+                <lf-lead-pipeline-widget
+                  [refreshTrigger]="refreshTrigger()"
+                  [range]="analyticsRange()"
+                />
+              } @placeholder {
+                <div class="widget-skeleton"></div>
+              }
+            }
+            @case ('trust-balance') {
+              @defer (on viewport) {
+                <lf-trust-balance-widget [refreshTrigger]="refreshTrigger()" />
+              } @placeholder {
+                <div class="widget-skeleton"></div>
+              }
+            }
+          }
+        </div>
+      }
+    </div>
+
+    @if (visibleLayout().length === 0) {
+      <p class="dashboard-page__empty">No widgets are visible. Use "Customize" to add some.</p>
+    }
+  }
+</div>

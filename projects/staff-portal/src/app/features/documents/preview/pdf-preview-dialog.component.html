@@ -1,0 +1,84 @@
+<h2 mat-dialog-title class="lf-preview-title">{{ data.title }}</h2>
+
+<mat-dialog-content class="lf-preview-content">
+  @if (loading()) {
+    <div class="lf-preview-state">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Loading preview…</p>
+    </div>
+  } @else if (loadFailed()) {
+    <div class="lf-preview-state">
+      <mat-icon>error_outline</mat-icon>
+      <p>Preview unavailable, download to view</p>
+      <a mat-flat-button color="primary" [href]="downloadUrl" target="_blank" rel="noopener">
+        Download
+      </a>
+    </div>
+  } @else {
+    <div class="lf-preview-toolbar">
+      <mat-form-field appearance="outline" class="lf-preview-search">
+        <mat-label>Search in document</mat-label>
+        <input
+          matInput
+          [formControl]="searchControl"
+          (keydown.enter)="runSearch()"
+          placeholder="Find text…"
+        />
+        @if (searchControl.value) {
+          <button matSuffix mat-icon-button type="button" (click)="clearSearch()">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+      <button mat-stroked-button type="button" [disabled]="searching()" (click)="runSearch()">
+        Search
+      </button>
+      @if (hasSearched()) {
+        <div class="lf-preview-match-nav">
+          @if (matches().length > 0) {
+            <span class="lf-preview-match-count">
+              {{ currentMatchIndex() + 1 }} of {{ matches().length }}
+            </span>
+            <button mat-icon-button type="button" (click)="prevMatch()" matTooltip="Previous match">
+              <mat-icon>keyboard_arrow_up</mat-icon>
+            </button>
+            <button mat-icon-button type="button" (click)="nextMatch()" matTooltip="Next match">
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+          } @else {
+            <span class="lf-preview-match-count">No matches</span>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="lf-preview-pager">
+      <button mat-icon-button type="button" [disabled]="currentPage() <= 1" (click)="prevPage()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <span>Page {{ currentPage() }} of {{ numPages() }}</span>
+      <button
+        mat-icon-button
+        type="button"
+        [disabled]="currentPage() >= numPages()"
+        (click)="nextPage()"
+      >
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+      @if (rendering()) {
+        <mat-spinner diameter="18"></mat-spinner>
+      }
+    </div>
+
+    <div class="lf-preview-canvas-wrap">
+      <div class="lf-preview-page">
+        <canvas #pageCanvas></canvas>
+        <div #textLayerHost class="lf-preview-text-layer"></div>
+      </div>
+    </div>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" [mat-dialog-close]="undefined">Close</button>
+</mat-dialog-actions>

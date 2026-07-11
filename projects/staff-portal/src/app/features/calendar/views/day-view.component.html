@@ -1,0 +1,51 @@
+<div class="day-view">
+  <div class="day-view__header">
+    <div class="day-view__gutter"></div>
+    <div class="day-view__day-header">{{ day() | date: 'EEEE, MMMM d' }}</div>
+  </div>
+
+  <div class="day-view__all-day-row" cdkDropListGroup>
+    <div class="day-view__gutter">All-day</div>
+    <div
+      class="day-view__all-day-cell"
+      cdkDropList
+      [cdkDropListData]="day()"
+      (cdkDropListDropped)="dropped.emit($event)"
+    >
+      @for (item of allDayItems(); track item.id) {
+        <div cdkDrag [cdkDragData]="item" [cdkDragDisabled]="item.isLocked">
+          <lf-event-chip
+            [item]="item"
+            (viewRequested)="viewRequested.emit($event)"
+            (editRequested)="editRequested.emit($event)"
+            (deleteRequested)="deleteRequested.emit($event)"
+          />
+        </div>
+      }
+    </div>
+  </div>
+
+  <cdk-virtual-scroll-viewport itemSize="48" class="day-view__body" cdkDropListGroup>
+    <div class="day-view__row" *cdkVirtualFor="let hour of hours">
+      <div class="day-view__gutter day-view__gutter--hour">{{ hour }}:00</div>
+      <div
+        class="day-view__hour-cell"
+        cdkDropList
+        [cdkDropListData]="slotDate(hour)"
+        (cdkDropListDropped)="dropped.emit($event)"
+        (dblclick)="itemsFor(hour).length === 0 && createRequested.emit(slotDate(hour))"
+      >
+        @for (item of itemsFor(hour); track item.id) {
+          <div cdkDrag [cdkDragData]="item" [cdkDragDisabled]="item.isLocked">
+            <lf-event-chip
+              [item]="item"
+              (viewRequested)="viewRequested.emit($event)"
+              (editRequested)="editRequested.emit($event)"
+              (deleteRequested)="deleteRequested.emit($event)"
+            />
+          </div>
+        }
+      </div>
+    </div>
+  </cdk-virtual-scroll-viewport>
+</div>

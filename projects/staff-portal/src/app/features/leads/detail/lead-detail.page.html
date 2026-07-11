@@ -1,0 +1,202 @@
+<div class="detail-page">
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (error()) {
+    <lf-empty-state
+      icon="error_outline"
+      title="Couldn't load this lead"
+      ctaLabel="Retry"
+      (cta)="load()"
+    />
+  } @else if (lead(); as currentLead) {
+    <div class="detail-page__panes">
+      <!-- Profile pane -->
+      <section class="pane pane--profile">
+        <header class="pane__header">
+          <h1 class="pane__title">{{ currentLead.firstName }} {{ currentLead.lastName }}</h1>
+          <button mat-stroked-button type="button" (click)="editLead()">
+            <mat-icon>edit</mat-icon>
+            Edit
+          </button>
+        </header>
+
+        <div class="profile-field">
+          <span class="profile-field__label">Number</span>
+          <span class="profile-field__value">{{ currentLead.number }}</span>
+        </div>
+
+        @if (currentLead.company) {
+          <div class="profile-field">
+            <span class="profile-field__label">Company</span>
+            <span class="profile-field__value">{{ currentLead.company }}</span>
+          </div>
+        }
+
+        @if (currentLead.email) {
+          <div class="profile-field">
+            <span class="profile-field__label">Email</span>
+            <span class="profile-field__value">{{ currentLead.email }}</span>
+          </div>
+        }
+
+        @if (currentLead.phoneE164) {
+          <div class="profile-field">
+            <span class="profile-field__label">Phone</span>
+            <span class="profile-field__value">{{ currentLead.phoneE164 }}</span>
+          </div>
+        }
+
+        @if (currentLead.sourceId) {
+          <div class="profile-field">
+            <span class="profile-field__label">Source</span>
+            <span class="profile-field__value">{{ currentLead.sourceId }}</span>
+          </div>
+        }
+
+        @if (currentLead.practiceAreaId) {
+          <div class="profile-field">
+            <span class="profile-field__label">Practice area</span>
+            <span class="profile-field__value">{{ currentLead.practiceAreaId }}</span>
+          </div>
+        }
+
+        @if (currentLead.issueSummary) {
+          <div class="profile-field">
+            <span class="profile-field__label">Issue summary</span>
+            <span class="profile-field__value">{{ currentLead.issueSummary }}</span>
+          </div>
+        }
+
+        @if (currentLead.opposingParty) {
+          <div class="profile-field">
+            <span class="profile-field__label">Opposing party</span>
+            <span class="profile-field__value">{{ currentLead.opposingParty }}</span>
+          </div>
+        }
+
+        @if (currentLead.budgetBand) {
+          <div class="profile-field">
+            <span class="profile-field__label">Budget band</span>
+            <span class="profile-field__value">{{ currentLead.budgetBand }}</span>
+          </div>
+        }
+
+        <div class="profile-field">
+          <span class="profile-field__label">Stage</span>
+          <lf-status-chip [label]="currentLead.stage" />
+        </div>
+
+        <div class="profile-field">
+          <span class="profile-field__label">Score</span>
+          <span class="profile-field__value">{{ currentLead.score }}/100</span>
+        </div>
+
+        <div class="profile-field">
+          <span class="profile-field__label">Status</span>
+          <lf-status-chip [label]="currentLead.status" />
+        </div>
+      </section>
+
+      <!-- Activity timeline pane -->
+      <section class="pane pane--timeline">
+        <header class="pane__header pane__header--actions">
+          <h2 class="pane__subtitle">Activity</h2>
+          <div class="pane__actions">
+            <button mat-stroked-button type="button" (click)="logActivity('call')">
+              <mat-icon>call</mat-icon>
+              Log call
+            </button>
+            <button mat-stroked-button type="button" (click)="logActivity('meeting')">
+              <mat-icon>groups</mat-icon>
+              Log meeting
+            </button>
+            <button mat-stroked-button type="button" (click)="logActivity('note')">
+              <mat-icon>note</mat-icon>
+              Add note
+            </button>
+          </div>
+        </header>
+
+        @if (timeline().length === 0) {
+          <lf-empty-state icon="history" title="No activity yet" />
+        } @else {
+          <ul class="timeline">
+            @for (item of timeline(); track item.at + item.kind) {
+              <li class="timeline-item">
+                @switch (item.kind) {
+                  @case ('activity') {
+                    <mat-icon class="timeline-item__icon">{{
+                      activityIcon(item.activity.activityType)
+                    }}</mat-icon>
+                    <div class="timeline-item__body">
+                      <p class="timeline-item__summary">{{ activitySummary(item.activity) }}</p>
+                      <p class="timeline-item__time">
+                        {{ item.activity.occurredAt | date: 'short' }}
+                      </p>
+                    </div>
+                  }
+                  @case ('stage') {
+                    <mat-icon class="timeline-item__icon">swap_horiz</mat-icon>
+                    <div class="timeline-item__body">
+                      <p class="timeline-item__summary">
+                        Moved from {{ item.entry.fromStage ?? '(none)' }} to
+                        {{ item.entry.toStage }}
+                      </p>
+                      <p class="timeline-item__time">{{ item.entry.at | date: 'short' }}</p>
+                    </div>
+                  }
+                }
+              </li>
+            }
+          </ul>
+        }
+      </section>
+
+      <!-- Next-action panel -->
+      <section class="pane pane--actions">
+        <h2 class="pane__subtitle">Next action</h2>
+
+        <div class="sla-info">
+          @if (currentLead.firstContactedAt) {
+            <p>First contacted {{ currentLead.firstContactedAt | date: 'short' }}</p>
+          } @else if (currentLead.slaFirstContactDueAt) {
+            <p>First contact due {{ currentLead.slaFirstContactDueAt | date: 'short' }}</p>
+          } @else {
+            <p>No SLA set</p>
+          }
+        </div>
+
+        <mat-form-field appearance="outline" class="stage-select">
+          <mat-label>Change stage</mat-label>
+          <mat-select [formControl]="stageControl" (selectionChange)="changeStage()">
+            @for (stage of stages; track stage) {
+              <mat-option [value]="stage">{{ stage }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        @if (stageSaving()) {
+          <mat-progress-bar mode="indeterminate" />
+        }
+        @if (stageError()) {
+          <p class="action-error" role="alert">{{ stageError() }}</p>
+        }
+
+        <div class="action-buttons">
+          @if (currentLead.status === 'Open') {
+            <button mat-flat-button color="primary" type="button" (click)="convert()">
+              Convert
+            </button>
+            <button mat-stroked-button color="warn" type="button" (click)="markLost()">
+              Mark lost
+            </button>
+          }
+
+          @if (currentLead.status === 'Converted') {
+            <p class="converted-note">Converted to client {{ currentLead.convertedClientId }}</p>
+          }
+        </div>
+      </section>
+    </div>
+  }
+</div>

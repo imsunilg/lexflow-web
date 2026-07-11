@@ -1,0 +1,27 @@
+.ics-export {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+}
+
+.ics-export__hint {
+  margin: 0;
+  color: var(--lf-on-surface-variant);
+  font-size: var(--lf-text-sm);
+}
+
+.ics-export__row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--lf-space-1);
+}
+
+.ics-export__field {
+  flex: 1;
+}
+
+.ics-export__error {
+  margin: 0;
+  color: var(--lf-error);
+  font-size: var(--lf-text-sm);
+}

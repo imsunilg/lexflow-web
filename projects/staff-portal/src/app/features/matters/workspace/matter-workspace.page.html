@@ -1,0 +1,214 @@
+<div class="matter-workspace">
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (error() || !matter()) {
+    <lf-empty-state
+      icon="error_outline"
+      title="Couldn't load this matter"
+      ctaLabel="Retry"
+      (cta)="load()"
+    />
+  } @else {
+    <header class="matter-workspace__header">
+      <div class="matter-workspace__header-main">
+        <h1>{{ matter()!.number }} — {{ matter()!.title }}</h1>
+        <lf-status-chip [label]="matter()!.matterType" toneOverride="info" />
+        <lf-status-chip [label]="matter()!.priority" toneOverride="warn" />
+        <lf-status-chip [label]="matter()!.status" />
+        @if (nextHearingCountdown(); as countdown) {
+          <span
+            class="matter-workspace__countdown"
+            [attr.data-tone]="countdown.tone"
+            matTooltip="Next hearing countdown"
+          >
+            Next hearing: {{ countdown.label }}
+          </span>
+        }
+      </div>
+
+      <div class="matter-workspace__header-actions">
+        <button
+          mat-stroked-button
+          type="button"
+          disabled
+          matTooltip="Not available in this environment yet"
+        >
+          <mat-icon>schedule</mat-icon>
+          Start timer
+        </button>
+        <button
+          mat-stroked-button
+          type="button"
+          disabled
+          matTooltip="Not available in this environment yet"
+        >
+          <mat-icon>note_add</mat-icon>
+          Add note
+        </button>
+        <button
+          mat-stroked-button
+          type="button"
+          disabled
+          matTooltip="Not available in this environment yet"
+        >
+          <mat-icon>upload</mat-icon>
+          Upload
+        </button>
+        <button
+          mat-stroked-button
+          type="button"
+          disabled
+          matTooltip="Not available in this environment yet"
+        >
+          <mat-icon>add_task</mat-icon>
+          New task
+        </button>
+
+        @if (matter()!.status === 'Open') {
+          <button mat-stroked-button type="button" (click)="putOnHold()">On hold</button>
+          <button mat-flat-button color="warn" type="button" (click)="openClosingChecklist()">
+            Close matter
+          </button>
+        } @else if (matter()!.status === 'OnHold') {
+          <button mat-flat-button color="warn" type="button" (click)="openClosingChecklist()">
+            Close matter
+          </button>
+        } @else if (matter()!.status === 'Closed') {
+          <button mat-stroked-button type="button" (click)="reopen()">Reopen</button>
+        }
+      </div>
+    </header>
+
+    <mat-tab-group>
+      <mat-tab label="Overview">
+        <div class="matter-workspace__tab-content matter-workspace__overview">
+          <section class="matter-workspace__profile">
+            <h2>Details</h2>
+            <dl class="matter-workspace__profile-grid">
+              <dt>Client</dt>
+              <dd>{{ matter()!.clientId }}</dd>
+              <dt>Practice area</dt>
+              <dd>{{ matter()!.practiceAreaId || '—' }}</dd>
+              <dt>Branch</dt>
+              <dd>{{ matter()!.branchId || '—' }}</dd>
+              <dt>Responsible lawyer</dt>
+              <dd>{{ matter()!.responsibleLawyerId || '—' }}</dd>
+              <dt>Opened</dt>
+              <dd>{{ matter()!.openedOn }}</dd>
+              <dt>Budget</dt>
+              <dd>{{ matter()!.budget ?? '—' }}</dd>
+              <dt>Description</dt>
+              <dd>{{ matter()!.description || '—' }}</dd>
+            </dl>
+          </section>
+
+          <section>
+            <lf-important-dates-panel [matterId]="matter()!.id" />
+          </section>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Court Cases">
+        <div class="matter-workspace__tab-content">
+          <button mat-stroked-button type="button" (click)="addCase()">Add court case</button>
+
+          @if (casesLoading()) {
+            <p>Loading…</p>
+          } @else if (cases().length === 0) {
+            <lf-empty-state
+              icon="gavel"
+              title="No court cases yet"
+              ctaLabel="Add court case"
+              (cta)="addCase()"
+            />
+          } @else {
+            <ul class="matter-workspace__case-list">
+              @for (courtCase of cases(); track courtCase.id) {
+                <li>
+                  <button
+                    type="button"
+                    class="matter-workspace__case-row"
+                    (click)="openCase(courtCase)"
+                  >
+                    <strong
+                      >{{ courtCase.caseType }} {{ courtCase.caseNumber }}/{{
+                        courtCase.caseYear
+                      }}</strong
+                    >
+                    <span>{{ courtCase.stage || courtCase.status }}</span>
+                  </button>
+                </li>
+              }
+            </ul>
+          }
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Hearings">
+        <div class="matter-workspace__tab-content">
+          @if (hearingsLoading()) {
+            <p>Loading…</p>
+          } @else if (upcomingHearings().length === 0) {
+            <lf-empty-state icon="event_available" title="No upcoming hearings" />
+          } @else {
+            <ul class="matter-workspace__hearing-list">
+              @for (entry of upcomingHearings(); track entry.hearing.id) {
+                <li>
+                  <strong>{{ entry.hearing.date }}</strong>
+                  {{ entry.hearing.time }} — {{ entry.hearing.purpose || 'Hearing' }}
+                  <span class="matter-workspace__hearing-case">
+                    ({{ entry.courtCase.caseType }} {{ entry.courtCase.caseNumber }}/{{
+                      entry.courtCase.caseYear
+                    }})
+                  </span>
+                </li>
+              }
+            </ul>
+          }
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Documents & Evidence">
+        <div class="matter-workspace__tab-content">
+          <lf-matter-documents-tab [matterId]="matter()!.id" />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Tasks">
+        <div class="matter-workspace__tab-content">
+          <lf-matter-tasks-tab [matterId]="matter()!.id" />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Time & Expenses">
+        <div class="matter-workspace__tab-content">
+          <lf-matter-time-expenses-tab [matterId]="matter()!.id" />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Billing">
+        <div class="matter-workspace__tab-content">
+          <lf-matter-billing-tab [matterId]="matter()!.id" />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Notes">
+        <div class="matter-workspace__tab-content">
+          <lf-matter-notes-tab [matterId]="matter()!.id" />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Parties">
+        <div class="matter-workspace__tab-content">
+          <lf-matter-parties-tab [matterId]="matter()!.id" />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Activity">
+        <div class="matter-workspace__tab-content">
+          <lf-matter-activity-tab [matterId]="matter()!.id" />
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  }
+</div>

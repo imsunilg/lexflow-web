@@ -1,0 +1,44 @@
+.lf-share-dialog__tab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-2) 0;
+  min-width: 420px;
+}
+
+.lf-share-dialog__form,
+.lf-share-dialog__result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+}
+
+.lf-share-dialog__wide {
+  width: 100%;
+}
+
+.lf-share-dialog__banner {
+  margin: 0;
+  padding: var(--lf-space-1);
+  border-radius: var(--lf-radius);
+  background: var(--lf-surface-variant);
+  color: var(--lf-on-surface-variant);
+  font-size: var(--lf-text-sm);
+}
+
+.lf-share-dialog__banner--error {
+  color: var(--lf-error);
+  background: color-mix(in srgb, var(--lf-error) 12%, transparent);
+}
+
+.lf-share-dialog__hint {
+  margin: 0;
+  color: var(--lf-on-surface-variant);
+  font-size: var(--lf-text-xs);
+}
+
+.lf-share-dialog__label {
+  margin: 0;
+  font-weight: 600;
+  font-size: var(--lf-text-sm);
+}

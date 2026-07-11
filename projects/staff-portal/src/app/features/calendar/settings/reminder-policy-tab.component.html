@@ -1,0 +1,94 @@
+<div class="reminder-policy">
+  <div class="reminder-policy__banner" role="note">
+    <mat-icon>info</mat-icon>
+    <span>
+      These defaults aren't applied server-side yet — only per-event reminder overrides exist on the
+      backend today. What you set here is staged locally in this browser pending a real
+      reminder-policy API; add a matching per-event reminder in the event dialog for it to actually
+      dispatch.
+    </span>
+  </div>
+
+  <div class="reminder-policy__toolbar">
+    <button mat-stroked-button type="button" (click)="resetToDefaults()">
+      <mat-icon>restore</mat-icon>
+      Reset to PRD defaults
+    </button>
+  </div>
+
+  @for (kind of kinds; track kind) {
+    <section class="reminder-policy__kind">
+      <div class="reminder-policy__kind-header">
+        <h2>{{ kind }}</h2>
+        <button mat-button type="button" (click)="addRule(kind)">
+          <mat-icon>add</mat-icon>
+          Add reminder
+        </button>
+      </div>
+
+      @if (rulesFor(kind).length === 0) {
+        <p class="reminder-policy__empty">No reminders configured for {{ kind }}.</p>
+      }
+
+      @for (rule of rulesFor(kind); track rule.id) {
+        <div class="reminder-policy__rule">
+          <mat-form-field appearance="outline" class="reminder-policy__offset">
+            <mat-label>Days before</mat-label>
+            <input
+              matInput
+              type="number"
+              min="0"
+              max="90"
+              [ngModel]="rule.offsetDays"
+              (ngModelChange)="setOffsetDays(kind, rule.id, $event)"
+            />
+          </mat-form-field>
+
+          <mat-slide-toggle
+            [checked]="rule.fixedTime !== null"
+            (change)="
+              $event.checked ? setFixedTime(kind, rule.id, '07:00') : clearFixedTime(kind, rule.id)
+            "
+            matTooltip="Fire at a fixed local time instead of the event's own start time (e.g. same-day 07:00 court-local)"
+          >
+            Fixed time
+          </mat-slide-toggle>
+
+          @if (rule.fixedTime !== null) {
+            <mat-form-field appearance="outline" class="reminder-policy__time">
+              <mat-label>At</mat-label>
+              <input
+                matInput
+                type="time"
+                [ngModel]="rule.fixedTime"
+                (ngModelChange)="setFixedTime(kind, rule.id, $event)"
+              />
+            </mat-form-field>
+          }
+
+          <div class="reminder-policy__channels">
+            @for (channel of channels; track channel) {
+              <button
+                type="button"
+                class="reminder-policy__channel-chip"
+                [attr.data-active]="hasChannel(rule, channel)"
+                (click)="toggleChannel(kind, rule.id, channel)"
+              >
+                {{ channel }}
+              </button>
+            }
+          </div>
+
+          <button
+            mat-icon-button
+            type="button"
+            matTooltip="Remove this reminder"
+            (click)="removeRule(kind, rule.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      }
+    </section>
+  }
+</div>

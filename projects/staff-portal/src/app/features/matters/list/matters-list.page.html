@@ -1,0 +1,109 @@
+<div class="matters-list-page">
+  <header class="matters-list-page__toolbar">
+    <h1 class="matters-list-page__title">Matters</h1>
+    <div class="matters-list-page__toolbar-actions">
+      <button mat-flat-button color="primary" type="button" (click)="createMatter()">
+        <mat-icon>add</mat-icon>
+        New matter
+      </button>
+    </div>
+  </header>
+
+  <form class="matters-list-page__filters" [formGroup]="form">
+    <mat-form-field appearance="outline" class="matters-list-page__search">
+      <mat-label>Search</mat-label>
+      <input matInput formControlName="q" placeholder="Number, title" />
+      <mat-icon matIconSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status" (selectionChange)="load()">
+        <mat-option value="">All statuses</mat-option>
+        @for (status of statuses; track status) {
+          <mat-option [value]="status">{{ status }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="matterType" (selectionChange)="load()">
+        <mat-option value="">All types</mat-option>
+        @for (type of matterTypes; track type) {
+          <mat-option [value]="type">{{ type }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Priority</mat-label>
+      <mat-select formControlName="priority" (selectionChange)="load()">
+        <mat-option value="">All priorities</mat-option>
+        @for (priority of priorities; track priority) {
+          <mat-option [value]="priority">{{ priority }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-button type="button" (click)="clearFilters()">
+      <mat-icon>filter_alt_off</mat-icon>
+      Clear filters
+    </button>
+  </form>
+
+  <div class="matters-list-page__saved-views">
+    <mat-chip-set>
+      @for (view of savedViews(); track view.id) {
+        <mat-chip (click)="applySavedView(view)">
+          {{ view.name }}
+          <button matChipRemove (click)="removeSavedView(view, $event)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+      }
+    </mat-chip-set>
+
+    @if (savingViewName()) {
+      <mat-form-field appearance="outline" class="matters-list-page__save-view-input">
+        <mat-label>View name</mat-label>
+        <input matInput [formControl]="newViewName" (keydown.enter)="confirmSaveView()" />
+      </mat-form-field>
+      <button mat-icon-button type="button" (click)="confirmSaveView()">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button mat-icon-button type="button" (click)="cancelSavingView()">
+        <mat-icon>close</mat-icon>
+      </button>
+    } @else {
+      <button mat-button type="button" (click)="startSavingView()">
+        <mat-icon>bookmark_add</mat-icon>
+        Save current filter
+      </button>
+    }
+  </div>
+
+  @if (error()) {
+    <lf-empty-state
+      icon="error_outline"
+      title="Couldn't load matters"
+      ctaLabel="Retry"
+      (cta)="load()"
+    />
+  } @else if (!loading() && rows().length === 0) {
+    <lf-empty-state
+      icon="folder_off"
+      title="No matters match these filters"
+      message="Try adjusting or clearing your filters."
+      ctaLabel="Clear filters"
+      (cta)="clearFilters()"
+    />
+  } @else {
+    <lf-data-table
+      [columns]="columns"
+      [rows]="rows()"
+      [loading]="loading()"
+      (rowClick)="openMatter($event)"
+    />
+  }
+</div>

@@ -1,0 +1,138 @@
+<div class="calendar-page">
+  <header class="calendar-page__header">
+    <div class="calendar-page__nav">
+      <button mat-icon-button type="button" (click)="step(-1)">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button mat-stroked-button type="button" (click)="today()">Today</button>
+      <button mat-icon-button type="button" (click)="step(1)">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+      <h1>{{ anchorDate() | date: (viewMode() === 'month' ? 'MMMM yyyy' : 'mediumDate') }}</h1>
+    </div>
+
+    <div class="calendar-page__controls">
+      <mat-button-toggle-group [value]="viewMode()" (change)="setViewMode($event.value)">
+        <mat-button-toggle value="day">Day</mat-button-toggle>
+        <mat-button-toggle value="week">Week</mat-button-toggle>
+        <mat-button-toggle value="month">Month</mat-button-toggle>
+        <mat-button-toggle value="agenda">Agenda</mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <mat-button-toggle-group [value]="scope()" (change)="setScope($event.value)">
+        <mat-button-toggle value="Me">My</mat-button-toggle>
+        <mat-button-toggle value="Team" [disabled]="!canViewTeam()">Team</mat-button-toggle>
+        <mat-button-toggle value="Firm" [disabled]="!canViewFirm()">Firm</mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <button mat-flat-button color="primary" type="button" (click)="createEvent(anchorDate())">
+        <mat-icon>add</mat-icon> New event
+      </button>
+
+      <a mat-icon-button routerLink="/calendar/settings" matTooltip="Sync, reminders, ICS export">
+        <mat-icon>settings</mat-icon>
+      </a>
+    </div>
+  </header>
+
+  <div class="calendar-page__filters">
+    @for (kind of itemKinds; track kind) {
+      <button
+        type="button"
+        mat-stroked-button
+        class="calendar-page__filter-chip"
+        [class.calendar-page__filter-chip--active]="activeKinds().has(kind)"
+        (click)="toggleKind(kind)"
+      >
+        {{ kind }}
+      </button>
+    }
+  </div>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (error()) {
+    <lf-empty-state
+      icon="error_outline"
+      title="Couldn't load the calendar"
+      ctaLabel="Retry"
+      (cta)="load()"
+    />
+  } @else if (viewMode() === 'month') {
+    <div class="month-view" cdkDropListGroup>
+      <div class="month-view__weekday-row">
+        @for (weekday of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; track weekday) {
+          <div class="month-view__weekday">{{ weekday }}</div>
+        }
+      </div>
+
+      @for (week of monthWeeks(); track $index) {
+        <div class="month-view__week">
+          @for (cell of week; track cell.key) {
+            <div
+              class="month-view__cell"
+              [class.month-view__cell--outside]="!cell.inMonth"
+              cdkDropList
+              [cdkDropListData]="cell.date"
+              (cdkDropListDropped)="onDrop($event)"
+              (dblclick)="createEvent(cell.date)"
+            >
+              <span class="month-view__cell-date">{{ cell.date.getDate() }}</span>
+              <div class="month-view__cell-items">
+                @for (item of (itemsByDay().get(cell.key) ?? []).slice(0, 3); track item.id) {
+                  <div cdkDrag [cdkDragData]="item" [cdkDragDisabled]="item.isLocked">
+                    <lf-event-chip
+                      [item]="item"
+                      (viewRequested)="openItem($event)"
+                      (editRequested)="editItem($event)"
+                      (deleteRequested)="deleteItem($event)"
+                    />
+                  </div>
+                }
+                @if ((itemsByDay().get(cell.key) ?? []).length > 3) {
+                  <button
+                    mat-button
+                    type="button"
+                    class="month-view__more"
+                    (click)="setViewMode('agenda'); anchorDate.set(cell.date)"
+                  >
+                    +{{ (itemsByDay().get(cell.key) ?? []).length - 3 }} more
+                  </button>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  } @else if (viewMode() === 'week') {
+    <lf-calendar-week-view
+      [items]="filteredItems()"
+      [anchorDate]="anchorDate()"
+      (dropped)="onDrop($event)"
+      (viewRequested)="openItem($event)"
+      (editRequested)="editItem($event)"
+      (deleteRequested)="deleteItem($event)"
+      (createRequested)="createEvent($event)"
+    />
+  } @else if (viewMode() === 'day') {
+    <lf-calendar-day-view
+      [items]="filteredItems()"
+      [anchorDate]="anchorDate()"
+      (dropped)="onDrop($event)"
+      (viewRequested)="openItem($event)"
+      (editRequested)="editItem($event)"
+      (deleteRequested)="deleteItem($event)"
+      (createRequested)="createEvent($event)"
+    />
+  } @else {
+    <lf-calendar-agenda-view
+      [items]="filteredItems()"
+      [anchorDate]="anchorDate()"
+      (viewRequested)="openItem($event)"
+      (editRequested)="editItem($event)"
+      (deleteRequested)="deleteItem($event)"
+      (createRequested)="createEvent($event)"
+    />
+  }
+</div>

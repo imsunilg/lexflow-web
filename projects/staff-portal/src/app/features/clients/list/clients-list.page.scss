@@ -1,0 +1,112 @@
+.clients-list-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-3);
+  height: 100%;
+}
+
+.clients-list-page__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.clients-list-page__toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-2);
+}
+
+.clients-list-page__title {
+  margin: 0;
+}
+
+.clients-list-page__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--lf-space-2);
+}
+
+.clients-list-page__search {
+  flex: 1 1 240px;
+  min-width: 200px;
+}
+
+.clients-list-page__body {
+  display: flex;
+  gap: var(--lf-space-2);
+  flex: 1;
+  min-height: 0;
+}
+
+.clients-list-page__alpha-index {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 0 0 auto;
+}
+
+.clients-list-page__alpha-btn {
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+  line-height: 1;
+
+  &--active {
+    color: var(--lf-primary, var(--lf-on-surface));
+    font-weight: 700;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+  }
+}
+
+.clients-list-page__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.clients-list-page__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--lf-space-2);
+}
+
+.clients-list-page__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+  text-align: left;
+  padding: var(--lf-space-2);
+  border: 1px solid var(--lf-surface-variant);
+  border-radius: 8px;
+  background: var(--lf-surface);
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+
+  &:hover {
+    border-color: var(--lf-on-surface-variant);
+  }
+}
+
+.clients-list-page__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lf-space-1);
+}
+
+.clients-list-page__card-name {
+  font-weight: 600;
+}
+
+.clients-list-page__card-number,
+.clients-list-page__card-type,
+.clients-list-page__card-contact,
+.clients-list-page__card-portal {
+  font-size: var(--lf-text-sm);
+  color: var(--lf-on-surface-variant);
+}

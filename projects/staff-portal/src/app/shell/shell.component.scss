@@ -90,6 +90,46 @@
   font-variant-numeric: tabular-nums;
 }
 
+// Pulsing dot while a timer is actively running (not paused) — PRD §12 "timer pulse".
+.shell__timer-chip--running mat-icon {
+  color: var(--lf-success);
+  animation: shell-timer-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes shell-timer-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.shell__notifications-menu {
+  min-width: 320px;
+  max-width: 360px;
+}
+
+.shell__notifications-empty {
+  padding: var(--lf-space-2);
+  margin: 0;
+  color: var(--lf-on-surface-variant);
+  text-align: center;
+}
+
+.shell__notification--unread {
+  font-weight: 600;
+}
+
+.shell__account-summary {
+  display: flex;
+  flex-direction: column;
+  padding: var(--lf-space-1) var(--lf-space-2);
+  color: var(--lf-on-surface-variant);
+  font-size: var(--lf-text-sm);
+}
+
 .shell__content {
   flex: 1;
   overflow: auto;

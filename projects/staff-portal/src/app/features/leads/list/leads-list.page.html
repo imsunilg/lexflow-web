@@ -1,0 +1,121 @@
+<div class="leads-list-page">
+  <lf-leads-tabs />
+
+  <header class="leads-list-page__toolbar">
+    <h1 class="leads-list-page__title">Leads</h1>
+    <div class="leads-list-page__toolbar-actions">
+      <button mat-stroked-button type="button" (click)="export('csv')">
+        <mat-icon>download</mat-icon>
+        Export CSV
+      </button>
+      <button mat-stroked-button type="button" (click)="export('xlsx')">
+        <mat-icon>download</mat-icon>
+        Export XLSX
+      </button>
+      <button mat-flat-button color="primary" type="button" (click)="createLead()">
+        <mat-icon>add</mat-icon>
+        New lead
+      </button>
+    </div>
+  </header>
+
+  <form class="leads-list-page__filters" [formGroup]="form">
+    <mat-form-field appearance="outline" class="leads-list-page__search">
+      <mat-label>Search</mat-label>
+      <input matInput formControlName="q" placeholder="Name, email, phone, company" />
+      <mat-icon matIconSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Stage</mat-label>
+      <mat-select formControlName="stage" (selectionChange)="load()">
+        <mat-option value="">All stages</mat-option>
+        @for (stage of stages; track stage) {
+          <mat-option [value]="stage">{{ stage }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Source</mat-label>
+      <mat-select formControlName="source" (selectionChange)="load()">
+        <mat-option value="">All sources</mat-option>
+        @for (source of sources(); track source.id) {
+          <mat-option [value]="source.id">{{ source.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status" (selectionChange)="load()">
+        <mat-option value="">All statuses</mat-option>
+        @for (status of statuses; track status) {
+          <mat-option [value]="status">{{ status }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <lf-date-range-picker label="Created" (rangeChange)="onDateRangeChange($event)" />
+
+    <button mat-button type="button" (click)="clearFilters()">
+      <mat-icon>filter_alt_off</mat-icon>
+      Clear filters
+    </button>
+  </form>
+
+  <div class="leads-list-page__saved-views">
+    <mat-chip-set>
+      @for (view of savedViews(); track view.id) {
+        <mat-chip (click)="applySavedView(view)">
+          {{ view.name }}
+          <button matChipRemove (click)="removeSavedView(view, $event)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+      }
+    </mat-chip-set>
+
+    @if (savingViewName()) {
+      <mat-form-field appearance="outline" class="leads-list-page__save-view-input">
+        <mat-label>View name</mat-label>
+        <input matInput [formControl]="newViewName" (keydown.enter)="confirmSaveView()" />
+      </mat-form-field>
+      <button mat-icon-button type="button" (click)="confirmSaveView()">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button mat-icon-button type="button" (click)="cancelSavingView()">
+        <mat-icon>close</mat-icon>
+      </button>
+    } @else {
+      <button mat-button type="button" (click)="startSavingView()">
+        <mat-icon>bookmark_add</mat-icon>
+        Save current filter
+      </button>
+    }
+  </div>
+
+  @if (error()) {
+    <lf-empty-state
+      icon="error_outline"
+      title="Couldn't load leads"
+      ctaLabel="Retry"
+      (cta)="load()"
+    />
+  } @else if (!loading() && rows().length === 0) {
+    <lf-empty-state
+      icon="person_search"
+      title="No leads match these filters"
+      message="Try adjusting or clearing your filters."
+      ctaLabel="Clear filters"
+      (cta)="clearFilters()"
+    />
+  } @else {
+    <lf-data-table
+      [columns]="columns"
+      [rows]="rows()"
+      [loading]="loading()"
+      (rowClick)="openLead($event)"
+    />
+  }
+</div>

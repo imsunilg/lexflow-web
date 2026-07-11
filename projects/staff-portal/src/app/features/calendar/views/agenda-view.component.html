@@ -1,0 +1,31 @@
+<cdk-virtual-scroll-viewport itemSize="44" class="agenda-view">
+  <div class="agenda-view__row" *cdkVirtualFor="let row of rows(); trackBy: trackByKey">
+    @switch (row.kind) {
+      @case ('header') {
+        <div class="agenda-view__header">
+          <span>{{ row.date | date: 'EEEE, MMMM d' }}</span>
+          <button
+            mat-icon-button
+            type="button"
+            class="agenda-view__add"
+            (click)="createRequested.emit(row.date)"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      }
+      @case ('item') {
+        <div class="agenda-view__item">
+          <span class="agenda-view__time">{{ row.item.startsAt | date: 'shortTime' }}</span>
+          <lf-event-chip
+            class="agenda-view__chip"
+            [item]="row.item"
+            (viewRequested)="viewRequested.emit($event)"
+            (editRequested)="editRequested.emit($event)"
+            (deleteRequested)="deleteRequested.emit($event)"
+          />
+        </div>
+      }
+    }
+  </div>
+</cdk-virtual-scroll-viewport>

@@ -1,0 +1,224 @@
+<h2 mat-dialog-title>New matter</h2>
+<mat-dialog-content>
+  <mat-stepper linear class="create-matter__stepper">
+    <mat-step [stepControl]="detailsForm" label="Matter details">
+      <form [formGroup]="detailsForm" class="create-matter__form">
+        <mat-form-field appearance="outline" class="create-matter__wide">
+          <mat-label>Client ID</mat-label>
+          <input matInput formControlName="clientId" />
+          <mat-hint>Paste the client's ID (no client picker exists yet)</mat-hint>
+          @if (
+            detailsForm.controls.clientId.hasError('required') &&
+            detailsForm.controls.clientId.touched
+          ) {
+            <mat-error>Client ID is required.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="create-matter__wide">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" />
+          @if (
+            detailsForm.controls.title.hasError('required') && detailsForm.controls.title.touched
+          ) {
+            <mat-error>Title is required.</mat-error>
+          }
+          @if (
+            detailsForm.controls.title.hasError('minlength') && detailsForm.controls.title.touched
+          ) {
+            <mat-error>At least 3 characters.</mat-error>
+          }
+          @if (
+            detailsForm.controls.title.hasError('maxlength') && detailsForm.controls.title.touched
+          ) {
+            <mat-error>At most 300 characters.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Matter type</mat-label>
+          <mat-select formControlName="matterType">
+            @for (type of matterTypes; track type) {
+              <mat-option [value]="type">{{ type }}</mat-option>
+            }
+          </mat-select>
+          @if (
+            detailsForm.controls.matterType.hasError('required') &&
+            detailsForm.controls.matterType.touched
+          ) {
+            <mat-error>Matter type is required.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Priority</mat-label>
+          <mat-select formControlName="priority">
+            @for (priority of priorities; track priority) {
+              <mat-option [value]="priority">{{ priority }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Practice area ID</mat-label>
+          <input matInput formControlName="practiceAreaId" />
+          <mat-hint>No practice-area picker exists yet</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Branch ID</mat-label>
+          <input matInput formControlName="branchId" />
+          <mat-hint>No branch picker exists yet</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="create-matter__wide">
+          <mat-label>Responsible lawyer ID</mat-label>
+          <input matInput formControlName="responsibleLawyerId" />
+          <mat-hint>No user-search picker exists yet</mat-hint>
+          @if (
+            detailsForm.controls.responsibleLawyerId.hasError('required') &&
+            detailsForm.controls.responsibleLawyerId.touched
+          ) {
+            <mat-error>Responsible lawyer is required.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Opened on</mat-label>
+          <input matInput [matDatepicker]="openedPicker" formControlName="openedOn" />
+          <mat-datepicker-toggle matIconSuffix [for]="openedPicker" />
+          <mat-datepicker #openedPicker />
+          @if (
+            detailsForm.controls.openedOn.hasError('required') &&
+            detailsForm.controls.openedOn.touched
+          ) {
+            <mat-error>Open date is required.</mat-error>
+          }
+          @if (
+            detailsForm.controls.openedOn.hasError('dateNotInFuture') &&
+            detailsForm.controls.openedOn.touched
+          ) {
+            <mat-error>Open date can't be in the future.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Budget</mat-label>
+          <input matInput type="number" formControlName="budget" min="0" />
+          @if (detailsForm.controls.budget.hasError('min') && detailsForm.controls.budget.touched) {
+            <mat-error>Budget can't be negative.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="create-matter__wide">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" rows="3"></textarea>
+        </mat-form-field>
+      </form>
+      <div class="create-matter__step-actions">
+        <button
+          mat-flat-button
+          color="primary"
+          matStepperNext
+          type="button"
+          [disabled]="detailsForm.invalid"
+        >
+          Next
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step label="Opposite parties & conflict check">
+      <div class="create-matter__parties">
+        @for (control of partyControls(); track $index) {
+          <mat-form-field appearance="outline" class="create-matter__wide">
+            <mat-label>Opposite party {{ $index + 1 }}</mat-label>
+            <input matInput [formControl]="control" />
+            @if (partyControls().length > 1) {
+              <button matSuffix mat-icon-button type="button" (click)="removeParty($index)">
+                <mat-icon>close</mat-icon>
+              </button>
+            }
+          </mat-form-field>
+        }
+        <button mat-button type="button" (click)="addParty()">
+          <mat-icon>add</mat-icon>
+          Add another party
+        </button>
+      </div>
+
+      <div class="create-matter__conflict-check">
+        <button
+          mat-stroked-button
+          type="button"
+          [disabled]="checkingConflicts()"
+          (click)="checkConflicts()"
+        >
+          @if (checkingConflicts()) {
+            <mat-spinner diameter="18" />
+          } @else {
+            Check for conflicts
+          }
+        </button>
+
+        @if (conflictCheckRun()) {
+          @if (conflicts().length === 0) {
+            <p class="create-matter__conflict-clear">No conflicts found.</p>
+          } @else {
+            <div class="create-matter__conflict-warning" role="alert">
+              <p>
+                <strong>{{ conflicts().length }}</strong> potential conflict(s) of interest found:
+              </p>
+              <ul>
+                @for (match of conflicts(); track $index) {
+                  <li>
+                    {{ match.name }} — {{ (match.score * 100).toFixed(0) }}% match on matter
+                    {{ match.matterNumber }}
+                  </li>
+                }
+              </ul>
+
+              <mat-checkbox [formControl]="overrideChecked">
+                I've reviewed these matches and want to proceed anyway
+              </mat-checkbox>
+
+              @if (overrideChecked.value) {
+                <mat-form-field appearance="outline" class="create-matter__wide">
+                  <mat-label>Override reason</mat-label>
+                  <textarea matInput [formControl]="conflictOverrideReason" rows="2"></textarea>
+                  @if (conflictOverrideReason.value.trim().length === 0) {
+                    <mat-error>A reason is required to override.</mat-error>
+                  }
+                </mat-form-field>
+              }
+            </div>
+          }
+        }
+      </div>
+
+      @if (errorMessage()) {
+        <p class="create-matter__error" role="alert">{{ errorMessage() }}</p>
+      }
+
+      <div class="create-matter__step-actions">
+        <button mat-button matStepperPrevious type="button">Back</button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          [disabled]="!canSubmit"
+          (click)="submit()"
+        >
+          @if (submitting()) {
+            <mat-spinner diameter="20" />
+          } @else {
+            Create matter
+          }
+        </button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+</mat-dialog-actions>

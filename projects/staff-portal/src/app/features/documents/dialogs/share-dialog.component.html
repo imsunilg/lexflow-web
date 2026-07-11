@@ -1,0 +1,119 @@
+<h2 mat-dialog-title>Share "{{ data.document.title }}"</h2>
+<mat-dialog-content>
+  <mat-tab-group>
+    <mat-tab label="External Link">
+      <div class="lf-share-dialog__tab">
+        @if (isPrivileged()) {
+          <p class="lf-share-dialog__banner lf-share-dialog__banner--error" role="alert">
+            Privileged documents cannot get external share links.
+          </p>
+        } @else if (createdLink(); as link) {
+          <div class="lf-share-dialog__result">
+            <mat-form-field appearance="outline" class="lf-share-dialog__wide">
+              <mat-label>Share link</mat-label>
+              <input matInput readonly [value]="shareUrl(link)" />
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                (click)="copyLink()"
+                aria-label="Copy link"
+              >
+                <mat-icon>content_copy</mat-icon>
+              </button>
+            </mat-form-field>
+            @if (copied()) {
+              <p class="lf-share-dialog__hint">Copied to clipboard.</p>
+            }
+            <p class="lf-share-dialog__hint">Expires {{ link.expiresAt | date: 'medium' }}.</p>
+            <p class="lf-share-dialog__hint">
+              Only links created in this session are shown here — there is no endpoint to list
+              previously created links.
+            </p>
+            <button
+              mat-button
+              color="warn"
+              type="button"
+              [disabled]="revoking()"
+              (click)="revokeLink()"
+            >
+              Revoke link
+            </button>
+          </div>
+        } @else {
+          <form [formGroup]="form" class="lf-share-dialog__form">
+            <mat-form-field appearance="outline">
+              <mat-label>Expires</mat-label>
+              <input
+                matInput
+                [matDatepicker]="expiryPicker"
+                formControlName="expiresAt"
+                [max]="maxExpiryDate"
+              />
+              <mat-datepicker-toggle matIconSuffix [for]="expiryPicker" />
+              <mat-datepicker #expiryPicker />
+              <mat-hint>Up to 30 days from today</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Password (optional)</mat-label>
+              <input matInput type="password" formControlName="password" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Max downloads (optional)</mat-label>
+              <input matInput type="number" min="1" formControlName="maxDownloads" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Watermark recipient email (optional)</mat-label>
+              <input matInput type="email" formControlName="watermarkEmail" />
+              <mat-hint>Produces watermark text "Prepared for {{ '{' }}email{{ '}' }}"</mat-hint>
+            </mat-form-field>
+
+            @if (errorMessage()) {
+              <p class="lf-share-dialog__banner lf-share-dialog__banner--error" role="alert">
+                {{ errorMessage() }}
+              </p>
+            }
+
+            <button
+              mat-flat-button
+              color="primary"
+              type="button"
+              [disabled]="creating() || form.invalid"
+              (click)="createLink()"
+            >
+              Create link
+            </button>
+          </form>
+        }
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Team Access">
+      <div class="lf-share-dialog__tab">
+        <p class="lf-share-dialog__banner">
+          Internal user/team permissions aren't available yet. The database has a
+          `document_permissions` table, but no confirmed backend endpoint exposes it, so this dialog
+          can't offer a real Viewer/Editor assignment form here.
+        </p>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Client Portal">
+      <div class="lf-share-dialog__tab">
+        <p class="lf-share-dialog__label">
+          Portal status: {{ data.document.portalPublished ? 'Published' : 'Not published' }}
+        </p>
+        <p class="lf-share-dialog__banner">
+          There is no confirmed "publish to portal" toggle endpoint yet, so this value is shown
+          read-only rather than editable.
+        </p>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" [mat-dialog-close]="undefined">Close</button>
+</mat-dialog-actions>

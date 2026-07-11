@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
-import { Observable, finalize, tap } from 'rxjs';
+import { Observable, finalize, map, tap } from 'rxjs';
+import { ApiSuccessEnvelope } from '../models/api-envelope.models';
 import { API_BASE_URL } from './api-base-url.token';
 
 interface RefreshResponse {
@@ -35,8 +36,9 @@ export class AuthTokenService {
   /** Coalesces concurrent 401s into a single in-flight refresh call. */
   refresh(): Observable<RefreshResponse> {
     this.refreshInFlight$ ??= this.http
-      .post<RefreshResponse>(`${this.baseUrl}/auth/refresh`, {})
+      .post<ApiSuccessEnvelope<RefreshResponse>>(`${this.baseUrl}/auth/refresh`, {})
       .pipe(
+        map((envelope) => envelope.data),
         tap({
           next: (response) => this.setAccessToken(response.accessToken),
           error: () => this.setAccessToken(null),

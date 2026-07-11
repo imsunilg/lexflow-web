@@ -1,0 +1,195 @@
+<h2 mat-dialog-title>{{ data.mode === 'create' ? 'New event' : 'Edit event' }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="form" class="event-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="kind">
+        @for (kind of kinds; track kind) {
+          <mat-option [value]="kind">{{ kind }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="event-form__title">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+
+    <mat-slide-toggle formControlName="allDay" class="event-form__all-day"
+      >All day</mat-slide-toggle
+    >
+
+    <mat-form-field appearance="outline">
+      <mat-label>Starts</mat-label>
+      <input matInput [matDatepicker]="startPicker" [formControl]="startControl" />
+      <mat-datepicker-toggle matIconSuffix [for]="startPicker" />
+      <mat-datepicker #startPicker />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Ends</mat-label>
+      <input matInput [matDatepicker]="endPicker" [formControl]="endControl" />
+      <mat-datepicker-toggle matIconSuffix [for]="endPicker" />
+      <mat-datepicker #endPicker />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Location</mat-label>
+      <input matInput formControlName="location" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Video link</mat-label>
+      <input matInput formControlName="videoLink" />
+    </mat-form-field>
+
+    <mat-checkbox
+      class="event-form__recurring"
+      [ngModel]="recurring()"
+      [ngModelOptions]="{ standalone: true }"
+      (ngModelChange)="recurring.set($event)"
+    >
+      Repeats
+    </mat-checkbox>
+
+    @if (recurring()) {
+      <div class="rrule-builder">
+        <mat-form-field appearance="outline">
+          <mat-label>Frequency</mat-label>
+          <mat-select [formControl]="recurrenceForm.controls.freq">
+            @for (freq of frequencies; track freq) {
+              <mat-option [value]="freq">{{ freq | titlecase }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Every</mat-label>
+          <input matInput type="number" min="1" [formControl]="recurrenceForm.controls.interval" />
+        </mat-form-field>
+
+        @if (recurrenceForm.controls.freq.value === 'WEEKLY') {
+          <div class="rrule-builder__weekdays">
+            @for (day of weekdays; track day) {
+              <button
+                type="button"
+                mat-stroked-button
+                [class.rrule-builder__weekday--active]="
+                  recurrenceForm.controls.byDay.value.includes(day)
+                "
+                (click)="toggleByDay(day)"
+              >
+                {{ day }}
+              </button>
+            }
+          </div>
+        }
+
+        <mat-radio-group
+          [ngModel]="endCondition()"
+          [ngModelOptions]="{ standalone: true }"
+          (ngModelChange)="endCondition.set($event)"
+          class="rrule-builder__end"
+        >
+          <mat-radio-button value="never">Never ends</mat-radio-button>
+          <mat-radio-button value="until">Until</mat-radio-button>
+          @if (endCondition() === 'until') {
+            <mat-form-field appearance="outline">
+              <mat-label>End date</mat-label>
+              <input matInput [matDatepicker]="untilPicker" [formControl]="untilControl" />
+              <mat-datepicker-toggle matIconSuffix [for]="untilPicker" />
+              <mat-datepicker #untilPicker />
+            </mat-form-field>
+          }
+          <mat-radio-button value="count">After</mat-radio-button>
+          @if (endCondition() === 'count') {
+            <mat-form-field appearance="outline">
+              <mat-label>Occurrences</mat-label>
+              <input matInput type="number" min="1" [formControl]="countControl" />
+            </mat-form-field>
+          }
+        </mat-radio-group>
+
+        @if (upcomingOccurrences().length > 0) {
+          <div class="rrule-builder__preview">
+            <strong>Next occurrences:</strong>
+            <ul>
+              @for (date of upcomingOccurrences(); track date.getTime()) {
+                <li>{{ date | date: 'mediumDate' }}</li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    }
+
+    <section class="event-form__section">
+      <div class="event-form__section-header">
+        <strong>Attendees</strong>
+        <button mat-button type="button" (click)="addAttendee()">
+          <mat-icon>add</mat-icon> Add
+        </button>
+      </div>
+      @for (control of attendees.controls; track $index) {
+        <mat-form-field appearance="outline" class="event-form__row-field">
+          <mat-label>Email</mat-label>
+          <input matInput [formControl]="control" />
+          @if (control.invalid && control.touched) {
+            <mat-error>Invalid email</mat-error>
+          }
+          <button matIconSuffix mat-icon-button type="button" (click)="removeAttendee($index)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      }
+    </section>
+
+    <section class="event-form__section">
+      <div class="event-form__section-header">
+        <strong>Reminder overrides</strong>
+        <button mat-button type="button" (click)="addReminder()">
+          <mat-icon>add</mat-icon> Add
+        </button>
+      </div>
+      @for (row of reminders.controls; track $index) {
+        <div class="event-form__row" [formGroup]="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Minutes before</mat-label>
+            <input matInput type="number" formControlName="offsetMinutes" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Channel</mat-label>
+            <mat-select formControlName="channel">
+              @for (channel of channels; track channel) {
+                <mat-option [value]="channel">{{ channel }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <button mat-icon-button type="button" (click)="removeReminder($index)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      }
+    </section>
+
+    @if (errorMessage()) {
+      <p class="event-form__error" role="alert">{{ errorMessage() }}</p>
+    }
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+  <button
+    mat-flat-button
+    color="primary"
+    type="button"
+    [disabled]="form.invalid || saving()"
+    (click)="submit()"
+  >
+    @if (saving()) {
+      <mat-spinner diameter="20" />
+    } @else {
+      Save
+    }
+  </button>
+</mat-dialog-actions>

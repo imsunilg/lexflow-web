@@ -1,0 +1,74 @@
+.week-view {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  border: 1px solid var(--lf-surface-variant);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.week-view__header,
+.week-view__all-day-row,
+.week-view__row {
+  display: grid;
+  grid-template-columns: 56px repeat(7, 1fr);
+}
+
+.week-view__header {
+  background: var(--lf-surface-variant);
+}
+
+.week-view__day-header {
+  padding: var(--lf-space-1);
+  text-align: center;
+  font-size: var(--lf-text-xs);
+  font-weight: 600;
+  color: var(--lf-on-surface-variant);
+  border-left: 1px solid var(--lf-surface-variant);
+}
+
+.week-view__gutter {
+  padding: var(--lf-space-1);
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+  text-align: right;
+}
+
+.week-view__gutter--hour {
+  border-right: 1px solid var(--lf-surface-variant);
+}
+
+.week-view__all-day-row {
+  border-bottom: 1px solid var(--lf-surface-variant);
+  min-height: 40px;
+}
+
+.week-view__all-day-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 2px;
+  border-left: 1px solid var(--lf-surface-variant);
+  min-height: 100%;
+}
+
+.week-view__body {
+  flex: 1;
+  min-height: 0;
+}
+
+.week-view__row {
+  height: 48px;
+}
+
+.week-view__hour-cell {
+  border-left: 1px solid var(--lf-surface-variant);
+  border-top: 1px solid var(--lf-surface-variant);
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+  cursor: pointer;
+}

@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Template gallery</h2>
+
+<mat-dialog-content class="lf-gallery-content">
+  @if (loading()) {
+    <div class="lf-gallery-state">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+  } @else if (error()) {
+    <lf-empty-state
+      icon="error_outline"
+      title="Couldn't load templates"
+      message="Something went wrong loading the template library."
+      ctaLabel="Retry"
+      (cta)="load()"
+    ></lf-empty-state>
+  } @else if (templates().length === 0) {
+    <lf-empty-state
+      icon="description"
+      title="No templates yet"
+      message="Firm template library is empty. Ask an admin to add merge templates."
+    ></lf-empty-state>
+  } @else {
+    <div class="lf-gallery-grid">
+      @for (template of templates(); track template.id) {
+        <mat-card class="lf-gallery-card" (click)="select(template)" tabindex="0">
+          <mat-card-content>
+            <div class="lf-gallery-card__header">
+              <span class="lf-gallery-card__name">{{ template.name }}</span>
+              @if (template.category) {
+                <span class="lf-gallery-card__badge">{{ template.category }}</span>
+              }
+            </div>
+            <span class="lf-gallery-card__version">v{{ template.version }}</span>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+</mat-dialog-actions>
