@@ -25,7 +25,9 @@
     "i18n:check": "node scripts/check-i18n-coverage.mjs",
     "bundle:check:staff-portal": "node scripts/check-bundle-budget.mjs staff-portal",
     "bundle:check:client-portal": "node scripts/check-bundle-budget.mjs client-portal",
-    "e2e": "playwright test --config=e2e/playwright.config.ts"
+    "e2e": "playwright test --config=e2e/playwright.config.ts",
+    "e2e:fullstack:seed": "dotnet run --project ../lexflow-api/tools/E2eSeed",
+    "e2e:fullstack": "playwright test --config=e2e/playwright.fullstack.config.ts"
   },
   "prettier": {
     "printWidth": 100,

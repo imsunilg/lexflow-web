@@ -75,3 +75,115 @@ jobs:
           name: playwright-report
           path: e2e/playwright-report/
           retention-days: 7
+
+  e2e-fullstack:
+    # PRD §37: "E2E (Playwright: 40 critical journeys ...)" run against the
+    # full local stack, not the mocked-API suite above. Needs three sibling
+    # repos (this one, lexflow-api, lexflow-database) checked out side by
+    # side, exactly like local dev — see e2e/playwright.fullstack.config.ts
+    # and e2e/fixtures/real-auth.ts for the matching client-side half of
+    # this setup.
+    name: Full-stack E2E (40 critical journeys, PRD §37)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout lexflow-web
+        uses: actions/checkout@v4
+        with:
+          path: lexflow-web
+
+      - name: Checkout lexflow-api
+        uses: actions/checkout@v4
+        with:
+          repository: imsunilg/lexflow-api
+          path: lexflow-api
+
+      - name: Checkout lexflow-database
+        uses: actions/checkout@v4
+        with:
+          repository: imsunilg/lexflow-database
+          path: lexflow-database
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: lexflow-web/package-lock.json
+
+      - name: Start docker-compose stack (Postgres, Redis, Elasticsearch, Azurite, API, workers)
+        working-directory: lexflow-api
+        run: docker compose up -d --build
+
+      - name: Wait for API health
+        run: |
+          for i in $(seq 1 60); do
+            if curl -sf http://localhost:8080/health >/dev/null 2>&1; then
+              echo "API is up."
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "API did not become healthy in time." >&2
+          docker compose -f lexflow-api/docker-compose.yml logs
+          exit 1
+
+      - name: Apply database schema (lexflow-database Runner)
+        working-directory: lexflow-database
+        env:
+          LEXFLOW_DB_CONNECTION: "Host=localhost;Port=5432;Database=lexflow;Username=postgres;Password=postgres"
+        run: dotnet run --project Runner/LexFlow.Database.Runner -- --scripts-path Scripts
+
+      - name: Seed the E2E tenant/user/portal-client (lexflow-api tools/E2eSeed)
+        working-directory: lexflow-api
+        env:
+          LEXFLOW_E2E_DB: "Host=localhost;Port=5432;Database=lexflow;Username=postgres;Password=postgres"
+        run: dotnet run --project tools/E2eSeed
+
+      - name: Install web dependencies
+        working-directory: lexflow-web
+        run: npm ci
+
+      - run: npx playwright install --with-deps chromium
+        working-directory: lexflow-web
+
+      - name: Run the 40 critical journeys
+        working-directory: lexflow-web
+        env:
+          CI: true
+          # Optional — the two Razorpay-dependent steps in journey-02 skip
+          # gracefully (not a failure) when these aren't set, per the
+          # project decision that fabricating gateway credentials isn't
+          # possible (Razorpay's payment-link API is a live call even in
+          # test mode). Configure as repo/environment secrets to exercise
+          # the real payment leg.
+          RAZORPAY_TEST_KEY_ID: ${{ secrets.RAZORPAY_TEST_KEY_ID }}
+          RAZORPAY_TEST_KEY_SECRET: ${{ secrets.RAZORPAY_TEST_KEY_SECRET }}
+        run: npm run e2e:fullstack
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-fullstack-report
+          path: lexflow-web/e2e/playwright-report/
+          retention-days: 7
+
+      - name: Tear down docker-compose stack
+        if: always()
+        working-directory: lexflow-api
+        run: docker compose down -v
+
+  deploy-gate:
+    # The single required check to point a branch-protection rule at
+    # (Settings -> Branches -> add "deploy-gate" to "Require status checks
+    # to pass") — a workflow file can gate jobs *within itself* via `needs:`
+    # but cannot configure GitHub's branch-protection required-checks list;
+    # that's a repo setting only an admin can set, done once, pointing at
+    # this job's name.
+    name: Ready to deploy
+    needs: [lint, unit-test, build, e2e, e2e-fullstack]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "All required checks passed — safe to deploy."
