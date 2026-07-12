@@ -21,7 +21,14 @@
           <input matInput [formControl]="newDescription" />
         </mat-form-field>
         <div class="collections__new-form-actions">
-          <button mat-button type="button" (click)="toggleNewForm()" i18n="@@kb.collections.cancelButton">Cancel</button>
+          <button
+            mat-button
+            type="button"
+            (click)="toggleNewForm()"
+            i18n="@@kb.collections.cancelButton"
+          >
+            Cancel
+          </button>
           <button
             mat-flat-button
             color="primary"
@@ -39,7 +46,11 @@
     @if (collectionsLoading()) {
       <mat-progress-bar mode="indeterminate" />
     } @else if (collections().length === 0) {
-      <lf-empty-state icon="dashboard" title="No collections yet" i18n-title="@@kb.collections.noCollectionsEmptyState" />
+      <lf-empty-state
+        icon="dashboard"
+        title="No collections yet"
+        i18n-title="@@kb.collections.noCollectionsEmptyState"
+      />
     } @else {
       <ul class="collections__board-list">
         @for (collection of collections(); track collection.id) {
@@ -71,7 +82,9 @@
       @if (showAddSearch()) {
         <div class="collections__add-search">
           <mat-form-field appearance="outline">
-            <mat-label i18n="@@kb.collections.searchLabel">Search Acts, judgments, articles…</mat-label>
+            <mat-label i18n="@@kb.collections.searchLabel"
+              >Search Acts, judgments, articles…</mat-label
+            >
             <input matInput [formControl]="addQuery" />
             <mat-icon matPrefix>search</mat-icon>
           </mat-form-field>
@@ -104,7 +117,11 @@
       @if (itemsLoading()) {
         <mat-progress-bar mode="indeterminate" />
       } @else if (items().length === 0) {
-        <lf-empty-state icon="widgets" title="No items in this collection yet" i18n-title="@@kb.collections.noItemsEmptyState" />
+        <lf-empty-state
+          icon="widgets"
+          title="No items in this collection yet"
+          i18n-title="@@kb.collections.noItemsEmptyState"
+        />
       } @else {
         <ul class="collections__card-grid">
           @for (row of items(); track row.item.id) {

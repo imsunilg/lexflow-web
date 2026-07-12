@@ -36,7 +36,11 @@ import { calendarItemStyle } from './calendar-item-style.util';
       <mat-icon class="event-chip__icon">{{ style.icon }}</mat-icon>
       <span class="event-chip__title">{{ item().title }}</span>
       @if (item().isLocked) {
-        <mat-icon class="event-chip__lock" matTooltip="Locked — edit from its source module">
+        <mat-icon
+          class="event-chip__lock"
+          matTooltip="Locked — edit from its source module"
+          i18n-matTooltip="@@calendar.eventChip.lockedTooltip"
+        >
           lock
         </mat-icon>
       }
@@ -47,7 +51,11 @@ import { calendarItemStyle } from './calendar-item-style.util';
         <div class="event-chip__quickview-header">
           <lf-status-chip [label]="item().itemKind" [toneOverride]="style.tone" />
           @if (item().isLocked) {
-            <lf-status-chip label="Locked" toneOverride="neutral" />
+            <lf-status-chip
+              label="Locked"
+              i18n-label="@@calendar.eventChip.lockedLabel"
+              toneOverride="neutral"
+            />
           }
         </div>
         <p class="event-chip__quickview-title">{{ item().title }}</p>
@@ -64,14 +72,14 @@ import { calendarItemStyle } from './calendar-item-style.util';
         }
       </div>
       <button mat-menu-item type="button" (click)="viewRequested.emit(item())">
-        <mat-icon>visibility</mat-icon> Open
+        <mat-icon>visibility</mat-icon> <span i18n="@@calendar.eventChip.openAction">Open</span>
       </button>
       @if (!item().isLocked && (item().itemKind === 'Meeting' || item().itemKind === 'Personal')) {
         <button mat-menu-item type="button" (click)="editRequested.emit(item())">
-          <mat-icon>edit</mat-icon> Edit
+          <mat-icon>edit</mat-icon> <span i18n="@@calendar.eventChip.editAction">Edit</span>
         </button>
         <button mat-menu-item type="button" (click)="deleteRequested.emit(item())">
-          <mat-icon>delete</mat-icon> Delete
+          <mat-icon>delete</mat-icon> <span i18n="@@calendar.eventChip.deleteAction">Delete</span>
         </button>
       }
     </mat-menu>

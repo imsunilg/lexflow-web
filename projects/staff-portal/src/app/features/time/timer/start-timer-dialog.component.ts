@@ -26,10 +26,10 @@ import { Matter, MattersService, StartTimerRequest } from 'shared';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Start timer</h2>
+    <h2 mat-dialog-title i18n="@@time.startTimerDialog.title">Start timer</h2>
     <mat-dialog-content>
       <mat-form-field appearance="outline" style="width: 360px">
-        <mat-label>Matter (optional)</mat-label>
+        <mat-label i18n="@@time.startTimerDialog.matterLabel">Matter (optional)</mat-label>
         <input matInput [formControl]="matterControl" [matAutocomplete]="matterAuto" />
         <mat-autocomplete #matterAuto="matAutocomplete" (optionSelected)="onSelected($event)">
           @for (matter of matterResults(); track matter.id) {
@@ -38,12 +38,27 @@ import { Matter, MattersService, StartTimerRequest } from 'shared';
             </mat-option>
           }
         </mat-autocomplete>
-        <mat-hint>Leave blank to classify later.</mat-hint>
+        <mat-hint i18n="@@time.startTimerDialog.hint">Leave blank to classify later.</mat-hint>
       </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
-      <button mat-flat-button color="primary" type="button" (click)="submit()">Start</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@time.startTimerDialog.cancelButton"
+      >
+        Cancel
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        (click)="submit()"
+        i18n="@@time.startTimerDialog.startButton"
+      >
+        Start
+      </button>
     </mat-dialog-actions>
   `,
 })

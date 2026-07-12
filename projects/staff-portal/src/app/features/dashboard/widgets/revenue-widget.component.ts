@@ -17,31 +17,45 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
   imports: [DashboardWidgetComponent, EmptyStateComponent, LfCurrencyPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-dashboard-widget title="Revenue" [loading]="loading()" (refresh)="load()">
+    <lf-dashboard-widget
+      title="Revenue"
+      i18n-title="@@dashboard.revenueWidget.title"
+      [loading]="loading()"
+      (refresh)="load()"
+    >
       @if (error()) {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load revenue"
+          i18n-title="@@dashboard.revenueWidget.errorTitle"
           message="Something went wrong."
+          i18n-message="@@dashboard.revenueWidget.errorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@dashboard.revenueWidget.retryLabel"
           (cta)="load()"
         />
       } @else if (data(); as summary) {
         <div class="revenue-stats">
           <div class="revenue-stats__item">
-            <span class="revenue-stats__label">Billed</span>
+            <span class="revenue-stats__label" i18n="@@dashboard.revenueWidget.billedLabel"
+              >Billed</span
+            >
             <span class="revenue-stats__value">{{
               summary.billed | lfCurrency: summary.currency
             }}</span>
           </div>
           <div class="revenue-stats__item">
-            <span class="revenue-stats__label">Collected</span>
+            <span class="revenue-stats__label" i18n="@@dashboard.revenueWidget.collectedLabel"
+              >Collected</span
+            >
             <span class="revenue-stats__value">{{
               summary.collected | lfCurrency: summary.currency
             }}</span>
           </div>
           <div class="revenue-stats__item">
-            <span class="revenue-stats__label">Target</span>
+            <span class="revenue-stats__label" i18n="@@dashboard.revenueWidget.targetLabel"
+              >Target</span
+            >
             <span class="revenue-stats__value">{{
               summary.target | lfCurrency: summary.currency
             }}</span>

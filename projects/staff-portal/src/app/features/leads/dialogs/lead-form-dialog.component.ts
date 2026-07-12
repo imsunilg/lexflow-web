@@ -59,39 +59,52 @@ export type LeadFormDialogResult =
     <mat-dialog-content>
       <form [formGroup]="form" class="lead-form">
         <mat-form-field appearance="outline">
-          <mat-label>First name</mat-label>
+          <mat-label i18n="@@leads.leadFormDialog.firstNameLabel">First name</mat-label>
           <input matInput formControlName="firstName" />
           @if (form.controls.firstName.hasError('required') && form.controls.firstName.touched) {
-            <mat-error>First name is required.</mat-error>
+            <mat-error i18n="@@leads.leadFormDialog.firstNameRequiredError"
+              >First name is required.</mat-error
+            >
           }
           @if (form.controls.firstName.hasError('minlength') && form.controls.firstName.touched) {
-            <mat-error>At least 2 characters.</mat-error>
+            <mat-error i18n="@@leads.leadFormDialog.firstNameMinLengthError"
+              >At least 2 characters.</mat-error
+            >
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Last name</mat-label>
+          <mat-label i18n="@@leads.leadFormDialog.lastNameLabel">Last name</mat-label>
           <input matInput formControlName="lastName" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Company</mat-label>
+          <mat-label i18n="@@leads.leadFormDialog.companyLabel">Company</mat-label>
           <input matInput formControlName="company" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
+          <mat-label i18n="@@leads.leadFormDialog.emailLabel">Email</mat-label>
           <input matInput type="email" formControlName="email" />
           @if (form.controls.email.hasError('pattern') && form.controls.email.touched) {
-            <mat-error>Enter a valid email address.</mat-error>
+            <mat-error i18n="@@leads.leadFormDialog.emailInvalidError"
+              >Enter a valid email address.</mat-error
+            >
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Phone</mat-label>
-          <input matInput formControlName="phoneE164" placeholder="+919812345678" />
+          <mat-label i18n="@@leads.leadFormDialog.phoneLabel">Phone</mat-label>
+          <input
+            matInput
+            formControlName="phoneE164"
+            placeholder="+919812345678"
+            i18n-placeholder="@@leads.leadFormDialog.phonePlaceholder"
+          />
           @if (form.controls.phoneE164.hasError('pattern') && form.controls.phoneE164.touched) {
-            <mat-error>Use international format, e.g. +919812345678.</mat-error>
+            <mat-error i18n="@@leads.leadFormDialog.phoneInvalidError"
+              >Use international format, e.g. +919812345678.</mat-error
+            >
           }
         </mat-form-field>
 
@@ -99,13 +112,21 @@ export type LeadFormDialogResult =
           form.hasError('atLeastOneRequired') &&
           (form.controls.email.touched || form.controls.phoneE164.touched)
         ) {
-          <p class="lead-form__error" role="alert">At least one of phone or email is required.</p>
+          <p
+            class="lead-form__error"
+            role="alert"
+            i18n="@@leads.leadFormDialog.contactRequiredError"
+          >
+            At least one of phone or email is required.
+          </p>
         }
 
         <mat-form-field appearance="outline">
-          <mat-label>Source</mat-label>
+          <mat-label i18n="@@leads.leadFormDialog.sourceLabel">Source</mat-label>
           <mat-select formControlName="sourceId">
-            <mat-option [value]="null">Direct</mat-option>
+            <mat-option [value]="null" i18n="@@leads.leadFormDialog.directSourceOption"
+              >Direct</mat-option
+            >
             @for (source of sources(); track source.id) {
               <mat-option [value]="source.id">{{ source.name }}</mat-option>
             }
@@ -113,18 +134,23 @@ export type LeadFormDialogResult =
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="lead-form__wide">
-          <mat-label>Issue summary</mat-label>
+          <mat-label i18n="@@leads.leadFormDialog.issueSummaryLabel">Issue summary</mat-label>
           <textarea matInput formControlName="issueSummary" rows="3"></textarea>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Opposing party</mat-label>
+          <mat-label i18n="@@leads.leadFormDialog.opposingPartyLabel">Opposing party</mat-label>
           <input matInput formControlName="opposingParty" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Budget band</mat-label>
-          <input matInput formControlName="budgetBand" placeholder="e.g. ₹50k–2L" />
+          <mat-label i18n="@@leads.leadFormDialog.budgetBandLabel">Budget band</mat-label>
+          <input
+            matInput
+            formControlName="budgetBand"
+            placeholder="e.g. ₹50k–2L"
+            i18n-placeholder="@@leads.leadFormDialog.budgetBandPlaceholder"
+          />
         </mat-form-field>
 
         @if (errorMessage()) {
@@ -133,7 +159,14 @@ export type LeadFormDialogResult =
       </form>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@leads.leadFormDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="primary"
@@ -144,7 +177,7 @@ export type LeadFormDialogResult =
         @if (saving()) {
           <mat-spinner diameter="20" />
         } @else {
-          Save
+          <span i18n="@@leads.leadFormDialog.saveButton">Save</span>
         }
       </button>
     </mat-dialog-actions>

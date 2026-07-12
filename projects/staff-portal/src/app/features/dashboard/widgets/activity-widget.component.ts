@@ -16,17 +16,29 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
   imports: [DashboardWidgetComponent, EmptyStateComponent, DatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-dashboard-widget title="Recent Activities" [loading]="loading()" (refresh)="load()">
+    <lf-dashboard-widget
+      title="Recent Activities"
+      i18n-title="@@dashboard.activityWidget.title"
+      [loading]="loading()"
+      (refresh)="load()"
+    >
       @if (error()) {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load recent activity"
+          i18n-title="@@dashboard.activityWidget.errorTitle"
           message="Something went wrong."
+          i18n-message="@@dashboard.activityWidget.errorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@dashboard.activityWidget.retryLabel"
           (cta)="load()"
         />
       } @else if (!loading() && data()?.length === 0) {
-        <lf-empty-state icon="history" title="No recent activity" />
+        <lf-empty-state
+          icon="history"
+          title="No recent activity"
+          i18n-title="@@dashboard.activityWidget.emptyTitle"
+        />
       } @else if (data()) {
         <ul class="activity-list">
           @for (item of data(); track item.id) {

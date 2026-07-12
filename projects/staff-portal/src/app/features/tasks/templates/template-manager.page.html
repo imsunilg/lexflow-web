@@ -4,7 +4,8 @@
   <header class="templates__header">
     <h1 i18n="@@tasks.templateManager.pageTitle">Task templates</h1>
     <button mat-flat-button color="primary" type="button" (click)="openNewTemplate()">
-      <mat-icon>add</mat-icon> <span i18n="@@tasks.templateManager.newTemplateButton">New template</span>
+      <mat-icon>add</mat-icon>
+      <span i18n="@@tasks.templateManager.newTemplateButton">New template</span>
     </button>
   </header>
 
@@ -48,7 +49,12 @@
             }
           </ul>
 
-          <button mat-stroked-button type="button" (click)="openApply(template)" i18n="@@tasks.templateManager.applyToMatterButton">
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="openApply(template)"
+            i18n="@@tasks.templateManager.applyToMatterButton"
+          >
             Apply to matter
           </button>
         </div>

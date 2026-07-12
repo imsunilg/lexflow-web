@@ -46,12 +46,14 @@ type WizardStep = 'search' | 'survivor' | 'fields' | 'done';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Merge duplicate client</h2>
+    <h2 mat-dialog-title i18n="@@clients.mergeClientsDialog.title">Merge duplicate client</h2>
     <mat-dialog-content>
       @if (step() === 'search') {
-        <p>Find the duplicate record to merge into {{ data.client.displayName }}.</p>
+        <p i18n="@@clients.mergeClientsDialog.searchIntro">
+          Find the duplicate record to merge into {{ data.client.displayName }}.
+        </p>
         <mat-form-field appearance="outline" class="merge-wizard__wide">
-          <mat-label>Search clients</mat-label>
+          <mat-label i18n="@@clients.mergeClientsDialog.searchLabel">Search clients</mat-label>
           <input matInput [formControl]="searchControl" />
         </mat-form-field>
 
@@ -68,12 +70,16 @@ type WizardStep = 'search' | 'survivor' | 'fields' | 'done';
             }
           </ul>
         } @else if (searchControl.value.length > 1) {
-          <p class="merge-wizard__hint">No matches.</p>
+          <p class="merge-wizard__hint" i18n="@@clients.mergeClientsDialog.noMatches">
+            No matches.
+          </p>
         }
       }
 
       @if (step() === 'survivor' && duplicate()) {
-        <p>Which record should survive the merge? The other will be tombstoned.</p>
+        <p i18n="@@clients.mergeClientsDialog.survivorPrompt">
+          Which record should survive the merge? The other will be tombstoned.
+        </p>
         <mat-radio-group [formControl]="survivorControl">
           <mat-radio-button [value]="data.client.id">
             {{ data.client.displayName }} ({{ data.client.number }})
@@ -83,15 +89,24 @@ type WizardStep = 'search' | 'survivor' | 'fields' | 'done';
           </mat-radio-button>
         </mat-radio-group>
         <div class="merge-wizard__actions">
-          <button mat-button type="button" (click)="step.set('search')">Back</button>
+          <button
+            mat-button
+            type="button"
+            (click)="step.set('search')"
+            i18n="@@clients.mergeClientsDialog.backButton"
+          >
+            Back
+          </button>
           <button mat-flat-button color="primary" type="button" (click)="step.set('fields')">
-            Next
+            <span i18n="@@clients.mergeClientsDialog.nextButton">Next</span>
           </button>
         </div>
       }
 
       @if (step() === 'fields' && duplicate()) {
-        <p>Pick which value to keep for each field that differs.</p>
+        <p i18n="@@clients.mergeClientsDialog.fieldsPrompt">
+          Pick which value to keep for each field that differs.
+        </p>
         @for (field of differingFields(); track field) {
           <div class="merge-wizard__field-row">
             <span class="merge-wizard__field-name">{{ field }}</span>
@@ -111,7 +126,14 @@ type WizardStep = 'search' | 'survivor' | 'fields' | 'done';
         }
 
         <div class="merge-wizard__actions">
-          <button mat-button type="button" (click)="step.set('survivor')">Back</button>
+          <button
+            mat-button
+            type="button"
+            (click)="step.set('survivor')"
+            i18n="@@clients.mergeClientsDialog.backButton"
+          >
+            Back
+          </button>
           <button
             mat-flat-button
             color="warn"
@@ -122,14 +144,16 @@ type WizardStep = 'search' | 'survivor' | 'fields' | 'done';
             @if (merging()) {
               <mat-spinner diameter="20" />
             } @else {
-              Merge
+              <span i18n="@@clients.mergeClientsDialog.mergeButton">Merge</span>
             }
           </button>
         </div>
       }
 
       @if (step() === 'done') {
-        <p class="merge-wizard__success">Merge complete.</p>
+        <p class="merge-wizard__success" i18n="@@clients.mergeClientsDialog.successMessage">
+          Merge complete.
+        </p>
       }
     </mat-dialog-content>
     <mat-dialog-actions align="end">

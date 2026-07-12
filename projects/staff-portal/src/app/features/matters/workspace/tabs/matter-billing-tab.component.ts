@@ -42,8 +42,11 @@ interface BillingStat {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load the financial summary"
+          i18n-title="@@matters.matterBillingTab.loadErrorTitle"
           message="Something went wrong while loading billing data."
+          i18n-message="@@matters.matterBillingTab.loadErrorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@matters.matterBillingTab.retryButton"
           (cta)="load()"
         />
       } @else if (summary(); as data) {
@@ -60,7 +63,7 @@ interface BillingStat {
             </div>
           }
         </div>
-        <p class="matter-billing-tab__note">
+        <p class="matter-billing-tab__note" i18n="@@matters.matterBillingTab.unavailableNote">
           Detailed invoices and line-item billing aren't available yet — the Billing module isn't
           fully built in this environment.
         </p>

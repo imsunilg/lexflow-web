@@ -54,15 +54,17 @@ const SEVERITY_TONE: Record<
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="important-dates">
-      <h3>Important dates</h3>
+      <h3 i18n="@@matters.importantDatesPanel.title">Important dates</h3>
 
       @if (loading()) {
-        <p>Loading…</p>
+        <p i18n="@@matters.importantDatesPanel.loading">Loading…</p>
       } @else if (rows().length === 0 && !addingNew()) {
         <lf-empty-state
           icon="event_busy"
           title="No important dates"
+          i18n-title="@@matters.importantDatesPanel.emptyTitle"
           ctaLabel="Add date"
+          i18n-ctaLabel="@@matters.importantDatesPanel.addDateButton"
           (cta)="addingNew.set(true)"
         />
       } @else {
@@ -77,9 +79,16 @@ const SEVERITY_TONE: Record<
                 />
               </div>
               <p class="important-dates__title">{{ row.date.title }}</p>
-              <p class="important-dates__due">Due {{ row.date.dueAt | slice: 0 : 10 }}</p>
+              <p class="important-dates__due" i18n="@@matters.importantDatesPanel.dueLabel">
+                Due {{ row.date.dueAt | slice: 0 : 10 }}
+              </p>
               @if (!row.date.satisfiedAt) {
-                <button mat-button type="button" (click)="markSatisfied(row.date)">
+                <button
+                  mat-button
+                  type="button"
+                  (click)="markSatisfied(row.date)"
+                  i18n="@@matters.importantDatesPanel.markSatisfiedButton"
+                >
                   Mark satisfied
                 </button>
               }
@@ -88,14 +97,21 @@ const SEVERITY_TONE: Record<
         </ul>
 
         @if (!addingNew()) {
-          <button mat-stroked-button type="button" (click)="addingNew.set(true)">Add date</button>
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="addingNew.set(true)"
+            i18n="@@matters.importantDatesPanel.addDateButton"
+          >
+            Add date
+          </button>
         }
       }
 
       @if (addingNew()) {
         <form [formGroup]="form" class="important-dates__form">
           <mat-form-field appearance="outline">
-            <mat-label>Kind</mat-label>
+            <mat-label i18n="@@matters.importantDatesPanel.kindLabel">Kind</mat-label>
             <mat-select formControlName="kind">
               @for (kind of kinds; track kind) {
                 <mat-option [value]="kind">{{ kind }}</mat-option>
@@ -103,11 +119,11 @@ const SEVERITY_TONE: Record<
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label>Title</mat-label>
+            <mat-label i18n="@@matters.importantDatesPanel.titleLabel">Title</mat-label>
             <input matInput formControlName="title" />
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label>Due date</mat-label>
+            <mat-label i18n="@@matters.importantDatesPanel.dueDateLabel">Due date</mat-label>
             <input matInput [matDatepicker]="picker" [formControl]="dueAtControl" />
             <mat-datepicker-toggle matIconSuffix [for]="picker" />
             <mat-datepicker #picker />
@@ -118,8 +134,23 @@ const SEVERITY_TONE: Record<
           }
 
           <div class="important-dates__form-actions">
-            <button mat-button type="button" (click)="cancelAdd()">Cancel</button>
-            <button mat-flat-button color="primary" type="button" (click)="submit()">Save</button>
+            <button
+              mat-button
+              type="button"
+              (click)="cancelAdd()"
+              i18n="@@matters.importantDatesPanel.cancelButton"
+            >
+              Cancel
+            </button>
+            <button
+              mat-flat-button
+              color="primary"
+              type="button"
+              (click)="submit()"
+              i18n="@@matters.importantDatesPanel.saveButton"
+            >
+              Save
+            </button>
           </div>
         </form>
       }

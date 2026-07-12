@@ -13,7 +13,12 @@
   <div class="audit-page__controls">
     <mat-form-field appearance="outline">
       <mat-label i18n="@@admin.auditLog.sectionLabel">Section</mat-label>
-      <input matInput [formControl]="sectionControl" placeholder="e.g. smtp, sms_gateway, stripe" i18n-placeholder="@@admin.auditLog.sectionPlaceholder" />
+      <input
+        matInput
+        [formControl]="sectionControl"
+        placeholder="e.g. smtp, sms_gateway, stripe"
+        i18n-placeholder="@@admin.auditLog.sectionPlaceholder"
+      />
     </mat-form-field>
     <button mat-flat-button color="primary" type="button" [disabled]="loading()" (click)="search()">
       @if (loading()) {

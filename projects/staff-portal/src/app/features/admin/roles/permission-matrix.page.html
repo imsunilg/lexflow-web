@@ -16,7 +16,9 @@
       <table class="permission-matrix__table">
         <thead>
           <tr>
-            <th class="permission-matrix__perm-col" i18n="@@admin.permissionMatrix.colPermission">Permission</th>
+            <th class="permission-matrix__perm-col" i18n="@@admin.permissionMatrix.colPermission">
+              Permission
+            </th>
             @for (role of roles(); track role.id) {
               <th>{{ role.name }}</th>
             }

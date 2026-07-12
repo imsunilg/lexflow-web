@@ -16,6 +16,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #homeActive="routerLinkActive"
         [active]="homeActive.isActive"
+        i18n="@@knowledgeBase.kbTabs.home"
       >
         Home
       </a>
@@ -25,6 +26,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #articlesActive="routerLinkActive"
         [active]="articlesActive.isActive"
+        i18n="@@knowledgeBase.kbTabs.articles"
       >
         Articles
       </a>
@@ -34,6 +36,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #collectionsActive="routerLinkActive"
         [active]="collectionsActive.isActive"
+        i18n="@@knowledgeBase.kbTabs.collections"
       >
         Collections
       </a>

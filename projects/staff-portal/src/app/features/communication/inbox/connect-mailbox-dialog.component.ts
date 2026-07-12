@@ -34,14 +34,14 @@ const PROVIDERS = ['Gmail', 'MicrosoftGraph'] as const;
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Connect a mailbox</h2>
+    <h2 mat-dialog-title i18n="@@communication.connectMailboxDialog.title">Connect a mailbox</h2>
     <mat-dialog-content class="connect-mailbox">
       @if (!authorizeUrl()) {
-        <p class="connect-mailbox__hint">
+        <p class="connect-mailbox__hint" i18n="@@communication.connectMailboxDialog.step1Hint">
           Step 1: choose a provider and get an authorization link.
         </p>
         <mat-form-field appearance="outline">
-          <mat-label>Provider</mat-label>
+          <mat-label i18n="@@communication.connectMailboxDialog.providerLabel">Provider</mat-label>
           <mat-select [formControl]="provider">
             @for (p of providers; track p) {
               <mat-option [value]="p">{{ p }}</mat-option>
@@ -49,14 +49,22 @@ const PROVIDERS = ['Gmail', 'MicrosoftGraph'] as const;
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Redirect URI</mat-label>
+          <mat-label i18n="@@communication.connectMailboxDialog.redirectUriLabel"
+            >Redirect URI</mat-label
+          >
           <input matInput [formControl]="redirectUri" />
         </mat-form-field>
-        <button mat-flat-button color="primary" type="button" (click)="getAuthorizeUrl()">
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          (click)="getAuthorizeUrl()"
+          i18n="@@communication.connectMailboxDialog.getAuthLinkButton"
+        >
           Get authorization link
         </button>
       } @else {
-        <p class="connect-mailbox__hint">
+        <p class="connect-mailbox__hint" i18n="@@communication.connectMailboxDialog.step2Hint">
           Step 2: open the link below, authorize LexFlow, then paste the
           <code>code</code> value from the redirect URL here.
         </p>
@@ -64,12 +72,21 @@ const PROVIDERS = ['Gmail', 'MicrosoftGraph'] as const;
           authorizeUrl()
         }}</a>
         <mat-form-field appearance="outline">
-          <mat-label>Authorization code</mat-label>
+          <mat-label i18n="@@communication.connectMailboxDialog.authCodeLabel"
+            >Authorization code</mat-label
+          >
           <input matInput [formControl]="code" />
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Label for this mailbox</mat-label>
-          <input matInput [formControl]="label" placeholder="e.g. Litigation team inbox" />
+          <mat-label i18n="@@communication.connectMailboxDialog.labelLabel"
+            >Label for this mailbox</mat-label
+          >
+          <input
+            matInput
+            [formControl]="label"
+            placeholder="e.g. Litigation team inbox"
+            i18n-placeholder="@@communication.connectMailboxDialog.labelPlaceholder"
+          />
         </mat-form-field>
         @if (error()) {
           <p class="connect-mailbox__error">{{ error() }}</p>
@@ -80,13 +97,21 @@ const PROVIDERS = ['Gmail', 'MicrosoftGraph'] as const;
           type="button"
           [disabled]="code.invalid || submitting()"
           (click)="completeConnection()"
+          i18n="@@communication.connectMailboxDialog.completeConnectionButton"
         >
           Complete connection
         </button>
       }
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@communication.connectMailboxDialog.cancelButton"
+      >
+        Cancel
+      </button>
     </mat-dialog-actions>
   `,
   styles: `

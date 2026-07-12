@@ -52,7 +52,14 @@
             <mat-label i18n="@@kb.articleEditor.addTagLabel">Add tag</mat-label>
             <input matInput [formControl]="newTagName" (keydown.enter)="addTag()" />
           </mat-form-field>
-          <button mat-stroked-button type="button" (click)="addTag()" i18n="@@kb.articleEditor.addButton">Add</button>
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="addTag()"
+            i18n="@@kb.articleEditor.addButton"
+          >
+            Add
+          </button>
         </div>
       </section>
 
@@ -64,7 +71,14 @@
         }
 
         @if (a.status === 'Draft' && canContribute) {
-          <button mat-stroked-button type="button" (click)="submit()" i18n="@@kb.articleEditor.submitForReviewButton">Submit for review</button>
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="submit()"
+            i18n="@@kb.articleEditor.submitForReviewButton"
+          >
+            Submit for review
+          </button>
         }
 
         @if (a.status === 'InReview' && canReview) {
@@ -81,13 +95,28 @@
                 }
               </mat-autocomplete>
               @if (userLookupUnavailable()) {
-                <mat-hint i18n="@@kb.articleEditor.noUserDirectoryHint">No user directory access.</mat-hint>
+                <mat-hint i18n="@@kb.articleEditor.noUserDirectoryHint"
+                  >No user directory access.</mat-hint
+                >
               }
             </mat-form-field>
-            <button mat-flat-button color="primary" type="button" (click)="approve()" i18n="@@kb.articleEditor.approvePublishButton">
+            <button
+              mat-flat-button
+              color="primary"
+              type="button"
+              (click)="approve()"
+              i18n="@@kb.articleEditor.approvePublishButton"
+            >
               Approve &amp; publish
             </button>
-            <button mat-button type="button" (click)="sendBack()" i18n="@@kb.articleEditor.sendBackButton">Send back to Draft</button>
+            <button
+              mat-button
+              type="button"
+              (click)="sendBack()"
+              i18n="@@kb.articleEditor.sendBackButton"
+            >
+              Send back to Draft
+            </button>
           </div>
           <p class="article-editor__hint" i18n="@@kb.articleEditor.publishingRequirementsHint">
             Publishing requires at least one tag and a reviewer who isn't the author — both are

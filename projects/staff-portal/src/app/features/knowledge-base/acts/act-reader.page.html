@@ -2,7 +2,11 @@
   @if (loading()) {
     <mat-progress-bar mode="indeterminate" />
   } @else if (!act()) {
-    <lf-empty-state icon="menu_book" title="Act not found" i18n-title="@@kb.actReader.actNotFoundEmptyState" />
+    <lf-empty-state
+      icon="menu_book"
+      title="Act not found"
+      i18n-title="@@kb.actReader.actNotFoundEmptyState"
+    />
   } @else {
     <header class="act-reader__header">
       <h1>{{ act()!.name }}</h1>
@@ -32,7 +36,11 @@
 
       <section class="act-reader__pane">
         @if (!selectedSection()) {
-          <lf-empty-state icon="menu_book" title="Select a section" i18n-title="@@kb.actReader.selectSectionEmptyState" />
+          <lf-empty-state
+            icon="menu_book"
+            title="Select a section"
+            i18n-title="@@kb.actReader.selectSectionEmptyState"
+          />
         } @else {
           <div class="act-reader__pane-toolbar">
             <button mat-icon-button type="button" (click)="stepSection(-1)">
@@ -54,10 +62,18 @@
               <mat-datepicker #asOfPicker />
             </mat-form-field>
             @if (asOfDate()) {
-              <button mat-button type="button" (click)="clearAsOf()" i18n="@@kb.actReader.backToCurrentButton">Back to current</button>
+              <button
+                mat-button
+                type="button"
+                (click)="clearAsOf()"
+                i18n="@@kb.actReader.backToCurrentButton"
+              >
+                Back to current
+              </button>
             }
             <button mat-stroked-button type="button" (click)="copyWithCitation()">
-              <mat-icon>content_copy</mat-icon> <span i18n="@@kb.actReader.copyWithCitationButton">Copy with citation</span>
+              <mat-icon>content_copy</mat-icon>
+              <span i18n="@@kb.actReader.copyWithCitationButton">Copy with citation</span>
             </button>
           </div>
 

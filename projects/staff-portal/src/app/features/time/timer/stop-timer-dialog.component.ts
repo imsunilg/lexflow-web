@@ -33,42 +33,58 @@ export interface StopTimerDialogData {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Stop timer</h2>
+    <h2 mat-dialog-title i18n="@@time.stopTimerDialog.title">Stop timer</h2>
     <mat-dialog-content>
-      <p class="stop-timer__elapsed">
+      <p class="stop-timer__elapsed" i18n="@@time.stopTimerDialog.elapsed">
         Elapsed: <strong>{{ elapsedLabel() }}</strong>
       </p>
-      <p class="stop-timer__rounding">
+      <p class="stop-timer__rounding" i18n="@@time.stopTimerDialog.roundingNote">
         Rounds up to <strong>{{ roundedMinutes() }} min</strong> ({{
           ROUNDING_INCREMENT_MINUTES
         }}-min increment — the server computes the final value from its own clock).
       </p>
 
       <form [formGroup]="form" class="stop-timer__form">
-        <mat-slide-toggle formControlName="billable">Billable</mat-slide-toggle>
+        <mat-slide-toggle formControlName="billable" i18n="@@time.stopTimerDialog.billableToggle">
+          Billable
+        </mat-slide-toggle>
 
         <mat-form-field appearance="outline">
-          <mat-label>Narrative{{ form.controls.billable.value ? ' (required)' : '' }}</mat-label>
+          <mat-label i18n="@@time.stopTimerDialog.narrativeLabel">
+            Narrative{{ form.controls.billable.value ? ' (required)' : '' }}
+          </mat-label>
           <textarea matInput formControlName="narrative" rows="3"></textarea>
           @if (form.controls.narrative.invalid && form.controls.narrative.touched) {
-            <mat-error>5–2000 characters required for billable time.</mat-error>
+            <mat-error i18n="@@time.stopTimerDialog.narrativeError">
+              5–2000 characters required for billable time.
+            </mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Internal note (never leaves the firm)</mat-label>
+          <mat-label i18n="@@time.stopTimerDialog.internalNoteLabel">
+            Internal note (never leaves the firm)
+          </mat-label>
           <textarea matInput formControlName="internalNote" rows="2"></textarea>
         </mat-form-field>
       </form>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@time.stopTimerDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="primary"
         type="button"
         [disabled]="form.invalid"
         (click)="submit()"
+        i18n="@@time.stopTimerDialog.stopSaveButton"
       >
         Stop &amp; save
       </button>

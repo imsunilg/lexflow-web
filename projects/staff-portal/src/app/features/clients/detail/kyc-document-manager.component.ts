@@ -91,13 +91,20 @@ function daysUntil(expiryDate: string): number {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load identity documents"
+          i18n-title="@@clients.kycDocumentManager.loadErrorTitle"
           message="Something went wrong while loading KYC documents."
+          i18n-message="@@clients.kycDocumentManager.loadErrorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@clients.kycDocumentManager.retryCta"
           (cta)="load()"
         />
       } @else {
         @if (documents().length === 0) {
-          <lf-empty-state icon="badge" title="No identity documents uploaded yet." />
+          <lf-empty-state
+            icon="badge"
+            title="No identity documents uploaded yet."
+            i18n-title="@@clients.kycDocumentManager.emptyTitle"
+          />
         } @else {
           <div class="kyc-manager__list">
             @for (doc of documents(); track doc.id) {
@@ -124,7 +131,7 @@ function daysUntil(expiryDate: string): number {
                       [disabled]="verifyingId() === doc.id"
                       (click)="verify(doc, true)"
                     >
-                      Approve
+                      <span i18n="@@clients.kycDocumentManager.approveButton">Approve</span>
                     </button>
                     <button
                       mat-stroked-button
@@ -133,7 +140,7 @@ function daysUntil(expiryDate: string): number {
                       [disabled]="verifyingId() === doc.id"
                       (click)="verify(doc, false)"
                     >
-                      Reject
+                      <span i18n="@@clients.kycDocumentManager.rejectButton">Reject</span>
                     </button>
                   </div>
                 }
@@ -143,10 +150,15 @@ function daysUntil(expiryDate: string): number {
         }
 
         <div class="kyc-manager__upload">
-          <h3 class="kyc-manager__upload-title">Upload document</h3>
+          <h3
+            class="kyc-manager__upload-title"
+            i18n="@@clients.kycDocumentManager.uploadSectionTitle"
+          >
+            Upload document
+          </h3>
           <form [formGroup]="uploadForm" class="kyc-manager__upload-form">
             <mat-form-field appearance="outline">
-              <mat-label>Document type</mat-label>
+              <mat-label i18n="@@clients.kycDocumentManager.docTypeLabel">Document type</mat-label>
               <mat-select formControlName="docKind">
                 @for (kind of docKinds; track kind) {
                   <mat-option [value]="kind">{{ kind }}</mat-option>
@@ -154,17 +166,23 @@ function daysUntil(expiryDate: string): number {
               </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Document number</mat-label>
+              <mat-label i18n="@@clients.kycDocumentManager.docNumberLabel"
+                >Document number</mat-label
+              >
               <input matInput formControlName="docNumber" />
               @if (
                 uploadForm.controls.docNumber.hasError('required') &&
                 uploadForm.controls.docNumber.touched
               ) {
-                <mat-error>Document number is required.</mat-error>
+                <mat-error i18n="@@clients.kycDocumentManager.docNumberRequiredError"
+                  >Document number is required.</mat-error
+                >
               }
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Expiry date (optional)</mat-label>
+              <mat-label i18n="@@clients.kycDocumentManager.expiryDateLabel"
+                >Expiry date (optional)</mat-label
+              >
               <input matInput [matDatepicker]="picker" formControlName="expiryDate" />
               <mat-datepicker-toggle matIconSuffix [for]="picker" />
               <mat-datepicker #picker />
@@ -177,7 +195,12 @@ function daysUntil(expiryDate: string): number {
           />
 
           @if (selectedFile()) {
-            <p class="kyc-manager__selected-file">Selected: {{ selectedFile()!.name }}</p>
+            <p
+              class="kyc-manager__selected-file"
+              i18n="@@clients.kycDocumentManager.selectedFileText"
+            >
+              Selected: {{ selectedFile()!.name }}
+            </p>
           }
 
           <button
@@ -190,7 +213,7 @@ function daysUntil(expiryDate: string): number {
             @if (uploading()) {
               <mat-spinner diameter="18" />
             } @else {
-              Upload
+              <span i18n="@@clients.kycDocumentManager.uploadButton">Upload</span>
             }
           </button>
 

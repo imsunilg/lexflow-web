@@ -4,7 +4,12 @@
   <div class="kb-home__search">
     <mat-form-field appearance="outline" class="kb-home__search-field">
       <mat-label i18n="@@kb.home.searchLabel">Search Acts, judgments, articles…</mat-label>
-      <input matInput [formControl]="query" placeholder="e.g. IPC 420, (2023) 5 SCC 1" i18n-placeholder="@@kb.home.searchPlaceholder" />
+      <input
+        matInput
+        [formControl]="query"
+        placeholder="e.g. IPC 420, (2023) 5 SCC 1"
+        i18n-placeholder="@@kb.home.searchPlaceholder"
+      />
       <mat-icon matPrefix>search</mat-icon>
     </mat-form-field>
   </div>
@@ -22,7 +27,9 @@
         [queryParams]="{ sectionId: r.directSection.id }"
       >
         <mat-icon>menu_book</mat-icon>
-        <span i18n="@@kb.home.directSectionLabel">Section {{ r.directSection.number }} — {{ r.directSection.title }}</span>
+        <span i18n="@@kb.home.directSectionLabel"
+          >Section {{ r.directSection.number }} — {{ r.directSection.title }}</span
+        >
       </button>
     }
     @if (r.directJudgment) {
@@ -37,7 +44,11 @@
     }
 
     @if (r.isFreeformFallback && r.hits.length === 0) {
-      <lf-empty-state icon="search_off" title="No results" i18n-title="@@kb.home.noResultsEmptyState" />
+      <lf-empty-state
+        icon="search_off"
+        title="No results"
+        i18n-title="@@kb.home.noResultsEmptyState"
+      />
     } @else if (r.hits.length > 0) {
       <ul class="kb-home__hits">
         @for (hit of r.hits; track hit.kind + hit.id) {
@@ -58,7 +69,11 @@
     @if (bookmarksLoading()) {
       <mat-progress-bar mode="indeterminate" />
     } @else if (bookmarks().length === 0) {
-      <lf-empty-state icon="bookmark" title="No bookmarks yet" i18n-title="@@kb.home.noBookmarksEmptyState" />
+      <lf-empty-state
+        icon="bookmark"
+        title="No bookmarks yet"
+        i18n-title="@@kb.home.noBookmarksEmptyState"
+      />
     } @else {
       <ul class="kb-home__hits">
         @for (row of bookmarks(); track row.bookmark.id) {

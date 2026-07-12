@@ -13,20 +13,31 @@
   <aside class="lf-detail-drawer" [class.lf-detail-drawer--open]="true">
     <header class="lf-detail-drawer__header">
       <h2 class="lf-detail-drawer__title">{{ doc.title }}</h2>
-      <button mat-icon-button type="button" aria-label="Close" i18n-aria-label="@@documents.detailDrawer.closeButtonAriaLabel" (click)="close()">
+      <button
+        mat-icon-button
+        type="button"
+        aria-label="Close"
+        i18n-aria-label="@@documents.detailDrawer.closeButtonAriaLabel"
+        (click)="close()"
+      >
         <mat-icon>close</mat-icon>
       </button>
     </header>
 
     <div class="lf-detail-drawer__quick-actions">
       <button mat-stroked-button type="button" (click)="requestPreview()">
-        <mat-icon>visibility</mat-icon> <ng-container i18n="@@documents.detailDrawer.previewButton">Preview</ng-container>
+        <mat-icon>visibility</mat-icon>
+        <ng-container i18n="@@documents.detailDrawer.previewButton">Preview</ng-container>
       </button>
       <button mat-stroked-button type="button" (click)="requestShare()">
-        <mat-icon>share</mat-icon> <ng-container i18n="@@documents.detailDrawer.shareButton">Share</ng-container>
+        <mat-icon>share</mat-icon>
+        <ng-container i18n="@@documents.detailDrawer.shareButton">Share</ng-container>
       </button>
       <button mat-stroked-button type="button" (click)="requestSign()">
-        <mat-icon>draw</mat-icon> <ng-container i18n="@@documents.detailDrawer.sendForSignatureButton">Send for signature</ng-container>
+        <mat-icon>draw</mat-icon>
+        <ng-container i18n="@@documents.detailDrawer.sendForSignatureButton"
+          >Send for signature</ng-container
+        >
       </button>
     </div>
 
@@ -49,7 +60,9 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-              <mat-label i18n="@@documents.detailDrawer.confidentialityLabel">Confidentiality</mat-label>
+              <mat-label i18n="@@documents.detailDrawer.confidentialityLabel"
+                >Confidentiality</mat-label
+              >
               <mat-select formControlName="confidentiality">
                 @for (level of confidentialityLevels; track level) {
                   <mat-option [value]="level">{{ level }}</mat-option>
@@ -95,7 +108,9 @@
           />
 
           @if (versionsLoading()) {
-            <p class="lf-detail-drawer__hint" i18n="@@documents.detailDrawer.loadingVersions">Loading versions…</p>
+            <p class="lf-detail-drawer__hint" i18n="@@documents.detailDrawer.loadingVersions">
+              Loading versions…
+            </p>
           } @else if (versions().length === 0) {
             <lf-empty-state
               icon="history"
@@ -112,7 +127,11 @@
                     <span class="lf-detail-drawer__version-no">
                       v{{ version.versionNo }}
                       @if (isCurrentVersion(version)) {
-                        <lf-status-chip label="Current" i18n-label="@@documents.detailDrawer.currentVersionLabel" [toneOverride]="'success'" />
+                        <lf-status-chip
+                          label="Current"
+                          i18n-label="@@documents.detailDrawer.currentVersionLabel"
+                          [toneOverride]="'success'"
+                        />
                       }
                     </span>
                     <span class="lf-detail-drawer__version-meta">
@@ -123,11 +142,21 @@
                   </div>
                   <lf-status-chip [label]="version.ocrStatus" />
                   <div class="lf-detail-drawer__version-actions">
-                    <a mat-button [href]="downloadUrl(doc.id)" target="_blank" rel="noopener" i18n="@@documents.detailDrawer.downloadLink"
+                    <a
+                      mat-button
+                      [href]="downloadUrl(doc.id)"
+                      target="_blank"
+                      rel="noopener"
+                      i18n="@@documents.detailDrawer.downloadLink"
                       >Download</a
                     >
                     @if (!isCurrentVersion(version)) {
-                      <button mat-button type="button" (click)="restoreVersion(version.versionNo)" i18n="@@documents.detailDrawer.restoreButton">
+                      <button
+                        mat-button
+                        type="button"
+                        (click)="restoreVersion(version.versionNo)"
+                        i18n="@@documents.detailDrawer.restoreButton"
+                      >
                         Restore
                       </button>
                     }
@@ -154,7 +183,11 @@
       <mat-tab label="Sharing" i18n-label="@@documents.detailDrawer.sharingTab">
         <div class="lf-detail-drawer__tab-content">
           <div class="lf-detail-drawer__sharing-summary">
-            <span class="lf-detail-drawer__sharing-label" i18n="@@documents.detailDrawer.clientPortalLabel">Client portal</span>
+            <span
+              class="lf-detail-drawer__sharing-label"
+              i18n="@@documents.detailDrawer.clientPortalLabel"
+              >Client portal</span
+            >
             <lf-status-chip
               [label]="doc.portalPublished ? 'Published' : 'Not published'"
               [toneOverride]="doc.portalPublished ? 'success' : 'neutral'"
@@ -164,7 +197,14 @@
             There is no publish/unpublish toggle endpoint yet, so this reflects the current value
             read-only. Use "Manage sharing" for external links.
           </p>
-          <button mat-stroked-button type="button" (click)="requestShare()" i18n="@@documents.detailDrawer.manageSharingButton">Manage sharing</button>
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="requestShare()"
+            i18n="@@documents.detailDrawer.manageSharingButton"
+          >
+            Manage sharing
+          </button>
         </div>
       </mat-tab>
     </mat-tab-group>

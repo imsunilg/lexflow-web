@@ -12,7 +12,14 @@
   @if (loading()) {
     <mat-progress-bar mode="indeterminate" />
   } @else if (users().length === 0) {
-    <lf-empty-state icon="group" title="No users yet" ctaLabel="Invite user" i18n-title="@@admin.usersList.emptyTitle" i18n-ctaLabel="@@admin.usersList.emptyCta" (cta)="openInvite()" />
+    <lf-empty-state
+      icon="group"
+      title="No users yet"
+      ctaLabel="Invite user"
+      i18n-title="@@admin.usersList.emptyTitle"
+      i18n-ctaLabel="@@admin.usersList.emptyCta"
+      (cta)="openInvite()"
+    />
   } @else {
     <table class="users-list__table">
       <thead>

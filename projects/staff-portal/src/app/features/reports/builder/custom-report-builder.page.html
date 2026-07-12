@@ -6,7 +6,11 @@
   }
 
   <mat-stepper orientation="horizontal" linear="false">
-    <mat-step [stepControl]="basicsForm" label="Base entity" i18n-label="@@reports.customBuilder.baseEntityStepLabel">
+    <mat-step
+      [stepControl]="basicsForm"
+      label="Base entity"
+      i18n-label="@@reports.customBuilder.baseEntityStepLabel"
+    >
       <form [formGroup]="basicsForm" class="custom-report-builder__form">
         <mat-form-field appearance="outline">
           <mat-label i18n="@@reports.customBuilder.reportNameLabel">Report name</mat-label>
@@ -23,7 +27,15 @@
         </mat-form-field>
       </form>
       <div class="custom-report-builder__step-actions">
-        <button mat-flat-button color="primary" type="button" matStepperNext i18n="@@reports.customBuilder.nextButton1">Next</button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          matStepperNext
+          i18n="@@reports.customBuilder.nextButton1"
+        >
+          Next
+        </button>
       </div>
     </mat-step>
 
@@ -79,11 +91,33 @@
           </button>
         </div>
       }
-      <button mat-stroked-button type="button" (click)="addAggregate()" i18n="@@reports.customBuilder.addAggregateButton">Add aggregate</button>
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="addAggregate()"
+        i18n="@@reports.customBuilder.addAggregateButton"
+      >
+        Add aggregate
+      </button>
 
       <div class="custom-report-builder__step-actions">
-        <button mat-button type="button" matStepperPrevious i18n="@@reports.customBuilder.backButton1">Back</button>
-        <button mat-flat-button color="primary" type="button" matStepperNext i18n="@@reports.customBuilder.nextButton2">Next</button>
+        <button
+          mat-button
+          type="button"
+          matStepperPrevious
+          i18n="@@reports.customBuilder.backButton1"
+        >
+          Back
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          matStepperNext
+          i18n="@@reports.customBuilder.nextButton2"
+        >
+          Next
+        </button>
       </div>
     </mat-step>
 
@@ -92,8 +126,12 @@
       <mat-form-field appearance="outline">
         <mat-label i18n="@@reports.customBuilder.matchLabel">Match</mat-label>
         <mat-select [formControl]="filterLogic">
-          <mat-option value="AND" i18n="@@reports.customBuilder.matchAllOption">All of (AND)</mat-option>
-          <mat-option value="OR" i18n="@@reports.customBuilder.matchAnyOption">Any of (OR)</mat-option>
+          <mat-option value="AND" i18n="@@reports.customBuilder.matchAllOption"
+            >All of (AND)</mat-option
+          >
+          <mat-option value="OR" i18n="@@reports.customBuilder.matchAnyOption"
+            >Any of (OR)</mat-option
+          >
         </mat-select>
       </mat-form-field>
 
@@ -134,7 +172,14 @@
           </button>
         </div>
       }
-      <button mat-stroked-button type="button" (click)="addFilter()" i18n="@@reports.customBuilder.addFilterButton">Add filter</button>
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="addFilter()"
+        i18n="@@reports.customBuilder.addFilterButton"
+      >
+        Add filter
+      </button>
 
       <h3 i18n="@@reports.customBuilder.sortHeading">Sort</h3>
       @for (s of sort(); track $index) {
@@ -162,11 +207,33 @@
           </button>
         </div>
       }
-      <button mat-stroked-button type="button" (click)="addSort()" i18n="@@reports.customBuilder.addSortButton">Add sort</button>
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="addSort()"
+        i18n="@@reports.customBuilder.addSortButton"
+      >
+        Add sort
+      </button>
 
       <div class="custom-report-builder__step-actions">
-        <button mat-button type="button" matStepperPrevious i18n="@@reports.customBuilder.backButton2">Back</button>
-        <button mat-flat-button color="primary" type="button" matStepperNext i18n="@@reports.customBuilder.nextButton3">Next</button>
+        <button
+          mat-button
+          type="button"
+          matStepperPrevious
+          i18n="@@reports.customBuilder.backButton2"
+        >
+          Back
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          matStepperNext
+          i18n="@@reports.customBuilder.nextButton3"
+        >
+          Next
+        </button>
       </div>
     </mat-step>
 
@@ -195,10 +262,21 @@
           {{ definitionId() ? 'Save changes' : 'Save' }}
         </button>
         @if (definitionId()) {
-          <button mat-stroked-button type="button" [disabled]="running()" (click)="preview()" i18n="@@reports.customBuilder.previewButton">
+          <button
+            mat-stroked-button
+            type="button"
+            [disabled]="running()"
+            (click)="preview()"
+            i18n="@@reports.customBuilder.previewButton"
+          >
             Preview
           </button>
-          <button mat-stroked-button type="button" (click)="openInViewer()" i18n="@@reports.customBuilder.openInViewerButton">
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="openInViewer()"
+            i18n="@@reports.customBuilder.openInViewerButton"
+          >
             Open in report viewer
           </button>
         }
@@ -235,7 +313,14 @@
       }
 
       <div class="custom-report-builder__step-actions">
-        <button mat-button type="button" matStepperPrevious i18n="@@reports.customBuilder.backButton3">Back</button>
+        <button
+          mat-button
+          type="button"
+          matStepperPrevious
+          i18n="@@reports.customBuilder.backButton3"
+        >
+          Back
+        </button>
       </div>
     </mat-step>
   </mat-stepper>

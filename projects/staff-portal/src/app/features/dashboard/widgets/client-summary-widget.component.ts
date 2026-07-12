@@ -16,27 +16,47 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
   imports: [DashboardWidgetComponent, EmptyStateComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-dashboard-widget title="Client Summary" [loading]="loading()" (refresh)="load()">
+    <lf-dashboard-widget
+      title="Client Summary"
+      i18n-title="@@dashboard.clientSummaryWidget.title"
+      [loading]="loading()"
+      (refresh)="load()"
+    >
       @if (error()) {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load client summary"
+          i18n-title="@@dashboard.clientSummaryWidget.errorTitle"
           message="Something went wrong."
+          i18n-message="@@dashboard.clientSummaryWidget.errorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@dashboard.clientSummaryWidget.retryLabel"
           (cta)="load()"
         />
       } @else if (data(); as summary) {
         <div class="client-summary-stats">
           <div class="client-summary-stats__item">
-            <span class="client-summary-stats__label">New this month</span>
+            <span
+              class="client-summary-stats__label"
+              i18n="@@dashboard.clientSummaryWidget.newThisMonthLabel"
+              >New this month</span
+            >
             <span class="client-summary-stats__value">{{ summary.newThisMonth }}</span>
           </div>
           <div class="client-summary-stats__item">
-            <span class="client-summary-stats__label">Active</span>
+            <span
+              class="client-summary-stats__label"
+              i18n="@@dashboard.clientSummaryWidget.activeLabel"
+              >Active</span
+            >
             <span class="client-summary-stats__value">{{ summary.active }}</span>
           </div>
           <div class="client-summary-stats__item">
-            <span class="client-summary-stats__label">At risk</span>
+            <span
+              class="client-summary-stats__label"
+              i18n="@@dashboard.clientSummaryWidget.atRiskLabel"
+              >At risk</span
+            >
             <span
               class="client-summary-stats__value"
               [style.color]="summary.atRisk > 0 ? 'var(--lf-warn)' : null"

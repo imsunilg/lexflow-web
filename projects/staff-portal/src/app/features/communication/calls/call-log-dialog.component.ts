@@ -39,13 +39,13 @@ const DIRECTIONS = ['Inbound', 'Outbound'] as const;
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Log a call</h2>
+    <h2 mat-dialog-title i18n="@@communication.callLogDialog.title">Log a call</h2>
     <mat-dialog-content class="call-log">
       <mat-tab-group>
-        <mat-tab label="Manual log">
+        <mat-tab label="Manual log" i18n-label="@@communication.callLogDialog.manualLogTab">
           <div class="call-log__tab">
             <mat-form-field appearance="outline">
-              <mat-label>Direction</mat-label>
+              <mat-label i18n="@@communication.callLogDialog.directionLabel">Direction</mat-label>
               <mat-select [formControl]="direction">
                 @for (d of directions; track d) {
                   <mat-option [value]="d">{{ d }}</mat-option>
@@ -54,19 +54,27 @@ const DIRECTIONS = ['Inbound', 'Outbound'] as const;
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-              <mat-label>Duration (seconds)</mat-label>
+              <mat-label i18n="@@communication.callLogDialog.durationLabel"
+                >Duration (seconds)</mat-label
+              >
               <input matInput type="number" min="0" [formControl]="durationSec" />
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-              <mat-label>Summary</mat-label>
+              <mat-label i18n="@@communication.callLogDialog.summaryLabel">Summary</mat-label>
               <textarea matInput [formControl]="summary" rows="3"></textarea>
             </mat-form-field>
 
-            <mat-checkbox [formControl]="createFollowUpTask">Create a follow-up task</mat-checkbox>
+            <mat-checkbox
+              [formControl]="createFollowUpTask"
+              i18n="@@communication.callLogDialog.createFollowUpCheckbox"
+              >Create a follow-up task</mat-checkbox
+            >
             @if (createFollowUpTask.value) {
               <mat-form-field appearance="outline">
-                <mat-label>Follow-up task title</mat-label>
+                <mat-label i18n="@@communication.callLogDialog.followUpTitleLabel"
+                  >Follow-up task title</mat-label
+                >
                 <input matInput [formControl]="followUpTaskTitle" />
               </mat-form-field>
             }
@@ -80,23 +88,35 @@ const DIRECTIONS = ['Inbound', 'Outbound'] as const;
               type="button"
               [disabled]="logSubmitting()"
               (click)="submitLog()"
+              i18n="@@communication.callLogDialog.saveLogButton"
             >
               Save log
             </button>
           </div>
         </mat-tab>
 
-        <mat-tab label="Click to call">
+        <mat-tab label="Click to call" i18n-label="@@communication.callLogDialog.clickToCallTab">
           <div class="call-log__tab">
-            <p class="call-log__hint">
+            <p class="call-log__hint" i18n="@@communication.callLogDialog.clickToCallHint">
               Places a real call via the firm's configured Twilio Voice number. Recording only
               happens if consent is given below — the Twilio API call itself is gated on it.
             </p>
             <mat-form-field appearance="outline">
-              <mat-label>Number to call</mat-label>
-              <input matInput [formControl]="toNumber" placeholder="+91XXXXXXXXXX" />
+              <mat-label i18n="@@communication.callLogDialog.numberToCallLabel"
+                >Number to call</mat-label
+              >
+              <input
+                matInput
+                [formControl]="toNumber"
+                placeholder="+91XXXXXXXXXX"
+                i18n-placeholder="@@communication.callLogDialog.numberToCallPlaceholder"
+              />
             </mat-form-field>
-            <mat-checkbox [formControl]="consentGiven">Recording consent given</mat-checkbox>
+            <mat-checkbox
+              [formControl]="consentGiven"
+              i18n="@@communication.callLogDialog.consentCheckbox"
+              >Recording consent given</mat-checkbox
+            >
 
             @if (clickError()) {
               <p class="call-log__error">{{ clickError() }}</p>
@@ -107,6 +127,7 @@ const DIRECTIONS = ['Inbound', 'Outbound'] as const;
               type="button"
               [disabled]="clickSubmitting() || toNumber.invalid"
               (click)="submitClickToCall()"
+              i18n="@@communication.callLogDialog.callNowButton"
             >
               Call now
             </button>
@@ -115,7 +136,14 @@ const DIRECTIONS = ['Inbound', 'Outbound'] as const;
       </mat-tab-group>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Close</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@communication.callLogDialog.closeButton"
+      >
+        Close
+      </button>
     </mat-dialog-actions>
   `,
   styles: `

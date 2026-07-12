@@ -15,7 +15,9 @@ import { EmptyStateComponent } from 'shared';
     <lf-empty-state
       icon="folder"
       title="No documents yet"
+      i18n-title="@@matters.matterDocumentsTab.emptyTitle"
       message="The Documents module isn't built in this environment yet."
+      i18n-message="@@matters.matterDocumentsTab.emptyMessage"
     />
   `,
 })

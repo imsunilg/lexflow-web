@@ -27,9 +27,11 @@ export type DuplicateResolutionResult =
   imports: [MatButtonModule, MatDialogModule, MatIconModule, MatListModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Possible duplicate leads found</h2>
+    <h2 mat-dialog-title i18n="@@leads.duplicateResolutionDialog.title">
+      Possible duplicate leads found
+    </h2>
     <mat-dialog-content>
-      <p>
+      <p i18n="@@leads.duplicateResolutionDialog.intro">
         This looks similar to {{ data.matches.length }} existing lead{{
           data.matches.length === 1 ? '' : 's'
         }}. Attach to one of them, or continue creating a new lead anyway.
@@ -44,7 +46,7 @@ export type DuplicateResolutionResult =
           >
             <mat-icon matListItemIcon>person</mat-icon>
             <span matListItemTitle>{{ match.displayName }}</span>
-            <span matListItemLine>
+            <span matListItemLine i18n="@@leads.duplicateResolutionDialog.matchDetail">
               {{ match.email || match.phoneE164 || 'No contact info' }} · matched on
               {{ match.matchKind }} ({{ (match.similarity * 100).toFixed(0) }}%)
             </span>
@@ -53,9 +55,16 @@ export type DuplicateResolutionResult =
       </mat-nav-list>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@leads.duplicateResolutionDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button mat-flat-button type="button" color="primary" (click)="createAnyway()">
-        Create anyway
+        <span i18n="@@leads.duplicateResolutionDialog.createAnywayButton">Create anyway</span>
       </button>
     </mat-dialog-actions>
   `,

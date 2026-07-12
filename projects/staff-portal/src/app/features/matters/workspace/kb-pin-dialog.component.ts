@@ -43,10 +43,12 @@ const KIND_ICONS: Record<string, string> = {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Pin from Knowledge Base</h2>
+    <h2 mat-dialog-title i18n="@@matters.kbPinDialog.title">Pin from Knowledge Base</h2>
     <mat-dialog-content class="kb-pin">
       <mat-form-field appearance="outline">
-        <mat-label>Search Acts, judgments, articles…</mat-label>
+        <mat-label i18n="@@matters.kbPinDialog.searchLabel"
+          >Search Acts, judgments, articles…</mat-label
+        >
         <input matInput [formControl]="query" />
       </mat-form-field>
 
@@ -70,11 +72,18 @@ const KIND_ICONS: Record<string, string> = {
         <div class="kb-pin__selected">
           <mat-icon>{{ iconFor(selected()!.kind) }}</mat-icon>
           <span>{{ selected()!.title }}</span>
-          <button mat-button type="button" (click)="selected.set(null)">Change</button>
+          <button
+            mat-button
+            type="button"
+            (click)="selected.set(null)"
+            i18n="@@matters.kbPinDialog.changeButton"
+          >
+            Change
+          </button>
         </div>
 
         <mat-form-field appearance="outline">
-          <mat-label>Note (optional)</mat-label>
+          <mat-label i18n="@@matters.kbPinDialog.noteLabel">Note (optional)</mat-label>
           <textarea matInput [formControl]="note" rows="3"></textarea>
         </mat-form-field>
 
@@ -84,13 +93,21 @@ const KIND_ICONS: Record<string, string> = {
       }
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@matters.kbPinDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="primary"
         type="button"
         [disabled]="!selected() || submitting()"
         (click)="submit()"
+        i18n="@@matters.kbPinDialog.pinButton"
       >
         Pin to matter
       </button>

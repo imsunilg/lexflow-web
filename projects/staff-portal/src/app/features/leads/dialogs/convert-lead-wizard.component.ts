@@ -45,74 +45,120 @@ export interface ConvertLeadWizardData {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Convert lead to client</h2>
+    <h2 mat-dialog-title i18n="@@leads.convertLeadWizard.title">Convert lead to client</h2>
     <mat-dialog-content>
       @if (result()) {
-        <p class="convert-wizard__success">
+        <p class="convert-wizard__success" i18n="@@leads.convertLeadWizard.successMessage">
           Converted. Client created{{ result()!.matterId ? ' with matter' : '' }}.
         </p>
       } @else {
         <mat-stepper linear>
-          <mat-step [stepControl]="clientForm" label="Client">
+          <mat-step
+            [stepControl]="clientForm"
+            label="Client"
+            i18n-label="@@leads.convertLeadWizard.clientStepLabel"
+          >
             <form [formGroup]="clientForm" class="convert-wizard__form">
               <mat-form-field appearance="outline">
-                <mat-label>First name</mat-label>
+                <mat-label i18n="@@leads.convertLeadWizard.firstNameLabel">First name</mat-label>
                 <input matInput formControlName="firstName" />
               </mat-form-field>
               <mat-form-field appearance="outline">
-                <mat-label>Last name</mat-label>
+                <mat-label i18n="@@leads.convertLeadWizard.lastNameLabel">Last name</mat-label>
                 <input matInput formControlName="lastName" />
               </mat-form-field>
               <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
+                <mat-label i18n="@@leads.convertLeadWizard.emailLabel">Email</mat-label>
                 <input matInput formControlName="email" />
               </mat-form-field>
               <mat-form-field appearance="outline">
-                <mat-label>Phone</mat-label>
+                <mat-label i18n="@@leads.convertLeadWizard.phoneLabel">Phone</mat-label>
                 <input matInput formControlName="phone" />
               </mat-form-field>
             </form>
             <div class="convert-wizard__step-actions">
-              <button mat-flat-button color="primary" matStepperNext type="button">Next</button>
+              <button
+                mat-flat-button
+                color="primary"
+                matStepperNext
+                type="button"
+                i18n="@@leads.convertLeadWizard.nextButton"
+              >
+                Next
+              </button>
             </div>
           </mat-step>
 
-          <mat-step label="Matter (optional)">
-            <mat-checkbox [formControl]="createMatterControl">Create a matter</mat-checkbox>
+          <mat-step
+            label="Matter (optional)"
+            i18n-label="@@leads.convertLeadWizard.matterStepLabel"
+          >
+            <mat-checkbox
+              [formControl]="createMatterControl"
+              i18n="@@leads.convertLeadWizard.createMatterCheckbox"
+              >Create a matter</mat-checkbox
+            >
             @if (createMatterControl.value) {
-              <p class="convert-wizard__hint">
+              <p
+                class="convert-wizard__hint"
+                i18n="@@leads.convertLeadWizard.matterUnavailableHint"
+              >
                 Matter creation isn't available in this environment yet (the Legal module hasn't
                 shipped) — submitting with this enabled will show that error.
               </p>
               <form [formGroup]="matterForm" class="convert-wizard__form">
                 <mat-form-field appearance="outline" class="convert-wizard__wide">
-                  <mat-label>Matter title</mat-label>
+                  <mat-label i18n="@@leads.convertLeadWizard.matterTitleLabel"
+                    >Matter title</mat-label
+                  >
                   <input matInput formControlName="title" />
                 </mat-form-field>
                 <mat-form-field appearance="outline">
-                  <mat-label>Opposing party</mat-label>
+                  <mat-label i18n="@@leads.convertLeadWizard.oppositePartyLabel"
+                    >Opposing party</mat-label
+                  >
                   <input matInput formControlName="oppositeParty" />
                 </mat-form-field>
               </form>
             }
             <div class="convert-wizard__step-actions">
-              <button mat-button matStepperPrevious type="button">Back</button>
-              <button mat-flat-button color="primary" matStepperNext type="button">Next</button>
+              <button
+                mat-button
+                matStepperPrevious
+                type="button"
+                i18n="@@leads.convertLeadWizard.backButton"
+              >
+                Back
+              </button>
+              <button
+                mat-flat-button
+                color="primary"
+                matStepperNext
+                type="button"
+                i18n="@@leads.convertLeadWizard.nextButton"
+              >
+                Next
+              </button>
             </div>
           </mat-step>
 
-          <mat-step label="Fees (optional)">
+          <mat-step label="Fees (optional)" i18n-label="@@leads.convertLeadWizard.feesStepLabel">
             <mat-checkbox [formControl]="createInvoiceControl"
-              >Create a consultation invoice</mat-checkbox
+              ><span i18n="@@leads.convertLeadWizard.createInvoiceCheckbox"
+                >Create a consultation invoice</span
+              ></mat-checkbox
             >
             @if (createInvoiceControl.value) {
-              <p class="convert-wizard__hint">
+              <p
+                class="convert-wizard__hint"
+                i18n="@@leads.convertLeadWizard.billingUnavailableHint"
+              >
                 Billing isn't available in this environment yet (the Fin module hasn't shipped) —
                 submitting with this enabled will show that error.
               </p>
               <form [formGroup]="invoiceForm" class="convert-wizard__form">
                 <mat-form-field appearance="outline">
-                  <mat-label>Amount</mat-label>
+                  <mat-label i18n="@@leads.convertLeadWizard.amountLabel">Amount</mat-label>
                   <input matInput type="number" formControlName="amount" />
                 </mat-form-field>
               </form>
@@ -123,7 +169,14 @@ export interface ConvertLeadWizardData {
             }
 
             <div class="convert-wizard__step-actions">
-              <button mat-button matStepperPrevious type="button">Back</button>
+              <button
+                mat-button
+                matStepperPrevious
+                type="button"
+                i18n="@@leads.convertLeadWizard.backButton"
+              >
+                Back
+              </button>
               <button
                 mat-flat-button
                 color="primary"
@@ -134,7 +187,7 @@ export interface ConvertLeadWizardData {
                 @if (submitting()) {
                   <mat-spinner diameter="20" />
                 } @else {
-                  Convert
+                  <span i18n="@@leads.convertLeadWizard.convertButton">Convert</span>
                 }
               </button>
             </div>

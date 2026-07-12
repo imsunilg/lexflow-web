@@ -18,7 +18,7 @@ export interface WidgetCatalogDialogData {
   imports: [MatButtonModule, MatCheckboxModule, MatDialogModule, MatIconModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Customize dashboard</h2>
+    <h2 mat-dialog-title i18n="@@dashboard.widgetCatalogDialog.title">Customize dashboard</h2>
     <mat-dialog-content>
       <ul class="catalog-list">
         @for (entry of data.catalog; track entry.id) {
@@ -35,8 +35,23 @@ export interface WidgetCatalogDialogData {
       </ul>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" (click)="dialogRef.close()">Cancel</button>
-      <button mat-flat-button color="primary" type="button" (click)="save()">Save</button>
+      <button
+        mat-button
+        type="button"
+        (click)="dialogRef.close()"
+        i18n="@@dashboard.widgetCatalogDialog.cancelButton"
+      >
+        Cancel
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        (click)="save()"
+        i18n="@@dashboard.widgetCatalogDialog.saveButton"
+      >
+        Save
+      </button>
     </mat-dialog-actions>
   `,
   styles: `

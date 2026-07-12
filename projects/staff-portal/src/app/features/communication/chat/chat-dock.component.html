@@ -34,7 +34,9 @@
 
       <div class="chat-dock__messages">
         @if (!activeChannel()) {
-          <p class="chat-dock__hint" i18n="@@communication.chatDock.pickChannelHint">Pick a channel to start chatting.</p>
+          <p class="chat-dock__hint" i18n="@@communication.chatDock.pickChannelHint">
+            Pick a channel to start chatting.
+          </p>
         } @else {
           @for (message of messages(); track message.id) {
             <div class="chat-dock__message" [class.chat-dock__message--mine]="isMine(message)">

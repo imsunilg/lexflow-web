@@ -14,12 +14,20 @@
   </div>
 
   @if (!activeClient()) {
-    <lf-empty-state icon="sms" title="Pick a client to see SMS history" i18n-title="@@communication.smsPane.pickClientEmptyState" />
+    <lf-empty-state
+      icon="sms"
+      title="Pick a client to see SMS history"
+      i18n-title="@@communication.smsPane.pickClientEmptyState"
+    />
   } @else {
     @if (loading()) {
       <mat-progress-bar mode="indeterminate" />
     } @else if (messages().length === 0) {
-      <lf-empty-state icon="sms" title="No SMS messages for this client yet" i18n-title="@@communication.smsPane.noMessagesEmptyState" />
+      <lf-empty-state
+        icon="sms"
+        title="No SMS messages for this client yet"
+        i18n-title="@@communication.smsPane.noMessagesEmptyState"
+      />
     } @else {
       <div class="sms-pane__history">
         @for (message of messages(); track message.id) {
@@ -47,7 +55,9 @@
       <mat-form-field appearance="outline">
         <mat-label i18n="@@communication.smsPane.templateLabel">Template</mat-label>
         <mat-select [formControl]="selectedTemplateId">
-          <mat-option [value]="null" i18n="@@communication.smsPane.noTemplateOption">None — write freeform</mat-option>
+          <mat-option [value]="null" i18n="@@communication.smsPane.noTemplateOption"
+            >None — write freeform</mat-option
+          >
           @for (template of templates(); track template.id) {
             <mat-option [value]="template.id">{{ template.name }}</mat-option>
           }
@@ -87,7 +97,14 @@
         </p>
       }
 
-      <button mat-flat-button color="primary" type="button" [disabled]="sending()" (click)="send()" i18n="@@communication.smsPane.sendButton">
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        [disabled]="sending()"
+        (click)="send()"
+        i18n="@@communication.smsPane.sendButton"
+      >
         Send
       </button>
     </div>

@@ -25,8 +25,21 @@ export interface SelectFolderDialogData {
       />
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
-      <button mat-flat-button color="primary" type="button" (click)="dialogRef.close(selectedId())">
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@documents.selectFolderDialog.cancelButton"
+      >
+        Cancel
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        (click)="dialogRef.close(selectedId())"
+        i18n="@@documents.selectFolderDialog.selectButton"
+      >
         Select
       </button>
     </mat-dialog-actions>

@@ -17,7 +17,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         #inboxActive="routerLinkActive"
         [active]="inboxActive.isActive"
       >
-        Inbox
+        <span i18n="@@communication.commTabs.inboxTab">Inbox</span>
       </a>
       <a
         mat-tab-link
@@ -26,7 +26,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         #smsActive="routerLinkActive"
         [active]="smsActive.isActive"
       >
-        SMS
+        <span i18n="@@communication.commTabs.smsTab">SMS</span>
       </a>
       <a
         mat-tab-link
@@ -35,7 +35,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         #waActive="routerLinkActive"
         [active]="waActive.isActive"
       >
-        WhatsApp
+        <span i18n="@@communication.commTabs.whatsappTab">WhatsApp</span>
       </a>
       <a
         mat-tab-link
@@ -44,7 +44,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         #callsActive="routerLinkActive"
         [active]="callsActive.isActive"
       >
-        Calls
+        <span i18n="@@communication.commTabs.callsTab">Calls</span>
       </a>
     </nav>
     <mat-tab-nav-panel #tabPanel />

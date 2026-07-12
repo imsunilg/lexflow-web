@@ -73,16 +73,42 @@
         </button>
 
         @if (matter()!.status === 'Open') {
-          <button mat-stroked-button type="button" (click)="putOnHold()" i18n="@@matters.workspace.onHoldButton">On hold</button>
-          <button mat-flat-button color="warn" type="button" (click)="openClosingChecklist()" i18n="@@matters.workspace.closeMatterButton">
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="putOnHold()"
+            i18n="@@matters.workspace.onHoldButton"
+          >
+            On hold
+          </button>
+          <button
+            mat-flat-button
+            color="warn"
+            type="button"
+            (click)="openClosingChecklist()"
+            i18n="@@matters.workspace.closeMatterButton"
+          >
             Close matter
           </button>
         } @else if (matter()!.status === 'OnHold') {
-          <button mat-flat-button color="warn" type="button" (click)="openClosingChecklist()" i18n="@@matters.workspace.closeMatterButton2">
+          <button
+            mat-flat-button
+            color="warn"
+            type="button"
+            (click)="openClosingChecklist()"
+            i18n="@@matters.workspace.closeMatterButton2"
+          >
             Close matter
           </button>
         } @else if (matter()!.status === 'Closed') {
-          <button mat-stroked-button type="button" (click)="reopen()" i18n="@@matters.workspace.reopenButton">Reopen</button>
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="reopen()"
+            i18n="@@matters.workspace.reopenButton"
+          >
+            Reopen
+          </button>
         }
       </div>
     </header>
@@ -118,7 +144,14 @@
 
       <mat-tab label="Court Cases" i18n-label="@@matters.workspace.courtCasesTab">
         <div class="matter-workspace__tab-content">
-          <button mat-stroked-button type="button" (click)="addCase()" i18n="@@matters.workspace.addCourtCaseButton">Add court case</button>
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="addCase()"
+            i18n="@@matters.workspace.addCourtCaseButton"
+          >
+            Add court case
+          </button>
 
           @if (casesLoading()) {
             <p i18n="@@matters.workspace.loadingCases">Loading…</p>
@@ -159,7 +192,11 @@
           @if (hearingsLoading()) {
             <p i18n="@@matters.workspace.loadingHearings">Loading…</p>
           } @else if (upcomingHearings().length === 0) {
-            <lf-empty-state icon="event_available" title="No upcoming hearings" i18n-title="@@matters.workspace.noUpcomingHearingsTitle" />
+            <lf-empty-state
+              icon="event_available"
+              title="No upcoming hearings"
+              i18n-title="@@matters.workspace.noUpcomingHearingsTitle"
+            />
           } @else {
             <ul class="matter-workspace__hearing-list">
               @for (entry of upcomingHearings(); track entry.hearing.id) {

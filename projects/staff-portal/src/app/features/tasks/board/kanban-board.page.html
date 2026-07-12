@@ -4,7 +4,9 @@
   <header class="board__header">
     <div class="board__filters">
       @if (canSeeTeam()) {
-        <mat-slide-toggle [formControl]="mineOnly" i18n="@@tasks.kanbanBoard.mineOnlyToggle">Mine only</mat-slide-toggle>
+        <mat-slide-toggle [formControl]="mineOnly" i18n="@@tasks.kanbanBoard.mineOnlyToggle"
+          >Mine only</mat-slide-toggle
+        >
       }
       <mat-form-field appearance="outline" class="board__filter-field">
         <mat-label i18n="@@tasks.kanbanBoard.priorityLabel">Priority</mat-label>
@@ -24,7 +26,9 @@
           }
         </mat-select>
       </mat-form-field>
-      <mat-slide-toggle [formControl]="overdueOnly" i18n="@@tasks.kanbanBoard.overdueOnlyToggle">Overdue only</mat-slide-toggle>
+      <mat-slide-toggle [formControl]="overdueOnly" i18n="@@tasks.kanbanBoard.overdueOnlyToggle"
+        >Overdue only</mat-slide-toggle
+      >
     </div>
 
     <button mat-flat-button color="primary" type="button" (click)="openComposer()">

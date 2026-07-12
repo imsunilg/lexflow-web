@@ -48,12 +48,18 @@ function buildAddForm(): FormGroup<{
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load argument notes"
+          i18n-title="@@matters.caseArgumentsTab.loadErrorTitle"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@matters.caseArgumentsTab.retryButton"
           (cta)="load()"
         />
       } @else {
         @if (notes().length === 0) {
-          <lf-empty-state icon="gavel" title="No argument notes yet" />
+          <lf-empty-state
+            icon="gavel"
+            title="No argument notes yet"
+            i18n-title="@@matters.caseArgumentsTab.emptyTitle"
+          />
         } @else {
           <div class="arguments-tab__list">
             @for (note of notes(); track note.id) {
@@ -63,7 +69,10 @@ function buildAddForm(): FormGroup<{
                 }
                 <p class="arguments-tab__body">{{ note.body }}</p>
                 @if (note.citationJudgmentIds.length > 0) {
-                  <span class="arguments-tab__citations">
+                  <span
+                    class="arguments-tab__citations"
+                    i18n="@@matters.caseArgumentsTab.citationsCount"
+                  >
                     {{ note.citationJudgmentIds.length }} citation(s)
                   </span>
                 }
@@ -73,17 +82,21 @@ function buildAddForm(): FormGroup<{
         }
 
         <div class="arguments-tab__add">
-          <h3 class="arguments-tab__add-title">Add argument note</h3>
+          <h3 class="arguments-tab__add-title" i18n="@@matters.caseArgumentsTab.addTitle">
+            Add argument note
+          </h3>
           <form [formGroup]="addForm" class="arguments-tab__form">
             <mat-form-field appearance="outline">
-              <mat-label>Stage (optional)</mat-label>
+              <mat-label i18n="@@matters.caseArgumentsTab.stageLabel">Stage (optional)</mat-label>
               <input matInput formControlName="stage" />
             </mat-form-field>
             <mat-form-field appearance="outline" class="arguments-tab__body-field">
-              <mat-label>Note</mat-label>
+              <mat-label i18n="@@matters.caseArgumentsTab.noteLabel">Note</mat-label>
               <textarea matInput formControlName="body" rows="4"></textarea>
               @if (addForm.controls.body.hasError('required') && addForm.controls.body.touched) {
-                <mat-error>A note is required.</mat-error>
+                <mat-error i18n="@@matters.caseArgumentsTab.noteRequiredError"
+                  >A note is required.</mat-error
+                >
               }
             </mat-form-field>
           </form>
@@ -98,7 +111,7 @@ function buildAddForm(): FormGroup<{
             @if (adding()) {
               <mat-spinner diameter="18" />
             } @else {
-              Add note
+              <span i18n="@@matters.caseArgumentsTab.addButton">Add note</span>
             }
           </button>
 

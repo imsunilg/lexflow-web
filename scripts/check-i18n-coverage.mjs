@@ -19,6 +19,25 @@ import { join } from 'node:path';
 
 const APPS = ['staff-portal', 'client-portal'];
 
+// Ids where the Hindi target is correctly identical to the English source —
+// government/industry acronyms (GSTIN, CIN, KYC), brand names (SMS, WhatsApp),
+// and raw phone-number/version format strings that Indian Hindi-speaking users
+// read in their Latin form. Not translation gaps; excluded from the
+// identical-to-source failure so real untranslated strings don't get lost in
+// noise.
+const KNOWN_IDENTICAL_OK = new Set([
+  'clients.createStepper.gstinLabel',
+  'clients.createStepper.cinLabel',
+  'clients.createStepper.kycStepLabel',
+  'clients.detail.gstinTerm',
+  'clients.detail.cinTerm',
+  'communication.callLogDialog.numberToCallPlaceholder',
+  'communication.commTabs.smsTab',
+  'communication.commTabs.whatsappTab',
+  'documents.templateGallery.versionLabel',
+  'leads.leadFormDialog.phonePlaceholder',
+]);
+
 function parseUnits(xlfPath) {
   if (!existsSync(xlfPath)) return null;
   const xml = readFileSync(xlfPath, 'utf-8');
@@ -59,7 +78,7 @@ for (const app of APPS) {
     const target = targetUnits.get(id);
     if (!target || !target.target) {
       missing.push(id);
-    } else if (target.target === source) {
+    } else if (target.target === source && !KNOWN_IDENTICAL_OK.has(id)) {
       untranslated.push(id);
     }
   }

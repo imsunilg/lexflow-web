@@ -17,10 +17,14 @@
       placeholder="Any (leave blank to apply to all types)"
       i18n-placeholder="@@tasks.templateFormDialog.matterTypePlaceholder"
     />
-    <mat-hint i18n="@@tasks.templateFormDialog.matterTypeHint">Free text — there's no fixed list of matter types server-side.</mat-hint>
+    <mat-hint i18n="@@tasks.templateFormDialog.matterTypeHint"
+      >Free text — there's no fixed list of matter types server-side.</mat-hint
+    >
   </mat-form-field>
 
-  <h3 class="template-form__items-title" i18n="@@tasks.templateFormDialog.itemsTitle">Template items</h3>
+  <h3 class="template-form__items-title" i18n="@@tasks.templateFormDialog.itemsTitle">
+    Template items
+  </h3>
   <p class="template-form__note" i18n="@@tasks.templateFormDialog.hardcodedNote">
     Generated tasks always get <strong>priority: Medium</strong> and an
     <strong>unassigned owner</strong> when this template is applied — that's hardcoded server-side
@@ -37,21 +41,29 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="template-form__item-days">
-          <mat-label i18n="@@tasks.templateFormDialog.itemDueLabel">Due (days from anchor)</mat-label>
+          <mat-label i18n="@@tasks.templateFormDialog.itemDueLabel"
+            >Due (days from anchor)</mat-label
+          >
           <input matInput type="number" step="1" formControlName="relativeDueDays" />
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="template-form__item-category">
           <mat-label i18n="@@tasks.templateFormDialog.itemCategoryLabel">Category</mat-label>
           <mat-select formControlName="category">
-            <mat-option [value]="null" i18n="@@tasks.templateFormDialog.noCategoryOption">None</mat-option>
+            <mat-option [value]="null" i18n="@@tasks.templateFormDialog.noCategoryOption"
+              >None</mat-option
+            >
             @for (c of categories; track c) {
               <mat-option [value]="c">{{ c }}</mat-option>
             }
           </mat-select>
         </mat-form-field>
 
-        <mat-checkbox formControlName="isMandatory" i18n="@@tasks.templateFormDialog.mandatoryCheckbox">Mandatory</mat-checkbox>
+        <mat-checkbox
+          formControlName="isMandatory"
+          i18n="@@tasks.templateFormDialog.mandatoryCheckbox"
+          >Mandatory</mat-checkbox
+        >
 
         <button
           mat-icon-button
@@ -77,8 +89,22 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button type="button" (click)="cancel()" i18n="@@tasks.templateFormDialog.cancelButton">Cancel</button>
-  <button mat-flat-button color="primary" type="button" [disabled]="submitting" (click)="submit()" i18n="@@tasks.templateFormDialog.createButton">
+  <button
+    mat-button
+    type="button"
+    (click)="cancel()"
+    i18n="@@tasks.templateFormDialog.cancelButton"
+  >
+    Cancel
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    type="button"
+    [disabled]="submitting"
+    (click)="submit()"
+    i18n="@@tasks.templateFormDialog.createButton"
+  >
     Create template
   </button>
 </mat-dialog-actions>

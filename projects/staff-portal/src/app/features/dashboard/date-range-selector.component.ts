@@ -17,18 +17,36 @@ import { customRange, isRangeWithinLimit, rangeForPreset } from './analytics-ran
   template: `
     <div class="range-selector">
       <mat-button-toggle-group [value]="range().preset" (change)="onPresetChange($event.value)">
-        <mat-button-toggle value="week">This week</mat-button-toggle>
-        <mat-button-toggle value="month">This month</mat-button-toggle>
-        <mat-button-toggle value="quarter">This quarter</mat-button-toggle>
-        <mat-button-toggle value="custom">Custom</mat-button-toggle>
+        <mat-button-toggle value="week" i18n="@@dashboard.dateRangeSelector.week"
+          >This week</mat-button-toggle
+        >
+        <mat-button-toggle value="month" i18n="@@dashboard.dateRangeSelector.month"
+          >This month</mat-button-toggle
+        >
+        <mat-button-toggle value="quarter" i18n="@@dashboard.dateRangeSelector.quarter"
+          >This quarter</mat-button-toggle
+        >
+        <mat-button-toggle value="custom" i18n="@@dashboard.dateRangeSelector.custom"
+          >Custom</mat-button-toggle
+        >
       </mat-button-toggle-group>
 
       @if (range().preset === 'custom') {
-        <lf-date-range-picker label="Custom range" (rangeChange)="onCustomRange($event)" />
+        <lf-date-range-picker
+          label="Custom range"
+          i18n-label="@@dashboard.dateRangeSelector.customRangeLabel"
+          (rangeChange)="onCustomRange($event)"
+        />
       }
 
       @if (rangeTooLarge()) {
-        <p class="range-selector__error" role="alert">Date ranges can't exceed 366 days.</p>
+        <p
+          class="range-selector__error"
+          role="alert"
+          i18n="@@dashboard.dateRangeSelector.rangeTooLarge"
+        >
+          Date ranges can't exceed 366 days.
+        </p>
       }
     </div>
   `,

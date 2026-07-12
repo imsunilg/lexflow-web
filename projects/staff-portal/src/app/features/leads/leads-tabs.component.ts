@@ -19,7 +19,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         #kanbanActive="routerLinkActive"
         [active]="kanbanActive.isActive"
       >
-        Kanban
+        <span i18n="@@leads.leadsTabs.kanbanTab">Kanban</span>
       </a>
       <a
         mat-tab-link
@@ -28,7 +28,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         #listActive="routerLinkActive"
         [active]="listActive.isActive"
       >
-        List
+        <span i18n="@@leads.leadsTabs.listTab">List</span>
       </a>
       <a
         mat-tab-link
@@ -37,7 +37,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         #importActive="routerLinkActive"
         [active]="importActive.isActive"
       >
-        Import
+        <span i18n="@@leads.leadsTabs.importTab">Import</span>
       </a>
     </nav>
     <mat-tab-nav-panel #tabPanel />

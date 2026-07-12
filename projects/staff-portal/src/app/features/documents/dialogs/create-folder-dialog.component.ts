@@ -24,11 +24,11 @@ export interface CreateFolderDialogData {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>New folder</h2>
+    <h2 mat-dialog-title i18n="@@documents.createFolderDialog.title">New folder</h2>
     <mat-dialog-content>
       <form [formGroup]="form">
         <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Folder name</mat-label>
+          <mat-label i18n="@@documents.createFolderDialog.nameLabel">Folder name</mat-label>
           <input matInput formControlName="name" />
         </mat-form-field>
         @if (errorMessage) {
@@ -37,13 +37,21 @@ export interface CreateFolderDialogData {
       </form>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@documents.createFolderDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="primary"
         type="button"
         [disabled]="form.invalid"
         (click)="submit()"
+        i18n="@@documents.createFolderDialog.createButton"
       >
         Create
       </button>

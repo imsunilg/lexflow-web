@@ -36,57 +36,74 @@ export interface QuickLogActivityDialogData {
         @switch (data.activityType) {
           @case ('call') {
             <mat-form-field appearance="outline">
-              <mat-label>Direction</mat-label>
+              <mat-label i18n="@@leads.quickLogActivityDialog.directionLabel">Direction</mat-label>
               <mat-select formControlName="direction">
-                <mat-option value="Inbound">Inbound</mat-option>
-                <mat-option value="Outbound">Outbound</mat-option>
+                <mat-option value="Inbound" i18n="@@leads.quickLogActivityDialog.inboundOption"
+                  >Inbound</mat-option
+                >
+                <mat-option value="Outbound" i18n="@@leads.quickLogActivityDialog.outboundOption"
+                  >Outbound</mat-option
+                >
               </mat-select>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-              <mat-label>Duration (min)</mat-label>
+              <mat-label i18n="@@leads.quickLogActivityDialog.durationLabel"
+                >Duration (min)</mat-label
+              >
               <input matInput type="number" formControlName="durationMin" />
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="quick-log-form__wide">
-              <mat-label>Outcome</mat-label>
+              <mat-label i18n="@@leads.quickLogActivityDialog.outcomeLabel">Outcome</mat-label>
               <input
                 matInput
                 formControlName="outcome"
                 placeholder="e.g. Connected, No answer, Voicemail"
+                i18n-placeholder="@@leads.quickLogActivityDialog.outcomePlaceholder"
               />
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="quick-log-form__wide">
-              <mat-label>Notes (optional)</mat-label>
+              <mat-label i18n="@@leads.quickLogActivityDialog.notesLabel"
+                >Notes (optional)</mat-label
+              >
               <textarea matInput formControlName="body" rows="3"></textarea>
             </mat-form-field>
           }
           @case ('meeting') {
             <mat-form-field appearance="outline" class="quick-log-form__wide">
-              <mat-label>Subject</mat-label>
+              <mat-label i18n="@@leads.quickLogActivityDialog.subjectLabel">Subject</mat-label>
               <input matInput formControlName="subject" />
               @if (form.controls.subject.hasError('required') && form.controls.subject.touched) {
-                <mat-error>Subject is required.</mat-error>
+                <mat-error i18n="@@leads.quickLogActivityDialog.subjectRequiredError"
+                  >Subject is required.</mat-error
+                >
               }
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-              <mat-label>Duration (min)</mat-label>
+              <mat-label i18n="@@leads.quickLogActivityDialog.durationLabel"
+                >Duration (min)</mat-label
+              >
               <input matInput type="number" formControlName="durationMin" />
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="quick-log-form__wide">
-              <mat-label>Notes (optional)</mat-label>
+              <mat-label i18n="@@leads.quickLogActivityDialog.notesLabel"
+                >Notes (optional)</mat-label
+              >
               <textarea matInput formControlName="body" rows="3"></textarea>
             </mat-form-field>
           }
           @case ('note') {
             <mat-form-field appearance="outline" class="quick-log-form__wide">
-              <mat-label>Note</mat-label>
+              <mat-label i18n="@@leads.quickLogActivityDialog.noteLabel">Note</mat-label>
               <textarea matInput formControlName="body" rows="4"></textarea>
               @if (form.controls.body.hasError('required') && form.controls.body.touched) {
-                <mat-error>Note content is required.</mat-error>
+                <mat-error i18n="@@leads.quickLogActivityDialog.noteRequiredError"
+                  >Note content is required.</mat-error
+                >
               }
             </mat-form-field>
           }
@@ -98,7 +115,14 @@ export interface QuickLogActivityDialogData {
       </form>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@leads.quickLogActivityDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="primary"
@@ -109,7 +133,7 @@ export interface QuickLogActivityDialogData {
         @if (saving()) {
           <mat-spinner diameter="20" />
         } @else {
-          Save
+          <span i18n="@@leads.quickLogActivityDialog.saveButton">Save</span>
         }
       </button>
     </mat-dialog-actions>

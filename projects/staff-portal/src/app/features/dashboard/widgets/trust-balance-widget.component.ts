@@ -16,25 +16,41 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
   imports: [DashboardWidgetComponent, EmptyStateComponent, LfCurrencyPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-dashboard-widget title="Trust Balance" [loading]="loading()" (refresh)="load()">
+    <lf-dashboard-widget
+      title="Trust Balance"
+      i18n-title="@@dashboard.trustBalanceWidget.title"
+      [loading]="loading()"
+      (refresh)="load()"
+    >
       @if (error()) {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load trust balance"
+          i18n-title="@@dashboard.trustBalanceWidget.errorTitle"
           message="Something went wrong."
+          i18n-message="@@dashboard.trustBalanceWidget.errorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@dashboard.trustBalanceWidget.retryLabel"
           (cta)="load()"
         />
       } @else if (data(); as summary) {
         <div class="trust-balance-stats">
           <div class="trust-balance-stats__item">
-            <span class="trust-balance-stats__label">Total Held</span>
+            <span
+              class="trust-balance-stats__label"
+              i18n="@@dashboard.trustBalanceWidget.totalHeldLabel"
+              >Total Held</span
+            >
             <span class="trust-balance-stats__value">{{
               summary.totalHeld | lfCurrency: summary.currency
             }}</span>
           </div>
           <div class="trust-balance-stats__item">
-            <span class="trust-balance-stats__label">Accounts needing reconciliation</span>
+            <span
+              class="trust-balance-stats__label"
+              i18n="@@dashboard.trustBalanceWidget.reconciliationLabel"
+              >Accounts needing reconciliation</span
+            >
             <span
               class="trust-balance-stats__value"
               [style.color]="

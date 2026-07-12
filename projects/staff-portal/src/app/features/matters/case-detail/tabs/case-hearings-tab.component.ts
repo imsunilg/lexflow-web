@@ -95,13 +95,20 @@ function buildScheduleForm(): FormGroup<{
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load hearings"
+          i18n-title="@@matters.caseHearingsTab.loadErrorTitle"
           message="Something went wrong while loading hearings."
+          i18n-message="@@matters.caseHearingsTab.loadErrorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@matters.caseHearingsTab.retryButton"
           (cta)="load()"
         />
       } @else {
         @if (hearings().length === 0) {
-          <lf-empty-state icon="event" title="No hearings scheduled yet" />
+          <lf-empty-state
+            icon="event"
+            title="No hearings scheduled yet"
+            i18n-title="@@matters.caseHearingsTab.emptyTitle"
+          />
         } @else {
           <div class="hearings-tab__list">
             @for (hearing of hearings(); track hearing.id) {
@@ -115,7 +122,12 @@ function buildScheduleForm(): FormGroup<{
                   <lf-status-chip [label]="hearing.status" [toneOverride]="tone(hearing)" />
                 </div>
                 @if (hearing.status === 'Scheduled') {
-                  <button mat-stroked-button type="button" (click)="outcomeRequested.emit(hearing)">
+                  <button
+                    mat-stroked-button
+                    type="button"
+                    (click)="outcomeRequested.emit(hearing)"
+                    i18n="@@matters.caseHearingsTab.recordOutcomeButton"
+                  >
                     Record outcome
                   </button>
                 }
@@ -125,10 +137,12 @@ function buildScheduleForm(): FormGroup<{
         }
 
         <div class="hearings-tab__add">
-          <h3 class="hearings-tab__add-title">Schedule hearing</h3>
+          <h3 class="hearings-tab__add-title" i18n="@@matters.caseHearingsTab.addTitle">
+            Schedule hearing
+          </h3>
           <form [formGroup]="scheduleForm" class="hearings-tab__form">
             <mat-form-field appearance="outline">
-              <mat-label>Date</mat-label>
+              <mat-label i18n="@@matters.caseHearingsTab.dateLabel">Date</mat-label>
               <input matInput [matDatepicker]="picker" formControlName="date" />
               <mat-datepicker-toggle matIconSuffix [for]="picker" />
               <mat-datepicker #picker />
@@ -136,25 +150,29 @@ function buildScheduleForm(): FormGroup<{
                 scheduleForm.controls.date.hasError('pastDate') &&
                 scheduleForm.controls.date.touched
               ) {
-                <mat-error>Hearing date can't be in the past.</mat-error>
+                <mat-error i18n="@@matters.caseHearingsTab.pastDateError"
+                  >Hearing date can't be in the past.</mat-error
+                >
               }
               @if (
                 scheduleForm.controls.date.hasError('required') &&
                 scheduleForm.controls.date.touched
               ) {
-                <mat-error>Date is required.</mat-error>
+                <mat-error i18n="@@matters.caseHearingsTab.dateRequiredError"
+                  >Date is required.</mat-error
+                >
               }
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Time</mat-label>
+              <mat-label i18n="@@matters.caseHearingsTab.timeLabel">Time</mat-label>
               <input matInput type="time" formControlName="time" />
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Purpose</mat-label>
+              <mat-label i18n="@@matters.caseHearingsTab.purposeLabel">Purpose</mat-label>
               <input matInput formControlName="purpose" />
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Courtroom</mat-label>
+              <mat-label i18n="@@matters.caseHearingsTab.courtroomLabel">Courtroom</mat-label>
               <input matInput formControlName="courtroom" />
             </mat-form-field>
           </form>
@@ -169,7 +187,7 @@ function buildScheduleForm(): FormGroup<{
             @if (scheduling()) {
               <mat-spinner diameter="18" />
             } @else {
-              Schedule hearing
+              <span i18n="@@matters.caseHearingsTab.scheduleButton">Schedule hearing</span>
             }
           </button>
 

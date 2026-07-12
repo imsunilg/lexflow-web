@@ -1,5 +1,7 @@
 @if (loading()) {
-  <mat-dialog-content class="detail detail--loading" i18n="@@tasks.taskDetail.loadingLabel">Loading…</mat-dialog-content>
+  <mat-dialog-content class="detail detail--loading" i18n="@@tasks.taskDetail.loadingLabel"
+    >Loading…</mat-dialog-content
+  >
 } @else if (task(); as t) {
   <h2 mat-dialog-title>
     {{ t.title }}
@@ -9,7 +11,9 @@
   </h2>
   <mat-dialog-content class="detail">
     @if (t.recurrenceId) {
-      <p class="detail__recurrence-badge" i18n="@@tasks.taskDetail.recurrenceBadge">Part of a generated series (no server-side linking).</p>
+      <p class="detail__recurrence-badge" i18n="@@tasks.taskDetail.recurrenceBadge">
+        Part of a generated series (no server-side linking).
+      </p>
     }
 
     <section class="detail__section">
@@ -47,7 +51,8 @@
       }
 
       <button mat-button type="button" (click)="openRecurringEditor()">
-        <mat-icon>repeat</mat-icon> <span i18n="@@tasks.taskDetail.repeatTaskButton">Repeat this task</span>
+        <mat-icon>repeat</mat-icon>
+        <span i18n="@@tasks.taskDetail.repeatTaskButton">Repeat this task</span>
       </button>
     </section>
 
@@ -84,10 +89,19 @@
             }
           </mat-select>
         </mat-form-field>
-        <button mat-stroked-button type="button" (click)="addAssignee()" i18n="@@tasks.taskDetail.addAssigneeButton">Add</button>
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="addAssignee()"
+          i18n="@@tasks.taskDetail.addAssigneeButton"
+        >
+          Add
+        </button>
       </div>
       @if (userLookupUnavailable()) {
-        <p class="detail__hint" i18n="@@tasks.taskDetail.noUserDirectoryHint">No user directory access — assignees can't be looked up here.</p>
+        <p class="detail__hint" i18n="@@tasks.taskDetail.noUserDirectoryHint">
+          No user directory access — assignees can't be looked up here.
+        </p>
       }
     </section>
 
@@ -108,8 +122,19 @@
           <mat-label i18n="@@tasks.taskDetail.newChecklistItemLabel">New checklist item</mat-label>
           <input matInput [formControl]="newChecklistLabel" (keydown.enter)="addChecklistItem()" />
         </mat-form-field>
-        <mat-checkbox [formControl]="newChecklistMandatory" i18n="@@tasks.taskDetail.mandatoryCheckbox">Mandatory</mat-checkbox>
-        <button mat-stroked-button type="button" (click)="addChecklistItem()" i18n="@@tasks.taskDetail.addChecklistItemButton">Add</button>
+        <mat-checkbox
+          [formControl]="newChecklistMandatory"
+          i18n="@@tasks.taskDetail.mandatoryCheckbox"
+          >Mandatory</mat-checkbox
+        >
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="addChecklistItem()"
+          i18n="@@tasks.taskDetail.addChecklistItemButton"
+        >
+          Add
+        </button>
       </div>
     </section>
 
@@ -142,7 +167,14 @@
             }
           </mat-autocomplete>
         </mat-form-field>
-        <button mat-stroked-button type="button" (click)="addDependency()" i18n="@@tasks.taskDetail.addDependencyButton">Add</button>
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="addDependency()"
+          i18n="@@tasks.taskDetail.addDependencyButton"
+        >
+          Add
+        </button>
       </div>
       @if (dependencyError()) {
         <p class="detail__error">{{ dependencyError() }}</p>
@@ -164,11 +196,26 @@
           <mat-label i18n="@@tasks.taskDetail.addCommentLabel">Add comment</mat-label>
           <textarea matInput [formControl]="newComment" rows="2"></textarea>
         </mat-form-field>
-        <button mat-stroked-button type="button" (click)="addComment()" i18n="@@tasks.taskDetail.postCommentButton">Post</button>
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="addComment()"
+          i18n="@@tasks.taskDetail.postCommentButton"
+        >
+          Post
+        </button>
       </div>
     </section>
   </mat-dialog-content>
 }
 <mat-dialog-actions align="end">
-  <button mat-flat-button color="primary" type="button" (click)="close()" i18n="@@tasks.taskDetail.closeButton">Close</button>
+  <button
+    mat-flat-button
+    color="primary"
+    type="button"
+    (click)="close()"
+    i18n="@@tasks.taskDetail.closeButton"
+  >
+    Close
+  </button>
 </mat-dialog-actions>

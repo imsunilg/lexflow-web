@@ -16,6 +16,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #hubActive="routerLinkActive"
         [active]="hubActive.isActive"
+        i18n="@@reports.reportsTabs.hub"
       >
         Hub
       </a>
@@ -25,6 +26,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #savedActive="routerLinkActive"
         [active]="savedActive.isActive"
+        i18n="@@reports.reportsTabs.myReports"
       >
         My Reports
       </a>
@@ -34,6 +36,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #builderActive="routerLinkActive"
         [active]="builderActive.isActive"
+        i18n="@@reports.reportsTabs.newCustomReport"
       >
         New Custom Report
       </a>

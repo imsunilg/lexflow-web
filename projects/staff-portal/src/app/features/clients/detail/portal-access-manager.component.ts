@@ -63,7 +63,7 @@ function portalUserStatusTone(status: ClientPortalUser['status']): StatusChipTon
           "
           (change)="onToggle($event)"
         >
-          Enable portal access
+          <span i18n="@@clients.portalAccessManager.enableToggle">Enable portal access</span>
         </mat-slide-toggle>
         @if (togglingAccess()) {
           <mat-spinner diameter="18" />
@@ -75,7 +75,11 @@ function portalUserStatusTone(status: ClientPortalUser['status']): StatusChipTon
       }
 
       @if (!client().portalEnabled) {
-        <lf-empty-state icon="lock" title="Portal access is off for this client." />
+        <lf-empty-state
+          icon="lock"
+          title="Portal access is off for this client."
+          i18n-title="@@clients.portalAccessManager.disabledTitle"
+        />
       } @else if (loading()) {
         <div class="portal-manager__spinner">
           <mat-spinner diameter="32" />
@@ -84,12 +88,19 @@ function portalUserStatusTone(status: ClientPortalUser['status']): StatusChipTon
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load portal users"
+          i18n-title="@@clients.portalAccessManager.loadErrorTitle"
           message="Something went wrong while loading portal users."
+          i18n-message="@@clients.portalAccessManager.loadErrorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@clients.portalAccessManager.retryCta"
           (cta)="loadPortalUsers()"
         />
       } @else if (portalUsers().length === 0) {
-        <lf-empty-state icon="group" title="No portal users yet." />
+        <lf-empty-state
+          icon="group"
+          title="No portal users yet."
+          i18n-title="@@clients.portalAccessManager.emptyTitle"
+        />
       } @else {
         <div class="portal-manager__list">
           @for (user of portalUsers(); track user.id) {
@@ -106,10 +117,14 @@ function portalUserStatusTone(status: ClientPortalUser['status']): StatusChipTon
                   [disabled]="resendingId() === user.id"
                   (click)="resendInvite(user)"
                 >
-                  Resend invite
+                  <span i18n="@@clients.portalAccessManager.resendInviteButton">Resend invite</span>
                 </button>
                 @if (resentId() === user.id) {
-                  <span class="portal-manager__confirmation">Invite resent.</span>
+                  <span
+                    class="portal-manager__confirmation"
+                    i18n="@@clients.portalAccessManager.inviteResentConfirmation"
+                    >Invite resent.</span
+                  >
                 }
               }
             </div>

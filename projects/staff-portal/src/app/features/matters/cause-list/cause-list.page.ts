@@ -41,28 +41,39 @@ function toIsoDate(date: Date): string {
   template: `
     <div class="cause-list">
       <header class="cause-list__toolbar">
-        <h1>Cause list</h1>
+        <h1 i18n="@@matters.causeListPage.title">Cause list</h1>
         <mat-form-field appearance="outline">
-          <mat-label>Date</mat-label>
+          <mat-label i18n="@@matters.causeListPage.dateLabel">Date</mat-label>
           <input matInput [matDatepicker]="picker" [formControl]="dateControl" />
           <mat-datepicker-toggle matIconSuffix [for]="picker" />
           <mat-datepicker #picker />
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Lawyer ID (optional)</mat-label>
+          <mat-label i18n="@@matters.causeListPage.lawyerIdLabel">Lawyer ID (optional)</mat-label>
           <input matInput [formControl]="lawyerIdControl" />
         </mat-form-field>
-        <button mat-stroked-button type="button" (click)="load()">Load</button>
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="load()"
+          i18n="@@matters.causeListPage.loadButton"
+        >
+          Load
+        </button>
         <button mat-flat-button color="primary" type="button" (click)="print()">
           <mat-icon>print</mat-icon>
-          Print
+          <span i18n="@@matters.causeListPage.printButton">Print</span>
         </button>
       </header>
 
       @if (loading()) {
         <mat-progress-bar mode="indeterminate" />
       } @else if (groups().length === 0) {
-        <lf-empty-state icon="event_available" title="No hearings scheduled for this date" />
+        <lf-empty-state
+          icon="event_available"
+          title="No hearings scheduled for this date"
+          i18n-title="@@matters.causeListPage.emptyTitle"
+        />
       } @else {
         <p class="cause-list__date-heading">
           {{ dateControl.value ? dateControl.value!.toDateString() : '' }}
@@ -73,9 +84,9 @@ function toIsoDate(date: Date): string {
             <table class="cause-list__table">
               <thead>
                 <tr>
-                  <th>Time</th>
-                  <th>Purpose</th>
-                  <th>Status</th>
+                  <th i18n="@@matters.causeListPage.timeColumn">Time</th>
+                  <th i18n="@@matters.causeListPage.purposeColumn">Purpose</th>
+                  <th i18n="@@matters.causeListPage.statusColumn">Status</th>
                 </tr>
               </thead>
               <tbody>

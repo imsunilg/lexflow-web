@@ -15,7 +15,9 @@ import { EmptyStateComponent } from 'shared';
     <lf-empty-state
       icon="checklist"
       title="No tasks yet"
+      i18n-title="@@matters.matterTasksTab.emptyTitle"
       message="Task management isn't built in this environment yet."
+      i18n-message="@@matters.matterTasksTab.emptyMessage"
     />
   `,
 })

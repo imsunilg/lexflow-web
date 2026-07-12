@@ -31,26 +31,30 @@ export interface DepartmentFormDialogData {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>{{ isEdit ? 'Edit department' : 'New department' }}</h2>
+    <h2 mat-dialog-title i18n="@@admin.departmentFormDialog.title">
+      {{ isEdit ? 'Edit department' : 'New department' }}
+    </h2>
 
     <mat-dialog-content class="department-form">
       <mat-form-field appearance="outline">
-        <mat-label>Name</mat-label>
+        <mat-label i18n="@@admin.departmentFormDialog.nameLabel">Name</mat-label>
         <input matInput [formControl]="name" required />
         @if (name.invalid && name.touched) {
-          <mat-error>Name is required.</mat-error>
+          <mat-error i18n="@@admin.departmentFormDialog.nameRequired">Name is required.</mat-error>
         }
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Code</mat-label>
+        <mat-label i18n="@@admin.departmentFormDialog.codeLabel">Code</mat-label>
         <input matInput [formControl]="code" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Head</mat-label>
+        <mat-label i18n="@@admin.departmentFormDialog.headLabel">Head</mat-label>
         <mat-select [formControl]="headUserId">
-          <mat-option [value]="null">None</mat-option>
+          <mat-option [value]="null" i18n="@@admin.departmentFormDialog.headNoneOption"
+            >None</mat-option
+          >
           @for (user of users; track user.id) {
             <mat-option [value]="user.id">{{ user.name }}</mat-option>
           }
@@ -63,13 +67,21 @@ export interface DepartmentFormDialogData {
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
-      <button mat-button type="button" (click)="cancel()">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        (click)="cancel()"
+        i18n="@@admin.departmentFormDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="primary"
         type="button"
         [disabled]="submitting"
         (click)="submit()"
+        i18n="@@admin.departmentFormDialog.submitButton"
       >
         {{ isEdit ? 'Save' : 'Create department' }}
       </button>

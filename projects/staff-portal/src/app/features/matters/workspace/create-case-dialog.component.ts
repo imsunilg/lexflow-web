@@ -29,12 +29,12 @@ export interface CreateCaseDialogData {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Add court case</h2>
+    <h2 mat-dialog-title i18n="@@matters.createCaseDialog.title">Add court case</h2>
     <mat-dialog-content>
       <form [formGroup]="form" class="create-case-form">
         @if (courts().length > 0) {
           <mat-form-field appearance="outline">
-            <mat-label>Court</mat-label>
+            <mat-label i18n="@@matters.createCaseDialog.courtLabel">Court</mat-label>
             <mat-select formControlName="courtId">
               @for (court of courts(); track court.id) {
                 <mat-option [value]="court.id">{{ court.name }}</mat-option>
@@ -43,31 +43,31 @@ export interface CreateCaseDialogData {
           </mat-form-field>
         } @else {
           <mat-form-field appearance="outline">
-            <mat-label>Court ID</mat-label>
+            <mat-label i18n="@@matters.createCaseDialog.courtIdLabel">Court ID</mat-label>
             <input matInput formControlName="courtId" />
           </mat-form-field>
         }
 
         <mat-form-field appearance="outline">
-          <mat-label>Case type</mat-label>
+          <mat-label i18n="@@matters.createCaseDialog.caseTypeLabel">Case type</mat-label>
           <input matInput formControlName="caseType" placeholder="e.g. CS, WP, CRL.A" />
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Case number</mat-label>
+          <mat-label i18n="@@matters.createCaseDialog.caseNumberLabel">Case number</mat-label>
           <input matInput formControlName="caseNumber" />
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Year</mat-label>
+          <mat-label i18n="@@matters.createCaseDialog.yearLabel">Year</mat-label>
           <input matInput type="number" formControlName="caseYear" />
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Filing date</mat-label>
+          <mat-label i18n="@@matters.createCaseDialog.filingDateLabel">Filing date</mat-label>
           <input matInput [matDatepicker]="filingPicker" [formControl]="filingDateControl" />
           <mat-datepicker-toggle matIconSuffix [for]="filingPicker" />
           <mat-datepicker #filingPicker />
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Courtroom</mat-label>
+          <mat-label i18n="@@matters.createCaseDialog.courtroomLabel">Courtroom</mat-label>
           <input matInput formControlName="courtroom" />
         </mat-form-field>
 
@@ -77,7 +77,14 @@ export interface CreateCaseDialogData {
       </form>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@matters.createCaseDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="primary"
@@ -88,7 +95,7 @@ export interface CreateCaseDialogData {
         @if (saving()) {
           <mat-spinner diameter="20" />
         } @else {
-          Add case
+          <span i18n="@@matters.createCaseDialog.addButton">Add case</span>
         }
       </button>
     </mat-dialog-actions>

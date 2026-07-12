@@ -347,6 +347,110 @@
         <source>After</source>
       </segment>
     </unit>
+    <unit id="admin.branchFormDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/branches/branch-form-dialog.component.ts:46,48</note>
+      </notes>
+      <segment>
+        <source><ph id="0" equiv="INTERPOLATION" disp="{{ isEdit ? &apos;Edit branch&apos; : &apos;New branch&apos; }}"/></source>
+      </segment>
+    </unit>
+    <unit id="admin.branchFormDialog.nameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/branches/branch-form-dialog.component.ts:50,51</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="admin.branchFormDialog.nameRequired">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/branches/branch-form-dialog.component.ts:53,57</note>
+      </notes>
+      <segment>
+        <source>Name is required.</source>
+      </segment>
+    </unit>
+    <unit id="admin.branchFormDialog.codeLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/branches/branch-form-dialog.component.ts:58,59</note>
+      </notes>
+      <segment>
+        <source>Code</source>
+      </segment>
+    </unit>
+    <unit id="admin.branchFormDialog.codeRequired">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/branches/branch-form-dialog.component.ts:61,65</note>
+      </notes>
+      <segment>
+        <source>Code is required.</source>
+      </segment>
+    </unit>
+    <unit id="admin.branchFormDialog.timezoneLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/branches/branch-form-dialog.component.ts:66,69</note>
+      </notes>
+      <segment>
+        <source>Timezone</source>
+      </segment>
+    </unit>
+    <unit id="admin.branchFormDialog.timezonePlaceholder">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/branches/branch-form-dialog.component.ts:71,72</note>
+      </notes>
+      <segment>
+        <source>e.g. Asia/Kolkata</source>
+      </segment>
+    </unit>
+    <unit id="admin.branchFormDialog.timezoneRequired">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/branches/branch-form-dialog.component.ts:75,79</note>
+      </notes>
+      <segment>
+        <source>Timezone is required.</source>
+      </segment>
+    </unit>
+    <unit id="admin.branchFormDialog.gstinLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/branches/branch-form-dialog.component.ts:80,81</note>
+      </notes>
+      <segment>
+        <source>GSTIN</source>
+      </segment>
+    </unit>
+    <unit id="admin.branchFormDialog.seriesPrefixLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/branches/branch-form-dialog.component.ts:85,86</note>
+      </notes>
+      <segment>
+        <source>Series prefix</source>
+      </segment>
+    </unit>
+    <unit id="admin.branchFormDialog.addressLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/branches/branch-form-dialog.component.ts:90,91</note>
+      </notes>
+      <segment>
+        <source>Address</source>
+      </segment>
+    </unit>
+    <unit id="admin.branchFormDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/branches/branch-form-dialog.component.ts:100,103</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="admin.branchFormDialog.submitButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/branches/branch-form-dialog.component.ts:109,111</note>
+      </notes>
+      <segment>
+        <source> <ph id="0" equiv="INTERPOLATION" disp="{{ isEdit ? &apos;Save&apos; : &apos;Create branch&apos; }}"/> </source>
+      </segment>
+    </unit>
     <unit id="admin.branchesList.title">
       <notes>
         <note category="location">projects/staff-portal/src/app/features/admin/branches/branches-list.page.html:5,6</note>
@@ -441,6 +545,70 @@
       </notes>
       <segment>
         <source>Delete branch</source>
+      </segment>
+    </unit>
+    <unit id="admin.departmentFormDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/departments/department-form-dialog.component.ts:34,36</note>
+      </notes>
+      <segment>
+        <source><ph id="0" equiv="INTERPOLATION" disp="{{ isEdit ? &apos;Edit department&apos; : &apos;New department&apos; }}"/></source>
+      </segment>
+    </unit>
+    <unit id="admin.departmentFormDialog.nameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/departments/department-form-dialog.component.ts:38,39</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="admin.departmentFormDialog.nameRequired">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/departments/department-form-dialog.component.ts:41,45</note>
+      </notes>
+      <segment>
+        <source>Name is required.</source>
+      </segment>
+    </unit>
+    <unit id="admin.departmentFormDialog.codeLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/departments/department-form-dialog.component.ts:46,47</note>
+      </notes>
+      <segment>
+        <source>Code</source>
+      </segment>
+    </unit>
+    <unit id="admin.departmentFormDialog.headLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/departments/department-form-dialog.component.ts:51,52</note>
+      </notes>
+      <segment>
+        <source>Head</source>
+      </segment>
+    </unit>
+    <unit id="admin.departmentFormDialog.headNoneOption">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/departments/department-form-dialog.component.ts:53,54</note>
+      </notes>
+      <segment>
+        <source>None</source>
+      </segment>
+    </unit>
+    <unit id="admin.departmentFormDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/departments/department-form-dialog.component.ts:66,69</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="admin.departmentFormDialog.submitButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/departments/department-form-dialog.component.ts:75,77</note>
+      </notes>
+      <segment>
+        <source> <ph id="0" equiv="INTERPOLATION" disp="{{ isEdit ? &apos;Save&apos; : &apos;Create department&apos; }}"/> </source>
       </segment>
     </unit>
     <unit id="admin.departmentsList.title">
@@ -545,6 +713,46 @@
       </notes>
       <segment>
         <source>Permission</source>
+      </segment>
+    </unit>
+    <unit id="admin.roleFormDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/roles/role-form-dialog.component.ts:38,39</note>
+      </notes>
+      <segment>
+        <source><ph id="0" equiv="INTERPOLATION" disp="{{ data.role ? &apos;Edit role&apos; : &apos;New custom role&apos; }}"/></source>
+      </segment>
+    </unit>
+    <unit id="admin.roleFormDialog.keyLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/roles/role-form-dialog.component.ts:43,44</note>
+      </notes>
+      <segment>
+        <source>Key</source>
+      </segment>
+    </unit>
+    <unit id="admin.roleFormDialog.nameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/roles/role-form-dialog.component.ts:49,50</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="admin.roleFormDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/roles/role-form-dialog.component.ts:75,78</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="admin.roleFormDialog.saveButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/roles/role-form-dialog.component.ts:84,86</note>
+      </notes>
+      <segment>
+        <source> Save </source>
       </segment>
     </unit>
     <unit id="admin.rolesList.title">
@@ -1603,6 +1811,70 @@
         <source>Delete</source>
       </segment>
     </unit>
+    <unit id="admin.teamFormDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/teams/team-form-dialog.component.ts:34,36</note>
+      </notes>
+      <segment>
+        <source><ph id="0" equiv="INTERPOLATION" disp="{{ isEdit ? &apos;Edit team&apos; : &apos;New team&apos; }}"/></source>
+      </segment>
+    </unit>
+    <unit id="admin.teamFormDialog.nameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/teams/team-form-dialog.component.ts:38,39</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="admin.teamFormDialog.nameRequired">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/teams/team-form-dialog.component.ts:41,45</note>
+      </notes>
+      <segment>
+        <source>Name is required.</source>
+      </segment>
+    </unit>
+    <unit id="admin.teamFormDialog.leadLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/teams/team-form-dialog.component.ts:46,47</note>
+      </notes>
+      <segment>
+        <source>Lead</source>
+      </segment>
+    </unit>
+    <unit id="admin.teamFormDialog.leadNoneOption">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/teams/team-form-dialog.component.ts:48,49</note>
+      </notes>
+      <segment>
+        <source>None</source>
+      </segment>
+    </unit>
+    <unit id="admin.teamFormDialog.membersLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/teams/team-form-dialog.component.ts:56,57</note>
+      </notes>
+      <segment>
+        <source>Members</source>
+      </segment>
+    </unit>
+    <unit id="admin.teamFormDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/teams/team-form-dialog.component.ts:70,73</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="admin.teamFormDialog.submitButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/teams/team-form-dialog.component.ts:79,81</note>
+      </notes>
+      <segment>
+        <source> <ph id="0" equiv="INTERPOLATION" disp="{{ isEdit ? &apos;Save&apos; : &apos;Create team&apos; }}"/> </source>
+      </segment>
+    </unit>
     <unit id="admin.teamsList.title">
       <notes>
         <note category="location">projects/staff-portal/src/app/features/admin/teams/teams-list.page.html:5,6</note>
@@ -1681,6 +1953,136 @@
       </notes>
       <segment>
         <source>Delete team</source>
+      </segment>
+    </unit>
+    <unit id="admin.deactivateUserDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/deactivate-user-dialog.component.ts:39,40</note>
+      </notes>
+      <segment>
+        <source>Deactivate user</source>
+      </segment>
+    </unit>
+    <unit id="admin.deactivateUserDialog.noAssignments">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/deactivate-user-dialog.component.ts:44,46</note>
+      </notes>
+      <segment>
+        <source>No unresolved assignments — this user can be deactivated immediately.</source>
+      </segment>
+    </unit>
+    <unit id="admin.deactivateUserDialog.assignmentsIntro">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/deactivate-user-dialog.component.ts:47,51</note>
+      </notes>
+      <segment>
+        <source> This user has <ph id="0" equiv="INTERPOLATION" disp="{{ rows().length }}"/> unresolved assignment<ph id="1" equiv="INTERPOLATION_1" disp="{{
+            rows().length === 1 ? &apos;&apos; : &apos;s&apos;
+          }}"/> that must be reassigned before deactivation: </source>
+      </segment>
+    </unit>
+    <unit id="admin.deactivateUserDialog.reassignPlaceholder">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/deactivate-user-dialog.component.ts:56,57</note>
+      </notes>
+      <segment>
+        <source>Reassign to…</source>
+      </segment>
+    </unit>
+    <unit id="admin.deactivateUserDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/deactivate-user-dialog.component.ts:74,77</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="admin.deactivateUserDialog.submitButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/deactivate-user-dialog.component.ts:83,86</note>
+      </notes>
+      <segment>
+        <source> Deactivate </source>
+      </segment>
+    </unit>
+    <unit id="admin.inviteUserDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/invite-user-dialog.component.ts:41,42</note>
+      </notes>
+      <segment>
+        <source>Invite user</source>
+      </segment>
+    </unit>
+    <unit id="admin.inviteUserDialog.nameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/invite-user-dialog.component.ts:45,46</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="admin.inviteUserDialog.emailLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/invite-user-dialog.component.ts:50,51</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="admin.inviteUserDialog.roleLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/invite-user-dialog.component.ts:55,56</note>
+      </notes>
+      <segment>
+        <source>Role</source>
+      </segment>
+    </unit>
+    <unit id="admin.inviteUserDialog.branchLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/invite-user-dialog.component.ts:64,65</note>
+      </notes>
+      <segment>
+        <source>Branch (optional)</source>
+      </segment>
+    </unit>
+    <unit id="admin.inviteUserDialog.branchNoneOption">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/invite-user-dialog.component.ts:66,67</note>
+      </notes>
+      <segment>
+        <source>(none)</source>
+      </segment>
+    </unit>
+    <unit id="admin.inviteUserDialog.departmentLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/invite-user-dialog.component.ts:74,75</note>
+      </notes>
+      <segment>
+        <source>Department (optional)</source>
+      </segment>
+    </unit>
+    <unit id="admin.inviteUserDialog.departmentNoneOption">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/invite-user-dialog.component.ts:76,77</note>
+      </notes>
+      <segment>
+        <source>(none)</source>
+      </segment>
+    </unit>
+    <unit id="admin.inviteUserDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/invite-user-dialog.component.ts:92,95</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="admin.inviteUserDialog.submitButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/admin/users/invite-user-dialog.component.ts:101,104</note>
+      </notes>
+      <segment>
+        <source> Send invitation </source>
       </segment>
     </unit>
     <unit id="admin.userDetail.notFound">
@@ -2337,6 +2739,118 @@
       </notes>
       <segment>
         <source>Ask anything, or /research, /draft…</source>
+      </segment>
+    </unit>
+    <unit id="ai.aiHub.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/ai/ai-hub.page.ts:20,21</note>
+      </notes>
+      <segment>
+        <source>AI Studio</source>
+      </segment>
+    </unit>
+    <unit id="ai.aiHub.note">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/ai/ai-hub.page.ts:22,25</note>
+      </notes>
+      <segment>
+        <source> Every AI output here is labeled AI-generated and requires an explicit Save/Insert action — nothing an AI feature produces is applied automatically. </source>
+      </segment>
+    </unit>
+    <unit id="ai.aiHub.assistantTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/ai/ai-hub.page.ts:28,29</note>
+      </notes>
+      <segment>
+        <source>AI Assistant</source>
+      </segment>
+    </unit>
+    <unit id="ai.aiHub.assistantDescription">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/ai/ai-hub.page.ts:30,33</note>
+      </notes>
+      <segment>
+        <source> Chat with the assistant from the floating dock in the bottom-right corner. </source>
+      </segment>
+    </unit>
+    <unit id="ai.aiHub.contractReviewTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/ai/ai-hub.page.ts:35,36</note>
+      </notes>
+      <segment>
+        <source>Contract Review</source>
+      </segment>
+    </unit>
+    <unit id="ai.aiHub.contractReviewDescription">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/ai/ai-hub.page.ts:37,40</note>
+      </notes>
+      <segment>
+        <source> Clause extraction and risk flags for an existing document. </source>
+      </segment>
+    </unit>
+    <unit id="ai.aiHub.draftStudioTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/ai/ai-hub.page.ts:42,43</note>
+      </notes>
+      <segment>
+        <source>Draft Studio</source>
+      </segment>
+    </unit>
+    <unit id="ai.aiHub.draftStudioDescription">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/ai/ai-hub.page.ts:44,47</note>
+      </notes>
+      <segment>
+        <source> Guided intake to generate a notice or agreement draft. </source>
+      </segment>
+    </unit>
+    <unit id="ai.aiHub.researchTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/ai/ai-hub.page.ts:49,50</note>
+      </notes>
+      <segment>
+        <source>Research</source>
+      </segment>
+    </unit>
+    <unit id="ai.aiHub.researchDescription">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/ai/ai-hub.page.ts:51,54</note>
+      </notes>
+      <segment>
+        <source> Ask a question and get a cited answer from the firm&apos;s knowledge base. </source>
+      </segment>
+    </unit>
+    <unit id="ai.aiTabs.hub">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/ai/ai-tabs.component.ts:21,24</note>
+      </notes>
+      <segment>
+        <source> Hub </source>
+      </segment>
+    </unit>
+    <unit id="ai.aiTabs.contractReview">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/ai/ai-tabs.component.ts:31,34</note>
+      </notes>
+      <segment>
+        <source> Contract Review </source>
+      </segment>
+    </unit>
+    <unit id="ai.aiTabs.draftStudio">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/ai/ai-tabs.component.ts:41,44</note>
+      </notes>
+      <segment>
+        <source> Draft Studio </source>
+      </segment>
+    </unit>
+    <unit id="ai.aiTabs.research">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/ai/ai-tabs.component.ts:51,54</note>
+      </notes>
+      <segment>
+        <source> Research </source>
       </segment>
     </unit>
     <unit id="ai.contractReview.heading">
@@ -5117,6 +5631,86 @@
         <source>Save</source>
       </segment>
     </unit>
+    <unit id="calendar.rescheduleScopeDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/calendar/dialogs/reschedule-scope-dialog.component.ts:17,19</note>
+      </notes>
+      <segment>
+        <source>Move recurring event</source>
+      </segment>
+    </unit>
+    <unit id="calendar.rescheduleScopeDialog.prompt">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/calendar/dialogs/reschedule-scope-dialog.component.ts:20,22</note>
+      </notes>
+      <segment>
+        <source> &quot;<ph id="0" equiv="INTERPOLATION" disp="{{ data.title }}"/>&quot; repeats. What would you like to reschedule? </source>
+      </segment>
+    </unit>
+    <unit id="calendar.rescheduleScopeDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/calendar/dialogs/reschedule-scope-dialog.component.ts:30,33</note>
+      </notes>
+      <segment>
+        <source> Cancel </source>
+      </segment>
+    </unit>
+    <unit id="calendar.rescheduleScopeDialog.occurrenceButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/calendar/dialogs/reschedule-scope-dialog.component.ts:38,42</note>
+      </notes>
+      <segment>
+        <source> This occurrence only </source>
+      </segment>
+    </unit>
+    <unit id="calendar.rescheduleScopeDialog.seriesButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/calendar/dialogs/reschedule-scope-dialog.component.ts:47,52</note>
+      </notes>
+      <segment>
+        <source> Entire series </source>
+      </segment>
+    </unit>
+    <unit id="calendar.eventChip.lockedTooltip">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/calendar/event-chip.component.ts:41,42</note>
+      </notes>
+      <segment>
+        <source>Locked — edit from its source module</source>
+      </segment>
+    </unit>
+    <unit id="calendar.eventChip.lockedLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/calendar/event-chip.component.ts:54</note>
+      </notes>
+      <segment>
+        <source>Locked</source>
+      </segment>
+    </unit>
+    <unit id="calendar.eventChip.openAction">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/calendar/event-chip.component.ts:71,73</note>
+      </notes>
+      <segment>
+        <source>Open</source>
+      </segment>
+    </unit>
+    <unit id="calendar.eventChip.editAction">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/calendar/event-chip.component.ts:75,77</note>
+      </notes>
+      <segment>
+        <source>Edit</source>
+      </segment>
+    </unit>
+    <unit id="calendar.eventChip.deleteAction">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/calendar/event-chip.component.ts:78,81</note>
+      </notes>
+      <segment>
+        <source>Delete</source>
+      </segment>
+    </unit>
     <unit id="calendar.settingsPage.backButton">
       <notes>
         <note category="location">projects/staff-portal/src/app/features/calendar/settings/calendar-settings.page.html:5,7</note>
@@ -6141,6 +6735,512 @@
         <source>Portal</source>
       </segment>
     </unit>
+    <unit id="clients.contactSubGrid.loadErrorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:90,91</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load contacts</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.loadErrorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:92,93</note>
+      </notes>
+      <segment>
+        <source>Something went wrong while loading contact persons.</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.retryCta">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:95</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:102,103</note>
+      </notes>
+      <segment>
+        <source>No contact persons yet</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.addContactCta">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:104,105</note>
+      </notes>
+      <segment>
+        <source>Add contact</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.nameHeader">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:112,113</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.designationHeader">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:113,114</note>
+      </notes>
+      <segment>
+        <source>Designation</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.emailHeader">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:114,115</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.phoneHeader">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:115,117</note>
+      </notes>
+      <segment>
+        <source>Phone</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.formNameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:127,128</note>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:208,209</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.formDesignationLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:131,132</note>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:215,216</note>
+      </notes>
+      <segment>
+        <source>Designation</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.formEmailLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:135,136</note>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:219,220</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.formPhoneLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:139,140</note>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:223,224</note>
+      </notes>
+      <segment>
+        <source>Phone</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.primaryCheckbox">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:142,143</note>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:170</note>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:226,227</note>
+      </notes>
+      <segment>
+        <source>Primary</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:144,146</note>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:228,230</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.saveButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:155,157</note>
+      </notes>
+      <segment>
+        <source>Save</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.editAriaLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:180,181</note>
+      </notes>
+      <segment>
+        <source>Edit contact</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.deleteAriaLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:191,192</note>
+      </notes>
+      <segment>
+        <source>Delete contact</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.nameRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:211,213</note>
+      </notes>
+      <segment>
+        <source>Name is required.</source>
+      </segment>
+    </unit>
+    <unit id="clients.contactSubGrid.addContactButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:239,242</note>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/contact-sub-grid.component.ts:250,254</note>
+      </notes>
+      <segment>
+        <source>Add contact</source>
+      </segment>
+    </unit>
+    <unit id="clients.kycDocumentManager.loadErrorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/kyc-document-manager.component.ts:93,94</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load identity documents</source>
+      </segment>
+    </unit>
+    <unit id="clients.kycDocumentManager.loadErrorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/kyc-document-manager.component.ts:95,96</note>
+      </notes>
+      <segment>
+        <source>Something went wrong while loading KYC documents.</source>
+      </segment>
+    </unit>
+    <unit id="clients.kycDocumentManager.retryCta">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/kyc-document-manager.component.ts:98</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="clients.kycDocumentManager.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/kyc-document-manager.component.ts:105,106</note>
+      </notes>
+      <segment>
+        <source>No identity documents uploaded yet.</source>
+      </segment>
+    </unit>
+    <unit id="clients.kycDocumentManager.approveButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/kyc-document-manager.component.ts:134,136</note>
+      </notes>
+      <segment>
+        <source>Approve</source>
+      </segment>
+    </unit>
+    <unit id="clients.kycDocumentManager.rejectButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/kyc-document-manager.component.ts:143,145</note>
+      </notes>
+      <segment>
+        <source>Reject</source>
+      </segment>
+    </unit>
+    <unit id="clients.kycDocumentManager.uploadSectionTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/kyc-document-manager.component.ts:153,154</note>
+      </notes>
+      <segment>
+        <source>Upload document</source>
+      </segment>
+    </unit>
+    <unit id="clients.kycDocumentManager.docTypeLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/kyc-document-manager.component.ts:156,157</note>
+      </notes>
+      <segment>
+        <source>Document type</source>
+      </segment>
+    </unit>
+    <unit id="clients.kycDocumentManager.docNumberLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/kyc-document-manager.component.ts:164,165</note>
+      </notes>
+      <segment>
+        <source>Document number</source>
+      </segment>
+    </unit>
+    <unit id="clients.kycDocumentManager.docNumberRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/kyc-document-manager.component.ts:170,173</note>
+      </notes>
+      <segment>
+        <source>Document number is required.</source>
+      </segment>
+    </unit>
+    <unit id="clients.kycDocumentManager.expiryDateLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/kyc-document-manager.component.ts:174,175</note>
+      </notes>
+      <segment>
+        <source>Expiry date (optional)</source>
+      </segment>
+    </unit>
+    <unit id="clients.kycDocumentManager.selectedFileText">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/kyc-document-manager.component.ts:187,189</note>
+      </notes>
+      <segment>
+        <source>Selected: <ph id="0" equiv="INTERPOLATION" disp="{{ selectedFile()!.name }}"/></source>
+      </segment>
+    </unit>
+    <unit id="clients.kycDocumentManager.uploadButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/kyc-document-manager.component.ts:200,204</note>
+      </notes>
+      <segment>
+        <source>Upload</source>
+      </segment>
+    </unit>
+    <unit id="clients.mergeClientsDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/merge-clients-dialog.component.ts:49,51</note>
+      </notes>
+      <segment>
+        <source>Merge duplicate client</source>
+      </segment>
+    </unit>
+    <unit id="clients.mergeClientsDialog.searchIntro">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/merge-clients-dialog.component.ts:52,53</note>
+      </notes>
+      <segment>
+        <source>Find the duplicate record to merge into <ph id="0" equiv="INTERPOLATION" disp="{{ data.client.displayName }}"/>.</source>
+      </segment>
+    </unit>
+    <unit id="clients.mergeClientsDialog.searchLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/merge-clients-dialog.component.ts:54,55</note>
+      </notes>
+      <segment>
+        <source>Search clients</source>
+      </segment>
+    </unit>
+    <unit id="clients.mergeClientsDialog.noMatches">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/merge-clients-dialog.component.ts:71,75</note>
+      </notes>
+      <segment>
+        <source>No matches.</source>
+      </segment>
+    </unit>
+    <unit id="clients.mergeClientsDialog.survivorPrompt">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/merge-clients-dialog.component.ts:76,77</note>
+      </notes>
+      <segment>
+        <source>Which record should survive the merge? The other will be tombstoned.</source>
+      </segment>
+    </unit>
+    <unit id="clients.mergeClientsDialog.backButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/merge-clients-dialog.component.ts:86,87</note>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/merge-clients-dialog.component.ts:114,116</note>
+      </notes>
+      <segment>
+        <source>Back</source>
+      </segment>
+    </unit>
+    <unit id="clients.mergeClientsDialog.nextButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/merge-clients-dialog.component.ts:88,93</note>
+      </notes>
+      <segment>
+        <source>Next</source>
+      </segment>
+    </unit>
+    <unit id="clients.mergeClientsDialog.fieldsPrompt">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/merge-clients-dialog.component.ts:94,95</note>
+      </notes>
+      <segment>
+        <source>Pick which value to keep for each field that differs.</source>
+      </segment>
+    </unit>
+    <unit id="clients.mergeClientsDialog.mergeButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/merge-clients-dialog.component.ts:125,128</note>
+      </notes>
+      <segment>
+        <source>Merge</source>
+      </segment>
+    </unit>
+    <unit id="clients.mergeClientsDialog.successMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/merge-clients-dialog.component.ts:132,135</note>
+      </notes>
+      <segment>
+        <source>Merge complete.</source>
+      </segment>
+    </unit>
+    <unit id="clients.portalAccessManager.enableToggle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/portal-access-manager.component.ts:66,68</note>
+      </notes>
+      <segment>
+        <source>Enable portal access</source>
+      </segment>
+    </unit>
+    <unit id="clients.portalAccessManager.disabledTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/portal-access-manager.component.ts:80,81</note>
+      </notes>
+      <segment>
+        <source>Portal access is off for this client.</source>
+      </segment>
+    </unit>
+    <unit id="clients.portalAccessManager.loadErrorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/portal-access-manager.component.ts:90,91</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load portal users</source>
+      </segment>
+    </unit>
+    <unit id="clients.portalAccessManager.loadErrorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/portal-access-manager.component.ts:92,93</note>
+      </notes>
+      <segment>
+        <source>Something went wrong while loading portal users.</source>
+      </segment>
+    </unit>
+    <unit id="clients.portalAccessManager.retryCta">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/portal-access-manager.component.ts:95</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="clients.portalAccessManager.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/portal-access-manager.component.ts:101,102</note>
+      </notes>
+      <segment>
+        <source>No portal users yet.</source>
+      </segment>
+    </unit>
+    <unit id="clients.portalAccessManager.resendInviteButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/portal-access-manager.component.ts:120,122</note>
+      </notes>
+      <segment>
+        <source>Resend invite</source>
+      </segment>
+    </unit>
+    <unit id="clients.portalAccessManager.inviteResentConfirmation">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/portal-access-manager.component.ts:123,127</note>
+      </notes>
+      <segment>
+        <source>Invite resent.</source>
+      </segment>
+    </unit>
+    <unit id="clients.relationshipGraph.loading">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/relationship-graph.component.ts:52,54</note>
+      </notes>
+      <segment>
+        <source>Loading…</source>
+      </segment>
+    </unit>
+    <unit id="clients.relationshipGraph.loadErrorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/relationship-graph.component.ts:56,57</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load relationships</source>
+      </segment>
+    </unit>
+    <unit id="clients.relationshipGraph.retryCta">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/relationship-graph.component.ts:59</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="clients.relationshipGraph.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/relationship-graph.component.ts:65,66</note>
+      </notes>
+      <segment>
+        <source>No relationships recorded</source>
+      </segment>
+    </unit>
+    <unit id="clients.relationshipGraph.emptyMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/relationship-graph.component.ts:67,68</note>
+      </notes>
+      <segment>
+        <source>Family members, corporate group links, and referrers show up here.</source>
+      </segment>
+    </unit>
+    <unit id="clients.relationshipGraph.addRelationshipButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/relationship-graph.component.ts:69,70</note>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/relationship-graph.component.ts:118,123</note>
+      </notes>
+      <segment>
+        <source>Add relationship</source>
+      </segment>
+    </unit>
+    <unit id="clients.relationshipGraph.relationTypeLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/relationship-graph.component.ts:125,126</note>
+      </notes>
+      <segment>
+        <source>Relation type</source>
+      </segment>
+    </unit>
+    <unit id="clients.relationshipGraph.relatedClientIdLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/relationship-graph.component.ts:134,135</note>
+      </notes>
+      <segment>
+        <source>Related client ID (optional)</source>
+      </segment>
+    </unit>
+    <unit id="clients.relationshipGraph.personNameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/relationship-graph.component.ts:139,140</note>
+      </notes>
+      <segment>
+        <source>Person name (if not a client)</source>
+      </segment>
+    </unit>
+    <unit id="clients.relationshipGraph.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/relationship-graph.component.ts:148,149</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="clients.relationshipGraph.saveButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/clients/detail/relationship-graph.component.ts:149,153</note>
+      </notes>
+      <segment>
+        <source>Save</source>
+      </segment>
+    </unit>
     <unit id="clients.list.title">
       <notes>
         <note category="location">projects/staff-portal/src/app/features/clients/list/clients-list.page.html:3,4</note>
@@ -6285,6 +7385,126 @@
         <source> Portal: <ph id="0" equiv="INTERPOLATION" disp="{{ client.portalEnabled ? &apos;✓&apos; : &apos;—&apos; }}"/> </source>
       </segment>
     </unit>
+    <unit id="communication.callLogDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:42,44</note>
+      </notes>
+      <segment>
+        <source>Log a call</source>
+      </segment>
+    </unit>
+    <unit id="communication.callLogDialog.manualLogTab">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:45</note>
+      </notes>
+      <segment>
+        <source>Manual log</source>
+      </segment>
+    </unit>
+    <unit id="communication.callLogDialog.directionLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:48,49</note>
+      </notes>
+      <segment>
+        <source>Direction</source>
+      </segment>
+    </unit>
+    <unit id="communication.callLogDialog.durationLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:57,58</note>
+      </notes>
+      <segment>
+        <source>Duration (seconds)</source>
+      </segment>
+    </unit>
+    <unit id="communication.callLogDialog.summaryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:62,63</note>
+      </notes>
+      <segment>
+        <source>Summary</source>
+      </segment>
+    </unit>
+    <unit id="communication.callLogDialog.createFollowUpCheckbox">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:66,68</note>
+      </notes>
+      <segment>
+        <source>Create a follow-up task</source>
+      </segment>
+    </unit>
+    <unit id="communication.callLogDialog.followUpTitleLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:69,70</note>
+      </notes>
+      <segment>
+        <source>Follow-up task title</source>
+      </segment>
+    </unit>
+    <unit id="communication.callLogDialog.saveLogButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:85,88</note>
+      </notes>
+      <segment>
+        <source> Save log </source>
+      </segment>
+    </unit>
+    <unit id="communication.callLogDialog.clickToCallTab">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:90</note>
+      </notes>
+      <segment>
+        <source>Click to call</source>
+      </segment>
+    </unit>
+    <unit id="communication.callLogDialog.clickToCallHint">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:93,96</note>
+      </notes>
+      <segment>
+        <source> Places a real call via the firm&apos;s configured Twilio Voice number. Recording only happens if consent is given below — the Twilio API call itself is gated on it. </source>
+      </segment>
+    </unit>
+    <unit id="communication.callLogDialog.numberToCallLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:97,98</note>
+      </notes>
+      <segment>
+        <source>Number to call</source>
+      </segment>
+    </unit>
+    <unit id="communication.callLogDialog.numberToCallPlaceholder">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:98</note>
+      </notes>
+      <segment>
+        <source>+91XXXXXXXXXX</source>
+      </segment>
+    </unit>
+    <unit id="communication.callLogDialog.consentCheckbox">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:100,103</note>
+      </notes>
+      <segment>
+        <source>Recording consent given</source>
+      </segment>
+    </unit>
+    <unit id="communication.callLogDialog.callNowButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:113,116</note>
+      </notes>
+      <segment>
+        <source> Call now </source>
+      </segment>
+    </unit>
+    <unit id="communication.callLogDialog.closeButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/calls/call-log-dialog.component.ts:120,124</note>
+      </notes>
+      <segment>
+        <source>Close</source>
+      </segment>
+    </unit>
     <unit id="communication.calls.clientLabel">
       <notes>
         <note category="location">projects/staff-portal/src/app/features/communication/calls/calls.page.html:6,7</note>
@@ -6347,6 +7567,126 @@
       </notes>
       <segment>
         <source>Message…</source>
+      </segment>
+    </unit>
+    <unit id="communication.commTabs.inboxTab">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/comm-tabs.component.ts:20,23</note>
+      </notes>
+      <segment>
+        <source>Inbox</source>
+      </segment>
+    </unit>
+    <unit id="communication.commTabs.smsTab">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/comm-tabs.component.ts:29,32</note>
+      </notes>
+      <segment>
+        <source>SMS</source>
+      </segment>
+    </unit>
+    <unit id="communication.commTabs.whatsappTab">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/comm-tabs.component.ts:38,42</note>
+      </notes>
+      <segment>
+        <source>WhatsApp</source>
+      </segment>
+    </unit>
+    <unit id="communication.commTabs.callsTab">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/comm-tabs.component.ts:47,50</note>
+      </notes>
+      <segment>
+        <source>Calls</source>
+      </segment>
+    </unit>
+    <unit id="communication.connectMailboxDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/inbox/connect-mailbox-dialog.component.ts:37,39</note>
+      </notes>
+      <segment>
+        <source>Connect a mailbox</source>
+      </segment>
+    </unit>
+    <unit id="communication.connectMailboxDialog.step1Hint">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/inbox/connect-mailbox-dialog.component.ts:41,43</note>
+      </notes>
+      <segment>
+        <source> Step 1: choose a provider and get an authorization link. </source>
+      </segment>
+    </unit>
+    <unit id="communication.connectMailboxDialog.providerLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/inbox/connect-mailbox-dialog.component.ts:44,46</note>
+      </notes>
+      <segment>
+        <source>Provider</source>
+      </segment>
+    </unit>
+    <unit id="communication.connectMailboxDialog.redirectUriLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/inbox/connect-mailbox-dialog.component.ts:52,53</note>
+      </notes>
+      <segment>
+        <source>Redirect URI</source>
+      </segment>
+    </unit>
+    <unit id="communication.connectMailboxDialog.getAuthLinkButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/inbox/connect-mailbox-dialog.component.ts:56,59</note>
+      </notes>
+      <segment>
+        <source> Get authorization link </source>
+      </segment>
+    </unit>
+    <unit id="communication.connectMailboxDialog.step2Hint">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/inbox/connect-mailbox-dialog.component.ts:60,63</note>
+      </notes>
+      <segment>
+        <source> Step 2: open the link below, authorize LexFlow, then paste the <pc id="0" equivStart="START_TAG_CODE" equivEnd="CLOSE_TAG_CODE" type="other" dispStart="&lt;code&gt;" dispEnd="&lt;/code&gt;">code</pc> value from the redirect URL here. </source>
+      </segment>
+    </unit>
+    <unit id="communication.connectMailboxDialog.authCodeLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/inbox/connect-mailbox-dialog.component.ts:67,69</note>
+      </notes>
+      <segment>
+        <source>Authorization code</source>
+      </segment>
+    </unit>
+    <unit id="communication.connectMailboxDialog.labelLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/inbox/connect-mailbox-dialog.component.ts:71,72</note>
+      </notes>
+      <segment>
+        <source>Label for this mailbox</source>
+      </segment>
+    </unit>
+    <unit id="communication.connectMailboxDialog.labelPlaceholder">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/inbox/connect-mailbox-dialog.component.ts:72</note>
+      </notes>
+      <segment>
+        <source>e.g. Litigation team inbox</source>
+      </segment>
+    </unit>
+    <unit id="communication.connectMailboxDialog.completeConnectionButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/inbox/connect-mailbox-dialog.component.ts:85,89</note>
+      </notes>
+      <segment>
+        <source> Complete connection </source>
+      </segment>
+    </unit>
+    <unit id="communication.connectMailboxDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/communication/inbox/connect-mailbox-dialog.component.ts:90,94</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
       </segment>
     </unit>
     <unit id="communication.emailComposer.fromMailboxLabel">
@@ -6813,6 +8153,686 @@
         <source> No widgets are visible. Use &quot;Customize&quot; to add some. </source>
       </segment>
     </unit>
+    <unit id="dashboard.dateRangeSelector.week">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/date-range-selector.component.ts:20,21</note>
+      </notes>
+      <segment>
+        <source>This week</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.dateRangeSelector.month">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/date-range-selector.component.ts:21,22</note>
+      </notes>
+      <segment>
+        <source>This month</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.dateRangeSelector.quarter">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/date-range-selector.component.ts:22,23</note>
+      </notes>
+      <segment>
+        <source>This quarter</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.dateRangeSelector.custom">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/date-range-selector.component.ts:23,24</note>
+      </notes>
+      <segment>
+        <source>Custom</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.dateRangeSelector.customRangeLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/date-range-selector.component.ts:28,29</note>
+      </notes>
+      <segment>
+        <source>Custom range</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.dateRangeSelector.rangeTooLarge">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/date-range-selector.component.ts:35,40</note>
+      </notes>
+      <segment>
+        <source>Date ranges can&apos;t exceed 366 days.</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.widgetCatalogDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widget-catalog-dialog.component.ts:21,23</note>
+      </notes>
+      <segment>
+        <source>Customize dashboard</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.widgetCatalogDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widget-catalog-dialog.component.ts:38,39</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.widgetCatalogDialog.saveButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widget-catalog-dialog.component.ts:39,43</note>
+      </notes>
+      <segment>
+        <source>Save</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.activityWidget.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/activity-widget.component.ts:20,21</note>
+      </notes>
+      <segment>
+        <source>Recent Activities</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.activityWidget.errorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/activity-widget.component.ts:28,29</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load recent activity</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.activityWidget.errorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/activity-widget.component.ts:30,31</note>
+      </notes>
+      <segment>
+        <source>Something went wrong.</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.activityWidget.retryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/activity-widget.component.ts:33</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.activityWidget.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/activity-widget.component.ts:37</note>
+      </notes>
+      <segment>
+        <source>No recent activity</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.caseStatsWidget.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/case-stats-widget.component.ts:20,21</note>
+      </notes>
+      <segment>
+        <source>Case Statistics</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.caseStatsWidget.errorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/case-stats-widget.component.ts:28,29</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load case statistics</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.caseStatsWidget.errorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/case-stats-widget.component.ts:30,31</note>
+      </notes>
+      <segment>
+        <source>Something went wrong.</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.caseStatsWidget.retryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/case-stats-widget.component.ts:33</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.caseStatsWidget.openLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/case-stats-widget.component.ts:39,40</note>
+      </notes>
+      <segment>
+        <source>Open</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.caseStatsWidget.closedLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/case-stats-widget.component.ts:43,44</note>
+      </notes>
+      <segment>
+        <source>Closed</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.caseStatsWidget.wonLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/case-stats-widget.component.ts:47,48</note>
+      </notes>
+      <segment>
+        <source>Won</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.caseStatsWidget.lostLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/case-stats-widget.component.ts:51,52</note>
+      </notes>
+      <segment>
+        <source>Lost</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.caseStatsWidget.settledLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/case-stats-widget.component.ts:55,56</note>
+      </notes>
+      <segment>
+        <source>Settled</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.clientSummaryWidget.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/client-summary-widget.component.ts:20,21</note>
+      </notes>
+      <segment>
+        <source>Client Summary</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.clientSummaryWidget.errorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/client-summary-widget.component.ts:28,29</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load client summary</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.clientSummaryWidget.errorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/client-summary-widget.component.ts:30,31</note>
+      </notes>
+      <segment>
+        <source>Something went wrong.</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.clientSummaryWidget.retryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/client-summary-widget.component.ts:33</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.clientSummaryWidget.newThisMonthLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/client-summary-widget.component.ts:39,40</note>
+      </notes>
+      <segment>
+        <source>New this month</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.clientSummaryWidget.activeLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/client-summary-widget.component.ts:43,44</note>
+      </notes>
+      <segment>
+        <source>Active</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.clientSummaryWidget.atRiskLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/client-summary-widget.component.ts:47,49</note>
+      </notes>
+      <segment>
+        <source>At risk</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.deadlinesWidget.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/deadlines-widget.component.ts:21,22</note>
+      </notes>
+      <segment>
+        <source>Upcoming Deadlines</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.deadlinesWidget.errorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/deadlines-widget.component.ts:29,30</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load upcoming deadlines</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.deadlinesWidget.errorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/deadlines-widget.component.ts:31,32</note>
+      </notes>
+      <segment>
+        <source>Something went wrong.</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.deadlinesWidget.retryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/deadlines-widget.component.ts:34</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.deadlinesWidget.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/deadlines-widget.component.ts:38</note>
+      </notes>
+      <segment>
+        <source>No upcoming deadlines</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.deadlinesWidget.dueLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/deadlines-widget.component.ts:48,49</note>
+      </notes>
+      <segment>
+        <source>Due <ph id="0" equiv="INTERPOLATION" disp="{{ deadline.dueDate }}"/></source>
+      </segment>
+    </unit>
+    <unit id="dashboard.hearingsTodayWidget.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/hearings-today-widget.component.ts:19,20</note>
+      </notes>
+      <segment>
+        <source>Today&apos;s Hearings</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.hearingsTodayWidget.errorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/hearings-today-widget.component.ts:27,28</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load today&apos;s hearings</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.hearingsTodayWidget.errorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/hearings-today-widget.component.ts:29,30</note>
+      </notes>
+      <segment>
+        <source>Something went wrong.</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.hearingsTodayWidget.retryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/hearings-today-widget.component.ts:32</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.hearingsTodayWidget.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/hearings-today-widget.component.ts:36</note>
+      </notes>
+      <segment>
+        <source>No hearings scheduled today</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.hearingsTodayWidget.unassignedLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/hearings-today-widget.component.ts:49,53</note>
+      </notes>
+      <segment>
+        <source>Unassigned</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.lawyerPerformanceWidget.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/lawyer-performance-widget.component.ts:20,21</note>
+      </notes>
+      <segment>
+        <source>Performance Charts</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.lawyerPerformanceWidget.errorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/lawyer-performance-widget.component.ts:28,29</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load performance data</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.lawyerPerformanceWidget.errorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/lawyer-performance-widget.component.ts:30,31</note>
+      </notes>
+      <segment>
+        <source>Something went wrong.</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.lawyerPerformanceWidget.retryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/lawyer-performance-widget.component.ts:33</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.lawyerPerformanceWidget.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/lawyer-performance-widget.component.ts:37</note>
+      </notes>
+      <segment>
+        <source>No performance data for this period</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.lawyerPerformanceWidget.hoursLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/lawyer-performance-widget.component.ts:43,44</note>
+      </notes>
+      <segment>
+        <source><ph id="0" equiv="INTERPOLATION" disp="{{ lawyer.billableHours }}"/> hrs</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.lawyerPerformanceWidget.utilizationLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/lawyer-performance-widget.component.ts:44,45</note>
+      </notes>
+      <segment>
+        <source><ph id="0" equiv="INTERPOLATION" disp="{{ lawyer.utilizationPct }}"/>% util</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.lawyerPerformanceWidget.realizationLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/lawyer-performance-widget.component.ts:45,46</note>
+      </notes>
+      <segment>
+        <source><ph id="0" equiv="INTERPOLATION" disp="{{ lawyer.realizationPct }}"/>% realization</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.leadPipelineWidget.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/lead-pipeline-widget.component.ts:20,21</note>
+      </notes>
+      <segment>
+        <source>Lead Pipeline</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.leadPipelineWidget.errorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/lead-pipeline-widget.component.ts:28,29</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load lead pipeline</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.leadPipelineWidget.errorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/lead-pipeline-widget.component.ts:30,31</note>
+      </notes>
+      <segment>
+        <source>Something went wrong.</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.leadPipelineWidget.retryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/lead-pipeline-widget.component.ts:33</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.leadPipelineWidget.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/lead-pipeline-widget.component.ts:37</note>
+      </notes>
+      <segment>
+        <source>No leads in the pipeline</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.matterSummaryWidget.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/matter-summary-widget.component.ts:20,21</note>
+      </notes>
+      <segment>
+        <source>Matter Summary</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.matterSummaryWidget.errorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/matter-summary-widget.component.ts:28,29</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load matter summary</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.matterSummaryWidget.errorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/matter-summary-widget.component.ts:30,31</note>
+      </notes>
+      <segment>
+        <source>Something went wrong.</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.matterSummaryWidget.retryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/matter-summary-widget.component.ts:33</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.matterSummaryWidget.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/matter-summary-widget.component.ts:37</note>
+      </notes>
+      <segment>
+        <source>No matters for this period</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.outstandingWidget.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/outstanding-widget.component.ts:20,21</note>
+      </notes>
+      <segment>
+        <source>Outstanding Payments</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.outstandingWidget.errorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/outstanding-widget.component.ts:28,29</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load outstanding payments</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.outstandingWidget.errorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/outstanding-widget.component.ts:30,31</note>
+      </notes>
+      <segment>
+        <source>Something went wrong.</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.outstandingWidget.retryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/outstanding-widget.component.ts:33</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.outstandingWidget.totalLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/outstanding-widget.component.ts:38,39</note>
+      </notes>
+      <segment>
+        <source>Total Outstanding</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.outstandingWidget.bucketDaysLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/outstanding-widget.component.ts:47,48</note>
+      </notes>
+      <segment>
+        <source><ph id="0" equiv="INTERPOLATION" disp="{{ bucket.label }}"/> days</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.outstandingWidget.topDebtorsHeading">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/outstanding-widget.component.ts:62,64</note>
+      </notes>
+      <segment>
+        <source>Top debtors</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.revenueWidget.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/revenue-widget.component.ts:22</note>
+      </notes>
+      <segment>
+        <source>Revenue</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.revenueWidget.errorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/revenue-widget.component.ts:29,30</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load revenue</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.revenueWidget.errorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/revenue-widget.component.ts:31,32</note>
+      </notes>
+      <segment>
+        <source>Something went wrong.</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.revenueWidget.retryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/revenue-widget.component.ts:34</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.revenueWidget.billedLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/revenue-widget.component.ts:40,41</note>
+      </notes>
+      <segment>
+        <source>Billed</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.revenueWidget.collectedLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/revenue-widget.component.ts:46,47</note>
+      </notes>
+      <segment>
+        <source>Collected</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.revenueWidget.targetLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/revenue-widget.component.ts:52,53</note>
+      </notes>
+      <segment>
+        <source>Target</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.tasksPendingWidget.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/tasks-pending-widget.component.ts:25,26</note>
+      </notes>
+      <segment>
+        <source>Pending Tasks</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.tasksPendingWidget.errorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/tasks-pending-widget.component.ts:33,34</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load pending tasks</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.tasksPendingWidget.errorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/tasks-pending-widget.component.ts:35,36</note>
+      </notes>
+      <segment>
+        <source>Something went wrong.</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.tasksPendingWidget.retryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/tasks-pending-widget.component.ts:38</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.tasksPendingWidget.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/tasks-pending-widget.component.ts:42</note>
+      </notes>
+      <segment>
+        <source>No pending tasks</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.trustBalanceWidget.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/trust-balance-widget.component.ts:20,21</note>
+      </notes>
+      <segment>
+        <source>Trust Balance</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.trustBalanceWidget.errorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/trust-balance-widget.component.ts:28,29</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load trust balance</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.trustBalanceWidget.errorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/trust-balance-widget.component.ts:30,31</note>
+      </notes>
+      <segment>
+        <source>Something went wrong.</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.trustBalanceWidget.retryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/trust-balance-widget.component.ts:33</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.trustBalanceWidget.totalHeldLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/trust-balance-widget.component.ts:39,40</note>
+      </notes>
+      <segment>
+        <source>Total Held</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.trustBalanceWidget.reconciliationLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/dashboard/widgets/trust-balance-widget.component.ts:45,47</note>
+      </notes>
+      <segment>
+        <source>Accounts needing reconciliation</source>
+      </segment>
+    </unit>
     <unit id="documents.detailDrawer.closeDrawerAriaLabel">
       <notes>
         <note category="location">projects/staff-portal/src/app/features/documents/detail/document-detail-drawer.component.html:6,7</note>
@@ -7011,6 +9031,94 @@
       </notes>
       <segment>
         <source>Manage sharing</source>
+      </segment>
+    </unit>
+    <unit id="documents.bulkTagDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/documents/dialogs/bulk-tag-dialog.component.ts:21,23</note>
+      </notes>
+      <segment>
+        <source>Add tags</source>
+      </segment>
+    </unit>
+    <unit id="documents.bulkTagDialog.tagsLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/documents/dialogs/bulk-tag-dialog.component.ts:25,26</note>
+      </notes>
+      <segment>
+        <source>Tags (comma-separated)</source>
+      </segment>
+    </unit>
+    <unit id="documents.bulkTagDialog.tagsPlaceholder">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/documents/dialogs/bulk-tag-dialog.component.ts:26</note>
+      </notes>
+      <segment>
+        <source>Evidence, Reviewed</source>
+      </segment>
+    </unit>
+    <unit id="documents.bulkTagDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/documents/dialogs/bulk-tag-dialog.component.ts:31,32</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="documents.bulkTagDialog.applyButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/documents/dialogs/bulk-tag-dialog.component.ts:32,36</note>
+      </notes>
+      <segment>
+        <source>Apply</source>
+      </segment>
+    </unit>
+    <unit id="documents.createFolderDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/documents/dialogs/create-folder-dialog.component.ts:27,29</note>
+      </notes>
+      <segment>
+        <source>New folder</source>
+      </segment>
+    </unit>
+    <unit id="documents.createFolderDialog.nameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/documents/dialogs/create-folder-dialog.component.ts:31,32</note>
+      </notes>
+      <segment>
+        <source>Folder name</source>
+      </segment>
+    </unit>
+    <unit id="documents.createFolderDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/documents/dialogs/create-folder-dialog.component.ts:40,43</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="documents.createFolderDialog.createButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/documents/dialogs/create-folder-dialog.component.ts:49,53</note>
+      </notes>
+      <segment>
+        <source> Create </source>
+      </segment>
+    </unit>
+    <unit id="documents.selectFolderDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/documents/dialogs/select-folder-dialog.component.ts:28,29</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="documents.selectFolderDialog.selectButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/documents/dialogs/select-folder-dialog.component.ts:30,34</note>
+      </notes>
+      <segment>
+        <source> Select </source>
       </segment>
     </unit>
     <unit id="documents.shareDialog.title">
@@ -8197,6 +10305,30 @@
         <source>Page <ph id="0" equiv="INTERPOLATION" disp="{{ currentPage() }}"/> / <ph id="1" equiv="INTERPOLATION_1" disp="{{ numPages() }}"/></source>
       </segment>
     </unit>
+    <unit id="knowledgeBase.kbTabs.home">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/knowledge-base/kb-tabs.component.ts:21,24</note>
+      </notes>
+      <segment>
+        <source> Home </source>
+      </segment>
+    </unit>
+    <unit id="knowledgeBase.kbTabs.articles">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/knowledge-base/kb-tabs.component.ts:31,34</note>
+      </notes>
+      <segment>
+        <source> Articles </source>
+      </segment>
+    </unit>
+    <unit id="knowledgeBase.kbTabs.collections">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/knowledge-base/kb-tabs.component.ts:41,44</note>
+      </notes>
+      <segment>
+        <source> Collections </source>
+      </segment>
+    </unit>
     <unit id="leads.detail.errorTitle">
       <notes>
         <note category="location">projects/staff-portal/src/app/features/leads/detail/lead-detail.page.html:7,8</note>
@@ -8429,6 +10561,508 @@
         <source> Converted to client <ph id="0" equiv="INTERPOLATION" disp="{{ currentLead.convertedClientId }}"/> </source>
       </segment>
     </unit>
+    <unit id="leads.convertLeadWizard.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:48,50</note>
+      </notes>
+      <segment>
+        <source>Convert lead to client</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.successMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:52,54</note>
+      </notes>
+      <segment>
+        <source> Converted. Client created<ph id="0" equiv="INTERPOLATION" disp="{{ result()!.matterId ? &apos; with matter&apos; : &apos;&apos; }}"/>. </source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.clientStepLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:56</note>
+      </notes>
+      <segment>
+        <source>Client</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.firstNameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:59,60</note>
+      </notes>
+      <segment>
+        <source>First name</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.lastNameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:63,64</note>
+      </notes>
+      <segment>
+        <source>Last name</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.emailLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:67,68</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.phoneLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:71,72</note>
+      </notes>
+      <segment>
+        <source>Phone</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.nextButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:76,78</note>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:100,102</note>
+      </notes>
+      <segment>
+        <source>Next</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.matterStepLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:80</note>
+      </notes>
+      <segment>
+        <source>Matter (optional)</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.createMatterCheckbox">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:81,82</note>
+      </notes>
+      <segment>
+        <source>Create a matter</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.matterUnavailableHint">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:84,87</note>
+      </notes>
+      <segment>
+        <source> Matter creation isn&apos;t available in this environment yet (the Legal module hasn&apos;t shipped) — submitting with this enabled will show that error. </source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.matterTitleLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:89,90</note>
+      </notes>
+      <segment>
+        <source>Matter title</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.oppositePartyLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:93,94</note>
+      </notes>
+      <segment>
+        <source>Opposing party</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.backButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:99,100</note>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:126,128</note>
+      </notes>
+      <segment>
+        <source>Back</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.feesStepLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:104</note>
+      </notes>
+      <segment>
+        <source>Fees (optional)</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.createInvoiceCheckbox">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:106,108</note>
+      </notes>
+      <segment>
+        <source>Create a consultation invoice</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.billingUnavailableHint">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:110,113</note>
+      </notes>
+      <segment>
+        <source> Billing isn&apos;t available in this environment yet (the Fin module hasn&apos;t shipped) — submitting with this enabled will show that error. </source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.amountLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:115,116</note>
+      </notes>
+      <segment>
+        <source>Amount</source>
+      </segment>
+    </unit>
+    <unit id="leads.convertLeadWizard.convertButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/convert-lead-wizard.component.ts:137,140</note>
+      </notes>
+      <segment>
+        <source>Convert</source>
+      </segment>
+    </unit>
+    <unit id="leads.duplicateResolutionDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/duplicate-resolution-dialog.component.ts:30,32</note>
+      </notes>
+      <segment>
+        <source>Possible duplicate leads found</source>
+      </segment>
+    </unit>
+    <unit id="leads.duplicateResolutionDialog.intro">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/duplicate-resolution-dialog.component.ts:33,37</note>
+      </notes>
+      <segment>
+        <source> This looks similar to <ph id="0" equiv="INTERPOLATION" disp="{{ data.matches.length }}"/> existing lead<ph id="1" equiv="INTERPOLATION_1" disp="{{
+          data.matches.length === 1 ? &apos;&apos; : &apos;s&apos;
+        }}"/>. Attach to one of them, or continue creating a new lead anyway. </source>
+      </segment>
+    </unit>
+    <unit id="leads.duplicateResolutionDialog.matchDetail">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/duplicate-resolution-dialog.component.ts:48,50</note>
+      </notes>
+      <segment>
+        <source> <ph id="0" equiv="INTERPOLATION" disp="{{ match.email || match.phoneE164 || &apos;No contact info&apos; }}"/> · matched on <ph id="1" equiv="INTERPOLATION_1" disp="{{ match.matchKind }}"/> (<ph id="2" equiv="INTERPOLATION_2" disp="{{ (match.similarity * 100).toFixed(0) }}"/>%) </source>
+      </segment>
+    </unit>
+    <unit id="leads.duplicateResolutionDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/duplicate-resolution-dialog.component.ts:56,57</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="leads.duplicateResolutionDialog.createAnywayButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/duplicate-resolution-dialog.component.ts:58,62</note>
+      </notes>
+      <segment>
+        <source>Create anyway</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.firstNameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:62,63</note>
+      </notes>
+      <segment>
+        <source>First name</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.firstNameRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:65,67</note>
+      </notes>
+      <segment>
+        <source>First name is required.</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.firstNameMinLengthError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:68,72</note>
+      </notes>
+      <segment>
+        <source>At least 2 characters.</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.lastNameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:73,74</note>
+      </notes>
+      <segment>
+        <source>Last name</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.companyLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:78,79</note>
+      </notes>
+      <segment>
+        <source>Company</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.emailLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:83,84</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.emailInvalidError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:86,90</note>
+      </notes>
+      <segment>
+        <source>Enter a valid email address.</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.phoneLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:91,92</note>
+      </notes>
+      <segment>
+        <source>Phone</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.phonePlaceholder">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:92</note>
+      </notes>
+      <segment>
+        <source>+919812345678</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.phoneInvalidError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:94,98</note>
+      </notes>
+      <segment>
+        <source>Use international format, e.g. +919812345678.</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.contactRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:102,105</note>
+      </notes>
+      <segment>
+        <source>At least one of phone or email is required.</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.sourceLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:106,107</note>
+      </notes>
+      <segment>
+        <source>Source</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.directSourceOption">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:108,109</note>
+      </notes>
+      <segment>
+        <source>Direct</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.issueSummaryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:116,117</note>
+      </notes>
+      <segment>
+        <source>Issue summary</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.opposingPartyLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:121,122</note>
+      </notes>
+      <segment>
+        <source>Opposing party</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.budgetBandLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:126,127</note>
+      </notes>
+      <segment>
+        <source>Budget band</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.budgetBandPlaceholder">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:127</note>
+      </notes>
+      <segment>
+        <source>e.g. ₹50k–2L</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:136,139</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadFormDialog.saveButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lead-form-dialog.component.ts:147,150</note>
+      </notes>
+      <segment>
+        <source>Save</source>
+      </segment>
+    </unit>
+    <unit id="leads.lostReasonDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lost-reason-dialog.component.ts:30,32</note>
+      </notes>
+      <segment>
+        <source>Mark lead as lost</source>
+      </segment>
+    </unit>
+    <unit id="leads.lostReasonDialog.reasonLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lost-reason-dialog.component.ts:34,35</note>
+      </notes>
+      <segment>
+        <source>Reason</source>
+      </segment>
+    </unit>
+    <unit id="leads.lostReasonDialog.reasonRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lost-reason-dialog.component.ts:41,45</note>
+      </notes>
+      <segment>
+        <source>A reason is required.</source>
+      </segment>
+    </unit>
+    <unit id="leads.lostReasonDialog.notesLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lost-reason-dialog.component.ts:46,47</note>
+      </notes>
+      <segment>
+        <source>Notes (optional)</source>
+      </segment>
+    </unit>
+    <unit id="leads.lostReasonDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lost-reason-dialog.component.ts:56,59</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="leads.lostReasonDialog.markLostButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/lost-reason-dialog.component.ts:67,70</note>
+      </notes>
+      <segment>
+        <source>Mark lost</source>
+      </segment>
+    </unit>
+    <unit id="leads.quickLogActivityDialog.directionLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:39,40</note>
+      </notes>
+      <segment>
+        <source>Direction</source>
+      </segment>
+    </unit>
+    <unit id="leads.quickLogActivityDialog.inboundOption">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:41,42</note>
+      </notes>
+      <segment>
+        <source>Inbound</source>
+      </segment>
+    </unit>
+    <unit id="leads.quickLogActivityDialog.outboundOption">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:42,44</note>
+      </notes>
+      <segment>
+        <source>Outbound</source>
+      </segment>
+    </unit>
+    <unit id="leads.quickLogActivityDialog.durationLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:47,48</note>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:76,77</note>
+      </notes>
+      <segment>
+        <source>Duration (min)</source>
+      </segment>
+    </unit>
+    <unit id="leads.quickLogActivityDialog.outcomeLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:52,54</note>
+      </notes>
+      <segment>
+        <source>Outcome</source>
+      </segment>
+    </unit>
+    <unit id="leads.quickLogActivityDialog.outcomePlaceholder">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:56,57</note>
+      </notes>
+      <segment>
+        <source>e.g. Connected, No answer, Voicemail</source>
+      </segment>
+    </unit>
+    <unit id="leads.quickLogActivityDialog.notesLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:62,63</note>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:81,82</note>
+      </notes>
+      <segment>
+        <source>Notes (optional)</source>
+      </segment>
+    </unit>
+    <unit id="leads.quickLogActivityDialog.subjectLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:68,69</note>
+      </notes>
+      <segment>
+        <source>Subject</source>
+      </segment>
+    </unit>
+    <unit id="leads.quickLogActivityDialog.subjectRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:71,75</note>
+      </notes>
+      <segment>
+        <source>Subject is required.</source>
+      </segment>
+    </unit>
+    <unit id="leads.quickLogActivityDialog.noteLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:87,88</note>
+      </notes>
+      <segment>
+        <source>Note</source>
+      </segment>
+    </unit>
+    <unit id="leads.quickLogActivityDialog.noteRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:90,93</note>
+      </notes>
+      <segment>
+        <source>Note content is required.</source>
+      </segment>
+    </unit>
+    <unit id="leads.quickLogActivityDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:102,105</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="leads.quickLogActivityDialog.saveButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/dialogs/quick-log-activity-dialog.component.ts:113,116</note>
+      </notes>
+      <segment>
+        <source>Save</source>
+      </segment>
+    </unit>
     <unit id="leads.import.title">
       <notes>
         <note category="location">projects/staff-portal/src/app/features/leads/import/leads-import-wizard.page.html:4,6</note>
@@ -8595,6 +11229,30 @@
       </notes>
       <segment>
         <source><ph id="0" equiv="INTERPOLATION" disp="{{ aging(lead).days }}"/>d in stage</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadsTabs.kanbanTab">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/leads-tabs.component.ts:22,25</note>
+      </notes>
+      <segment>
+        <source>Kanban</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadsTabs.listTab">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/leads-tabs.component.ts:31,34</note>
+      </notes>
+      <segment>
+        <source>List</source>
+      </segment>
+    </unit>
+    <unit id="leads.leadsTabs.importTab">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/leads/leads-tabs.component.ts:40,43</note>
+      </notes>
+      <segment>
+        <source>Import</source>
       </segment>
     </unit>
     <unit id="leads.list.title">
@@ -8851,6 +11509,853 @@
       </notes>
       <segment>
         <source>No timeline entries yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.hearingOutcomeDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/hearing-outcome-dialog.component.ts:63,65</note>
+      </notes>
+      <segment>
+        <source>Record hearing outcome</source>
+      </segment>
+    </unit>
+    <unit id="matters.hearingOutcomeDialog.summaryLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/hearing-outcome-dialog.component.ts:67,68</note>
+      </notes>
+      <segment>
+        <source>What transpired</source>
+      </segment>
+    </unit>
+    <unit id="matters.hearingOutcomeDialog.summaryMinLengthError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/hearing-outcome-dialog.component.ts:71,76</note>
+      </notes>
+      <segment>
+        <source>At least 10 characters.</source>
+      </segment>
+    </unit>
+    <unit id="matters.hearingOutcomeDialog.nextDateOption">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/hearing-outcome-dialog.component.ts:78,80</note>
+      </notes>
+      <segment>
+        <source>Next hearing date</source>
+      </segment>
+    </unit>
+    <unit id="matters.hearingOutcomeDialog.sineDieOption">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/hearing-outcome-dialog.component.ts:81,83</note>
+      </notes>
+      <segment>
+        <source>Adjourned sine die</source>
+      </segment>
+    </unit>
+    <unit id="matters.hearingOutcomeDialog.disposedOption">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/hearing-outcome-dialog.component.ts:84,87</note>
+      </notes>
+      <segment>
+        <source>Disposed</source>
+      </segment>
+    </unit>
+    <unit id="matters.hearingOutcomeDialog.nextDateLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/hearing-outcome-dialog.component.ts:91,94</note>
+      </notes>
+      <segment>
+        <source>Next hearing date</source>
+      </segment>
+    </unit>
+    <unit id="matters.hearingOutcomeDialog.holidayWarning">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/hearing-outcome-dialog.component.ts:105,108</note>
+      </notes>
+      <segment>
+        <source> <ph id="0" equiv="INTERPOLATION" disp="{{ selectedHolidayName() }}"/> falls on a court holiday. Nearest working day: <ph id="1" equiv="INTERPOLATION_1" disp="{{ nearestWorkingDayLabel() }}"/>. </source>
+      </segment>
+    </unit>
+    <unit id="matters.hearingOutcomeDialog.purposeLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/hearing-outcome-dialog.component.ts:111,112</note>
+      </notes>
+      <segment>
+        <source>Purpose</source>
+      </segment>
+    </unit>
+    <unit id="matters.hearingOutcomeDialog.adjournReasonLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/hearing-outcome-dialog.component.ts:118,120</note>
+      </notes>
+      <segment>
+        <source>Adjournment reason (optional)</source>
+      </segment>
+    </unit>
+    <unit id="matters.hearingOutcomeDialog.complianceTaskCheckbox">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/hearing-outcome-dialog.component.ts:124,128</note>
+      </notes>
+      <segment>
+        <source> Create a compliance task from this outcome </source>
+      </segment>
+    </unit>
+    <unit id="matters.hearingOutcomeDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/hearing-outcome-dialog.component.ts:133,136</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="matters.hearingOutcomeDialog.saveButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/hearing-outcome-dialog.component.ts:144,147</note>
+      </notes>
+      <segment>
+        <source>Save outcome</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseArgumentsTab.loadErrorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-arguments-tab.component.ts:50,51</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load argument notes</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseArgumentsTab.retryButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-arguments-tab.component.ts:53</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseArgumentsTab.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-arguments-tab.component.ts:58</note>
+      </notes>
+      <segment>
+        <source>No argument notes yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseArgumentsTab.citationsCount">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-arguments-tab.component.ts:69,70</note>
+      </notes>
+      <segment>
+        <source> <ph id="0" equiv="INTERPOLATION" disp="{{ note.citationJudgmentIds.length }}"/> citation(s) </source>
+      </segment>
+    </unit>
+    <unit id="matters.caseArgumentsTab.addTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-arguments-tab.component.ts:78,79</note>
+      </notes>
+      <segment>
+        <source>Add argument note</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseArgumentsTab.stageLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-arguments-tab.component.ts:81,82</note>
+      </notes>
+      <segment>
+        <source>Stage (optional)</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseArgumentsTab.noteLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-arguments-tab.component.ts:85,86</note>
+      </notes>
+      <segment>
+        <source>Note</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseArgumentsTab.noteRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-arguments-tab.component.ts:88,90</note>
+      </notes>
+      <segment>
+        <source>A note is required.</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseArgumentsTab.addButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-arguments-tab.component.ts:103,107</note>
+      </notes>
+      <segment>
+        <source>Add note</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.loadErrorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:74,75</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load evidence</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.loadErrorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:76,77</note>
+      </notes>
+      <segment>
+        <source>Something went wrong while loading evidence.</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.retryButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:79</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:84</note>
+      </notes>
+      <segment>
+        <source>No evidence recorded yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.markedLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:94</note>
+      </notes>
+      <segment>
+        <source>Marked</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.objectedLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:97</note>
+      </notes>
+      <segment>
+        <source>Objected</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.hideCustodyLogButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:104,106</note>
+      </notes>
+      <segment>
+        <source>Hide custody log</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.chainOfCustodyButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:106,109</note>
+      </notes>
+      <segment>
+        <source>Chain of custody</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.custodyEmpty">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:117,119</note>
+      </notes>
+      <segment>
+        <source>No custody entries yet.</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.custodyActionLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:139,140</note>
+      </notes>
+      <segment>
+        <source>Action</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.custodyHolderLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:143,144</note>
+      </notes>
+      <segment>
+        <source>Holder</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.custodyNoteLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:147,148</note>
+      </notes>
+      <segment>
+        <source>Note</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.addCustodyEntryButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:159,161</note>
+      </notes>
+      <segment>
+        <source>Add custody entry</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.addTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:175,176</note>
+      </notes>
+      <segment>
+        <source>Add evidence</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.exhibitNoLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:178,179</note>
+      </notes>
+      <segment>
+        <source>Exhibit no.</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.kindLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:182,183</note>
+      </notes>
+      <segment>
+        <source>Kind</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.descriptionLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:190,191</note>
+      </notes>
+      <segment>
+        <source>Description</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseEvidenceTab.addEvidenceButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-evidence-tab.component.ts:205,209</note>
+      </notes>
+      <segment>
+        <source>Add evidence</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseHearingsTab.loadErrorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-hearings-tab.component.ts:97,98</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load hearings</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseHearingsTab.loadErrorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-hearings-tab.component.ts:99,100</note>
+      </notes>
+      <segment>
+        <source>Something went wrong while loading hearings.</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseHearingsTab.retryButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-hearings-tab.component.ts:102</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseHearingsTab.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-hearings-tab.component.ts:107</note>
+      </notes>
+      <segment>
+        <source>No hearings scheduled yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseHearingsTab.recordOutcomeButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-hearings-tab.component.ts:122,124</note>
+      </notes>
+      <segment>
+        <source> Record outcome </source>
+      </segment>
+    </unit>
+    <unit id="matters.caseHearingsTab.addTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-hearings-tab.component.ts:131,132</note>
+      </notes>
+      <segment>
+        <source>Schedule hearing</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseHearingsTab.dateLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-hearings-tab.component.ts:134,135</note>
+      </notes>
+      <segment>
+        <source>Date</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseHearingsTab.pastDateError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-hearings-tab.component.ts:142,145</note>
+      </notes>
+      <segment>
+        <source>Hearing date can&apos;t be in the past.</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseHearingsTab.dateRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-hearings-tab.component.ts:148,150</note>
+      </notes>
+      <segment>
+        <source>Date is required.</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseHearingsTab.timeLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-hearings-tab.component.ts:152,153</note>
+      </notes>
+      <segment>
+        <source>Time</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseHearingsTab.purposeLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-hearings-tab.component.ts:156,157</note>
+      </notes>
+      <segment>
+        <source>Purpose</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseHearingsTab.courtroomLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-hearings-tab.component.ts:160,161</note>
+      </notes>
+      <segment>
+        <source>Courtroom</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseHearingsTab.scheduleButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-hearings-tab.component.ts:175,179</note>
+      </notes>
+      <segment>
+        <source>Schedule hearing</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseOrdersTab.loadErrorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-orders-tab.component.ts:78,79</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load orders</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseOrdersTab.loadErrorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-orders-tab.component.ts:80,81</note>
+      </notes>
+      <segment>
+        <source>Something went wrong while loading orders.</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseOrdersTab.retryButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-orders-tab.component.ts:83</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseOrdersTab.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-orders-tab.component.ts:88</note>
+      </notes>
+      <segment>
+        <source>No orders yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseOrdersTab.complianceDue">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-orders-tab.component.ts:101,102</note>
+      </notes>
+      <segment>
+        <source> Compliance due <ph id="0" equiv="INTERPOLATION" disp="{{ order.complianceDue }}"/> </source>
+      </segment>
+    </unit>
+    <unit id="matters.caseOrdersTab.uploadTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-orders-tab.component.ts:110,111</note>
+      </notes>
+      <segment>
+        <source>Upload order</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseOrdersTab.orderDateLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-orders-tab.component.ts:113,114</note>
+      </notes>
+      <segment>
+        <source>Order date</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseOrdersTab.futureDateError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-orders-tab.component.ts:121,124</note>
+      </notes>
+      <segment>
+        <source>Order date can&apos;t be in the future.</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseOrdersTab.orderDateRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-orders-tab.component.ts:127,130</note>
+      </notes>
+      <segment>
+        <source>Order date is required.</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseOrdersTab.gistLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-orders-tab.component.ts:131,132</note>
+      </notes>
+      <segment>
+        <source>Gist</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseOrdersTab.complianceDueLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-orders-tab.component.ts:135,136</note>
+      </notes>
+      <segment>
+        <source>Compliance due (optional)</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseOrdersTab.selectedFile">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-orders-tab.component.ts:148,150</note>
+      </notes>
+      <segment>
+        <source>Selected: <ph id="0" equiv="INTERPOLATION" disp="{{ selectedFile()!.name }}"/></source>
+      </segment>
+    </unit>
+    <unit id="matters.caseOrdersTab.uploadButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-orders-tab.component.ts:161,165</note>
+      </notes>
+      <segment>
+        <source>Upload</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.loadErrorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:81,82</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load parties</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.loadErrorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:83,84</note>
+      </notes>
+      <segment>
+        <source>Something went wrong while loading parties &amp; advocates.</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.retryButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:86</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:93,94</note>
+      </notes>
+      <segment>
+        <source>No parties added yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.addPartyButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:95,96</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:229,232</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:240,244</note>
+      </notes>
+      <segment>
+        <source>Add party</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.nameColumn">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:103,104</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.roleColumn">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:104,105</note>
+      </notes>
+      <segment>
+        <source>Role</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.advocateColumn">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:105,106</note>
+      </notes>
+      <segment>
+        <source>Advocate</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.contactColumn">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:106,108</note>
+      </notes>
+      <segment>
+        <source>Contact</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.nameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:118,119</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:193,194</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.roleLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:122,123</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:200,201</note>
+      </notes>
+      <segment>
+        <source>Role</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.advocateNameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:126,127</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:210,211</note>
+      </notes>
+      <segment>
+        <source>Advocate name</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.contactLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:130,131</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:214,215</note>
+      </notes>
+      <segment>
+        <source>Contact</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:134,136</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:218,220</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.saveButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:145,147</note>
+      </notes>
+      <segment>
+        <source>Save</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.editPartyAriaLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:165,166</note>
+      </notes>
+      <segment>
+        <source>Edit party</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.deletePartyAriaLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:176,177</note>
+      </notes>
+      <segment>
+        <source>Delete party</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.nameRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:196,198</note>
+      </notes>
+      <segment>
+        <source>Name is required.</source>
+      </segment>
+    </unit>
+    <unit id="matters.casePartiesTab.roleRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-parties-tab.component.ts:206,208</note>
+      </notes>
+      <segment>
+        <source>Role is required.</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseWitnessesTab.loadErrorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-witnesses-tab.component.ts:74,75</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load witnesses</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseWitnessesTab.loadErrorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-witnesses-tab.component.ts:76,77</note>
+      </notes>
+      <segment>
+        <source>Something went wrong while loading witnesses.</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseWitnessesTab.retryButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-witnesses-tab.component.ts:79</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseWitnessesTab.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-witnesses-tab.component.ts:84</note>
+      </notes>
+      <segment>
+        <source>No witnesses recorded yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseWitnessesTab.examStatusLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-witnesses-tab.component.ts:97,99</note>
+      </notes>
+      <segment>
+        <source>Exam status</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseWitnessesTab.addTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-witnesses-tab.component.ts:117,118</note>
+      </notes>
+      <segment>
+        <source>Add witness</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseWitnessesTab.nameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-witnesses-tab.component.ts:120,121</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseWitnessesTab.nameRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-witnesses-tab.component.ts:123,125</note>
+      </notes>
+      <segment>
+        <source>Name is required.</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseWitnessesTab.sideLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-witnesses-tab.component.ts:127,128</note>
+      </notes>
+      <segment>
+        <source>Side</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseWitnessesTab.scheduledOnLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-witnesses-tab.component.ts:131,132</note>
+      </notes>
+      <segment>
+        <source>Scheduled on</source>
+      </segment>
+    </unit>
+    <unit id="matters.caseWitnessesTab.addButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/case-detail/tabs/case-witnesses-tab.component.ts:148,152</note>
+      </notes>
+      <segment>
+        <source>Add witness</source>
+      </segment>
+    </unit>
+    <unit id="matters.causeListPage.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/cause-list/cause-list.page.ts:44,45</note>
+      </notes>
+      <segment>
+        <source>Cause list</source>
+      </segment>
+    </unit>
+    <unit id="matters.causeListPage.dateLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/cause-list/cause-list.page.ts:46,47</note>
+      </notes>
+      <segment>
+        <source>Date</source>
+      </segment>
+    </unit>
+    <unit id="matters.causeListPage.lawyerIdLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/cause-list/cause-list.page.ts:52,53</note>
+      </notes>
+      <segment>
+        <source>Lawyer ID (optional)</source>
+      </segment>
+    </unit>
+    <unit id="matters.causeListPage.loadButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/cause-list/cause-list.page.ts:55,56</note>
+      </notes>
+      <segment>
+        <source>Load</source>
+      </segment>
+    </unit>
+    <unit id="matters.causeListPage.printButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/cause-list/cause-list.page.ts:58,62</note>
+      </notes>
+      <segment>
+        <source>Print</source>
+      </segment>
+    </unit>
+    <unit id="matters.causeListPage.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/cause-list/cause-list.page.ts:65</note>
+      </notes>
+      <segment>
+        <source>No hearings scheduled for this date</source>
+      </segment>
+    </unit>
+    <unit id="matters.causeListPage.timeColumn">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/cause-list/cause-list.page.ts:76,77</note>
+      </notes>
+      <segment>
+        <source>Time</source>
+      </segment>
+    </unit>
+    <unit id="matters.causeListPage.purposeColumn">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/cause-list/cause-list.page.ts:77,78</note>
+      </notes>
+      <segment>
+        <source>Purpose</source>
+      </segment>
+    </unit>
+    <unit id="matters.causeListPage.statusColumn">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/cause-list/cause-list.page.ts:78,80</note>
+      </notes>
+      <segment>
+        <source>Status</source>
       </segment>
     </unit>
     <unit id="matters.createDialog.title">
@@ -9301,6 +12806,319 @@
         <source>Clear filters</source>
       </segment>
     </unit>
+    <unit id="matters.closingChecklistDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/closing-checklist-dialog.component.ts:57,59</note>
+      </notes>
+      <segment>
+        <source>Close matter — checklist</source>
+      </segment>
+    </unit>
+    <unit id="matters.closingChecklistDialog.noRunningTimersCheckbox">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/closing-checklist-dialog.component.ts:61,65</note>
+      </notes>
+      <segment>
+        <source> No running timers remain on this matter </source>
+      </segment>
+    </unit>
+    <unit id="matters.closingChecklistDialog.wipLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/closing-checklist-dialog.component.ts:68,70</note>
+      </notes>
+      <segment>
+        <source> Unbilled time (WIP): <pc id="0" equivStart="START_TAG_STRONG" equivEnd="CLOSE_TAG_STRONG" type="other" dispStart="&lt;strong&gt;" dispEnd="&lt;/strong&gt;"><ph id="1" equiv="INTERPOLATION" disp="{{ fin.wip | lfCurrency }}"/></pc></source>
+      </segment>
+    </unit>
+    <unit id="matters.closingChecklistDialog.billOption">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/closing-checklist-dialog.component.ts:71,72</note>
+      </notes>
+      <segment>
+        <source>Bill this time</source>
+      </segment>
+    </unit>
+    <unit id="matters.closingChecklistDialog.writeOffOption">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/closing-checklist-dialog.component.ts:72,74</note>
+      </notes>
+      <segment>
+        <source>Write it off</source>
+      </segment>
+    </unit>
+    <unit id="matters.closingChecklistDialog.trustBalanceLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/closing-checklist-dialog.component.ts:80,82</note>
+      </notes>
+      <segment>
+        <source> Trust balance: <pc id="0" equivStart="START_TAG_STRONG" equivEnd="CLOSE_TAG_STRONG" type="other" dispStart="&lt;strong&gt;" dispEnd="&lt;/strong&gt;"><ph id="1" equiv="INTERPOLATION" disp="{{ fin.trustBalance | lfCurrency }}"/></pc></source>
+      </segment>
+    </unit>
+    <unit id="matters.closingChecklistDialog.trustDisposedCheckbox">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/closing-checklist-dialog.component.ts:83,86</note>
+      </notes>
+      <segment>
+        <source> Trust funds have been disbursed/accounted for </source>
+      </segment>
+    </unit>
+    <unit id="matters.closingChecklistDialog.outcomeLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/closing-checklist-dialog.component.ts:90,91</note>
+      </notes>
+      <segment>
+        <source>Outcome</source>
+      </segment>
+    </unit>
+    <unit id="matters.closingChecklistDialog.closureNoteLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/closing-checklist-dialog.component.ts:99,100</note>
+      </notes>
+      <segment>
+        <source>Closure summary note</source>
+      </segment>
+    </unit>
+    <unit id="matters.closingChecklistDialog.closureNoteRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/closing-checklist-dialog.component.ts:104,108</note>
+      </notes>
+      <segment>
+        <source>A closure summary note is required.</source>
+      </segment>
+    </unit>
+    <unit id="matters.closingChecklistDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/closing-checklist-dialog.component.ts:114,117</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="matters.closingChecklistDialog.closeButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/closing-checklist-dialog.component.ts:125,128</note>
+      </notes>
+      <segment>
+        <source>Close matter</source>
+      </segment>
+    </unit>
+    <unit id="matters.createCaseDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/create-case-dialog.component.ts:32,34</note>
+      </notes>
+      <segment>
+        <source>Add court case</source>
+      </segment>
+    </unit>
+    <unit id="matters.createCaseDialog.courtLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/create-case-dialog.component.ts:37,38</note>
+      </notes>
+      <segment>
+        <source>Court</source>
+      </segment>
+    </unit>
+    <unit id="matters.createCaseDialog.courtIdLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/create-case-dialog.component.ts:46,47</note>
+      </notes>
+      <segment>
+        <source>Court ID</source>
+      </segment>
+    </unit>
+    <unit id="matters.createCaseDialog.caseTypeLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/create-case-dialog.component.ts:52,53</note>
+      </notes>
+      <segment>
+        <source>Case type</source>
+      </segment>
+    </unit>
+    <unit id="matters.createCaseDialog.caseNumberLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/create-case-dialog.component.ts:56,57</note>
+      </notes>
+      <segment>
+        <source>Case number</source>
+      </segment>
+    </unit>
+    <unit id="matters.createCaseDialog.yearLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/create-case-dialog.component.ts:60,61</note>
+      </notes>
+      <segment>
+        <source>Year</source>
+      </segment>
+    </unit>
+    <unit id="matters.createCaseDialog.filingDateLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/create-case-dialog.component.ts:64,65</note>
+      </notes>
+      <segment>
+        <source>Filing date</source>
+      </segment>
+    </unit>
+    <unit id="matters.createCaseDialog.courtroomLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/create-case-dialog.component.ts:70,71</note>
+      </notes>
+      <segment>
+        <source>Courtroom</source>
+      </segment>
+    </unit>
+    <unit id="matters.createCaseDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/create-case-dialog.component.ts:80,83</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="matters.createCaseDialog.addButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/create-case-dialog.component.ts:91,94</note>
+      </notes>
+      <segment>
+        <source>Add case</source>
+      </segment>
+    </unit>
+    <unit id="matters.importantDatesPanel.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/important-dates-panel.component.ts:57,60</note>
+      </notes>
+      <segment>
+        <source>Important dates</source>
+      </segment>
+    </unit>
+    <unit id="matters.importantDatesPanel.loading">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/important-dates-panel.component.ts:60,61</note>
+      </notes>
+      <segment>
+        <source>Loading…</source>
+      </segment>
+    </unit>
+    <unit id="matters.importantDatesPanel.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/important-dates-panel.component.ts:64,65</note>
+      </notes>
+      <segment>
+        <source>No important dates</source>
+      </segment>
+    </unit>
+    <unit id="matters.importantDatesPanel.addDateButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/important-dates-panel.component.ts:66,67</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/important-dates-panel.component.ts:93,98</note>
+      </notes>
+      <segment>
+        <source>Add date</source>
+      </segment>
+    </unit>
+    <unit id="matters.importantDatesPanel.dueLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/important-dates-panel.component.ts:82,83</note>
+      </notes>
+      <segment>
+        <source>Due <ph id="0" equiv="INTERPOLATION" disp="{{ row.date.dueAt | slice: 0 : 10 }}"/></source>
+      </segment>
+    </unit>
+    <unit id="matters.importantDatesPanel.markSatisfiedButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/important-dates-panel.component.ts:85,88</note>
+      </notes>
+      <segment>
+        <source> Mark satisfied </source>
+      </segment>
+    </unit>
+    <unit id="matters.importantDatesPanel.kindLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/important-dates-panel.component.ts:100,101</note>
+      </notes>
+      <segment>
+        <source>Kind</source>
+      </segment>
+    </unit>
+    <unit id="matters.importantDatesPanel.titleLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/important-dates-panel.component.ts:108,109</note>
+      </notes>
+      <segment>
+        <source>Title</source>
+      </segment>
+    </unit>
+    <unit id="matters.importantDatesPanel.dueDateLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/important-dates-panel.component.ts:112,113</note>
+      </notes>
+      <segment>
+        <source>Due date</source>
+      </segment>
+    </unit>
+    <unit id="matters.importantDatesPanel.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/important-dates-panel.component.ts:123,124</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="matters.importantDatesPanel.saveButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/important-dates-panel.component.ts:124,128</note>
+      </notes>
+      <segment>
+        <source>Save</source>
+      </segment>
+    </unit>
+    <unit id="matters.kbPinDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/kb-pin-dialog.component.ts:46,47</note>
+      </notes>
+      <segment>
+        <source>Pin from Knowledge Base</source>
+      </segment>
+    </unit>
+    <unit id="matters.kbPinDialog.searchLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/kb-pin-dialog.component.ts:49,50</note>
+      </notes>
+      <segment>
+        <source>Search Acts, judgments, articles…</source>
+      </segment>
+    </unit>
+    <unit id="matters.kbPinDialog.changeButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/kb-pin-dialog.component.ts:73,76</note>
+      </notes>
+      <segment>
+        <source>Change</source>
+      </segment>
+    </unit>
+    <unit id="matters.kbPinDialog.noteLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/kb-pin-dialog.component.ts:77,78</note>
+      </notes>
+      <segment>
+        <source>Note (optional)</source>
+      </segment>
+    </unit>
+    <unit id="matters.kbPinDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/kb-pin-dialog.component.ts:87,89</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="matters.kbPinDialog.pinButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/kb-pin-dialog.component.ts:96,98</note>
+      </notes>
+      <segment>
+        <source> Pin to matter </source>
+      </segment>
+    </unit>
     <unit id="matters.workspace.errorTitle">
       <notes>
         <note category="location">projects/staff-portal/src/app/features/matters/workspace/matter-workspace.page.html:7,8</note>
@@ -9616,6 +13434,471 @@
         <source>Research</source>
       </segment>
     </unit>
+    <unit id="matters.matterActivityTab.loadErrorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-activity-tab.component.ts:45,46</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load activity</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterActivityTab.loadErrorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-activity-tab.component.ts:47,48</note>
+      </notes>
+      <segment>
+        <source>Something went wrong while loading the timeline.</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterActivityTab.retryButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-activity-tab.component.ts:50</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterActivityTab.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-activity-tab.component.ts:54</note>
+      </notes>
+      <segment>
+        <source>No activity yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterActivityTab.loadMoreButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-activity-tab.component.ts:72,76</note>
+      </notes>
+      <segment>
+        <source>Load more</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterBillingTab.loadErrorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-billing-tab.component.ts:44,45</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load the financial summary</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterBillingTab.loadErrorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-billing-tab.component.ts:46,47</note>
+      </notes>
+      <segment>
+        <source>Something went wrong while loading billing data.</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterBillingTab.retryButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-billing-tab.component.ts:49</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterBillingTab.unavailableNote">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-billing-tab.component.ts:67,72</note>
+      </notes>
+      <segment>
+        <source> Detailed invoices and line-item billing aren&apos;t available yet — the Billing module isn&apos;t fully built in this environment. </source>
+      </segment>
+    </unit>
+    <unit id="matters.matterDocumentsTab.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-documents-tab.component.ts:17,18</note>
+      </notes>
+      <segment>
+        <source>No documents yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterDocumentsTab.emptyMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-documents-tab.component.ts:19,20</note>
+      </notes>
+      <segment>
+        <source>The Documents module isn&apos;t built in this environment yet.</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterNotesTab.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-notes-tab.component.ts:18,19</note>
+      </notes>
+      <segment>
+        <source>Notes aren&apos;t available yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterNotesTab.emptyMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-notes-tab.component.ts:20,21</note>
+      </notes>
+      <segment>
+        <source>No shared notes API exists in this environment yet.</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.loadErrorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:88,89</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load parties</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.loadErrorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:90,91</note>
+      </notes>
+      <segment>
+        <source>Something went wrong while loading parties.</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.retryButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:93</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:100,101</note>
+      </notes>
+      <segment>
+        <source>No parties yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.addPartyButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:102,103</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:241,244</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:252,256</note>
+      </notes>
+      <segment>
+        <source>Add party</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.nameColumn">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:110,111</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.roleColumn">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:111,112</note>
+      </notes>
+      <segment>
+        <source>Role</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.advocateColumn">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:112,113</note>
+      </notes>
+      <segment>
+        <source>Advocate</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.contactColumn">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:113,115</note>
+      </notes>
+      <segment>
+        <source>Contact</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.nameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:125,126</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:207,208</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.roleLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:129,130</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:214,215</note>
+      </notes>
+      <segment>
+        <source>Role</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.advocateNameLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:137,138</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:222,223</note>
+      </notes>
+      <segment>
+        <source>Advocate name</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.contactLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:141,142</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:226,227</note>
+      </notes>
+      <segment>
+        <source>Contact</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:145,147</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:230,232</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.saveButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:156,158</note>
+      </notes>
+      <segment>
+        <source>Save</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.editPartyAriaLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:176,177</note>
+      </notes>
+      <segment>
+        <source>Edit party</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.deletePartyAriaLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:187,188</note>
+      </notes>
+      <segment>
+        <source>Delete party</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterPartiesTab.nameRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-parties-tab.component.ts:210,212</note>
+      </notes>
+      <segment>
+        <source>Name is required.</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterResearchTab.pinButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-research-tab.component.ts:33,37</note>
+      </notes>
+      <segment>
+        <source>Pin from Knowledge Base</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterResearchTab.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-research-tab.component.ts:39</note>
+      </notes>
+      <segment>
+        <source>Nothing pinned yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterResearchTab.unpinAriaLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-research-tab.component.ts:52</note>
+      </notes>
+      <segment>
+        <source>Remove pin</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTasksTab.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-tasks-tab.component.ts:17,18</note>
+      </notes>
+      <segment>
+        <source>No tasks yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTasksTab.emptyMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-tasks-tab.component.ts:19,20</note>
+      </notes>
+      <segment>
+        <source>Task management isn&apos;t built in this environment yet.</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.expensesHeading">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:83,85</note>
+      </notes>
+      <segment>
+        <source>Expenses</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.loadErrorTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:91,92</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load expenses</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.loadErrorMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:93,94</note>
+      </notes>
+      <segment>
+        <source>Something went wrong while loading expenses.</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.retryButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:96</note>
+      </notes>
+      <segment>
+        <source>Retry</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.emptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:103,104</note>
+      </notes>
+      <segment>
+        <source>No expenses yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.addExpenseButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:105,106</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:187,190</note>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:198,202</note>
+      </notes>
+      <segment>
+        <source>Add expense</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.descriptionColumn">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:113,114</note>
+      </notes>
+      <segment>
+        <source>Description</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.amountColumn">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:114,115</note>
+      </notes>
+      <segment>
+        <source>Amount</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.incurredOnColumn">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:115,118</note>
+      </notes>
+      <segment>
+        <source>Incurred on</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.billableChip">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:127,129</note>
+      </notes>
+      <segment>
+        <source>Billable</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.descriptionLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:142,143</note>
+      </notes>
+      <segment>
+        <source>Description</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.descriptionRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:148,151</note>
+      </notes>
+      <segment>
+        <source>Description is required.</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.amountLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:152,153</note>
+      </notes>
+      <segment>
+        <source>Amount</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.amountRequiredError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:157,159</note>
+      </notes>
+      <segment>
+        <source>Amount is required.</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.amountMinError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:160,162</note>
+      </notes>
+      <segment>
+        <source>Amount must be zero or more.</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.incurredOnLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:164,166</note>
+      </notes>
+      <segment>
+        <source>Incurred on</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.billableCheckbox">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:174,175</note>
+      </notes>
+      <segment>
+        <source>Billable</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:176,178</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.timeEntriesHeading">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:205,208</note>
+      </notes>
+      <segment>
+        <source>Time entries</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.timeEntriesEmptyTitle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:208,209</note>
+      </notes>
+      <segment>
+        <source>Time entries aren&apos;t available here yet</source>
+      </segment>
+    </unit>
+    <unit id="matters.matterTimeExpensesTab.timeEntriesEmptyMessage">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/matters/workspace/tabs/matter-time-expenses-tab.component.ts:210,211</note>
+      </notes>
+      <segment>
+        <source>No matter-scoped time-entry API exists in this environment yet.</source>
+      </segment>
+    </unit>
     <unit id="reports.customBuilder.baseEntityStepLabel">
       <notes>
         <note category="location">projects/staff-portal/src/app/features/reports/builder/custom-report-builder.page.html:9</note>
@@ -9896,6 +14179,30 @@
         <source>Favorites</source>
       </segment>
     </unit>
+    <unit id="reports.reportsTabs.hub">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/reports-tabs.component.ts:21,24</note>
+      </notes>
+      <segment>
+        <source> Hub </source>
+      </segment>
+    </unit>
+    <unit id="reports.reportsTabs.myReports">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/reports-tabs.component.ts:31,34</note>
+      </notes>
+      <segment>
+        <source> My Reports </source>
+      </segment>
+    </unit>
+    <unit id="reports.reportsTabs.newCustomReport">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/reports-tabs.component.ts:41,44</note>
+      </notes>
+      <segment>
+        <source> New Custom Report </source>
+      </segment>
+    </unit>
     <unit id="reports.savedManager.customReportsHeading">
       <notes>
         <note category="location">projects/staff-portal/src/app/features/reports/saved/saved-report-manager.page.html:5,7</note>
@@ -9934,6 +14241,102 @@
       </notes>
       <segment>
         <source>No schedules yet</source>
+      </segment>
+    </unit>
+    <unit id="reports.scheduleDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/schedule-dialog.component.ts:65,66</note>
+      </notes>
+      <segment>
+        <source>Schedule this report</source>
+      </segment>
+    </unit>
+    <unit id="reports.scheduleDialog.frequencyLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/schedule-dialog.component.ts:68,69</note>
+      </notes>
+      <segment>
+        <source>Frequency</source>
+      </segment>
+    </unit>
+    <unit id="reports.scheduleDialog.frequencyDaily">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/schedule-dialog.component.ts:70,71</note>
+      </notes>
+      <segment>
+        <source>Daily</source>
+      </segment>
+    </unit>
+    <unit id="reports.scheduleDialog.frequencyWeekly">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/schedule-dialog.component.ts:71,72</note>
+      </notes>
+      <segment>
+        <source>Weekly</source>
+      </segment>
+    </unit>
+    <unit id="reports.scheduleDialog.frequencyMonthly">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/schedule-dialog.component.ts:72,74</note>
+      </notes>
+      <segment>
+        <source>Monthly</source>
+      </segment>
+    </unit>
+    <unit id="reports.scheduleDialog.formatLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/schedule-dialog.component.ts:77,78</note>
+      </notes>
+      <segment>
+        <source>Format</source>
+      </segment>
+    </unit>
+    <unit id="reports.scheduleDialog.externalEmailTooltip">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/schedule-dialog.component.ts:92,93</note>
+      </notes>
+      <segment>
+        <source>External emails aren&apos;t sent an attachment yet — no attachment-capable mail sender exists server-side.</source>
+      </segment>
+    </unit>
+    <unit id="reports.scheduleDialog.addFirmUserLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/schedule-dialog.component.ts:104,105</note>
+      </notes>
+      <segment>
+        <source>Add firm user</source>
+      </segment>
+    </unit>
+    <unit id="reports.scheduleDialog.addExternalEmailLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/schedule-dialog.component.ts:115,116</note>
+      </notes>
+      <segment>
+        <source>Add external email</source>
+      </segment>
+    </unit>
+    <unit id="reports.scheduleDialog.addButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/schedule-dialog.component.ts:124,128</note>
+      </notes>
+      <segment>
+        <source> Add </source>
+      </segment>
+    </unit>
+    <unit id="reports.scheduleDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/schedule-dialog.component.ts:142,145</note>
+      </notes>
+      <segment>
+        <source> Cancel </source>
+      </segment>
+    </unit>
+    <unit id="reports.scheduleDialog.scheduleButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/reports/schedule-dialog.component.ts:152,155</note>
+      </notes>
+      <segment>
+        <source> Schedule </source>
       </segment>
     </unit>
     <unit id="reports.viewer.reportNotFoundTitle">
@@ -10344,6 +14747,70 @@
         <source> Create task </source>
       </segment>
     </unit>
+    <unit id="tasks.recurringEditorDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/tasks/detail/recurring-editor-dialog.component.ts:49,51</note>
+      </notes>
+      <segment>
+        <source> Repeat &quot;<ph id="0" equiv="INTERPOLATION" disp="{{ data.seed.title }}"/>&quot; </source>
+      </segment>
+    </unit>
+    <unit id="tasks.recurringEditorDialog.note">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/tasks/detail/recurring-editor-dialog.component.ts:53,58</note>
+      </notes>
+      <segment>
+        <source> LexFlow has no recurrence engine yet — this creates independent copies of this task with computed due dates. They are not linked as a series (no API field exists for that); cancelling or editing one has no effect on the others. </source>
+      </segment>
+    </unit>
+    <unit id="tasks.recurringEditorDialog.everyLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/tasks/detail/recurring-editor-dialog.component.ts:60,61</note>
+      </notes>
+      <segment>
+        <source>Every</source>
+      </segment>
+    </unit>
+    <unit id="tasks.recurringEditorDialog.intervalLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/tasks/detail/recurring-editor-dialog.component.ts:65,66</note>
+      </notes>
+      <segment>
+        <source>Interval</source>
+      </segment>
+    </unit>
+    <unit id="tasks.recurringEditorDialog.occurrencesLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/tasks/detail/recurring-editor-dialog.component.ts:74,75</note>
+      </notes>
+      <segment>
+        <source>Occurrences</source>
+      </segment>
+    </unit>
+    <unit id="tasks.recurringEditorDialog.noDueDateWarning">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/tasks/detail/recurring-editor-dialog.component.ts:81,85</note>
+      </notes>
+      <segment>
+        <source> This task has no due date — future copies will also be created without one, spaced by creation order only. </source>
+      </segment>
+    </unit>
+    <unit id="tasks.recurringEditorDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/tasks/detail/recurring-editor-dialog.component.ts:93,96</note>
+      </notes>
+      <segment>
+        <source> Cancel </source>
+      </segment>
+    </unit>
+    <unit id="tasks.recurringEditorDialog.createButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/tasks/detail/recurring-editor-dialog.component.ts:103,105</note>
+      </notes>
+      <segment>
+        <source> Create <ph id="0" equiv="INTERPOLATION" disp="{{ occurrences.value }}"/> tasks </source>
+      </segment>
+    </unit>
     <unit id="tasks.taskDetail.loadingLabel">
       <notes>
         <note category="location">projects/staff-portal/src/app/features/tasks/detail/task-detail-drawer.component.html:2,3</note>
@@ -10510,6 +14977,30 @@
       </notes>
       <segment>
         <source>Close</source>
+      </segment>
+    </unit>
+    <unit id="tasks.tasksTabs.board">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/tasks/tasks-tabs.component.ts:21,24</note>
+      </notes>
+      <segment>
+        <source> Board </source>
+      </segment>
+    </unit>
+    <unit id="tasks.tasksTabs.workload">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/tasks/tasks-tabs.component.ts:31,34</note>
+      </notes>
+      <segment>
+        <source> Workload </source>
+      </segment>
+    </unit>
+    <unit id="tasks.tasksTabs.templates">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/tasks/tasks-tabs.component.ts:41,44</note>
+      </notes>
+      <segment>
+        <source> Templates </source>
       </segment>
     </unit>
     <unit id="tasks.applyTemplateDialog.title">
@@ -11182,6 +15673,192 @@
       </notes>
       <segment>
         <source> Delete </source>
+      </segment>
+    </unit>
+    <unit id="time.timeTabs.timesheet">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/time-tabs.component.ts:21,24</note>
+      </notes>
+      <segment>
+        <source> Timesheet </source>
+      </segment>
+    </unit>
+    <unit id="time.timeTabs.entries">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/time-tabs.component.ts:31,34</note>
+      </notes>
+      <segment>
+        <source> Entries </source>
+      </segment>
+    </unit>
+    <unit id="time.timeTabs.approvals">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/time-tabs.component.ts:41,44</note>
+      </notes>
+      <segment>
+        <source> Approvals </source>
+      </segment>
+    </unit>
+    <unit id="time.timeTabs.utilization">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/time-tabs.component.ts:51,54</note>
+      </notes>
+      <segment>
+        <source> Utilization </source>
+      </segment>
+    </unit>
+    <unit id="time.startTimerDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/start-timer-dialog.component.ts:29,31</note>
+      </notes>
+      <segment>
+        <source>Start timer</source>
+      </segment>
+    </unit>
+    <unit id="time.startTimerDialog.matterLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/start-timer-dialog.component.ts:32,33</note>
+      </notes>
+      <segment>
+        <source>Matter (optional)</source>
+      </segment>
+    </unit>
+    <unit id="time.startTimerDialog.hint">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/start-timer-dialog.component.ts:41,43</note>
+      </notes>
+      <segment>
+        <source>Leave blank to classify later.</source>
+      </segment>
+    </unit>
+    <unit id="time.startTimerDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/start-timer-dialog.component.ts:51,54</note>
+      </notes>
+      <segment>
+        <source> Cancel </source>
+      </segment>
+    </unit>
+    <unit id="time.startTimerDialog.startButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/start-timer-dialog.component.ts:60,62</note>
+      </notes>
+      <segment>
+        <source> Start </source>
+      </segment>
+    </unit>
+    <unit id="time.stopTimerDialog.title">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/stop-timer-dialog.component.ts:36,38</note>
+      </notes>
+      <segment>
+        <source>Stop timer</source>
+      </segment>
+    </unit>
+    <unit id="time.stopTimerDialog.elapsed">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/stop-timer-dialog.component.ts:39,41</note>
+      </notes>
+      <segment>
+        <source> Elapsed: <pc id="0" equivStart="START_TAG_STRONG" equivEnd="CLOSE_TAG_STRONG" type="other" dispStart="&lt;strong&gt;" dispEnd="&lt;/strong&gt;"><ph id="1" equiv="INTERPOLATION" disp="{{ elapsedLabel() }}"/></pc></source>
+      </segment>
+    </unit>
+    <unit id="time.stopTimerDialog.roundingNote">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/stop-timer-dialog.component.ts:42,47</note>
+      </notes>
+      <segment>
+        <source> Rounds up to <pc id="0" equivStart="START_TAG_STRONG" equivEnd="CLOSE_TAG_STRONG" type="other" dispStart="&lt;strong&gt;" dispEnd="&lt;/strong&gt;"><ph id="1" equiv="INTERPOLATION" disp="{{ roundedMinutes() }}"/> min</pc> (<ph id="2" equiv="INTERPOLATION_1" disp="{{
+          ROUNDING_INCREMENT_MINUTES
+        }}"/>-min increment — the server computes the final value from its own clock). </source>
+      </segment>
+    </unit>
+    <unit id="time.stopTimerDialog.billableToggle">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/stop-timer-dialog.component.ts:49,52</note>
+      </notes>
+      <segment>
+        <source> Billable </source>
+      </segment>
+    </unit>
+    <unit id="time.stopTimerDialog.narrativeLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/stop-timer-dialog.component.ts:54,55</note>
+      </notes>
+      <segment>
+        <source> Narrative<ph id="0" equiv="INTERPOLATION" disp="{{ form.controls.billable.value ? &apos; (required)&apos; : &apos;&apos; }}"/> </source>
+      </segment>
+    </unit>
+    <unit id="time.stopTimerDialog.narrativeError">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/stop-timer-dialog.component.ts:59,61</note>
+      </notes>
+      <segment>
+        <source> 5–2000 characters required for billable time. </source>
+      </segment>
+    </unit>
+    <unit id="time.stopTimerDialog.internalNoteLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/stop-timer-dialog.component.ts:66,68</note>
+      </notes>
+      <segment>
+        <source> Internal note (never leaves the firm) </source>
+      </segment>
+    </unit>
+    <unit id="time.stopTimerDialog.cancelButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/stop-timer-dialog.component.ts:79,82</note>
+      </notes>
+      <segment>
+        <source> Cancel </source>
+      </segment>
+    </unit>
+    <unit id="time.stopTimerDialog.stopSaveButton">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/stop-timer-dialog.component.ts:89,91</note>
+      </notes>
+      <segment>
+        <source> Stop &amp; save </source>
+      </segment>
+    </unit>
+    <unit id="time.timerChip.ariaLabel">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/timer-chip.component.ts:44</note>
+      </notes>
+      <segment>
+        <source>Timer</source>
+      </segment>
+    </unit>
+    <unit id="time.timerChip.startAction">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/timer-chip.component.ts:58,60</note>
+      </notes>
+      <segment>
+        <source>Start timer</source>
+      </segment>
+    </unit>
+    <unit id="time.timerChip.resumeAction">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/timer-chip.component.ts:64,66</note>
+      </notes>
+      <segment>
+        <source>Resume</source>
+      </segment>
+    </unit>
+    <unit id="time.timerChip.pauseAction">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/timer-chip.component.ts:69,72</note>
+      </notes>
+      <segment>
+        <source>Pause</source>
+      </segment>
+    </unit>
+    <unit id="time.timerChip.stopAction">
+      <notes>
+        <note category="location">projects/staff-portal/src/app/features/time/timer/timer-chip.component.ts:74,77</note>
+      </notes>
+      <segment>
+        <source>Stop</source>
       </segment>
     </unit>
     <unit id="time.timesheetGrid.thisWeekButton">

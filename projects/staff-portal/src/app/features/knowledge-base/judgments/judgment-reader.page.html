@@ -2,7 +2,11 @@
   @if (loading()) {
     <mat-progress-bar mode="indeterminate" />
   } @else if (!judgment()) {
-    <lf-empty-state icon="balance" title="Judgment not found" i18n-title="@@kb.judgmentReader.judgmentNotFoundEmptyState" />
+    <lf-empty-state
+      icon="balance"
+      title="Judgment not found"
+      i18n-title="@@kb.judgmentReader.judgmentNotFoundEmptyState"
+    />
   } @else {
     <header class="judgment-reader__header">
       <h1>{{ judgment()!.citation }}</h1>
@@ -37,7 +41,9 @@
         @if (judgment()!.headnote) {
           <p>{{ judgment()!.headnote }}</p>
         } @else {
-          <p class="judgment-reader__hint" i18n="@@kb.judgmentReader.noHeadnoteHint">No headnote recorded.</p>
+          <p class="judgment-reader__hint" i18n="@@kb.judgmentReader.noHeadnoteHint">
+            No headnote recorded.
+          </p>
         }
         @if (judgment()!.ocrStatus === 'Failed') {
           <p class="judgment-reader__hint" i18n="@@kb.judgmentReader.ocrFailedHint">
@@ -49,17 +55,27 @@
 
       <section class="judgment-reader__pdf">
         @if (!judgment()!.documentId) {
-          <lf-empty-state icon="picture_as_pdf" title="No PDF attached" i18n-title="@@kb.judgmentReader.noPdfEmptyState" />
+          <lf-empty-state
+            icon="picture_as_pdf"
+            title="No PDF attached"
+            i18n-title="@@kb.judgmentReader.noPdfEmptyState"
+          />
         } @else if (pdfLoading()) {
           <mat-spinner diameter="32" />
         } @else if (pdfFailed()) {
-          <lf-empty-state icon="error_outline" title="Could not load the PDF" i18n-title="@@kb.judgmentReader.pdfLoadFailedEmptyState" />
+          <lf-empty-state
+            icon="error_outline"
+            title="Could not load the PDF"
+            i18n-title="@@kb.judgmentReader.pdfLoadFailedEmptyState"
+          />
         } @else {
           <div class="judgment-reader__pdf-toolbar">
             <button mat-icon-button type="button" (click)="prevPage()">
               <mat-icon>chevron_left</mat-icon>
             </button>
-            <span i18n="@@kb.judgmentReader.pageOfLabel">Page {{ currentPage() }} / {{ numPages() }}</span>
+            <span i18n="@@kb.judgmentReader.pageOfLabel"
+              >Page {{ currentPage() }} / {{ numPages() }}</span
+            >
             <button mat-icon-button type="button" (click)="nextPage()">
               <mat-icon>chevron_right</mat-icon>
             </button>

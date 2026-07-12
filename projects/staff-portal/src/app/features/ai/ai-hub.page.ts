@@ -17,31 +17,39 @@ import { AiTabsComponent } from './ai-tabs.component';
   template: `
     <div class="ai-hub">
       <lf-ai-tabs />
-      <h1>AI Studio</h1>
-      <p class="ai-hub__note">
+      <h1 i18n="@@ai.aiHub.title">AI Studio</h1>
+      <p class="ai-hub__note" i18n="@@ai.aiHub.note">
         Every AI output here is labeled AI-generated and requires an explicit Save/Insert action —
         nothing an AI feature produces is applied automatically.
       </p>
       <div class="ai-hub__grid">
         <div class="ai-hub__card">
           <mat-icon>auto_awesome</mat-icon>
-          <h2>AI Assistant</h2>
-          <p>Chat with the assistant from the floating dock in the bottom-right corner.</p>
+          <h2 i18n="@@ai.aiHub.assistantTitle">AI Assistant</h2>
+          <p i18n="@@ai.aiHub.assistantDescription">
+            Chat with the assistant from the floating dock in the bottom-right corner.
+          </p>
         </div>
         <a class="ai-hub__card" [routerLink]="['/ai-studio/contract-review']">
           <mat-icon>gavel</mat-icon>
-          <h2>Contract Review</h2>
-          <p>Clause extraction and risk flags for an existing document.</p>
+          <h2 i18n="@@ai.aiHub.contractReviewTitle">Contract Review</h2>
+          <p i18n="@@ai.aiHub.contractReviewDescription">
+            Clause extraction and risk flags for an existing document.
+          </p>
         </a>
         <a class="ai-hub__card" [routerLink]="['/ai-studio/draft-studio']">
           <mat-icon>edit_note</mat-icon>
-          <h2>Draft Studio</h2>
-          <p>Guided intake to generate a notice or agreement draft.</p>
+          <h2 i18n="@@ai.aiHub.draftStudioTitle">Draft Studio</h2>
+          <p i18n="@@ai.aiHub.draftStudioDescription">
+            Guided intake to generate a notice or agreement draft.
+          </p>
         </a>
         <a class="ai-hub__card" [routerLink]="['/ai-studio/research']">
           <mat-icon>menu_book</mat-icon>
-          <h2>Research</h2>
-          <p>Ask a question and get a cited answer from the firm's knowledge base.</p>
+          <h2 i18n="@@ai.aiHub.researchTitle">Research</h2>
+          <p i18n="@@ai.aiHub.researchDescription">
+            Ask a question and get a cited answer from the firm's knowledge base.
+          </p>
         </a>
       </div>
     </div>

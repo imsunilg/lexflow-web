@@ -25,7 +25,12 @@
   <form class="clients-list-page__filters" [formGroup]="form">
     <mat-form-field appearance="outline" class="clients-list-page__search">
       <mat-label i18n="@@clients.list.searchLabel">Search</mat-label>
-      <input matInput formControlName="q" placeholder="Name, number, email, phone" i18n-placeholder="@@clients.list.searchPlaceholder" />
+      <input
+        matInput
+        formControlName="q"
+        placeholder="Name, number, email, phone"
+        i18n-placeholder="@@clients.list.searchPlaceholder"
+      />
       <mat-icon matIconSuffix>search</mat-icon>
     </mat-form-field>
 
@@ -56,7 +61,11 @@
   </form>
 
   <div class="clients-list-page__body">
-    <nav class="clients-list-page__alpha-index" aria-label="Jump to letter" i18n-aria-label="@@clients.list.jumpToLetterAriaLabel">
+    <nav
+      class="clients-list-page__alpha-index"
+      aria-label="Jump to letter"
+      i18n-aria-label="@@clients.list.jumpToLetterAriaLabel"
+    >
       <button
         mat-icon-button
         type="button"

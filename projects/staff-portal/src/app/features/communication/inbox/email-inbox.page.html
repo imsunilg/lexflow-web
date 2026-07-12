@@ -4,13 +4,20 @@
   <div class="inbox__panes">
     <aside class="inbox__pane inbox__pane--filters">
       <button mat-flat-button color="primary" type="button" (click)="openComposer()">
-        <mat-icon>edit</mat-icon> <span i18n="@@communication.emailInbox.newEmailButton">New email</span>
+        <mat-icon>edit</mat-icon>
+        <span i18n="@@communication.emailInbox.newEmailButton">New email</span>
       </button>
 
-      <mat-slide-toggle [formControl]="triageOnly" i18n="@@communication.emailInbox.triageOnlyToggle">Triage queue only</mat-slide-toggle>
+      <mat-slide-toggle
+        [formControl]="triageOnly"
+        i18n="@@communication.emailInbox.triageOnlyToggle"
+        >Triage queue only</mat-slide-toggle
+      >
 
       <mat-form-field appearance="outline">
-        <mat-label i18n="@@communication.emailInbox.filterByMatterLabel">Filter by matter</mat-label>
+        <mat-label i18n="@@communication.emailInbox.filterByMatterLabel"
+          >Filter by matter</mat-label
+        >
         <input matInput [formControl]="matterControl" [matAutocomplete]="matterAuto" />
         <mat-autocomplete #matterAuto="matAutocomplete" (optionSelected)="onMatterSelected($event)">
           @for (matter of matterResults(); track matter.id) {
@@ -29,7 +36,9 @@
         </div>
       }
 
-      <h3 class="inbox__mailboxes-title" i18n="@@communication.emailInbox.knownMailboxesTitle">Known mailboxes</h3>
+      <h3 class="inbox__mailboxes-title" i18n="@@communication.emailInbox.knownMailboxesTitle">
+        Known mailboxes
+      </h3>
       @if (mailboxRegistry.mailboxes().length === 0) {
         <p class="inbox__hint" i18n="@@communication.emailInbox.noMailboxesHint">None yet.</p>
       }
@@ -38,7 +47,12 @@
           <li>{{ mailbox.label }}</li>
         }
       </ul>
-      <button mat-stroked-button type="button" (click)="openConnectMailbox()" i18n="@@communication.emailInbox.connectMailboxButton">
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="openConnectMailbox()"
+        i18n="@@communication.emailInbox.connectMailboxButton"
+      >
         Connect mailbox
       </button>
     </aside>
@@ -47,7 +61,11 @@
       @if (threadsLoading()) {
         <mat-progress-bar mode="indeterminate" />
       } @else if (threads().length === 0) {
-        <lf-empty-state icon="mail" title="No threads" i18n-title="@@communication.emailInbox.noThreadsEmptyState" />
+        <lf-empty-state
+          icon="mail"
+          title="No threads"
+          i18n-title="@@communication.emailInbox.noThreadsEmptyState"
+        />
       } @else {
         <ul class="inbox__thread-list">
           @for (thread of threads(); track thread.id) {
@@ -76,15 +94,26 @@
 
     <section class="inbox__pane inbox__pane--thread">
       @if (!selectedThread()) {
-        <lf-empty-state icon="forum" title="Select a thread" i18n-title="@@communication.emailInbox.selectThreadEmptyState" />
+        <lf-empty-state
+          icon="forum"
+          title="Select a thread"
+          i18n-title="@@communication.emailInbox.selectThreadEmptyState"
+        />
       } @else {
         <div class="inbox__matter-banner">
           @if (selectedThread()!.matterId) {
-            <span i18n="@@communication.emailInbox.filedUnderMatter">Filed under matter {{ selectedThread()!.matterId }}</span>
+            <span i18n="@@communication.emailInbox.filedUnderMatter"
+              >Filed under matter {{ selectedThread()!.matterId }}</span
+            >
           } @else {
             <span i18n="@@communication.emailInbox.notFiledToMatter">Not filed to a matter</span>
             @if (activeMatterId()) {
-              <button mat-button type="button" (click)="linkToActiveMatter()" i18n="@@communication.emailInbox.linkToMatterButton">
+              <button
+                mat-button
+                type="button"
+                (click)="linkToActiveMatter()"
+                i18n="@@communication.emailInbox.linkToMatterButton"
+              >
                 Link to {{ activeMatterLabel() }}
               </button>
             }
@@ -109,13 +138,23 @@
                 }
                 @if (message.hasAttachments) {
                   <span class="inbox__message-attachment">
-                    <mat-icon>attach_file</mat-icon> <span i18n="@@communication.emailInbox.hasAttachmentsLabel">Has attachments</span>
+                    <mat-icon>attach_file</mat-icon>
+                    <span i18n="@@communication.emailInbox.hasAttachmentsLabel"
+                      >Has attachments</span
+                    >
                   </span>
                 }
               </li>
             }
           </ul>
-          <button mat-stroked-button type="button" (click)="openReply()" i18n="@@communication.emailInbox.replyButton">Reply</button>
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="openReply()"
+            i18n="@@communication.emailInbox.replyButton"
+          >
+            Reply
+          </button>
         }
       }
     </section>

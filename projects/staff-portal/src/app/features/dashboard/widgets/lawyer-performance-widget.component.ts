@@ -16,25 +16,49 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
   imports: [DashboardWidgetComponent, EmptyStateComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-dashboard-widget title="Performance Charts" [loading]="loading()" (refresh)="load()">
+    <lf-dashboard-widget
+      title="Performance Charts"
+      i18n-title="@@dashboard.lawyerPerformanceWidget.title"
+      [loading]="loading()"
+      (refresh)="load()"
+    >
       @if (error()) {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load performance data"
+          i18n-title="@@dashboard.lawyerPerformanceWidget.errorTitle"
           message="Something went wrong."
+          i18n-message="@@dashboard.lawyerPerformanceWidget.errorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@dashboard.lawyerPerformanceWidget.retryLabel"
           (cta)="load()"
         />
       } @else if (!loading() && data()?.length === 0) {
-        <lf-empty-state icon="query_stats" title="No performance data for this period" />
+        <lf-empty-state
+          icon="query_stats"
+          title="No performance data for this period"
+          i18n-title="@@dashboard.lawyerPerformanceWidget.emptyTitle"
+        />
       } @else if (data()) {
         <ul class="performance-list">
           @for (lawyer of data(); track lawyer.lawyerId) {
             <li class="performance-list__row">
               <span class="performance-list__name">{{ lawyer.lawyerName }}</span>
-              <span class="performance-list__stat">{{ lawyer.billableHours }} hrs</span>
-              <span class="performance-list__stat">{{ lawyer.utilizationPct }}% util</span>
-              <span class="performance-list__stat">{{ lawyer.realizationPct }}% realization</span>
+              <span
+                class="performance-list__stat"
+                i18n="@@dashboard.lawyerPerformanceWidget.hoursLabel"
+                >{{ lawyer.billableHours }} hrs</span
+              >
+              <span
+                class="performance-list__stat"
+                i18n="@@dashboard.lawyerPerformanceWidget.utilizationLabel"
+                >{{ lawyer.utilizationPct }}% util</span
+              >
+              <span
+                class="performance-list__stat"
+                i18n="@@dashboard.lawyerPerformanceWidget.realizationLabel"
+                >{{ lawyer.realizationPct }}% realization</span
+              >
             </li>
           }
         </ul>

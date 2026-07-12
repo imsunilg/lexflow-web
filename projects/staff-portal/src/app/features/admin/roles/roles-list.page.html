@@ -4,7 +4,12 @@
   <header class="roles-list__header">
     <h1 i18n="@@admin.rolesList.title">Roles</h1>
     <div class="roles-list__actions">
-      <a mat-stroked-button [routerLink]="['/admin/roles/matrix']" i18n="@@admin.rolesList.permissionMatrixLink">Permission matrix</a>
+      <a
+        mat-stroked-button
+        [routerLink]="['/admin/roles/matrix']"
+        i18n="@@admin.rolesList.permissionMatrixLink"
+        >Permission matrix</a
+      >
       <button mat-flat-button color="primary" type="button" (click)="openNew()">
         <mat-icon>add</mat-icon>
         <ng-container i18n="@@admin.rolesList.newRoleButton">New custom role</ng-container>
@@ -15,7 +20,11 @@
   @if (loading()) {
     <mat-progress-bar mode="indeterminate" />
   } @else if (roles().length === 0) {
-    <lf-empty-state icon="admin_panel_settings" title="No roles" i18n-title="@@admin.rolesList.emptyTitle" />
+    <lf-empty-state
+      icon="admin_panel_settings"
+      title="No roles"
+      i18n-title="@@admin.rolesList.emptyTitle"
+    />
   } @else {
     <table class="roles-list__table">
       <thead>

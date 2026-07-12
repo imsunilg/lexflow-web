@@ -45,10 +45,14 @@ import { AuthCardComponent } from './auth-card.component';
             maxlength="6"
           />
           @if (form.controls.code.hasError('required') && form.controls.code.touched) {
-            <mat-error i18n="@@auth.twoFaChallenge.codeRequiredError">Enter the 6-digit code.</mat-error>
+            <mat-error i18n="@@auth.twoFaChallenge.codeRequiredError"
+              >Enter the 6-digit code.</mat-error
+            >
           }
           @if (form.controls.code.hasError('pattern') && form.controls.code.touched) {
-            <mat-error i18n="@@auth.twoFaChallenge.codePatternError">Code must be 6 digits.</mat-error>
+            <mat-error i18n="@@auth.twoFaChallenge.codePatternError"
+              >Code must be 6 digits.</mat-error
+            >
           }
         </mat-form-field>
 

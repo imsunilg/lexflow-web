@@ -16,6 +16,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #hubActive="routerLinkActive"
         [active]="hubActive.isActive"
+        i18n="@@ai.aiTabs.hub"
       >
         Hub
       </a>
@@ -25,6 +26,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #contractActive="routerLinkActive"
         [active]="contractActive.isActive"
+        i18n="@@ai.aiTabs.contractReview"
       >
         Contract Review
       </a>
@@ -34,6 +36,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #draftActive="routerLinkActive"
         [active]="draftActive.isActive"
+        i18n="@@ai.aiTabs.draftStudio"
       >
         Draft Studio
       </a>
@@ -43,6 +46,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #researchActive="routerLinkActive"
         [active]="researchActive.isActive"
+        i18n="@@ai.aiTabs.research"
       >
         Research
       </a>

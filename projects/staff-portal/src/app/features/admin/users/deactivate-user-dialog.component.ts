@@ -36,14 +36,16 @@ interface AssignmentRow {
   imports: [MatButtonModule, MatDialogModule, MatProgressBarModule, MatSelectModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Deactivate user</h2>
+    <h2 mat-dialog-title i18n="@@admin.deactivateUserDialog.title">Deactivate user</h2>
     <mat-dialog-content class="deactivate-user">
       @if (loading()) {
         <mat-progress-bar mode="indeterminate" />
       } @else if (rows().length === 0) {
-        <p>No unresolved assignments — this user can be deactivated immediately.</p>
+        <p i18n="@@admin.deactivateUserDialog.noAssignments">
+          No unresolved assignments — this user can be deactivated immediately.
+        </p>
       } @else {
-        <p>
+        <p i18n="@@admin.deactivateUserDialog.assignmentsIntro">
           This user has {{ rows().length }} unresolved assignment{{
             rows().length === 1 ? '' : 's'
           }}
@@ -54,6 +56,7 @@ interface AssignmentRow {
             <span>{{ row.assignment.description }}</span>
             <mat-select
               placeholder="Reassign to…"
+              i18n-placeholder="@@admin.deactivateUserDialog.reassignPlaceholder"
               [value]="row.newAssigneeUserId"
               (selectionChange)="setAssignee(row, $event.value)"
             >
@@ -70,13 +73,21 @@ interface AssignmentRow {
       }
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@admin.deactivateUserDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="warn"
         type="button"
         [disabled]="loading() || submitting() || !allResolved()"
         (click)="submit()"
+        i18n="@@admin.deactivateUserDialog.submitButton"
       >
         Deactivate
       </button>

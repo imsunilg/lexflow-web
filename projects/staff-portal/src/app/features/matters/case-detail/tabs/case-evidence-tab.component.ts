@@ -72,13 +72,20 @@ function buildCustodyForm(): FormGroup<{
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load evidence"
+          i18n-title="@@matters.caseEvidenceTab.loadErrorTitle"
           message="Something went wrong while loading evidence."
+          i18n-message="@@matters.caseEvidenceTab.loadErrorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@matters.caseEvidenceTab.retryButton"
           (cta)="load()"
         />
       } @else {
         @if (evidenceItems().length === 0) {
-          <lf-empty-state icon="inventory_2" title="No evidence recorded yet" />
+          <lf-empty-state
+            icon="inventory_2"
+            title="No evidence recorded yet"
+            i18n-title="@@matters.caseEvidenceTab.emptyTitle"
+          />
         } @else {
           <div class="evidence-tab__list">
             @for (item of evidenceItems(); track item.id) {
@@ -88,16 +95,32 @@ function buildCustodyForm(): FormGroup<{
                   <lf-status-chip [label]="item.kind" toneOverride="neutral" />
                   <span class="evidence-tab__description">{{ item.description ?? '—' }}</span>
                   @if (item.marked) {
-                    <lf-status-chip label="Marked" toneOverride="success" />
+                    <lf-status-chip
+                      label="Marked"
+                      i18n-label="@@matters.caseEvidenceTab.markedLabel"
+                      toneOverride="success"
+                    />
                   }
                   @if (item.objected) {
-                    <lf-status-chip label="Objected" toneOverride="error" />
+                    <lf-status-chip
+                      label="Objected"
+                      i18n-label="@@matters.caseEvidenceTab.objectedLabel"
+                      toneOverride="error"
+                    />
                   }
                   @if (item.custodyStatus) {
                     <span class="evidence-tab__custody-status">{{ item.custodyStatus }}</span>
                   }
                   <button mat-button type="button" (click)="toggleCustodyLog(item)">
-                    {{ expandedId() === item.id ? 'Hide custody log' : 'Chain of custody' }}
+                    @if (expandedId() === item.id) {
+                      <span i18n="@@matters.caseEvidenceTab.hideCustodyLogButton"
+                        >Hide custody log</span
+                      >
+                    } @else {
+                      <span i18n="@@matters.caseEvidenceTab.chainOfCustodyButton"
+                        >Chain of custody</span
+                      >
+                    }
                   </button>
                 </div>
 
@@ -107,7 +130,12 @@ function buildCustodyForm(): FormGroup<{
                       <mat-spinner diameter="24" />
                     } @else {
                       @if (custodyLog().length === 0) {
-                        <p class="evidence-tab__custody-empty">No custody entries yet.</p>
+                        <p
+                          class="evidence-tab__custody-empty"
+                          i18n="@@matters.caseEvidenceTab.custodyEmpty"
+                        >
+                          No custody entries yet.
+                        </p>
                       } @else {
                         <ul class="evidence-tab__custody-list">
                           @for (entry of custodyLog(); track entry.id) {
@@ -129,15 +157,21 @@ function buildCustodyForm(): FormGroup<{
 
                       <form [formGroup]="custodyForm" class="evidence-tab__custody-form">
                         <mat-form-field appearance="outline">
-                          <mat-label>Action</mat-label>
+                          <mat-label i18n="@@matters.caseEvidenceTab.custodyActionLabel"
+                            >Action</mat-label
+                          >
                           <input matInput formControlName="action" />
                         </mat-form-field>
                         <mat-form-field appearance="outline">
-                          <mat-label>Holder</mat-label>
+                          <mat-label i18n="@@matters.caseEvidenceTab.custodyHolderLabel"
+                            >Holder</mat-label
+                          >
                           <input matInput formControlName="holder" />
                         </mat-form-field>
                         <mat-form-field appearance="outline">
-                          <mat-label>Note</mat-label>
+                          <mat-label i18n="@@matters.caseEvidenceTab.custodyNoteLabel"
+                            >Note</mat-label
+                          >
                           <textarea matInput formControlName="note"></textarea>
                         </mat-form-field>
                         <button
@@ -149,7 +183,9 @@ function buildCustodyForm(): FormGroup<{
                           @if (addingCustodyEntry()) {
                             <mat-spinner diameter="18" />
                           } @else {
-                            Add custody entry
+                            <span i18n="@@matters.caseEvidenceTab.addCustodyEntryButton"
+                              >Add custody entry</span
+                            >
                           }
                         </button>
                       </form>
@@ -165,14 +201,16 @@ function buildCustodyForm(): FormGroup<{
         }
 
         <div class="evidence-tab__add">
-          <h3 class="evidence-tab__add-title">Add evidence</h3>
+          <h3 class="evidence-tab__add-title" i18n="@@matters.caseEvidenceTab.addTitle">
+            Add evidence
+          </h3>
           <form [formGroup]="addForm" class="evidence-tab__form">
             <mat-form-field appearance="outline">
-              <mat-label>Exhibit no.</mat-label>
+              <mat-label i18n="@@matters.caseEvidenceTab.exhibitNoLabel">Exhibit no.</mat-label>
               <input matInput formControlName="exhibitNo" />
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Kind</mat-label>
+              <mat-label i18n="@@matters.caseEvidenceTab.kindLabel">Kind</mat-label>
               <mat-select formControlName="kind">
                 @for (kind of evidenceKinds; track kind) {
                   <mat-option [value]="kind">{{ kind }}</mat-option>
@@ -180,7 +218,7 @@ function buildCustodyForm(): FormGroup<{
               </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Description</mat-label>
+              <mat-label i18n="@@matters.caseEvidenceTab.descriptionLabel">Description</mat-label>
               <textarea matInput formControlName="description"></textarea>
             </mat-form-field>
           </form>
@@ -195,7 +233,7 @@ function buildCustodyForm(): FormGroup<{
             @if (addingEvidence()) {
               <mat-spinner diameter="18" />
             } @else {
-              Add evidence
+              <span i18n="@@matters.caseEvidenceTab.addEvidenceButton">Add evidence</span>
             }
           </button>
 

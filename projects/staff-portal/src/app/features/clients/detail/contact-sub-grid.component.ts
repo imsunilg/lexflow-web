@@ -88,8 +88,11 @@ function toInput(value: ContactFormValue): ClientContactInput {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load contacts"
+          i18n-title="@@clients.contactSubGrid.loadErrorTitle"
           message="Something went wrong while loading contact persons."
+          i18n-message="@@clients.contactSubGrid.loadErrorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@clients.contactSubGrid.retryCta"
           (cta)="load()"
         />
       } @else {
@@ -97,17 +100,19 @@ function toInput(value: ContactFormValue): ClientContactInput {
           <lf-empty-state
             icon="contacts"
             title="No contact persons yet"
+            i18n-title="@@clients.contactSubGrid.emptyTitle"
             ctaLabel="Add contact"
+            i18n-ctaLabel="@@clients.contactSubGrid.addContactCta"
             (cta)="startAdd()"
           />
         } @else {
           <table class="contact-sub-grid__table">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Designation</th>
-                <th>Email</th>
-                <th>Phone</th>
+                <th i18n="@@clients.contactSubGrid.nameHeader">Name</th>
+                <th i18n="@@clients.contactSubGrid.designationHeader">Designation</th>
+                <th i18n="@@clients.contactSubGrid.emailHeader">Email</th>
+                <th i18n="@@clients.contactSubGrid.phoneHeader">Phone</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -119,24 +124,41 @@ function toInput(value: ContactFormValue): ClientContactInput {
                     <td colspan="6">
                       <form [formGroup]="editForm!" class="contact-sub-grid__form">
                         <mat-form-field appearance="outline">
-                          <mat-label>Name</mat-label>
+                          <mat-label i18n="@@clients.contactSubGrid.formNameLabel">Name</mat-label>
                           <input matInput formControlName="name" />
                         </mat-form-field>
                         <mat-form-field appearance="outline">
-                          <mat-label>Designation</mat-label>
+                          <mat-label i18n="@@clients.contactSubGrid.formDesignationLabel"
+                            >Designation</mat-label
+                          >
                           <input matInput formControlName="designation" />
                         </mat-form-field>
                         <mat-form-field appearance="outline">
-                          <mat-label>Email</mat-label>
+                          <mat-label i18n="@@clients.contactSubGrid.formEmailLabel"
+                            >Email</mat-label
+                          >
                           <input matInput formControlName="email" />
                         </mat-form-field>
                         <mat-form-field appearance="outline">
-                          <mat-label>Phone</mat-label>
+                          <mat-label i18n="@@clients.contactSubGrid.formPhoneLabel"
+                            >Phone</mat-label
+                          >
                           <input matInput formControlName="phone" />
                         </mat-form-field>
-                        <mat-checkbox formControlName="isPrimary">Primary</mat-checkbox>
+                        <mat-checkbox
+                          formControlName="isPrimary"
+                          i18n="@@clients.contactSubGrid.primaryCheckbox"
+                          >Primary</mat-checkbox
+                        >
                         <div class="contact-sub-grid__form-actions">
-                          <button mat-button type="button" (click)="cancelEdit()">Cancel</button>
+                          <button
+                            mat-button
+                            type="button"
+                            (click)="cancelEdit()"
+                            i18n="@@clients.contactSubGrid.cancelButton"
+                          >
+                            Cancel
+                          </button>
                           <button
                             mat-flat-button
                             color="primary"
@@ -147,7 +169,7 @@ function toInput(value: ContactFormValue): ClientContactInput {
                             @if (saving()) {
                               <mat-spinner diameter="18" />
                             } @else {
-                              Save
+                              <span i18n="@@clients.contactSubGrid.saveButton">Save</span>
                             }
                           </button>
                         </div>
@@ -162,7 +184,11 @@ function toInput(value: ContactFormValue): ClientContactInput {
                     <td>
                       {{ contact.name }}
                       @if (contact.isPrimary) {
-                        <lf-status-chip label="Primary" toneOverride="info" />
+                        <lf-status-chip
+                          label="Primary"
+                          i18n-label="@@clients.contactSubGrid.primaryCheckbox"
+                          toneOverride="info"
+                        />
                       }
                     </td>
                     <td>{{ contact.designation ?? '—' }}</td>
@@ -173,6 +199,7 @@ function toInput(value: ContactFormValue): ClientContactInput {
                         mat-icon-button
                         type="button"
                         aria-label="Edit contact"
+                        i18n-aria-label="@@clients.contactSubGrid.editAriaLabel"
                         (click)="startEdit(contact)"
                       >
                         <mat-icon>edit</mat-icon>
@@ -183,6 +210,7 @@ function toInput(value: ContactFormValue): ClientContactInput {
                         mat-icon-button
                         type="button"
                         aria-label="Delete contact"
+                        i18n-aria-label="@@clients.contactSubGrid.deleteAriaLabel"
                         (click)="deleteContact(contact)"
                       >
                         <mat-icon>delete</mat-icon>
@@ -198,27 +226,42 @@ function toInput(value: ContactFormValue): ClientContactInput {
         @if (addingNew()) {
           <form [formGroup]="addForm" class="contact-sub-grid__form contact-sub-grid__form--add">
             <mat-form-field appearance="outline">
-              <mat-label>Name</mat-label>
+              <mat-label i18n="@@clients.contactSubGrid.formNameLabel">Name</mat-label>
               <input matInput formControlName="name" />
               @if (addForm.controls.name.hasError('required') && addForm.controls.name.touched) {
-                <mat-error>Name is required.</mat-error>
+                <mat-error i18n="@@clients.contactSubGrid.nameRequiredError"
+                  >Name is required.</mat-error
+                >
               }
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Designation</mat-label>
+              <mat-label i18n="@@clients.contactSubGrid.formDesignationLabel"
+                >Designation</mat-label
+              >
               <input matInput formControlName="designation" />
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Email</mat-label>
+              <mat-label i18n="@@clients.contactSubGrid.formEmailLabel">Email</mat-label>
               <input matInput formControlName="email" />
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Phone</mat-label>
+              <mat-label i18n="@@clients.contactSubGrid.formPhoneLabel">Phone</mat-label>
               <input matInput formControlName="phone" />
             </mat-form-field>
-            <mat-checkbox formControlName="isPrimary">Primary</mat-checkbox>
+            <mat-checkbox
+              formControlName="isPrimary"
+              i18n="@@clients.contactSubGrid.primaryCheckbox"
+              >Primary</mat-checkbox
+            >
             <div class="contact-sub-grid__form-actions">
-              <button mat-button type="button" (click)="cancelAdd()">Cancel</button>
+              <button
+                mat-button
+                type="button"
+                (click)="cancelAdd()"
+                i18n="@@clients.contactSubGrid.cancelButton"
+              >
+                Cancel
+              </button>
               <button
                 mat-flat-button
                 color="primary"
@@ -229,7 +272,7 @@ function toInput(value: ContactFormValue): ClientContactInput {
                 @if (saving()) {
                   <mat-spinner diameter="18" />
                 } @else {
-                  Add contact
+                  <span i18n="@@clients.contactSubGrid.addContactButton">Add contact</span>
                 }
               </button>
             </div>
@@ -240,7 +283,7 @@ function toInput(value: ContactFormValue): ClientContactInput {
         } @else if (contacts().length > 0) {
           <button mat-stroked-button type="button" (click)="startAdd()">
             <mat-icon>add</mat-icon>
-            Add contact
+            <span i18n="@@clients.contactSubGrid.addContactButton">Add contact</span>
           </button>
         }
       }

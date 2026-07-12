@@ -1,4 +1,6 @@
-<h2 mat-dialog-title i18n="@@tasks.applyTemplateDialog.title">Apply "{{ data.template.name }}" to a matter</h2>
+<h2 mat-dialog-title i18n="@@tasks.applyTemplateDialog.title">
+  Apply "{{ data.template.name }}" to a matter
+</h2>
 
 <mat-dialog-content class="apply-template">
   <mat-form-field appearance="outline">
@@ -19,7 +21,9 @@
     <input matInput [matDatepicker]="anchorPicker" [formControl]="anchorDate" />
     <mat-datepicker-toggle matIconSuffix [for]="anchorPicker" />
     <mat-datepicker #anchorPicker />
-    <mat-hint i18n="@@tasks.applyTemplateDialog.anchorDateHint">Each item's due date = this date + its relative due days.</mat-hint>
+    <mat-hint i18n="@@tasks.applyTemplateDialog.anchorDateHint"
+      >Each item's due date = this date + its relative due days.</mat-hint
+    >
   </mat-form-field>
 
   @if (error) {
@@ -28,7 +32,14 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button type="button" (click)="cancel()" i18n="@@tasks.applyTemplateDialog.cancelButton">Cancel</button>
+  <button
+    mat-button
+    type="button"
+    (click)="cancel()"
+    i18n="@@tasks.applyTemplateDialog.cancelButton"
+  >
+    Cancel
+  </button>
   <button mat-flat-button color="primary" type="button" [disabled]="submitting" (click)="submit()">
     @if (submitting) {
       <mat-spinner diameter="18" />

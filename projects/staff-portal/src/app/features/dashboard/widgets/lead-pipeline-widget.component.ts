@@ -16,17 +16,29 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
   imports: [DashboardWidgetComponent, EmptyStateComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-dashboard-widget title="Lead Pipeline" [loading]="loading()" (refresh)="load()">
+    <lf-dashboard-widget
+      title="Lead Pipeline"
+      i18n-title="@@dashboard.leadPipelineWidget.title"
+      [loading]="loading()"
+      (refresh)="load()"
+    >
       @if (error()) {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load lead pipeline"
+          i18n-title="@@dashboard.leadPipelineWidget.errorTitle"
           message="Something went wrong."
+          i18n-message="@@dashboard.leadPipelineWidget.errorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@dashboard.leadPipelineWidget.retryLabel"
           (cta)="load()"
         />
       } @else if (!loading() && data()?.length === 0) {
-        <lf-empty-state icon="filter_alt_off" title="No leads in the pipeline" />
+        <lf-empty-state
+          icon="filter_alt_off"
+          title="No leads in the pipeline"
+          i18n-title="@@dashboard.leadPipelineWidget.emptyTitle"
+        />
       } @else if (data()) {
         <ul class="pipeline-list">
           @for (stage of data(); track stage.stage) {

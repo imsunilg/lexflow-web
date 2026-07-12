@@ -15,17 +15,29 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
   imports: [DashboardWidgetComponent, EmptyStateComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-dashboard-widget title="Today's Hearings" [loading]="loading()" (refresh)="load()">
+    <lf-dashboard-widget
+      title="Today's Hearings"
+      i18n-title="@@dashboard.hearingsTodayWidget.title"
+      [loading]="loading()"
+      (refresh)="load()"
+    >
       @if (error()) {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load today's hearings"
+          i18n-title="@@dashboard.hearingsTodayWidget.errorTitle"
           message="Something went wrong."
+          i18n-message="@@dashboard.hearingsTodayWidget.errorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@dashboard.hearingsTodayWidget.retryLabel"
           (cta)="load()"
         />
       } @else if (!loading() && data()?.length === 0) {
-        <lf-empty-state icon="event_available" title="No hearings scheduled today" />
+        <lf-empty-state
+          icon="event_available"
+          title="No hearings scheduled today"
+          i18n-title="@@dashboard.hearingsTodayWidget.emptyTitle"
+        />
       } @else if (data()) {
         <ul class="hearings-list">
           @for (hearing of data(); track hearing.id) {
@@ -38,7 +50,11 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
                 >
               </span>
               @if (!hearing.assignedLawyerName) {
-                <span class="hearings-list__unassigned">Unassigned</span>
+                <span
+                  class="hearings-list__unassigned"
+                  i18n="@@dashboard.hearingsTodayWidget.unassignedLabel"
+                  >Unassigned</span
+                >
               }
             </li>
           }

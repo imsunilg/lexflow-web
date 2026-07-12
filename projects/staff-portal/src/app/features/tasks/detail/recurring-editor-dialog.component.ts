@@ -45,9 +45,11 @@ function addInterval(date: Date, unit: IntervalUnit, every: number): Date {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Repeat "{{ data.seed.title }}"</h2>
+    <h2 mat-dialog-title i18n="@@tasks.recurringEditorDialog.title">
+      Repeat "{{ data.seed.title }}"
+    </h2>
     <mat-dialog-content class="recurring">
-      <p class="recurring__note">
+      <p class="recurring__note" i18n="@@tasks.recurringEditorDialog.note">
         LexFlow has no recurrence engine yet — this creates independent copies of this task with
         computed due dates. They are not linked as a series (no API field exists for that);
         cancelling or editing one has no effect on the others.
@@ -55,12 +57,12 @@ function addInterval(date: Date, unit: IntervalUnit, every: number): Date {
 
       <div class="recurring__row">
         <mat-form-field appearance="outline">
-          <mat-label>Every</mat-label>
+          <mat-label i18n="@@tasks.recurringEditorDialog.everyLabel">Every</mat-label>
           <input matInput type="number" min="1" [formControl]="every" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Interval</mat-label>
+          <mat-label i18n="@@tasks.recurringEditorDialog.intervalLabel">Interval</mat-label>
           <mat-select [formControl]="unit">
             @for (u of units; track u) {
               <mat-option [value]="u">{{ u }}</mat-option>
@@ -69,26 +71,34 @@ function addInterval(date: Date, unit: IntervalUnit, every: number): Date {
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Occurrences</mat-label>
+          <mat-label i18n="@@tasks.recurringEditorDialog.occurrencesLabel">Occurrences</mat-label>
           <input matInput type="number" min="1" max="52" [formControl]="occurrences" />
         </mat-form-field>
       </div>
 
       @if (!data.seed.dueAt) {
-        <p class="recurring__warning">
+        <p class="recurring__warning" i18n="@@tasks.recurringEditorDialog.noDueDateWarning">
           This task has no due date — future copies will also be created without one, spaced by
           creation order only.
         </p>
       }
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@tasks.recurringEditorDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="primary"
         type="button"
         [disabled]="submitting() || every.invalid || occurrences.invalid"
         (click)="submit()"
+        i18n="@@tasks.recurringEditorDialog.createButton"
       >
         Create {{ occurrences.value }} tasks
       </button>

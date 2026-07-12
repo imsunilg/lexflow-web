@@ -40,7 +40,9 @@
         <span class="composer__preview-chip">{{ preview.assigneeMention }}</span>
       }
       @if (preview.dueAt) {
-        <span class="composer__preview-chip" i18n="@@tasks.taskComposer.dueLabel">Due {{ preview.dueAt | date: 'MMM d, y' }}</span>
+        <span class="composer__preview-chip" i18n="@@tasks.taskComposer.dueLabel"
+          >Due {{ preview.dueAt | date: 'MMM d, y' }}</span
+        >
       }
       <span class="composer__preview-chip">{{ preview.priority }}</span>
       <span class="composer__preview-note" i18n="@@tasks.taskComposer.reviewNote"
@@ -54,7 +56,9 @@
       <mat-label i18n="@@tasks.taskComposer.titleLabel">Title</mat-label>
       <input matInput [formControl]="title" maxlength="300" />
       @if (title.invalid && title.touched) {
-        <mat-error i18n="@@tasks.taskComposer.titleLengthError">3–300 characters required.</mat-error>
+        <mat-error i18n="@@tasks.taskComposer.titleLengthError"
+          >3–300 characters required.</mat-error
+        >
       }
     </mat-form-field>
 
@@ -83,7 +87,9 @@
           }
         </mat-autocomplete>
         @if (ownerLookupUnavailable()) {
-          <mat-hint i18n="@@tasks.taskComposer.ownerLookupHint">No user directory access — owner can be assigned later.</mat-hint>
+          <mat-hint i18n="@@tasks.taskComposer.ownerLookupHint"
+            >No user directory access — owner can be assigned later.</mat-hint
+          >
         }
       </mat-form-field>
     </div>
@@ -118,8 +124,17 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button type="button" (click)="cancel()" i18n="@@tasks.taskComposer.cancelButton">Cancel</button>
-  <button mat-flat-button color="primary" type="button" [disabled]="submitting" (click)="submit()" i18n="@@tasks.taskComposer.createButton">
+  <button mat-button type="button" (click)="cancel()" i18n="@@tasks.taskComposer.cancelButton">
+    Cancel
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    type="button"
+    [disabled]="submitting"
+    (click)="submit()"
+    i18n="@@tasks.taskComposer.createButton"
+  >
     Create task
   </button>
 </mat-dialog-actions>

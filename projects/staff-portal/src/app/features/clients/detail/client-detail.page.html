@@ -17,18 +17,32 @@
         <lf-status-chip [label]="client()!.type" toneOverride="info" />
         <lf-status-chip [label]="client()!.status" />
         @if (client()!.portalEnabled) {
-          <lf-status-chip label="Portal on" i18n-label="@@clients.detail.portalOnChip" toneOverride="success" />
+          <lf-status-chip
+            label="Portal on"
+            i18n-label="@@clients.detail.portalOnChip"
+            toneOverride="success"
+          />
         } @else {
-          <lf-status-chip label="Portal off" i18n-label="@@clients.detail.portalOffChip" toneOverride="neutral" />
+          <lf-status-chip
+            label="Portal off"
+            i18n-label="@@clients.detail.portalOffChip"
+            toneOverride="neutral"
+          />
         }
       </div>
 
       <div class="client-detail__header-chips">
         @if (summary()) {
-          <span class="client-detail__chip client-detail__chip--outstanding" i18n="@@clients.detail.outstandingChip">
+          <span
+            class="client-detail__chip client-detail__chip--outstanding"
+            i18n="@@clients.detail.outstandingChip"
+          >
             Outstanding: {{ summary()!.outstanding | lfCurrency }}
           </span>
-          <span class="client-detail__chip client-detail__chip--trust" i18n="@@clients.detail.trustChip">
+          <span
+            class="client-detail__chip client-detail__chip--trust"
+            i18n="@@clients.detail.trustChip"
+          >
             Trust: {{ summary()!.trustBalance | lfCurrency }}
           </span>
         }
@@ -72,7 +86,9 @@
           <section>
             <h2 i18n="@@clients.detail.addressesHeading">Addresses</h2>
             @if (addresses().length === 0) {
-              <p class="client-detail__hint" i18n="@@clients.detail.noAddressesHint">No addresses yet.</p>
+              <p class="client-detail__hint" i18n="@@clients.detail.noAddressesHint">
+                No addresses yet.
+              </p>
             } @else {
               <ul class="client-detail__address-list">
                 @for (address of addresses(); track address.id) {
@@ -94,7 +110,12 @@
             }
 
             @if (!addingAddress()) {
-              <button mat-stroked-button type="button" (click)="addingAddress.set(true)" i18n="@@clients.detail.addAddressButton">
+              <button
+                mat-stroked-button
+                type="button"
+                (click)="addingAddress.set(true)"
+                i18n="@@clients.detail.addAddressButton"
+              >
                 Add address
               </button>
             } @else {
@@ -116,10 +137,21 @@
                   <input matInput formControlName="city" />
                 </mat-form-field>
                 <div class="client-detail__form-actions">
-                  <button mat-button type="button" (click)="addingAddress.set(false)" i18n="@@clients.detail.cancelButton">
+                  <button
+                    mat-button
+                    type="button"
+                    (click)="addingAddress.set(false)"
+                    i18n="@@clients.detail.cancelButton"
+                  >
                     Cancel
                   </button>
-                  <button mat-flat-button color="primary" type="button" (click)="addAddress()" i18n="@@clients.detail.saveButton">
+                  <button
+                    mat-flat-button
+                    color="primary"
+                    type="button"
+                    (click)="addAddress()"
+                    i18n="@@clients.detail.saveButton"
+                  >
                     Save
                   </button>
                 </div>

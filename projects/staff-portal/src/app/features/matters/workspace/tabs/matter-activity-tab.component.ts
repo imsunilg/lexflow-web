@@ -43,12 +43,19 @@ const ACTIVITY_ICONS: Record<string, string> = {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load activity"
+          i18n-title="@@matters.matterActivityTab.loadErrorTitle"
           message="Something went wrong while loading the timeline."
+          i18n-message="@@matters.matterActivityTab.loadErrorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@matters.matterActivityTab.retryButton"
           (cta)="load()"
         />
       } @else if (entries().length === 0) {
-        <lf-empty-state icon="event" title="No activity yet" />
+        <lf-empty-state
+          icon="event"
+          title="No activity yet"
+          i18n-title="@@matters.matterActivityTab.emptyTitle"
+        />
       } @else {
         <ul class="matter-activity-tab__list">
           @for (entry of entries(); track entry.id) {
@@ -66,7 +73,7 @@ const ACTIVITY_ICONS: Record<string, string> = {
             @if (loadingMore()) {
               <mat-spinner diameter="18" />
             } @else {
-              Load more
+              <span i18n="@@matters.matterActivityTab.loadMoreButton">Load more</span>
             }
           </button>
         }

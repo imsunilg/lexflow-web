@@ -50,7 +50,9 @@ import { AuthCardComponent } from './auth-card.component';
             @if (
               form.controls.tenantSlug.hasError('required') && form.controls.tenantSlug.touched
             ) {
-              <mat-error i18n="@@auth.forgotPassword.workspaceRequiredError">Workspace is required.</mat-error>
+              <mat-error i18n="@@auth.forgotPassword.workspaceRequiredError"
+                >Workspace is required.</mat-error
+              >
             }
           </mat-form-field>
 
@@ -58,10 +60,14 @@ import { AuthCardComponent } from './auth-card.component';
             <mat-label i18n="@@auth.forgotPassword.emailLabel">Email</mat-label>
             <input matInput type="email" formControlName="email" autocomplete="username" />
             @if (form.controls.email.hasError('required') && form.controls.email.touched) {
-              <mat-error i18n="@@auth.forgotPassword.emailRequiredError">Email is required.</mat-error>
+              <mat-error i18n="@@auth.forgotPassword.emailRequiredError"
+                >Email is required.</mat-error
+              >
             }
             @if (form.controls.email.hasError('email') && form.controls.email.touched) {
-              <mat-error i18n="@@auth.forgotPassword.emailInvalidError">Enter a valid email.</mat-error>
+              <mat-error i18n="@@auth.forgotPassword.emailInvalidError"
+                >Enter a valid email.</mat-error
+              >
             }
           </mat-form-field>
 
@@ -75,7 +81,9 @@ import { AuthCardComponent } from './auth-card.component';
             @if (submitting()) {
               <mat-spinner diameter="20" />
             } @else {
-              <ng-container i18n="@@auth.forgotPassword.sendResetLinkButton">Send reset link</ng-container>
+              <ng-container i18n="@@auth.forgotPassword.sendResetLinkButton"
+                >Send reset link</ng-container
+              >
             }
           </button>
 

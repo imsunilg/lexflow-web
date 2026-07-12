@@ -8,7 +8,9 @@
   @if (loading()) {
     <mat-progress-bar mode="indeterminate" />
   } @else if (!isKnownSection()) {
-    <p class="settings-section__unknown" i18n="@@admin.settingsSection.unknownSection">Unknown settings section "{{ sectionKey() }}".</p>
+    <p class="settings-section__unknown" i18n="@@admin.settingsSection.unknownSection">
+      Unknown settings section "{{ sectionKey() }}".
+    </p>
   } @else {
     @switch (sectionKey()) {
       @case ('firm_details') {
@@ -30,7 +32,9 @@
             <input matInput formControlName="gstinOrPan" />
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label i18n="@@admin.settingsSection.fiscalYearStartLabel">Fiscal year start month</mat-label>
+            <mat-label i18n="@@admin.settingsSection.fiscalYearStartLabel"
+              >Fiscal year start month</mat-label
+            >
             <mat-select formControlName="fiscalYearStartMonth" required>
               @for (month of fiscalMonths; track month) {
                 <mat-option [value]="month">{{ month }}</mat-option>
@@ -50,9 +54,13 @@
             <input matInput formControlName="timezone" placeholder="Asia/Kolkata" />
           </mat-form-field>
           <mat-form-field appearance="outline" class="settings-section__wide">
-            <mat-label i18n="@@admin.settingsSection.registrationNumbersLabel">Registration numbers (JSON)</mat-label>
+            <mat-label i18n="@@admin.settingsSection.registrationNumbersLabel"
+              >Registration numbers (JSON)</mat-label
+            >
             <textarea matInput formControlName="registrationNumbers" rows="4"></textarea>
-            <mat-hint i18n="@@admin.settingsSection.registrationNumbersHint">Open object, e.g. {{ '{ "cin": "...", "llpin": "..." }' }}</mat-hint>
+            <mat-hint i18n="@@admin.settingsSection.registrationNumbersHint"
+              >Open object, e.g. {{ '{ "cin": "...", "llpin": "..." }' }}</mat-hint
+            >
           </mat-form-field>
           <div class="settings-section__actions">
             <button mat-flat-button color="primary" type="submit" [disabled]="saving()">
@@ -81,9 +89,13 @@
             <input matInput formControlName="accentColor" placeholder="#00A8A8" />
           </mat-form-field>
           <mat-form-field appearance="outline" class="settings-section__wide">
-            <mat-label i18n="@@admin.settingsSection.letterheadMarginsLabel">Letterhead margins (JSON, mm)</mat-label>
+            <mat-label i18n="@@admin.settingsSection.letterheadMarginsLabel"
+              >Letterhead margins (JSON, mm)</mat-label
+            >
             <textarea matInput formControlName="letterheadMarginsMm" rows="3"></textarea>
-            <mat-hint i18n="@@admin.settingsSection.letterheadMarginsHint">e.g. {{ '{ "top": 20, "bottom": 15, "left": 18, "right": 18 }' }}</mat-hint>
+            <mat-hint i18n="@@admin.settingsSection.letterheadMarginsHint"
+              >e.g. {{ '{ "top": 20, "bottom": 15, "left": 18, "right": 18 }' }}</mat-hint
+            >
           </mat-form-field>
           <mat-form-field appearance="outline" class="settings-section__wide">
             <mat-label i18n="@@admin.settingsSection.emailFooterLabel">Email footer</mat-label>
@@ -106,12 +118,20 @@
           <mat-form-field appearance="outline">
             <mat-label i18n="@@admin.settingsSection.defaultThemeLabel">Default theme</mat-label>
             <mat-select formControlName="default" required>
-              <mat-option value="Light" i18n="@@admin.settingsSection.themeLightOption">Light</mat-option>
-              <mat-option value="Dark" i18n="@@admin.settingsSection.themeDarkOption">Dark</mat-option>
-              <mat-option value="System" i18n="@@admin.settingsSection.themeSystemOption">System</mat-option>
+              <mat-option value="Light" i18n="@@admin.settingsSection.themeLightOption"
+                >Light</mat-option
+              >
+              <mat-option value="Dark" i18n="@@admin.settingsSection.themeDarkOption"
+                >Dark</mat-option
+              >
+              <mat-option value="System" i18n="@@admin.settingsSection.themeSystemOption"
+                >System</mat-option
+              >
             </mat-select>
           </mat-form-field>
-          <mat-checkbox formControlName="allowUserOverride" i18n="@@admin.settingsSection.allowThemeOverrideCheckbox"
+          <mat-checkbox
+            formControlName="allowUserOverride"
+            i18n="@@admin.settingsSection.allowThemeOverrideCheckbox"
             >Allow users to override theme</mat-checkbox
           >
           <p class="settings-section__note" i18n="@@admin.settingsSection.themeNote">
@@ -157,7 +177,9 @@
               formControlName="password"
               autocomplete="new-password"
             />
-            <mat-hint i18n="@@admin.settingsSection.smtpPasswordHint">Leave blank to keep the currently saved password.</mat-hint>
+            <mat-hint i18n="@@admin.settingsSection.smtpPasswordHint"
+              >Leave blank to keep the currently saved password.</mat-hint
+            >
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label i18n="@@admin.settingsSection.smtpFromNameLabel">From name</mat-label>
@@ -167,21 +189,31 @@
             <mat-label i18n="@@admin.settingsSection.smtpFromAddressLabel">From address</mat-label>
             <input matInput formControlName="fromAddress" required />
           </mat-form-field>
-          <mat-checkbox formControlName="useFallbackPlatformMailer" i18n="@@admin.settingsSection.smtpFallbackCheckbox">
+          <mat-checkbox
+            formControlName="useFallbackPlatformMailer"
+            i18n="@@admin.settingsSection.smtpFallbackCheckbox"
+          >
             Use fallback platform mailer
           </mat-checkbox>
           <div class="settings-section__actions">
             <button mat-flat-button color="primary" type="submit" [disabled]="saving()">
               {{ saving() ? 'Saving…' : 'Save' }}
             </button>
-            <button mat-stroked-button type="button" (click)="toggleSmtpTestField()" i18n="@@admin.settingsSection.smtpSendTestButton">
+            <button
+              mat-stroked-button
+              type="button"
+              (click)="toggleSmtpTestField()"
+              i18n="@@admin.settingsSection.smtpSendTestButton"
+            >
               Send test email
             </button>
           </div>
           @if (showSmtpTestField()) {
             <div class="settings-section__test-row">
               <mat-form-field appearance="outline">
-                <mat-label i18n="@@admin.settingsSection.smtpSendTestToLabel">Send test to</mat-label>
+                <mat-label i18n="@@admin.settingsSection.smtpSendTestToLabel"
+                  >Send test to</mat-label
+                >
                 <input matInput [formControl]="smtpTestAddress" placeholder="someone@example.com" />
               </mat-form-field>
               <button
@@ -222,7 +254,9 @@
               formControlName="authToken"
               autocomplete="new-password"
             />
-            <mat-hint i18n="@@admin.settingsSection.smsAuthTokenHint">Leave blank to keep the currently saved token.</mat-hint>
+            <mat-hint i18n="@@admin.settingsSection.smsAuthTokenHint"
+              >Leave blank to keep the currently saved token.</mat-hint
+            >
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label i18n="@@admin.settingsSection.smsDltEntityLabel">DLT entity ID</mat-label>
@@ -232,14 +266,21 @@
             <button mat-flat-button color="primary" type="submit" [disabled]="saving()">
               {{ saving() ? 'Saving…' : 'Save' }}
             </button>
-            <button mat-stroked-button type="button" (click)="toggleSmsTestField()" i18n="@@admin.settingsSection.smsSendTestButton">
+            <button
+              mat-stroked-button
+              type="button"
+              (click)="toggleSmsTestField()"
+              i18n="@@admin.settingsSection.smsSendTestButton"
+            >
               Send test SMS
             </button>
           </div>
           @if (showSmsTestField()) {
             <div class="settings-section__test-row">
               <mat-form-field appearance="outline">
-                <mat-label i18n="@@admin.settingsSection.smsSendTestToLabel">Send test to</mat-label>
+                <mat-label i18n="@@admin.settingsSection.smsSendTestToLabel"
+                  >Send test to</mat-label
+                >
                 <input matInput [formControl]="smsTestPhone" placeholder="+91…" />
               </mat-form-field>
               <button
@@ -262,18 +303,24 @@
             <input matInput formControlName="wabaId" required />
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label i18n="@@admin.settingsSection.whatsappPhoneNumberIdLabel">Phone number ID</mat-label>
+            <mat-label i18n="@@admin.settingsSection.whatsappPhoneNumberIdLabel"
+              >Phone number ID</mat-label
+            >
             <input matInput formControlName="phoneNumberId" required />
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label i18n="@@admin.settingsSection.whatsappAccessTokenLabel">Access token</mat-label>
+            <mat-label i18n="@@admin.settingsSection.whatsappAccessTokenLabel"
+              >Access token</mat-label
+            >
             <input
               matInput
               type="password"
               formControlName="accessToken"
               autocomplete="new-password"
             />
-            <mat-hint i18n="@@admin.settingsSection.whatsappAccessTokenHint">Leave blank to keep the currently saved token.</mat-hint>
+            <mat-hint i18n="@@admin.settingsSection.whatsappAccessTokenHint"
+              >Leave blank to keep the currently saved token.</mat-hint
+            >
           </mat-form-field>
           <div class="settings-section__actions">
             <button mat-flat-button color="primary" type="submit" [disabled]="saving()">
@@ -287,7 +334,12 @@
             >
               {{ whatsappSyncing() ? 'Syncing…' : 'Sync templates' }}
             </button>
-            <button mat-stroked-button type="button" (click)="toggleWhatsappTestField()" i18n="@@admin.settingsSection.whatsappSendTestButton">
+            <button
+              mat-stroked-button
+              type="button"
+              (click)="toggleWhatsappTestField()"
+              i18n="@@admin.settingsSection.whatsappSendTestButton"
+            >
               Send test message
             </button>
           </div>
@@ -298,7 +350,9 @@
           @if (showWhatsappTestField()) {
             <div class="settings-section__test-row">
               <mat-form-field appearance="outline">
-                <mat-label i18n="@@admin.settingsSection.whatsappSendTestToLabel">Send test to</mat-label>
+                <mat-label i18n="@@admin.settingsSection.whatsappSendTestToLabel"
+                  >Send test to</mat-label
+                >
                 <input matInput [formControl]="whatsappTestPhone" placeholder="+91…" />
               </mat-form-field>
               <button
@@ -321,16 +375,23 @@
           (ngSubmit)="saveBusinessHours()"
         >
           <mat-form-field appearance="outline" class="settings-section__wide">
-            <mat-label i18n="@@admin.settingsSection.weeklyHoursLabel">Weekly hours (JSON)</mat-label>
+            <mat-label i18n="@@admin.settingsSection.weeklyHoursLabel"
+              >Weekly hours (JSON)</mat-label
+            >
             <textarea matInput formControlName="weeklyHours" rows="5"></textarea>
-            <mat-hint i18n="@@admin.settingsSection.weeklyHoursHint">Open object — shape isn't enforced server-side.</mat-hint>
+            <mat-hint i18n="@@admin.settingsSection.weeklyHoursHint"
+              >Open object — shape isn't enforced server-side.</mat-hint
+            >
           </mat-form-field>
 
           <div class="settings-section__holidays">
             <div class="settings-section__holidays-header">
               <h2 i18n="@@admin.settingsSection.holidaysHeading">Holidays</h2>
               <button mat-stroked-button type="button" (click)="addHoliday()">
-                <mat-icon>add</mat-icon> <ng-container i18n="@@admin.settingsSection.addHolidayButton">Add holiday</ng-container>
+                <mat-icon>add</mat-icon>
+                <ng-container i18n="@@admin.settingsSection.addHolidayButton"
+                  >Add holiday</ng-container
+                >
               </button>
             </div>
 
@@ -345,9 +406,15 @@
                   <input matInput formControlName="name" required />
                 </mat-form-field>
                 <mat-form-field appearance="outline">
-                  <mat-label i18n="@@admin.settingsSection.holidayBranchLabel">Branch (optional)</mat-label>
+                  <mat-label i18n="@@admin.settingsSection.holidayBranchLabel"
+                    >Branch (optional)</mat-label
+                  >
                   <mat-select formControlName="branchId">
-                    <mat-option [value]="null" i18n="@@admin.settingsSection.holidayAllBranchesOption">All branches</mat-option>
+                    <mat-option
+                      [value]="null"
+                      i18n="@@admin.settingsSection.holidayAllBranchesOption"
+                      >All branches</mat-option
+                    >
                     @for (branch of branches(); track branch.id) {
                       <mat-option [value]="branch.id">{{ branch.name }}</mat-option>
                     }
@@ -377,10 +444,14 @@
       @case ('data') {
         <form class="settings-section__form" [formGroup]="dataForm" (ngSubmit)="saveData()">
           <mat-form-field appearance="outline">
-            <mat-label i18n="@@admin.settingsSection.retentionYearsLabel">Retention (years)</mat-label>
+            <mat-label i18n="@@admin.settingsSection.retentionYearsLabel"
+              >Retention (years)</mat-label
+            >
             <input matInput type="number" formControlName="retentionYears" required min="1" />
           </mat-form-field>
-          <mat-checkbox formControlName="legalHold" i18n="@@admin.settingsSection.legalHoldCheckbox">Legal hold</mat-checkbox>
+          <mat-checkbox formControlName="legalHold" i18n="@@admin.settingsSection.legalHoldCheckbox"
+            >Legal hold</mat-checkbox
+          >
           <p class="settings-section__note" i18n="@@admin.settingsSection.dataNote">
             Import hub, tenant data export, and backup status don't exist yet — this section only
             covers retention and legal hold.
@@ -396,19 +467,33 @@
       @case ('security') {
         <form class="settings-section__form" [formGroup]="securityForm" (ngSubmit)="saveSecurity()">
           <mat-form-field appearance="outline">
-            <mat-label i18n="@@admin.settingsSection.passwordMinLengthLabel">Minimum password length</mat-label>
+            <mat-label i18n="@@admin.settingsSection.passwordMinLengthLabel"
+              >Minimum password length</mat-label
+            >
             <input matInput type="number" formControlName="passwordMinLength" required min="10" />
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label i18n="@@admin.settingsSection.twoFactorLabel">Two-factor enforcement</mat-label>
+            <mat-label i18n="@@admin.settingsSection.twoFactorLabel"
+              >Two-factor enforcement</mat-label
+            >
             <mat-select formControlName="twoFactorEnforcement" required>
-              <mat-option value="off" i18n="@@admin.settingsSection.twoFactorOffOption">Off</mat-option>
-              <mat-option value="optional" i18n="@@admin.settingsSection.twoFactorOptionalOption">Optional</mat-option>
-              <mat-option value="required-per-role" i18n="@@admin.settingsSection.twoFactorRequiredOption">Required per role</mat-option>
+              <mat-option value="off" i18n="@@admin.settingsSection.twoFactorOffOption"
+                >Off</mat-option
+              >
+              <mat-option value="optional" i18n="@@admin.settingsSection.twoFactorOptionalOption"
+                >Optional</mat-option
+              >
+              <mat-option
+                value="required-per-role"
+                i18n="@@admin.settingsSection.twoFactorRequiredOption"
+                >Required per role</mat-option
+              >
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label i18n="@@admin.settingsSection.sessionTimeoutLabel">Session timeout (minutes)</mat-label>
+            <mat-label i18n="@@admin.settingsSection.sessionTimeoutLabel"
+              >Session timeout (minutes)</mat-label
+            >
             <input
               matInput
               type="number"
@@ -417,7 +502,11 @@
               min="1"
             />
           </mat-form-field>
-          <mat-checkbox formControlName="ipAllowlistEnabled" i18n="@@admin.settingsSection.ipAllowlistCheckbox">IP allowlist enabled</mat-checkbox>
+          <mat-checkbox
+            formControlName="ipAllowlistEnabled"
+            i18n="@@admin.settingsSection.ipAllowlistCheckbox"
+            >IP allowlist enabled</mat-checkbox
+          >
           <p class="settings-section__note" i18n="@@admin.settingsSection.securityNote">
             There is no IP address list field — this is a single enforcement toggle only.
           </p>

@@ -16,7 +16,9 @@ import { EmptyStateComponent } from 'shared';
     <lf-empty-state
       icon="note"
       title="Notes aren't available yet"
+      i18n-title="@@matters.matterNotesTab.emptyTitle"
       message="No shared notes API exists in this environment yet."
+      i18n-message="@@matters.matterNotesTab.emptyMessage"
     />
   `,
 })

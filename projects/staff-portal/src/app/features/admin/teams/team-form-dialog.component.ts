@@ -31,21 +31,23 @@ export interface TeamFormDialogData {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>{{ isEdit ? 'Edit team' : 'New team' }}</h2>
+    <h2 mat-dialog-title i18n="@@admin.teamFormDialog.title">
+      {{ isEdit ? 'Edit team' : 'New team' }}
+    </h2>
 
     <mat-dialog-content class="team-form">
       <mat-form-field appearance="outline">
-        <mat-label>Name</mat-label>
+        <mat-label i18n="@@admin.teamFormDialog.nameLabel">Name</mat-label>
         <input matInput [formControl]="name" required />
         @if (name.invalid && name.touched) {
-          <mat-error>Name is required.</mat-error>
+          <mat-error i18n="@@admin.teamFormDialog.nameRequired">Name is required.</mat-error>
         }
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Lead</mat-label>
+        <mat-label i18n="@@admin.teamFormDialog.leadLabel">Lead</mat-label>
         <mat-select [formControl]="leadUserId">
-          <mat-option [value]="null">None</mat-option>
+          <mat-option [value]="null" i18n="@@admin.teamFormDialog.leadNoneOption">None</mat-option>
           @for (user of users; track user.id) {
             <mat-option [value]="user.id">{{ user.name }}</mat-option>
           }
@@ -53,7 +55,7 @@ export interface TeamFormDialogData {
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Members</mat-label>
+        <mat-label i18n="@@admin.teamFormDialog.membersLabel">Members</mat-label>
         <mat-select [formControl]="memberUserIds" multiple>
           @for (user of users; track user.id) {
             <mat-option [value]="user.id">{{ user.name }}</mat-option>
@@ -67,13 +69,21 @@ export interface TeamFormDialogData {
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
-      <button mat-button type="button" (click)="cancel()">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        (click)="cancel()"
+        i18n="@@admin.teamFormDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="primary"
         type="button"
         [disabled]="submitting"
         (click)="submit()"
+        i18n="@@admin.teamFormDialog.submitButton"
       >
         {{ isEdit ? 'Save' : 'Create team' }}
       </button>

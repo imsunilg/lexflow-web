@@ -10,7 +10,11 @@
   @if (loading()) {
     <mat-progress-bar mode="indeterminate" />
   } @else if (articles().length === 0) {
-    <lf-empty-state icon="article" title="No articles yet" i18n-title="@@kb.articleList.noArticlesEmptyState" />
+    <lf-empty-state
+      icon="article"
+      title="No articles yet"
+      i18n-title="@@kb.articleList.noArticlesEmptyState"
+    />
   } @else {
     <ul class="article-list__list">
       @for (article of articles(); track article.id) {

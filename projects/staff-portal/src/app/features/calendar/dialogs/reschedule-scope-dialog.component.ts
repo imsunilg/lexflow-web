@@ -14,16 +14,36 @@ export interface RescheduleScopeDialogData {
   imports: [MatButtonModule, MatDialogModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Move recurring event</h2>
+    <h2 mat-dialog-title i18n="@@calendar.rescheduleScopeDialog.title">Move recurring event</h2>
     <mat-dialog-content>
-      <p>"{{ data.title }}" repeats. What would you like to reschedule?</p>
+      <p i18n="@@calendar.rescheduleScopeDialog.prompt">
+        "{{ data.title }}" repeats. What would you like to reschedule?
+      </p>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
-      <button mat-stroked-button type="button" (click)="close('occurrence')">
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@calendar.rescheduleScopeDialog.cancelButton"
+      >
+        Cancel
+      </button>
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="close('occurrence')"
+        i18n="@@calendar.rescheduleScopeDialog.occurrenceButton"
+      >
         This occurrence only
       </button>
-      <button mat-flat-button color="primary" type="button" (click)="close('series')">
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        (click)="close('series')"
+        i18n="@@calendar.rescheduleScopeDialog.seriesButton"
+      >
         Entire series
       </button>
     </mat-dialog-actions>

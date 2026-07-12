@@ -21,17 +21,29 @@ interface TaskBucketGroup {
   imports: [DashboardWidgetComponent, EmptyStateComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-dashboard-widget title="Pending Tasks" [loading]="loading()" (refresh)="load()">
+    <lf-dashboard-widget
+      title="Pending Tasks"
+      i18n-title="@@dashboard.tasksPendingWidget.title"
+      [loading]="loading()"
+      (refresh)="load()"
+    >
       @if (error()) {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load pending tasks"
+          i18n-title="@@dashboard.tasksPendingWidget.errorTitle"
           message="Something went wrong."
+          i18n-message="@@dashboard.tasksPendingWidget.errorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@dashboard.tasksPendingWidget.retryLabel"
           (cta)="load()"
         />
       } @else if (!loading() && data()?.length === 0) {
-        <lf-empty-state icon="task_alt" title="No pending tasks" />
+        <lf-empty-state
+          icon="task_alt"
+          title="No pending tasks"
+          i18n-title="@@dashboard.tasksPendingWidget.emptyTitle"
+        />
       } @else if (data()) {
         <div class="tasks-groups">
           @for (group of groups(); track group.bucket) {

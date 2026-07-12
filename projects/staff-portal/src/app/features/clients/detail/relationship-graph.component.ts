@@ -49,20 +49,25 @@ const CENTER = 180;
   template: `
     <div class="relationship-graph">
       @if (loading()) {
-        <p>Loading…</p>
+        <p i18n="@@clients.relationshipGraph.loading">Loading…</p>
       } @else if (error()) {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load relationships"
+          i18n-title="@@clients.relationshipGraph.loadErrorTitle"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@clients.relationshipGraph.retryCta"
           (cta)="load()"
         />
       } @else if (nodes().length === 0 && !addingNew()) {
         <lf-empty-state
           icon="hub"
           title="No relationships recorded"
+          i18n-title="@@clients.relationshipGraph.emptyTitle"
           message="Family members, corporate group links, and referrers show up here."
+          i18n-message="@@clients.relationshipGraph.emptyMessage"
           ctaLabel="Add relationship"
+          i18n-ctaLabel="@@clients.relationshipGraph.addRelationshipButton"
           (cta)="addingNew.set(true)"
         />
       } @else {
@@ -110,14 +115,16 @@ const CENTER = 180;
         </svg>
 
         <button mat-stroked-button type="button" (click)="addingNew.set(true)">
-          Add relationship
+          <span i18n="@@clients.relationshipGraph.addRelationshipButton">Add relationship</span>
         </button>
       }
 
       @if (addingNew()) {
         <form [formGroup]="form" class="relationship-graph__form">
           <mat-form-field appearance="outline">
-            <mat-label>Relation type</mat-label>
+            <mat-label i18n="@@clients.relationshipGraph.relationTypeLabel"
+              >Relation type</mat-label
+            >
             <mat-select formControlName="relationType">
               @for (type of relationTypes; track type) {
                 <mat-option [value]="type">{{ type }}</mat-option>
@@ -126,12 +133,16 @@ const CENTER = 180;
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Related client ID (optional)</mat-label>
+            <mat-label i18n="@@clients.relationshipGraph.relatedClientIdLabel"
+              >Related client ID (optional)</mat-label
+            >
             <input matInput formControlName="relatedClientId" />
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Person name (if not a client)</mat-label>
+            <mat-label i18n="@@clients.relationshipGraph.personNameLabel"
+              >Person name (if not a client)</mat-label
+            >
             <input matInput formControlName="personName" />
           </mat-form-field>
 
@@ -140,8 +151,23 @@ const CENTER = 180;
           }
 
           <div class="relationship-graph__form-actions">
-            <button mat-button type="button" (click)="cancelAdd()">Cancel</button>
-            <button mat-flat-button color="primary" type="button" (click)="submit()">Save</button>
+            <button
+              mat-button
+              type="button"
+              (click)="cancelAdd()"
+              i18n="@@clients.relationshipGraph.cancelButton"
+            >
+              Cancel
+            </button>
+            <button
+              mat-flat-button
+              color="primary"
+              type="button"
+              (click)="submit()"
+              i18n="@@clients.relationshipGraph.saveButton"
+            >
+              Save
+            </button>
           </div>
         </form>
       }

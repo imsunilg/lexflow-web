@@ -659,7 +659,7 @@
     </unit>
     <unit id="shell.topbar.languageAriaLabel">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:8</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:10,11</note>
       </notes>
       <segment>
         <source>Language</source>
@@ -667,7 +667,7 @@
     </unit>
     <unit id="shell.topbar.notificationsAriaLabel">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:13,14</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:17,18</note>
       </notes>
       <segment>
         <source>Notifications</source>
@@ -675,7 +675,7 @@
     </unit>
     <unit id="shell.topbar.accountAriaLabel">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:22</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:26</note>
       </notes>
       <segment>
         <source>Account</source>
@@ -683,7 +683,7 @@
     </unit>
     <unit id="shell.account.profile">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:27,28</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:31,32</note>
       </notes>
       <segment>
         <source>Profile</source>
@@ -691,7 +691,7 @@
     </unit>
     <unit id="shell.account.signOut">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:28,30</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:32,34</note>
       </notes>
       <segment>
         <source>Sign out</source>
@@ -699,7 +699,7 @@
     </unit>
     <unit id="shell.bottomNav.ariaLabel">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:40,41</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:44,45</note>
       </notes>
       <segment>
         <source>Portal navigation</source>
@@ -707,7 +707,7 @@
     </unit>
     <unit id="shell.nav.home">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:53,55</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:57,59</note>
       </notes>
       <segment>
         <source>Home</source>
@@ -715,7 +715,7 @@
     </unit>
     <unit id="shell.nav.matters">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:56,58</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:60,62</note>
       </notes>
       <segment>
         <source>Matters</source>
@@ -723,7 +723,7 @@
     </unit>
     <unit id="shell.nav.invoices">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:59,61</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:63,65</note>
       </notes>
       <segment>
         <source>Invoices</source>
@@ -731,7 +731,7 @@
     </unit>
     <unit id="shell.nav.documents">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:62,64</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:66,68</note>
       </notes>
       <segment>
         <source>Documents</source>
@@ -739,7 +739,7 @@
     </unit>
     <unit id="shell.nav.appointments">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:65,67</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:69,71</note>
       </notes>
       <segment>
         <source>Appointments</source>
@@ -747,7 +747,7 @@
     </unit>
     <unit id="shell.nav.messages">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:68,70</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:72,74</note>
       </notes>
       <segment>
         <source>Messages</source>
@@ -755,7 +755,7 @@
     </unit>
     <unit id="shell.nav.profile">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:71,73</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:75,77</note>
       </notes>
       <segment>
         <source>Profile</source>

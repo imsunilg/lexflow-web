@@ -38,21 +38,21 @@ import {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Invite user</h2>
+    <h2 mat-dialog-title i18n="@@admin.inviteUserDialog.title">Invite user</h2>
     <mat-dialog-content class="invite-user">
       <form [formGroup]="form">
         <mat-form-field appearance="outline">
-          <mat-label>Name</mat-label>
+          <mat-label i18n="@@admin.inviteUserDialog.nameLabel">Name</mat-label>
           <input matInput formControlName="name" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
+          <mat-label i18n="@@admin.inviteUserDialog.emailLabel">Email</mat-label>
           <input matInput type="email" formControlName="email" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Role</mat-label>
+          <mat-label i18n="@@admin.inviteUserDialog.roleLabel">Role</mat-label>
           <mat-select formControlName="roleId">
             @for (role of roles(); track role.id) {
               <mat-option [value]="role.id">{{ role.name }}</mat-option>
@@ -61,9 +61,11 @@ import {
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Branch (optional)</mat-label>
+          <mat-label i18n="@@admin.inviteUserDialog.branchLabel">Branch (optional)</mat-label>
           <mat-select formControlName="branchId">
-            <mat-option [value]="null">(none)</mat-option>
+            <mat-option [value]="null" i18n="@@admin.inviteUserDialog.branchNoneOption"
+              >(none)</mat-option
+            >
             @for (branch of branches(); track branch.id) {
               <mat-option [value]="branch.id">{{ branch.name }}</mat-option>
             }
@@ -71,9 +73,13 @@ import {
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Department (optional)</mat-label>
+          <mat-label i18n="@@admin.inviteUserDialog.departmentLabel"
+            >Department (optional)</mat-label
+          >
           <mat-select formControlName="departmentId">
-            <mat-option [value]="null">(none)</mat-option>
+            <mat-option [value]="null" i18n="@@admin.inviteUserDialog.departmentNoneOption"
+              >(none)</mat-option
+            >
             @for (department of departments(); track department.id) {
               <mat-option [value]="department.id">{{ department.name }}</mat-option>
             }
@@ -89,13 +95,21 @@ import {
       }
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@admin.inviteUserDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="primary"
         type="button"
         [disabled]="form.invalid || submitting()"
         (click)="submit()"
+        i18n="@@admin.inviteUserDialog.submitButton"
       >
         Send invitation
       </button>

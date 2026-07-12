@@ -72,13 +72,20 @@ function buildAddForm(): FormGroup<{
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load witnesses"
+          i18n-title="@@matters.caseWitnessesTab.loadErrorTitle"
           message="Something went wrong while loading witnesses."
+          i18n-message="@@matters.caseWitnessesTab.loadErrorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@matters.caseWitnessesTab.retryButton"
           (cta)="load()"
         />
       } @else {
         @if (witnesses().length === 0) {
-          <lf-empty-state icon="record_voice_over" title="No witnesses recorded yet" />
+          <lf-empty-state
+            icon="record_voice_over"
+            title="No witnesses recorded yet"
+            i18n-title="@@matters.caseWitnessesTab.emptyTitle"
+          />
         } @else {
           <div class="witnesses-tab__list">
             @for (witness of witnesses(); track witness.id) {
@@ -91,7 +98,9 @@ function buildAddForm(): FormGroup<{
                   [toneOverride]="tone(witness.examStatus)"
                 />
                 <mat-form-field appearance="outline" class="witnesses-tab__status-select">
-                  <mat-label>Exam status</mat-label>
+                  <mat-label i18n="@@matters.caseWitnessesTab.examStatusLabel"
+                    >Exam status</mat-label
+                  >
                   <mat-select
                     [value]="witness.examStatus"
                     (selectionChange)="updateExamStatus(witness, $event.value)"
@@ -111,21 +120,25 @@ function buildAddForm(): FormGroup<{
         }
 
         <div class="witnesses-tab__add">
-          <h3 class="witnesses-tab__add-title">Add witness</h3>
+          <h3 class="witnesses-tab__add-title" i18n="@@matters.caseWitnessesTab.addTitle">
+            Add witness
+          </h3>
           <form [formGroup]="addForm" class="witnesses-tab__form">
             <mat-form-field appearance="outline">
-              <mat-label>Name</mat-label>
+              <mat-label i18n="@@matters.caseWitnessesTab.nameLabel">Name</mat-label>
               <input matInput formControlName="name" />
               @if (addForm.controls.name.hasError('required') && addForm.controls.name.touched) {
-                <mat-error>Name is required.</mat-error>
+                <mat-error i18n="@@matters.caseWitnessesTab.nameRequiredError"
+                  >Name is required.</mat-error
+                >
               }
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Side</mat-label>
+              <mat-label i18n="@@matters.caseWitnessesTab.sideLabel">Side</mat-label>
               <input matInput formControlName="side" />
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Scheduled on</mat-label>
+              <mat-label i18n="@@matters.caseWitnessesTab.scheduledOnLabel">Scheduled on</mat-label>
               <input matInput [matDatepicker]="picker" formControlName="scheduledOn" />
               <mat-datepicker-toggle matIconSuffix [for]="picker" />
               <mat-datepicker #picker />
@@ -142,7 +155,7 @@ function buildAddForm(): FormGroup<{
             @if (adding()) {
               <mat-spinner diameter="18" />
             } @else {
-              Add witness
+              <span i18n="@@matters.caseWitnessesTab.addButton">Add witness</span>
             }
           </button>
 

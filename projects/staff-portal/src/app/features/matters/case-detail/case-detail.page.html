@@ -21,7 +21,11 @@
       </div>
 
       @if (nextHearingCountdown(); as countdown) {
-        <span class="case-detail__countdown" [attr.data-tone]="countdown.tone" i18n="@@matters.caseDetail.nextHearingLabel">
+        <span
+          class="case-detail__countdown"
+          [attr.data-tone]="countdown.tone"
+          i18n="@@matters.caseDetail.nextHearingLabel"
+        >
           Next hearing: {{ countdown.label }}
         </span>
       }
@@ -70,7 +74,11 @@
       <mat-tab label="Timeline" i18n-label="@@matters.caseDetail.timelineTab">
         <div class="case-detail__tab-content">
           @if (timelineRows().length === 0) {
-            <lf-empty-state icon="timeline" title="No timeline entries yet" i18n-title="@@matters.caseDetail.timelineEmptyTitle" />
+            <lf-empty-state
+              icon="timeline"
+              title="No timeline entries yet"
+              i18n-title="@@matters.caseDetail.timelineEmptyTitle"
+            />
           } @else {
             <ul class="case-detail__timeline">
               @for (row of timelineRows(); track $index) {

@@ -62,19 +62,25 @@ interface RecipientRow {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Schedule this report</h2>
+    <h2 mat-dialog-title i18n="@@reports.scheduleDialog.title">Schedule this report</h2>
     <mat-dialog-content class="schedule-dialog">
       <mat-form-field appearance="outline">
-        <mat-label>Frequency</mat-label>
+        <mat-label i18n="@@reports.scheduleDialog.frequencyLabel">Frequency</mat-label>
         <mat-select [formControl]="frequency">
-          <mat-option value="daily">Daily</mat-option>
-          <mat-option value="weekly">Weekly</mat-option>
-          <mat-option value="monthly">Monthly</mat-option>
+          <mat-option value="daily" i18n="@@reports.scheduleDialog.frequencyDaily"
+            >Daily</mat-option
+          >
+          <mat-option value="weekly" i18n="@@reports.scheduleDialog.frequencyWeekly"
+            >Weekly</mat-option
+          >
+          <mat-option value="monthly" i18n="@@reports.scheduleDialog.frequencyMonthly"
+            >Monthly</mat-option
+          >
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Format</mat-label>
+        <mat-label i18n="@@reports.scheduleDialog.formatLabel">Format</mat-label>
         <mat-select [formControl]="format">
           <mat-option value="pdf">PDF</mat-option>
           <mat-option value="xlsx">XLSX</mat-option>
@@ -90,6 +96,7 @@ interface RecipientRow {
               <mat-icon
                 matChipTrailingIcon
                 matTooltip="External emails aren't sent an attachment yet — no attachment-capable mail sender exists server-side."
+                i18n-matTooltip="@@reports.scheduleDialog.externalEmailTooltip"
               >
                 info
               </mat-icon>
@@ -100,7 +107,7 @@ interface RecipientRow {
       </mat-chip-set>
 
       <mat-form-field appearance="outline">
-        <mat-label>Add firm user</mat-label>
+        <mat-label i18n="@@reports.scheduleDialog.addFirmUserLabel">Add firm user</mat-label>
         <input matInput [formControl]="userQuery" [matAutocomplete]="userAuto" />
         <mat-autocomplete #userAuto="matAutocomplete" (optionSelected)="onUserSelected($event)">
           @for (user of userResults(); track user.id) {
@@ -111,10 +118,19 @@ interface RecipientRow {
 
       <div class="schedule-dialog__email-row">
         <mat-form-field appearance="outline">
-          <mat-label>Add external email</mat-label>
+          <mat-label i18n="@@reports.scheduleDialog.addExternalEmailLabel"
+            >Add external email</mat-label
+          >
           <input matInput [formControl]="emailInput" (keydown.enter)="addEmail()" />
         </mat-form-field>
-        <button mat-stroked-button type="button" (click)="addEmail()">Add</button>
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="addEmail()"
+          i18n="@@reports.scheduleDialog.addButton"
+        >
+          Add
+        </button>
       </div>
 
       @if (submitting()) {
@@ -125,13 +141,21 @@ interface RecipientRow {
       }
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@reports.scheduleDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="primary"
         type="button"
         [disabled]="recipients().length === 0 || submitting()"
         (click)="submit()"
+        i18n="@@reports.scheduleDialog.scheduleButton"
       >
         Schedule
       </button>

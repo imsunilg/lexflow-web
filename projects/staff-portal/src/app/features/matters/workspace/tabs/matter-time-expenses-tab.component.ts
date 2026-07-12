@@ -80,7 +80,12 @@ function toInput(value: ExpenseFormValue): MatterExpenseInput {
   template: `
     <div class="matter-time-expenses-tab">
       <section class="matter-time-expenses-tab__section">
-        <h3 class="matter-time-expenses-tab__heading">Expenses</h3>
+        <h3
+          class="matter-time-expenses-tab__heading"
+          i18n="@@matters.matterTimeExpensesTab.expensesHeading"
+        >
+          Expenses
+        </h3>
         @if (loading()) {
           <div class="matter-time-expenses-tab__spinner">
             <mat-spinner diameter="32" />
@@ -89,8 +94,11 @@ function toInput(value: ExpenseFormValue): MatterExpenseInput {
           <lf-empty-state
             icon="error_outline"
             title="Couldn't load expenses"
+            i18n-title="@@matters.matterTimeExpensesTab.loadErrorTitle"
             message="Something went wrong while loading expenses."
+            i18n-message="@@matters.matterTimeExpensesTab.loadErrorMessage"
             ctaLabel="Retry"
+            i18n-ctaLabel="@@matters.matterTimeExpensesTab.retryButton"
             (cta)="load()"
           />
         } @else {
@@ -98,16 +106,18 @@ function toInput(value: ExpenseFormValue): MatterExpenseInput {
             <lf-empty-state
               icon="receipt_long"
               title="No expenses yet"
+              i18n-title="@@matters.matterTimeExpensesTab.emptyTitle"
               ctaLabel="Add expense"
+              i18n-ctaLabel="@@matters.matterTimeExpensesTab.addExpenseButton"
               (cta)="startAdd()"
             />
           } @else {
             <table class="matter-time-expenses-tab__table">
               <thead>
                 <tr>
-                  <th>Description</th>
-                  <th>Amount</th>
-                  <th>Incurred on</th>
+                  <th i18n="@@matters.matterTimeExpensesTab.descriptionColumn">Description</th>
+                  <th i18n="@@matters.matterTimeExpensesTab.amountColumn">Amount</th>
+                  <th i18n="@@matters.matterTimeExpensesTab.incurredOnColumn">Incurred on</th>
                   <th></th>
                 </tr>
               </thead>
@@ -119,7 +129,11 @@ function toInput(value: ExpenseFormValue): MatterExpenseInput {
                     <td>{{ expense.incurredOn | date: 'mediumDate' }}</td>
                     <td>
                       @if (expense.billable) {
-                        <span class="matter-time-expenses-tab__chip">Billable</span>
+                        <span
+                          class="matter-time-expenses-tab__chip"
+                          i18n="@@matters.matterTimeExpensesTab.billableChip"
+                          >Billable</span
+                        >
                       }
                     </td>
                   </tr>
@@ -134,29 +148,39 @@ function toInput(value: ExpenseFormValue): MatterExpenseInput {
               class="matter-time-expenses-tab__form matter-time-expenses-tab__form--add"
             >
               <mat-form-field appearance="outline">
-                <mat-label>Description</mat-label>
+                <mat-label i18n="@@matters.matterTimeExpensesTab.descriptionLabel"
+                  >Description</mat-label
+                >
                 <input matInput formControlName="description" />
                 @if (
                   addForm.controls.description.hasError('required') &&
                   addForm.controls.description.touched
                 ) {
-                  <mat-error>Description is required.</mat-error>
+                  <mat-error i18n="@@matters.matterTimeExpensesTab.descriptionRequiredError"
+                    >Description is required.</mat-error
+                  >
                 }
               </mat-form-field>
               <mat-form-field appearance="outline">
-                <mat-label>Amount</mat-label>
+                <mat-label i18n="@@matters.matterTimeExpensesTab.amountLabel">Amount</mat-label>
                 <input matInput type="number" formControlName="amount" min="0" />
                 @if (
                   addForm.controls.amount.hasError('required') && addForm.controls.amount.touched
                 ) {
-                  <mat-error>Amount is required.</mat-error>
+                  <mat-error i18n="@@matters.matterTimeExpensesTab.amountRequiredError"
+                    >Amount is required.</mat-error
+                  >
                 }
                 @if (addForm.controls.amount.hasError('min')) {
-                  <mat-error>Amount must be zero or more.</mat-error>
+                  <mat-error i18n="@@matters.matterTimeExpensesTab.amountMinError"
+                    >Amount must be zero or more.</mat-error
+                  >
                 }
               </mat-form-field>
               <mat-form-field appearance="outline">
-                <mat-label>Incurred on</mat-label>
+                <mat-label i18n="@@matters.matterTimeExpensesTab.incurredOnLabel"
+                  >Incurred on</mat-label
+                >
                 <input
                   matInput
                   [matDatepicker]="picker"
@@ -166,9 +190,20 @@ function toInput(value: ExpenseFormValue): MatterExpenseInput {
                 <mat-datepicker-toggle matIconSuffix [for]="picker" />
                 <mat-datepicker #picker />
               </mat-form-field>
-              <mat-checkbox formControlName="billable">Billable</mat-checkbox>
+              <mat-checkbox
+                formControlName="billable"
+                i18n="@@matters.matterTimeExpensesTab.billableCheckbox"
+                >Billable</mat-checkbox
+              >
               <div class="matter-time-expenses-tab__form-actions">
-                <button mat-button type="button" (click)="cancelAdd()">Cancel</button>
+                <button
+                  mat-button
+                  type="button"
+                  (click)="cancelAdd()"
+                  i18n="@@matters.matterTimeExpensesTab.cancelButton"
+                >
+                  Cancel
+                </button>
                 <button
                   mat-flat-button
                   color="primary"
@@ -179,7 +214,7 @@ function toInput(value: ExpenseFormValue): MatterExpenseInput {
                   @if (saving()) {
                     <mat-spinner diameter="18" />
                   } @else {
-                    Add expense
+                    <span i18n="@@matters.matterTimeExpensesTab.addExpenseButton">Add expense</span>
                   }
                 </button>
               </div>
@@ -190,18 +225,25 @@ function toInput(value: ExpenseFormValue): MatterExpenseInput {
           } @else if (expenses().length > 0) {
             <button mat-stroked-button type="button" (click)="startAdd()">
               <mat-icon>add</mat-icon>
-              Add expense
+              <span i18n="@@matters.matterTimeExpensesTab.addExpenseButton">Add expense</span>
             </button>
           }
         }
       </section>
 
       <section class="matter-time-expenses-tab__section">
-        <h3 class="matter-time-expenses-tab__heading">Time entries</h3>
+        <h3
+          class="matter-time-expenses-tab__heading"
+          i18n="@@matters.matterTimeExpensesTab.timeEntriesHeading"
+        >
+          Time entries
+        </h3>
         <lf-empty-state
           icon="schedule"
           title="Time entries aren't available here yet"
+          i18n-title="@@matters.matterTimeExpensesTab.timeEntriesEmptyTitle"
           message="No matter-scoped time-entry API exists in this environment yet."
+          i18n-message="@@matters.matterTimeExpensesTab.timeEntriesEmptyMessage"
         />
       </section>
     </div>

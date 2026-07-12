@@ -6,7 +6,11 @@
   }
 
   <mat-stepper orientation="horizontal" linear="false">
-    <mat-step [stepControl]="basicsForm" label="Trigger" i18n-label="@@admin.workflowRuleBuilder.triggerStepLabel">
+    <mat-step
+      [stepControl]="basicsForm"
+      label="Trigger"
+      i18n-label="@@admin.workflowRuleBuilder.triggerStepLabel"
+    >
       <form [formGroup]="basicsForm" class="rule-builder__form">
         <mat-form-field appearance="outline">
           <mat-label i18n="@@admin.workflowRuleBuilder.ruleNameLabel">Rule name</mat-label>
@@ -27,10 +31,20 @@
           <input matInput type="number" formControlName="runOrder" />
         </mat-form-field>
 
-        <mat-checkbox formControlName="active" i18n="@@admin.workflowRuleBuilder.activeCheckbox">Active</mat-checkbox>
+        <mat-checkbox formControlName="active" i18n="@@admin.workflowRuleBuilder.activeCheckbox"
+          >Active</mat-checkbox
+        >
       </form>
       <div class="rule-builder__step-actions">
-        <button mat-flat-button color="primary" type="button" matStepperNext i18n="@@admin.workflowRuleBuilder.triggerNextButton">Next</button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          matStepperNext
+          i18n="@@admin.workflowRuleBuilder.triggerNextButton"
+        >
+          Next
+        </button>
       </div>
     </mat-step>
 
@@ -38,15 +52,21 @@
       <mat-form-field appearance="outline">
         <mat-label i18n="@@admin.workflowRuleBuilder.matchLabel">Match</mat-label>
         <mat-select [formControl]="conditionLogic">
-          <mat-option value="AND" i18n="@@admin.workflowRuleBuilder.matchAllOption">All of (AND)</mat-option>
-          <mat-option value="OR" i18n="@@admin.workflowRuleBuilder.matchAnyOption">Any of (OR)</mat-option>
+          <mat-option value="AND" i18n="@@admin.workflowRuleBuilder.matchAllOption"
+            >All of (AND)</mat-option
+          >
+          <mat-option value="OR" i18n="@@admin.workflowRuleBuilder.matchAnyOption"
+            >Any of (OR)</mat-option
+          >
         </mat-select>
       </mat-form-field>
 
       @for (condition of conditions(); track $index) {
         <div class="rule-builder__row">
           <mat-form-field appearance="outline">
-            <mat-label i18n="@@admin.workflowRuleBuilder.conditionFieldLabel">Field (dot-path)</mat-label>
+            <mat-label i18n="@@admin.workflowRuleBuilder.conditionFieldLabel"
+              >Field (dot-path)</mat-label
+            >
             <input
               matInput
               [value]="condition.field"
@@ -54,7 +74,9 @@
             />
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label i18n="@@admin.workflowRuleBuilder.conditionOperatorLabel">Operator</mat-label>
+            <mat-label i18n="@@admin.workflowRuleBuilder.conditionOperatorLabel"
+              >Operator</mat-label
+            >
             <mat-select
               [value]="condition.op"
               (selectionChange)="updateCondition($index, { op: $event.value })"
@@ -77,15 +99,37 @@
           </button>
         </div>
       }
-      <button mat-stroked-button type="button" (click)="addCondition()" i18n="@@admin.workflowRuleBuilder.addConditionButton">Add condition</button>
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="addCondition()"
+        i18n="@@admin.workflowRuleBuilder.addConditionButton"
+      >
+        Add condition
+      </button>
       <p class="rule-builder__hint" i18n="@@admin.workflowRuleBuilder.conditionsHint">
         Fields are dot-paths into the trigger's own event payload (e.g. <code>lead.stage</code>) —
         there's no related-entity lookup or business-hours predicate.
       </p>
 
       <div class="rule-builder__step-actions">
-        <button mat-button type="button" matStepperPrevious i18n="@@admin.workflowRuleBuilder.conditionsBackButton">Back</button>
-        <button mat-flat-button color="primary" type="button" matStepperNext i18n="@@admin.workflowRuleBuilder.conditionsNextButton">Next</button>
+        <button
+          mat-button
+          type="button"
+          matStepperPrevious
+          i18n="@@admin.workflowRuleBuilder.conditionsBackButton"
+        >
+          Back
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          matStepperNext
+          i18n="@@admin.workflowRuleBuilder.conditionsNextButton"
+        >
+          Next
+        </button>
       </div>
     </mat-step>
 
@@ -118,7 +162,9 @@
           @switch (action.type) {
             @case ('notify') {
               <mat-form-field appearance="outline">
-                <mat-label i18n="@@admin.workflowRuleBuilder.notifyChannelsLabel">Channels (comma-separated)</mat-label>
+                <mat-label i18n="@@admin.workflowRuleBuilder.notifyChannelsLabel"
+                  >Channels (comma-separated)</mat-label
+                >
                 <input
                   matInput
                   [value]="configString(action, 'channels')"
@@ -141,9 +187,13 @@
               </mat-form-field>
             }
             @case ('update_field') {
-              <p class="rule-builder__hint" i18n="@@admin.workflowRuleBuilder.updateFieldHint">Only the "status" field is honored server-side.</p>
+              <p class="rule-builder__hint" i18n="@@admin.workflowRuleBuilder.updateFieldHint">
+                Only the "status" field is honored server-side.
+              </p>
               <mat-form-field appearance="outline">
-                <mat-label i18n="@@admin.workflowRuleBuilder.newStatusValueLabel">New status value</mat-label>
+                <mat-label i18n="@@admin.workflowRuleBuilder.newStatusValueLabel"
+                  >New status value</mat-label
+                >
                 <input
                   matInput
                   [value]="configString(action, 'value')"
@@ -158,7 +208,9 @@
             }
             @case ('assign') {
               <mat-form-field appearance="outline">
-                <mat-label i18n="@@admin.workflowRuleBuilder.assignmentPoolLabel">Assignment pool</mat-label>
+                <mat-label i18n="@@admin.workflowRuleBuilder.assignmentPoolLabel"
+                  >Assignment pool</mat-label
+                >
                 <mat-select
                   multiple
                   [value]="action.config['pool'] ?? []"
@@ -169,11 +221,15 @@
                   }
                 </mat-select>
               </mat-form-field>
-              <p class="rule-builder__hint" i18n="@@admin.workflowRuleBuilder.assignHint">Least-loaded only — there is no round-robin mode.</p>
+              <p class="rule-builder__hint" i18n="@@admin.workflowRuleBuilder.assignHint">
+                Least-loaded only — there is no round-robin mode.
+              </p>
             }
             @case ('webhook') {
               <mat-form-field appearance="outline">
-                <mat-label i18n="@@admin.workflowRuleBuilder.webhookUrlLabel">Webhook URL</mat-label>
+                <mat-label i18n="@@admin.workflowRuleBuilder.webhookUrlLabel"
+                  >Webhook URL</mat-label
+                >
                 <input
                   matInput
                   [value]="configString(action, 'url')"
@@ -183,7 +239,9 @@
             }
             @case ('wait') {
               <mat-form-field appearance="outline">
-                <mat-label i18n="@@admin.workflowRuleBuilder.durationLabel">Duration (minutes)</mat-label>
+                <mat-label i18n="@@admin.workflowRuleBuilder.durationLabel"
+                  >Duration (minutes)</mat-label
+                >
                 <input
                   matInput
                   type="number"
@@ -197,20 +255,47 @@
               </mat-form-field>
             }
             @default {
-              <p class="rule-builder__hint" i18n="@@admin.workflowRuleBuilder.escalateHint">No extra configuration needed for "escalate".</p>
+              <p class="rule-builder__hint" i18n="@@admin.workflowRuleBuilder.escalateHint">
+                No extra configuration needed for "escalate".
+              </p>
             }
           }
         </div>
       }
-      <button mat-stroked-button type="button" (click)="addAction()" i18n="@@admin.workflowRuleBuilder.addActionButton">Add action</button>
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="addAction()"
+        i18n="@@admin.workflowRuleBuilder.addActionButton"
+      >
+        Add action
+      </button>
 
       <div class="rule-builder__step-actions">
-        <button mat-button type="button" matStepperPrevious i18n="@@admin.workflowRuleBuilder.actionsBackButton">Back</button>
-        <button mat-flat-button color="primary" type="button" matStepperNext i18n="@@admin.workflowRuleBuilder.actionsNextButton">Next</button>
+        <button
+          mat-button
+          type="button"
+          matStepperPrevious
+          i18n="@@admin.workflowRuleBuilder.actionsBackButton"
+        >
+          Back
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          matStepperNext
+          i18n="@@admin.workflowRuleBuilder.actionsNextButton"
+        >
+          Next
+        </button>
       </div>
     </mat-step>
 
-    <mat-step label="Save & simulate" i18n-label="@@admin.workflowRuleBuilder.saveSimulateStepLabel">
+    <mat-step
+      label="Save & simulate"
+      i18n-label="@@admin.workflowRuleBuilder.saveSimulateStepLabel"
+    >
       @if (saveError()) {
         <p class="rule-builder__error">{{ saveError() }}</p>
       }
@@ -225,7 +310,14 @@
         >
           {{ isNew() ? 'Save rule' : 'Save changes' }}
         </button>
-        <button mat-button type="button" (click)="goToList()" i18n="@@admin.workflowRuleBuilder.backToListButton">Back to list</button>
+        <button
+          mat-button
+          type="button"
+          (click)="goToList()"
+          i18n="@@admin.workflowRuleBuilder.backToListButton"
+        >
+          Back to list
+        </button>
       </div>
 
       @if (!isNew()) {
@@ -236,10 +328,18 @@
             simulation mode server-side, only this one-shot test.
           </p>
           <mat-form-field appearance="outline" class="rule-builder__payload">
-            <mat-label i18n="@@admin.workflowRuleBuilder.samplePayloadLabel">Sample payload (JSON)</mat-label>
+            <mat-label i18n="@@admin.workflowRuleBuilder.samplePayloadLabel"
+              >Sample payload (JSON)</mat-label
+            >
             <textarea matInput [formControl]="samplePayload" rows="6"></textarea>
           </mat-form-field>
-          <button mat-stroked-button type="button" [disabled]="testing()" (click)="runTest()" i18n="@@admin.workflowRuleBuilder.runTestButton">
+          <button
+            mat-stroked-button
+            type="button"
+            [disabled]="testing()"
+            (click)="runTest()"
+            i18n="@@admin.workflowRuleBuilder.runTestButton"
+          >
             Run test
           </button>
 
@@ -251,7 +351,9 @@
           }
           @if (testResult()) {
             <div class="rule-builder__result">
-              <p i18n="@@admin.workflowRuleBuilder.statusLine">Status: {{ testResult()!.status }}</p>
+              <p i18n="@@admin.workflowRuleBuilder.statusLine">
+                Status: {{ testResult()!.status }}
+              </p>
               @if (testResult()!.resultJson) {
                 <pre>{{ testResult()!.resultJson }}</pre>
               }

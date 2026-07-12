@@ -5,7 +5,10 @@
   }
 
   @if (lockClient) {
-    <p class="payment-record-dialog__client-locked" i18n="@@billing.paymentRecordDialog.clientLocked">
+    <p
+      class="payment-record-dialog__client-locked"
+      i18n="@@billing.paymentRecordDialog.clientLocked"
+    >
       Client: <strong>{{ data.invoice?.clientId }}</strong>
     </p>
   } @else {
@@ -46,11 +49,18 @@
     @if (form.controls.mode.value === 'Gateway') {
       <mat-form-field appearance="outline" class="payment-record-dialog__field">
         <mat-label i18n="@@billing.paymentRecordDialog.gatewayLabel">Gateway</mat-label>
-        <input matInput formControlName="gateway" placeholder="Razorpay / Stripe / PayPal" i18n-placeholder="@@billing.paymentRecordDialog.gatewayPlaceholder" />
+        <input
+          matInput
+          formControlName="gateway"
+          placeholder="Razorpay / Stripe / PayPal"
+          i18n-placeholder="@@billing.paymentRecordDialog.gatewayPlaceholder"
+        />
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="payment-record-dialog__field">
-        <mat-label i18n="@@billing.paymentRecordDialog.gatewayRefLabel">Gateway reference</mat-label>
+        <mat-label i18n="@@billing.paymentRecordDialog.gatewayRefLabel"
+          >Gateway reference</mat-label
+        >
         <input matInput formControlName="gatewayRef" />
       </mat-form-field>
     }
@@ -62,7 +72,11 @@
       <mat-datepicker #receivedOnPicker />
     </mat-form-field>
 
-    <mat-checkbox formControlName="onAccount" class="payment-record-dialog__on-account" i18n="@@billing.paymentRecordDialog.onAccountLabel">
+    <mat-checkbox
+      formControlName="onAccount"
+      class="payment-record-dialog__on-account"
+      i18n="@@billing.paymentRecordDialog.onAccountLabel"
+    >
       On account (skip the ≤ allocations check for excess/unallocated amounts)
     </mat-checkbox>
   </form>
@@ -71,11 +85,15 @@
     <div class="payment-record-dialog__allocations-header">
       <h3 i18n="@@billing.paymentRecordDialog.allocationsHeading">Allocations</h3>
       <button mat-button type="button" (click)="addAllocation()">
-        <mat-icon>add</mat-icon> <span i18n="@@billing.paymentRecordDialog.addRowButton">Add row</span>
+        <mat-icon>add</mat-icon>
+        <span i18n="@@billing.paymentRecordDialog.addRowButton">Add row</span>
       </button>
     </div>
 
-    <p class="payment-record-dialog__hint" i18n="@@billing.paymentRecordDialog.manualInvoiceIdsHint">
+    <p
+      class="payment-record-dialog__hint"
+      i18n="@@billing.paymentRecordDialog.manualInvoiceIdsHint"
+    >
       There's no endpoint to list a client's open invoices, so invoice ids are entered manually
       here.
     </p>
@@ -106,12 +124,24 @@
       </div>
     }
 
-    <p class="payment-record-dialog__allocation-total" i18n="@@billing.paymentRecordDialog.allocatedTotal">Allocated total: {{ allocationTotal() }}</p>
+    <p
+      class="payment-record-dialog__allocation-total"
+      i18n="@@billing.paymentRecordDialog.allocatedTotal"
+    >
+      Allocated total: {{ allocationTotal() }}
+    </p>
   </div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button type="button" (click)="cancel()" i18n="@@billing.paymentRecordDialog.cancelButton">Cancel</button>
+  <button
+    mat-button
+    type="button"
+    (click)="cancel()"
+    i18n="@@billing.paymentRecordDialog.cancelButton"
+  >
+    Cancel
+  </button>
   <button
     mat-flat-button
     color="primary"

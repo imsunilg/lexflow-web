@@ -16,35 +16,53 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
   imports: [DashboardWidgetComponent, EmptyStateComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-dashboard-widget title="Case Statistics" [loading]="loading()" (refresh)="load()">
+    <lf-dashboard-widget
+      title="Case Statistics"
+      i18n-title="@@dashboard.caseStatsWidget.title"
+      [loading]="loading()"
+      (refresh)="load()"
+    >
       @if (error()) {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load case statistics"
+          i18n-title="@@dashboard.caseStatsWidget.errorTitle"
           message="Something went wrong."
+          i18n-message="@@dashboard.caseStatsWidget.errorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@dashboard.caseStatsWidget.retryLabel"
           (cta)="load()"
         />
       } @else if (data(); as summary) {
         <div class="case-stats-grid">
           <div class="case-stats-grid__item">
-            <span class="case-stats-grid__label">Open</span>
+            <span class="case-stats-grid__label" i18n="@@dashboard.caseStatsWidget.openLabel"
+              >Open</span
+            >
             <span class="case-stats-grid__value">{{ summary.open }}</span>
           </div>
           <div class="case-stats-grid__item">
-            <span class="case-stats-grid__label">Closed</span>
+            <span class="case-stats-grid__label" i18n="@@dashboard.caseStatsWidget.closedLabel"
+              >Closed</span
+            >
             <span class="case-stats-grid__value">{{ summary.closed }}</span>
           </div>
           <div class="case-stats-grid__item">
-            <span class="case-stats-grid__label">Won</span>
+            <span class="case-stats-grid__label" i18n="@@dashboard.caseStatsWidget.wonLabel"
+              >Won</span
+            >
             <span class="case-stats-grid__value">{{ summary.won }}</span>
           </div>
           <div class="case-stats-grid__item">
-            <span class="case-stats-grid__label">Lost</span>
+            <span class="case-stats-grid__label" i18n="@@dashboard.caseStatsWidget.lostLabel"
+              >Lost</span
+            >
             <span class="case-stats-grid__value">{{ summary.lost }}</span>
           </div>
           <div class="case-stats-grid__item">
-            <span class="case-stats-grid__label">Settled</span>
+            <span class="case-stats-grid__label" i18n="@@dashboard.caseStatsWidget.settledLabel"
+              >Settled</span
+            >
             <span class="case-stats-grid__value">{{ summary.settled }}</span>
           </div>
         </div>

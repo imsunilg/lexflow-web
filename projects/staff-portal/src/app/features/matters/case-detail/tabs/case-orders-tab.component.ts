@@ -76,13 +76,20 @@ function buildUploadForm(): FormGroup<{
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load orders"
+          i18n-title="@@matters.caseOrdersTab.loadErrorTitle"
           message="Something went wrong while loading orders."
+          i18n-message="@@matters.caseOrdersTab.loadErrorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@matters.caseOrdersTab.retryButton"
           (cta)="load()"
         />
       } @else {
         @if (orders().length === 0) {
-          <lf-empty-state icon="gavel" title="No orders yet" />
+          <lf-empty-state
+            icon="gavel"
+            title="No orders yet"
+            i18n-title="@@matters.caseOrdersTab.emptyTitle"
+          />
         } @else {
           <div class="orders-tab__list">
             @for (order of orders(); track order.id) {
@@ -93,6 +100,7 @@ function buildUploadForm(): FormGroup<{
                   <span
                     class="orders-tab__due"
                     [style.color]="complianceDueColor(order.complianceDue)"
+                    i18n="@@matters.caseOrdersTab.complianceDue"
                   >
                     Compliance due {{ order.complianceDue }}
                   </span>
@@ -103,10 +111,12 @@ function buildUploadForm(): FormGroup<{
         }
 
         <div class="orders-tab__upload">
-          <h3 class="orders-tab__upload-title">Upload order</h3>
+          <h3 class="orders-tab__upload-title" i18n="@@matters.caseOrdersTab.uploadTitle">
+            Upload order
+          </h3>
           <form [formGroup]="uploadForm" class="orders-tab__form">
             <mat-form-field appearance="outline">
-              <mat-label>Order date</mat-label>
+              <mat-label i18n="@@matters.caseOrdersTab.orderDateLabel">Order date</mat-label>
               <input matInput [matDatepicker]="orderDatePicker" formControlName="orderDate" />
               <mat-datepicker-toggle matIconSuffix [for]="orderDatePicker" />
               <mat-datepicker #orderDatePicker />
@@ -114,21 +124,27 @@ function buildUploadForm(): FormGroup<{
                 uploadForm.controls.orderDate.hasError('futureDate') &&
                 uploadForm.controls.orderDate.touched
               ) {
-                <mat-error>Order date can't be in the future.</mat-error>
+                <mat-error i18n="@@matters.caseOrdersTab.futureDateError"
+                  >Order date can't be in the future.</mat-error
+                >
               }
               @if (
                 uploadForm.controls.orderDate.hasError('required') &&
                 uploadForm.controls.orderDate.touched
               ) {
-                <mat-error>Order date is required.</mat-error>
+                <mat-error i18n="@@matters.caseOrdersTab.orderDateRequiredError"
+                  >Order date is required.</mat-error
+                >
               }
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Gist</mat-label>
+              <mat-label i18n="@@matters.caseOrdersTab.gistLabel">Gist</mat-label>
               <textarea matInput formControlName="gist"></textarea>
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Compliance due (optional)</mat-label>
+              <mat-label i18n="@@matters.caseOrdersTab.complianceDueLabel"
+                >Compliance due (optional)</mat-label
+              >
               <input matInput [matDatepicker]="dueDatePicker" formControlName="complianceDue" />
               <mat-datepicker-toggle matIconSuffix [for]="dueDatePicker" />
               <mat-datepicker #dueDatePicker />
@@ -141,7 +157,9 @@ function buildUploadForm(): FormGroup<{
           />
 
           @if (selectedFile()) {
-            <p class="orders-tab__selected-file">Selected: {{ selectedFile()!.name }}</p>
+            <p class="orders-tab__selected-file" i18n="@@matters.caseOrdersTab.selectedFile">
+              Selected: {{ selectedFile()!.name }}
+            </p>
           }
 
           <button
@@ -154,7 +172,7 @@ function buildUploadForm(): FormGroup<{
             @if (uploading()) {
               <mat-spinner diameter="18" />
             } @else {
-              Upload
+              <span i18n="@@matters.caseOrdersTab.uploadButton">Upload</span>
             }
           </button>
 

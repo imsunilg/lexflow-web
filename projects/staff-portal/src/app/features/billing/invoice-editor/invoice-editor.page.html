@@ -1,6 +1,8 @@
 <div class="invoice-editor">
   <header class="invoice-editor__header">
-    <h1 i18n="@@billing.invoiceEditor.title">{{ isNew() ? 'New invoice' : (invoice()?.number ?? 'Invoice') }}</h1>
+    <h1 i18n="@@billing.invoiceEditor.title">
+      {{ isNew() ? 'New invoice' : (invoice()?.number ?? 'Invoice') }}
+    </h1>
     @if (invoice(); as inv) {
       <lf-status-chip [label]="inv.status" />
     }
@@ -19,12 +21,24 @@
         }
       </button>
       @if (invoice()?.status === 'Draft') {
-        <button mat-stroked-button type="button" (click)="submitInvoice()" i18n="@@billing.invoiceEditor.submitButton">
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="submitInvoice()"
+          i18n="@@billing.invoiceEditor.submitButton"
+        >
           Submit for approval
         </button>
       }
       @if (invoice()?.status === 'Approved') {
-        <button mat-stroked-button type="button" (click)="sendInvoice()" i18n="@@billing.invoiceEditor.sendButton">Send</button>
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="sendInvoice()"
+          i18n="@@billing.invoiceEditor.sendButton"
+        >
+          Send
+        </button>
       }
     </div>
   </header>
@@ -79,9 +93,13 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="invoice-editor__time-entries">
-          <mat-label i18n="@@billing.invoiceEditor.timeEntryIdsLabel">Unbilled time-entry IDs (comma-separated)</mat-label>
+          <mat-label i18n="@@billing.invoiceEditor.timeEntryIdsLabel"
+            >Unbilled time-entry IDs (comma-separated)</mat-label
+          >
           <input matInput formControlName="timeEntryIdsCsv" [readonly]="!canEdit()" />
-          <mat-hint i18n="@@billing.invoiceEditor.timeEntryIdsHint">No WIP picker exists yet — paste IDs from the Time module manually.</mat-hint>
+          <mat-hint i18n="@@billing.invoiceEditor.timeEntryIdsHint"
+            >No WIP picker exists yet — paste IDs from the Time module manually.</mat-hint
+          >
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="invoice-editor__notes">
@@ -95,7 +113,8 @@
           <h2 i18n="@@billing.invoiceEditor.linesHeading">Lines</h2>
           @if (canEdit()) {
             <button mat-button type="button" (click)="addLine()">
-              <mat-icon>add</mat-icon> <span i18n="@@billing.invoiceEditor.addLineButton">Add line</span>
+              <mat-icon>add</mat-icon>
+              <span i18n="@@billing.invoiceEditor.addLineButton">Add line</span>
             </button>
           }
         </div>
@@ -145,7 +164,9 @@
                 <tr>
                   <th i18n="@@billing.invoiceEditor.savedLinesTable.numberHeader">#</th>
                   <th i18n="@@billing.invoiceEditor.savedLinesTable.typeHeader">Type</th>
-                  <th i18n="@@billing.invoiceEditor.savedLinesTable.descriptionHeader">Description</th>
+                  <th i18n="@@billing.invoiceEditor.savedLinesTable.descriptionHeader">
+                    Description
+                  </th>
                   <th i18n="@@billing.invoiceEditor.savedLinesTable.qtyHeader">Qty</th>
                   <th i18n="@@billing.invoiceEditor.savedLinesTable.rateHeader">Rate</th>
                   <th i18n="@@billing.invoiceEditor.savedLinesTable.amountHeader">Amount</th>
@@ -194,11 +215,23 @@
     <section class="invoice-editor__preview-pane">
       <h2 i18n="@@billing.invoiceEditor.pdfPreviewHeading">PDF preview</h2>
       @if (isNew()) {
-        <p class="invoice-editor__preview-hint" i18n="@@billing.invoiceEditor.pdfPreviewSaveHint">Save the invoice to generate a PDF preview.</p>
+        <p class="invoice-editor__preview-hint" i18n="@@billing.invoiceEditor.pdfPreviewSaveHint">
+          Save the invoice to generate a PDF preview.
+        </p>
       } @else if (pdfPreviewUrl(); as url) {
-        <iframe [src]="url" class="invoice-editor__pdf-frame" title="Invoice PDF preview" i18n-title="@@billing.invoiceEditor.pdfFrameTitle"></iframe>
+        <iframe
+          [src]="url"
+          class="invoice-editor__pdf-frame"
+          title="Invoice PDF preview"
+          i18n-title="@@billing.invoiceEditor.pdfFrameTitle"
+        ></iframe>
       } @else {
-        <p class="invoice-editor__preview-hint" i18n="@@billing.invoiceEditor.pdfPreviewUnavailable">PDF preview unavailable.</p>
+        <p
+          class="invoice-editor__preview-hint"
+          i18n="@@billing.invoiceEditor.pdfPreviewUnavailable"
+        >
+          PDF preview unavailable.
+        </p>
       }
     </section>
   </div>

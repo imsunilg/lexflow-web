@@ -54,32 +54,44 @@ export interface ClosingChecklistDialogData {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Close matter — checklist</h2>
+    <h2 mat-dialog-title i18n="@@matters.closingChecklistDialog.title">Close matter — checklist</h2>
     <mat-dialog-content>
       <form [formGroup]="form" class="checklist">
-        <mat-checkbox [formControl]="noRunningTimersControl">
+        <mat-checkbox
+          [formControl]="noRunningTimersControl"
+          i18n="@@matters.closingChecklistDialog.noRunningTimersCheckbox"
+        >
           No running timers remain on this matter
         </mat-checkbox>
 
         @if (summary(); as fin) {
           @if (fin.wip > 0) {
             <div class="checklist__item">
-              <p>
+              <p i18n="@@matters.closingChecklistDialog.wipLabel">
                 Unbilled time (WIP): <strong>{{ fin.wip | lfCurrency }}</strong>
               </p>
               <mat-radio-group [formControl]="wipDecisionControl">
-                <mat-radio-button value="bill">Bill this time</mat-radio-button>
-                <mat-radio-button value="writeOff">Write it off</mat-radio-button>
+                <mat-radio-button value="bill" i18n="@@matters.closingChecklistDialog.billOption"
+                  >Bill this time</mat-radio-button
+                >
+                <mat-radio-button
+                  value="writeOff"
+                  i18n="@@matters.closingChecklistDialog.writeOffOption"
+                  >Write it off</mat-radio-button
+                >
               </mat-radio-group>
             </div>
           }
 
           @if (fin.trustBalance > 0) {
             <div class="checklist__item">
-              <p>
+              <p i18n="@@matters.closingChecklistDialog.trustBalanceLabel">
                 Trust balance: <strong>{{ fin.trustBalance | lfCurrency }}</strong>
               </p>
-              <mat-checkbox [formControl]="trustDisposedControl">
+              <mat-checkbox
+                [formControl]="trustDisposedControl"
+                i18n="@@matters.closingChecklistDialog.trustDisposedCheckbox"
+              >
                 Trust funds have been disbursed/accounted for
               </mat-checkbox>
             </div>
@@ -87,7 +99,7 @@ export interface ClosingChecklistDialogData {
         }
 
         <mat-form-field appearance="outline">
-          <mat-label>Outcome</mat-label>
+          <mat-label i18n="@@matters.closingChecklistDialog.outcomeLabel">Outcome</mat-label>
           <mat-select formControlName="outcome">
             @for (outcome of outcomes; track outcome) {
               <mat-option [value]="outcome">{{ outcome }}</mat-option>
@@ -96,12 +108,16 @@ export interface ClosingChecklistDialogData {
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Closure summary note</mat-label>
+          <mat-label i18n="@@matters.closingChecklistDialog.closureNoteLabel"
+            >Closure summary note</mat-label
+          >
           <textarea matInput formControlName="closureNote" rows="3"></textarea>
           @if (
             form.controls.closureNote.hasError('required') && form.controls.closureNote.touched
           ) {
-            <mat-error>A closure summary note is required.</mat-error>
+            <mat-error i18n="@@matters.closingChecklistDialog.closureNoteRequiredError"
+              >A closure summary note is required.</mat-error
+            >
           }
         </mat-form-field>
 
@@ -111,7 +127,14 @@ export interface ClosingChecklistDialogData {
       </form>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@matters.closingChecklistDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="warn"
@@ -122,7 +145,7 @@ export interface ClosingChecklistDialogData {
         @if (closing()) {
           <mat-spinner diameter="20" />
         } @else {
-          Close matter
+          <span i18n="@@matters.closingChecklistDialog.closeButton">Close matter</span>
         }
       </button>
     </mat-dialog-actions>

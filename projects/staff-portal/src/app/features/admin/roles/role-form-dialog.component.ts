@@ -35,18 +35,20 @@ export interface RoleFormDialogData {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>{{ data.role ? 'Edit role' : 'New custom role' }}</h2>
+    <h2 mat-dialog-title i18n="@@admin.roleFormDialog.title">
+      {{ data.role ? 'Edit role' : 'New custom role' }}
+    </h2>
     <mat-dialog-content class="role-form">
       <form [formGroup]="form">
         @if (!data.role) {
           <mat-form-field appearance="outline">
-            <mat-label>Key</mat-label>
+            <mat-label i18n="@@admin.roleFormDialog.keyLabel">Key</mat-label>
             <input matInput formControlName="key" />
           </mat-form-field>
         }
 
         <mat-form-field appearance="outline">
-          <mat-label>Name</mat-label>
+          <mat-label i18n="@@admin.roleFormDialog.nameLabel">Name</mat-label>
           <input matInput formControlName="name" />
         </mat-form-field>
       </form>
@@ -72,13 +74,21 @@ export interface RoleFormDialogData {
       }
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@admin.roleFormDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="primary"
         type="button"
         [disabled]="form.invalid || submitting()"
         (click)="submit()"
+        i18n="@@admin.roleFormDialog.saveButton"
       >
         Save
       </button>

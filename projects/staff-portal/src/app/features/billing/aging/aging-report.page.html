@@ -51,7 +51,11 @@
         <span i18n="@@billing.agingReport.totalArLabel">Total AR</span>
         <strong>{{ r.total | lfCurrency }}</strong>
       </div>
-      <p class="aging__check" [class.aging__check--fail]="!reconciles()" i18n="@@billing.agingReport.reconcileCheck">
+      <p
+        class="aging__check"
+        [class.aging__check--fail]="!reconciles()"
+        i18n="@@billing.agingReport.reconcileCheck"
+      >
         Buckets sum to {{ bucketsSum() | lfCurrency }}
         @if (reconciles()) {
           — matches total (AC-B6 ✓)

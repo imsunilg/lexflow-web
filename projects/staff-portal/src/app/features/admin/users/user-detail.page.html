@@ -9,7 +9,9 @@
     <header class="user-detail__header">
       <div>
         <h1>{{ user()!.name }}</h1>
-        <p class="user-detail__email" i18n="@@admin.userDetail.emailStatusLine">{{ user()!.email }} · {{ user()!.status }}</p>
+        <p class="user-detail__email" i18n="@@admin.userDetail.emailStatusLine">
+          {{ user()!.email }} · {{ user()!.status }}
+        </p>
       </div>
       <div class="user-detail__actions">
         @if (user()!.status === 'Active') {
@@ -44,10 +46,16 @@
     </header>
 
     <nav class="user-detail__links">
-      <a [routerLink]="['/admin/access']" [queryParams]="{ userId: userId }" i18n="@@admin.userDetail.permissionInspectorLink">
+      <a
+        [routerLink]="['/admin/access']"
+        [queryParams]="{ userId: userId }"
+        i18n="@@admin.userDetail.permissionInspectorLink"
+      >
         Why can this user do X? (effective-permission inspector)
       </a>
-      <a [routerLink]="['/admin/access/sessions']" i18n="@@admin.userDetail.sessionsLink">View sessions & login history</a>
+      <a [routerLink]="['/admin/access/sessions']" i18n="@@admin.userDetail.sessionsLink"
+        >View sessions & login history</a
+      >
     </nav>
 
     <form class="user-detail__form" [formGroup]="form">
@@ -89,7 +97,9 @@
       <mat-form-field appearance="outline">
         <mat-label i18n="@@admin.userDetail.departmentLabel">Department</mat-label>
         <mat-select formControlName="departmentId">
-          <mat-option [value]="null" i18n="@@admin.userDetail.departmentNoneOption">(none)</mat-option>
+          <mat-option [value]="null" i18n="@@admin.userDetail.departmentNoneOption"
+            >(none)</mat-option
+          >
           @for (department of departments(); track department.id) {
             <mat-option [value]="department.id">{{ department.name }}</mat-option>
           }
@@ -107,7 +117,9 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="user-detail__prefs">
-        <mat-label i18n="@@admin.userDetail.notificationPrefsLabel">Notification preferences (JSON)</mat-label>
+        <mat-label i18n="@@admin.userDetail.notificationPrefsLabel"
+          >Notification preferences (JSON)</mat-label
+        >
         <textarea matInput formControlName="notificationPrefsJson" rows="3"></textarea>
         <mat-hint i18n="@@admin.userDetail.notificationPrefsHint">
           Write-only — the server never returns current preferences, so this sets new ones rather

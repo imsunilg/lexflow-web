@@ -69,7 +69,9 @@
         <mat-datepicker #endPicker />
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label i18n="@@billing.reconciliation.bankBalanceLabel">Bank statement balance</mat-label>
+        <mat-label i18n="@@billing.reconciliation.bankBalanceLabel"
+          >Bank statement balance</mat-label
+        >
         <input matInput type="number" [formControl]="bankStatementBalanceControl" />
       </mat-form-field>
     </div>
@@ -100,9 +102,15 @@
     <section class="reconciliation__step">
       <h2 i18n="@@billing.reconciliation.step4Heading">4. Result</h2>
       <div class="reconciliation__result" [class.reconciliation__result--balanced]="r.isBalanced">
-        <p i18n="@@billing.reconciliation.ledgerBalanceLine">Ledger balance: {{ r.ledgerBalance | lfCurrency }}</p>
-        <p i18n="@@billing.reconciliation.bankBalanceLine">Bank statement balance: {{ r.bankStatementBalance | lfCurrency }}</p>
-        <p i18n="@@billing.reconciliation.statusLine">Status: {{ r.status }} — {{ r.isBalanced ? 'Balanced' : 'Not balanced' }}</p>
+        <p i18n="@@billing.reconciliation.ledgerBalanceLine">
+          Ledger balance: {{ r.ledgerBalance | lfCurrency }}
+        </p>
+        <p i18n="@@billing.reconciliation.bankBalanceLine">
+          Bank statement balance: {{ r.bankStatementBalance | lfCurrency }}
+        </p>
+        <p i18n="@@billing.reconciliation.statusLine">
+          Status: {{ r.status }} — {{ r.isBalanced ? 'Balanced' : 'Not balanced' }}
+        </p>
         <p i18n="@@billing.reconciliation.exceptionsLine">Exceptions: {{ r.exceptionCount }}</p>
       </div>
 
@@ -111,13 +119,19 @@
         @if (loadingExceptions()) {
           <mat-spinner diameter="24" />
         } @else if (exceptions().length === 0) {
-          <lf-empty-state icon="fact_check" title="No exception details returned" i18n-title="@@billing.reconciliation.noExceptionDetailsTitle" />
+          <lf-empty-state
+            icon="fact_check"
+            title="No exception details returned"
+            i18n-title="@@billing.reconciliation.noExceptionDetailsTitle"
+          />
         } @else {
           <table class="reconciliation__table">
             <thead>
               <tr>
                 <th i18n="@@billing.reconciliation.exceptionsTable.dateHeader">Bank line date</th>
-                <th i18n="@@billing.reconciliation.exceptionsTable.descriptionHeader">Description</th>
+                <th i18n="@@billing.reconciliation.exceptionsTable.descriptionHeader">
+                  Description
+                </th>
                 <th i18n="@@billing.reconciliation.exceptionsTable.amountHeader">Amount</th>
               </tr>
             </thead>
@@ -141,7 +155,9 @@
           <textarea matInput [formControl]="notesControl" rows="2"></textarea>
         </mat-form-field>
         @if (signedOff()) {
-          <p class="reconciliation__signed-off" i18n="@@billing.reconciliation.signedOffMessage">Signed off.</p>
+          <p class="reconciliation__signed-off" i18n="@@billing.reconciliation.signedOffMessage">
+            Signed off.
+          </p>
         } @else {
           <button
             mat-flat-button

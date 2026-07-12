@@ -8,7 +8,12 @@
     <mat-spinner diameter="24" />
   } @else if (errorMessage() && !url()) {
     <p class="ics-export__error" role="alert">{{ errorMessage() }}</p>
-    <button mat-stroked-button type="button" (click)="load()" i18n="@@calendar.icsExportTab.retryButton">
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="load()"
+      i18n="@@calendar.icsExportTab.retryButton"
+    >
       Retry
     </button>
   } @else if (url()) {

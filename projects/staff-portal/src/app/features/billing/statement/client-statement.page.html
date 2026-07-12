@@ -37,11 +37,15 @@
   @if (statement(); as s) {
     <section class="statement__balances">
       <div class="statement__balance">
-        <span class="statement__balance-label" i18n="@@billing.clientStatement.openingBalanceLabel">Opening balance</span>
+        <span class="statement__balance-label" i18n="@@billing.clientStatement.openingBalanceLabel"
+          >Opening balance</span
+        >
         <span class="statement__balance-value">{{ s.openingBalance | lfCurrency }}</span>
       </div>
       <div class="statement__balance">
-        <span class="statement__balance-label" i18n="@@billing.clientStatement.closingBalanceLabel">Closing balance</span>
+        <span class="statement__balance-label" i18n="@@billing.clientStatement.closingBalanceLabel"
+          >Closing balance</span
+        >
         <span class="statement__balance-value">{{ s.closingBalance | lfCurrency }}</span>
       </div>
     </section>
@@ -49,7 +53,11 @@
     <section class="statement__section">
       <h2 i18n="@@billing.clientStatement.invoicesHeading">Invoices</h2>
       @if (s.invoices.length === 0) {
-        <lf-empty-state icon="receipt_long" title="No invoices in this range" i18n-title="@@billing.clientStatement.noInvoicesTitle" />
+        <lf-empty-state
+          icon="receipt_long"
+          title="No invoices in this range"
+          i18n-title="@@billing.clientStatement.noInvoicesTitle"
+        />
       } @else {
         <table class="statement__table">
           <thead>
@@ -81,7 +89,11 @@
     <section class="statement__section">
       <h2 i18n="@@billing.clientStatement.paymentsHeading">Payments</h2>
       @if (s.payments.length === 0) {
-        <lf-empty-state icon="payments" title="No payments in this range" i18n-title="@@billing.clientStatement.noPaymentsTitle" />
+        <lf-empty-state
+          icon="payments"
+          title="No payments in this range"
+          i18n-title="@@billing.clientStatement.noPaymentsTitle"
+        />
       } @else {
         <table class="statement__table">
           <thead>
@@ -102,7 +114,8 @@
                 <td>{{ payment.mode }}</td>
                 <td>
                   <button mat-stroked-button type="button" (click)="refund(payment)">
-                    <mat-icon>undo</mat-icon> <span i18n="@@billing.clientStatement.refundButton">Refund</span>
+                    <mat-icon>undo</mat-icon>
+                    <span i18n="@@billing.clientStatement.refundButton">Refund</span>
                   </button>
                 </td>
               </tr>

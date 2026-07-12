@@ -16,6 +16,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #boardActive="routerLinkActive"
         [active]="boardActive.isActive"
+        i18n="@@tasks.tasksTabs.board"
       >
         Board
       </a>
@@ -25,6 +26,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #workloadActive="routerLinkActive"
         [active]="workloadActive.isActive"
+        i18n="@@tasks.tasksTabs.workload"
       >
         Workload
       </a>
@@ -34,6 +36,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #templatesActive="routerLinkActive"
         [active]="templatesActive.isActive"
+        i18n="@@tasks.tasksTabs.templates"
       >
         Templates
       </a>

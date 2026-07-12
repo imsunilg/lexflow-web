@@ -17,17 +17,29 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
   imports: [DashboardWidgetComponent, EmptyStateComponent, StatusChipComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-dashboard-widget title="Upcoming Deadlines" [loading]="loading()" (refresh)="load()">
+    <lf-dashboard-widget
+      title="Upcoming Deadlines"
+      i18n-title="@@dashboard.deadlinesWidget.title"
+      [loading]="loading()"
+      (refresh)="load()"
+    >
       @if (error()) {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load upcoming deadlines"
+          i18n-title="@@dashboard.deadlinesWidget.errorTitle"
           message="Something went wrong."
+          i18n-message="@@dashboard.deadlinesWidget.errorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@dashboard.deadlinesWidget.retryLabel"
           (cta)="load()"
         />
       } @else if (!loading() && data()?.length === 0) {
-        <lf-empty-state icon="event_available" title="No upcoming deadlines" />
+        <lf-empty-state
+          icon="event_available"
+          title="No upcoming deadlines"
+          i18n-title="@@dashboard.deadlinesWidget.emptyTitle"
+        />
       } @else if (data()) {
         <ul class="deadlines-list">
           @for (deadline of data(); track deadline.id) {
@@ -37,7 +49,9 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
                 @if (deadline.matterTitle) {
                   <span class="deadlines-list__meta">{{ deadline.matterTitle }}</span>
                 }
-                <span class="deadlines-list__meta">Due {{ deadline.dueDate }}</span>
+                <span class="deadlines-list__meta" i18n="@@dashboard.deadlinesWidget.dueLabel"
+                  >Due {{ deadline.dueDate }}</span
+                >
               </span>
               <lf-status-chip
                 [label]="deadline.severity"

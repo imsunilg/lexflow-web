@@ -30,13 +30,18 @@ const KIND_ICONS: Record<string, string> = {
   template: `
     <div class="research-tab">
       <button mat-stroked-button type="button" (click)="openPinDialog()">
-        <mat-icon>push_pin</mat-icon> Pin from Knowledge Base
+        <mat-icon>push_pin</mat-icon>
+        <span i18n="@@matters.matterResearchTab.pinButton">Pin from Knowledge Base</span>
       </button>
 
       @if (loading()) {
         <mat-progress-bar mode="indeterminate" />
       } @else if (pins().length === 0) {
-        <lf-empty-state icon="push_pin" title="Nothing pinned yet" />
+        <lf-empty-state
+          icon="push_pin"
+          title="Nothing pinned yet"
+          i18n-title="@@matters.matterResearchTab.emptyTitle"
+        />
       } @else {
         <ul class="research-tab__list">
           @for (pin of pins(); track pin.id) {
@@ -49,7 +54,13 @@ const KIND_ICONS: Record<string, string> = {
                 }
                 <span class="research-tab__meta">{{ pin.pinnedAt | date: 'MMM d, y' }}</span>
               </div>
-              <button mat-icon-button type="button" (click)="unpin(pin)">
+              <button
+                mat-icon-button
+                type="button"
+                (click)="unpin(pin)"
+                aria-label="Remove pin"
+                i18n-aria-label="@@matters.matterResearchTab.unpinAriaLabel"
+              >
                 <mat-icon>close</mat-icon>
               </button>
             </li>

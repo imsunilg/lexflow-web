@@ -27,23 +27,25 @@ export interface LostReasonDialogData {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Mark lead as lost</h2>
+    <h2 mat-dialog-title i18n="@@leads.lostReasonDialog.title">Mark lead as lost</h2>
     <mat-dialog-content>
       <form [formGroup]="form" class="lost-reason-form">
         <mat-form-field appearance="outline">
-          <mat-label>Reason</mat-label>
+          <mat-label i18n="@@leads.lostReasonDialog.reasonLabel">Reason</mat-label>
           <mat-select formControlName="reasonId">
             @for (reason of reasons(); track reason.id) {
               <mat-option [value]="reason.id">{{ reason.name }}</mat-option>
             }
           </mat-select>
           @if (form.controls.reasonId.hasError('required') && form.controls.reasonId.touched) {
-            <mat-error>A reason is required.</mat-error>
+            <mat-error i18n="@@leads.lostReasonDialog.reasonRequiredError"
+              >A reason is required.</mat-error
+            >
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Notes (optional)</mat-label>
+          <mat-label i18n="@@leads.lostReasonDialog.notesLabel">Notes (optional)</mat-label>
           <textarea matInput formControlName="note" rows="3"></textarea>
         </mat-form-field>
 
@@ -53,7 +55,14 @@ export interface LostReasonDialogData {
       </form>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@leads.lostReasonDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="warn"
@@ -64,7 +73,7 @@ export interface LostReasonDialogData {
         @if (saving()) {
           <mat-spinner diameter="20" />
         } @else {
-          Mark lost
+          <span i18n="@@leads.lostReasonDialog.markLostButton">Mark lost</span>
         }
       </button>
     </mat-dialog-actions>

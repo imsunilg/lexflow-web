@@ -48,8 +48,12 @@ import { passwordsMatchValidator } from './reset-password.page';
           >Back to sign in</a
         >
       } @else if (succeeded()) {
-        <p i18n="@@auth.acceptInvitation.successMessage">Your account is active. You can now sign in.</p>
-        <a class="auth-link" routerLink="/login" i18n="@@auth.acceptInvitation.signInLink">Sign in</a>
+        <p i18n="@@auth.acceptInvitation.successMessage">
+          Your account is active. You can now sign in.
+        </p>
+        <a class="auth-link" routerLink="/login" i18n="@@auth.acceptInvitation.signInLink"
+          >Sign in</a
+        >
       } @else {
         <form [formGroup]="form" (ngSubmit)="submit()">
           <mat-form-field appearance="outline" class="auth-field">
@@ -63,17 +67,23 @@ import { passwordsMatchValidator } from './reset-password.page';
             @if (
               form.controls.newPassword.hasError('required') && form.controls.newPassword.touched
             ) {
-              <mat-error i18n="@@auth.acceptInvitation.passwordRequiredError">Password is required.</mat-error>
+              <mat-error i18n="@@auth.acceptInvitation.passwordRequiredError"
+                >Password is required.</mat-error
+              >
             }
             @if (
               form.controls.newPassword.hasError('minlength') && form.controls.newPassword.touched
             ) {
-              <mat-error i18n="@@auth.acceptInvitation.passwordMinLengthError">Password must be at least 10 characters.</mat-error>
+              <mat-error i18n="@@auth.acceptInvitation.passwordMinLengthError"
+                >Password must be at least 10 characters.</mat-error
+              >
             }
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="auth-field">
-            <mat-label i18n="@@auth.acceptInvitation.confirmPasswordLabel">Confirm password</mat-label>
+            <mat-label i18n="@@auth.acceptInvitation.confirmPasswordLabel"
+              >Confirm password</mat-label
+            >
             <input
               matInput
               type="password"
@@ -84,12 +94,20 @@ import { passwordsMatchValidator } from './reset-password.page';
               form.controls.confirmPassword.hasError('required') &&
               form.controls.confirmPassword.touched
             ) {
-              <mat-error i18n="@@auth.acceptInvitation.confirmPasswordRequiredError">Confirm your password.</mat-error>
+              <mat-error i18n="@@auth.acceptInvitation.confirmPasswordRequiredError"
+                >Confirm your password.</mat-error
+              >
             }
           </mat-form-field>
 
           @if (form.hasError('passwordsMismatch') && form.controls.confirmPassword.touched) {
-            <p class="auth-error" role="alert" i18n="@@auth.acceptInvitation.passwordsMismatchError">Passwords don't match.</p>
+            <p
+              class="auth-error"
+              role="alert"
+              i18n="@@auth.acceptInvitation.passwordsMismatchError"
+            >
+              Passwords don't match.
+            </p>
           }
 
           @if (errorMessage()) {
@@ -106,7 +124,9 @@ import { passwordsMatchValidator } from './reset-password.page';
             @if (submitting()) {
               <mat-spinner diameter="20" />
             } @else {
-              <ng-container i18n="@@auth.acceptInvitation.activateButton">Activate account</ng-container>
+              <ng-container i18n="@@auth.acceptInvitation.activateButton"
+                >Activate account</ng-container
+              >
             }
           </button>
         </form>

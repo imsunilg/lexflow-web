@@ -16,17 +16,29 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
   imports: [DashboardWidgetComponent, EmptyStateComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-dashboard-widget title="Matter Summary" [loading]="loading()" (refresh)="load()">
+    <lf-dashboard-widget
+      title="Matter Summary"
+      i18n-title="@@dashboard.matterSummaryWidget.title"
+      [loading]="loading()"
+      (refresh)="load()"
+    >
       @if (error()) {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load matter summary"
+          i18n-title="@@dashboard.matterSummaryWidget.errorTitle"
           message="Something went wrong."
+          i18n-message="@@dashboard.matterSummaryWidget.errorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@dashboard.matterSummaryWidget.retryLabel"
           (cta)="load()"
         />
       } @else if (!loading() && data()?.length === 0) {
-        <lf-empty-state icon="folder_off" title="No matters for this period" />
+        <lf-empty-state
+          icon="folder_off"
+          title="No matters for this period"
+          i18n-title="@@dashboard.matterSummaryWidget.emptyTitle"
+        />
       } @else if (data()) {
         <ul class="matter-summary-list">
           @for (item of data(); track item.status + item.practiceArea) {

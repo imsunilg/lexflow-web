@@ -43,45 +43,55 @@ function addressJsonToText(addressJson: string | null): string {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>{{ isEdit ? 'Edit branch' : 'New branch' }}</h2>
+    <h2 mat-dialog-title i18n="@@admin.branchFormDialog.title">
+      {{ isEdit ? 'Edit branch' : 'New branch' }}
+    </h2>
 
     <mat-dialog-content class="branch-form">
       <mat-form-field appearance="outline">
-        <mat-label>Name</mat-label>
+        <mat-label i18n="@@admin.branchFormDialog.nameLabel">Name</mat-label>
         <input matInput [formControl]="name" required />
         @if (name.invalid && name.touched) {
-          <mat-error>Name is required.</mat-error>
+          <mat-error i18n="@@admin.branchFormDialog.nameRequired">Name is required.</mat-error>
         }
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Code</mat-label>
+        <mat-label i18n="@@admin.branchFormDialog.codeLabel">Code</mat-label>
         <input matInput [formControl]="code" required />
         @if (code.invalid && code.touched) {
-          <mat-error>Code is required.</mat-error>
+          <mat-error i18n="@@admin.branchFormDialog.codeRequired">Code is required.</mat-error>
         }
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Timezone</mat-label>
-        <input matInput [formControl]="tz" required placeholder="e.g. Asia/Kolkata" />
+        <mat-label i18n="@@admin.branchFormDialog.timezoneLabel">Timezone</mat-label>
+        <input
+          matInput
+          [formControl]="tz"
+          required
+          placeholder="e.g. Asia/Kolkata"
+          i18n-placeholder="@@admin.branchFormDialog.timezonePlaceholder"
+        />
         @if (tz.invalid && tz.touched) {
-          <mat-error>Timezone is required.</mat-error>
+          <mat-error i18n="@@admin.branchFormDialog.timezoneRequired"
+            >Timezone is required.</mat-error
+          >
         }
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>GSTIN</mat-label>
+        <mat-label i18n="@@admin.branchFormDialog.gstinLabel">GSTIN</mat-label>
         <input matInput [formControl]="gstin" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Series prefix</mat-label>
+        <mat-label i18n="@@admin.branchFormDialog.seriesPrefixLabel">Series prefix</mat-label>
         <input matInput [formControl]="seriesPrefix" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Address</mat-label>
+        <mat-label i18n="@@admin.branchFormDialog.addressLabel">Address</mat-label>
         <textarea matInput [formControl]="address" rows="3"></textarea>
       </mat-form-field>
 
@@ -91,13 +101,21 @@ function addressJsonToText(addressJson: string | null): string {
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
-      <button mat-button type="button" (click)="cancel()">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        (click)="cancel()"
+        i18n="@@admin.branchFormDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="primary"
         type="button"
         [disabled]="submitting"
         (click)="submit()"
+        i18n="@@admin.branchFormDialog.submitButton"
       >
         {{ isEdit ? 'Save' : 'Create branch' }}
       </button>

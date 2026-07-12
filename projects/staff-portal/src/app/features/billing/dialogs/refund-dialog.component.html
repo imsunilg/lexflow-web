@@ -14,7 +14,9 @@
       <mat-label i18n="@@billing.refundDialog.amountLabel">Amount</mat-label>
       <input matInput type="number" formControlName="amount" min="0.01" step="0.01" />
       @if (form.controls.amount.hasError('max')) {
-        <mat-error i18n="@@billing.refundDialog.amountMaxError">Cannot exceed the original payment amount.</mat-error>
+        <mat-error i18n="@@billing.refundDialog.amountMaxError"
+          >Cannot exceed the original payment amount.</mat-error
+        >
       }
     </mat-form-field>
 
@@ -29,7 +31,9 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button type="button" (click)="cancel()" i18n="@@billing.refundDialog.cancelButton">Cancel</button>
+  <button mat-button type="button" (click)="cancel()" i18n="@@billing.refundDialog.cancelButton">
+    Cancel
+  </button>
   <button
     mat-flat-button
     color="warn"

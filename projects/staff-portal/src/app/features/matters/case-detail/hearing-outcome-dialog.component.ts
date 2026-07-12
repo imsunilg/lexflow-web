@@ -60,26 +60,36 @@ function minLengthTrimmed(min: number): ValidatorFn {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Record hearing outcome</h2>
+    <h2 mat-dialog-title i18n="@@matters.hearingOutcomeDialog.title">Record hearing outcome</h2>
     <mat-dialog-content>
       <form [formGroup]="form" class="outcome-form">
         <mat-form-field appearance="outline" class="outcome-form__wide">
-          <mat-label>What transpired</mat-label>
+          <mat-label i18n="@@matters.hearingOutcomeDialog.summaryLabel">What transpired</mat-label>
           <textarea matInput formControlName="summary" rows="3"></textarea>
           @if (form.controls.summary.hasError('minlength') && form.controls.summary.touched) {
-            <mat-error>At least 10 characters.</mat-error>
+            <mat-error i18n="@@matters.hearingOutcomeDialog.summaryMinLengthError"
+              >At least 10 characters.</mat-error
+            >
           }
         </mat-form-field>
 
         <mat-radio-group [formControl]="decisionControl" class="outcome-form__decision">
-          <mat-radio-button value="nextDate">Next hearing date</mat-radio-button>
-          <mat-radio-button value="sineDie">Adjourned sine die</mat-radio-button>
-          <mat-radio-button value="disposed">Disposed</mat-radio-button>
+          <mat-radio-button value="nextDate" i18n="@@matters.hearingOutcomeDialog.nextDateOption"
+            >Next hearing date</mat-radio-button
+          >
+          <mat-radio-button value="sineDie" i18n="@@matters.hearingOutcomeDialog.sineDieOption"
+            >Adjourned sine die</mat-radio-button
+          >
+          <mat-radio-button value="disposed" i18n="@@matters.hearingOutcomeDialog.disposedOption"
+            >Disposed</mat-radio-button
+          >
         </mat-radio-group>
 
         @if (decisionControl.value === 'nextDate') {
           <mat-form-field appearance="outline">
-            <mat-label>Next hearing date</mat-label>
+            <mat-label i18n="@@matters.hearingOutcomeDialog.nextDateLabel"
+              >Next hearing date</mat-label
+            >
             <input
               matInput
               [matDatepicker]="nextDatePicker"
@@ -91,24 +101,33 @@ function minLengthTrimmed(min: number): ValidatorFn {
           </mat-form-field>
 
           @if (selectedDateIsHoliday()) {
-            <p class="outcome-form__warning" role="alert">
+            <p
+              class="outcome-form__warning"
+              role="alert"
+              i18n="@@matters.hearingOutcomeDialog.holidayWarning"
+            >
               {{ selectedHolidayName() }} falls on a court holiday. Nearest working day:
               {{ nearestWorkingDayLabel() }}.
             </p>
           }
 
           <mat-form-field appearance="outline">
-            <mat-label>Purpose</mat-label>
+            <mat-label i18n="@@matters.hearingOutcomeDialog.purposeLabel">Purpose</mat-label>
             <input matInput formControlName="nextPurpose" />
           </mat-form-field>
         }
 
         <mat-form-field appearance="outline" class="outcome-form__wide">
-          <mat-label>Adjournment reason (optional)</mat-label>
+          <mat-label i18n="@@matters.hearingOutcomeDialog.adjournReasonLabel"
+            >Adjournment reason (optional)</mat-label
+          >
           <input matInput formControlName="adjournReason" />
         </mat-form-field>
 
-        <mat-checkbox [formControl]="createComplianceTaskControl">
+        <mat-checkbox
+          [formControl]="createComplianceTaskControl"
+          i18n="@@matters.hearingOutcomeDialog.complianceTaskCheckbox"
+        >
           Create a compliance task from this outcome
         </mat-checkbox>
 
@@ -118,7 +137,14 @@ function minLengthTrimmed(min: number): ValidatorFn {
       </form>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@matters.hearingOutcomeDialog.cancelButton"
+      >
+        Cancel
+      </button>
       <button
         mat-flat-button
         color="primary"
@@ -129,7 +155,7 @@ function minLengthTrimmed(min: number): ValidatorFn {
         @if (submitting()) {
           <mat-spinner diameter="20" />
         } @else {
-          Save outcome
+          <span i18n="@@matters.hearingOutcomeDialog.saveButton">Save outcome</span>
         }
       </button>
     </mat-dialog-actions>

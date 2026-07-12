@@ -3,13 +3,16 @@
     <h1 i18n="@@billing.hub.title">Billing</h1>
     <div class="billing-hub__actions">
       <a mat-stroked-button routerLink="/billing/aging"
-        ><mat-icon>bar_chart</mat-icon> <span i18n="@@billing.hub.agingReportLink">Aging report</span></a
+        ><mat-icon>bar_chart</mat-icon>
+        <span i18n="@@billing.hub.agingReportLink">Aging report</span></a
       >
       <a mat-stroked-button routerLink="/billing/reconciliation">
-        <mat-icon>fact_check</mat-icon> <span i18n="@@billing.hub.reconciliationLink">Reconciliation</span>
+        <mat-icon>fact_check</mat-icon>
+        <span i18n="@@billing.hub.reconciliationLink">Reconciliation</span>
       </a>
       <a mat-stroked-button routerLink="/billing/batch"
-        ><mat-icon>playlist_add_check</mat-icon> <span i18n="@@billing.hub.batchBillLink">Batch bill</span></a
+        ><mat-icon>playlist_add_check</mat-icon>
+        <span i18n="@@billing.hub.batchBillLink">Batch bill</span></a
       >
       <button mat-flat-button color="primary" type="button" (click)="newInvoice()">
         <mat-icon>add</mat-icon> <span i18n="@@billing.hub.newInvoiceButton">New invoice</span>
@@ -49,15 +52,34 @@
               <td>{{ invoice.matterId }}</td>
               <td>{{ invoice.grandTotal | lfCurrency }}</td>
               <td class="billing-hub__row-actions">
-                <button mat-button type="button" (click)="submit(invoice)" i18n="@@billing.hub.draftTable.submitButton">Submit</button>
-                <button mat-button color="warn" type="button" (click)="voidInvoice(invoice)" i18n="@@billing.hub.draftTable.voidButton">
+                <button
+                  mat-button
+                  type="button"
+                  (click)="submit(invoice)"
+                  i18n="@@billing.hub.draftTable.submitButton"
+                >
+                  Submit
+                </button>
+                <button
+                  mat-button
+                  color="warn"
+                  type="button"
+                  (click)="voidInvoice(invoice)"
+                  i18n="@@billing.hub.draftTable.voidButton"
+                >
                   Void
                 </button>
               </td>
             </tr>
           } @empty {
             <tr>
-              <td colspan="4"><lf-empty-state icon="description" title="No draft invoices" i18n-title="@@billing.hub.draftTable.emptyTitle" /></td>
+              <td colspan="4">
+                <lf-empty-state
+                  icon="description"
+                  title="No draft invoices"
+                  i18n-title="@@billing.hub.draftTable.emptyTitle"
+                />
+              </td>
             </tr>
           }
         </tbody>
@@ -85,10 +107,22 @@
               <td>{{ invoice.matterId }}</td>
               <td>{{ invoice.grandTotal | lfCurrency }}</td>
               <td class="billing-hub__row-actions">
-                <button mat-button color="primary" type="button" (click)="approve(invoice)" i18n="@@billing.hub.approvalsTable.approveButton">
+                <button
+                  mat-button
+                  color="primary"
+                  type="button"
+                  (click)="approve(invoice)"
+                  i18n="@@billing.hub.approvalsTable.approveButton"
+                >
                   Approve
                 </button>
-                <button mat-button color="warn" type="button" (click)="reject(invoice)" i18n="@@billing.hub.approvalsTable.rejectButton">
+                <button
+                  mat-button
+                  color="warn"
+                  type="button"
+                  (click)="reject(invoice)"
+                  i18n="@@billing.hub.approvalsTable.rejectButton"
+                >
                   Reject
                 </button>
               </td>
@@ -96,7 +130,11 @@
           } @empty {
             <tr>
               <td colspan="4">
-                <lf-empty-state icon="task_alt" title="Nothing awaiting approval" i18n-title="@@billing.hub.approvalsTable.emptyTitle" />
+                <lf-empty-state
+                  icon="task_alt"
+                  title="Nothing awaiting approval"
+                  i18n-title="@@billing.hub.approvalsTable.emptyTitle"
+                />
               </td>
             </tr>
           }
@@ -127,13 +165,28 @@
               <td>{{ invoice.grandTotal | lfCurrency }}</td>
               <td>{{ invoice.amountPaid | lfCurrency }}</td>
               <td class="billing-hub__row-actions">
-                <button mat-button type="button" (click)="recordPayment(invoice)" i18n="@@billing.hub.sentTable.recordPaymentButton">
+                <button
+                  mat-button
+                  type="button"
+                  (click)="recordPayment(invoice)"
+                  i18n="@@billing.hub.sentTable.recordPaymentButton"
+                >
                   Record payment
                 </button>
-                <button mat-button type="button" (click)="createCreditNote(invoice)" i18n="@@billing.hub.sentTable.creditNoteButton">
+                <button
+                  mat-button
+                  type="button"
+                  (click)="createCreditNote(invoice)"
+                  i18n="@@billing.hub.sentTable.creditNoteButton"
+                >
                   Credit note
                 </button>
-                <button mat-button type="button" (click)="muteReminders(invoice)" i18n="@@billing.hub.sentTable.muteRemindersButton">
+                <button
+                  mat-button
+                  type="button"
+                  (click)="muteReminders(invoice)"
+                  i18n="@@billing.hub.sentTable.muteRemindersButton"
+                >
                   Mute reminders
                 </button>
               </td>
@@ -141,7 +194,11 @@
           } @empty {
             <tr>
               <td colspan="5">
-                <lf-empty-state icon="mark_email_read" title="No sent invoices" i18n-title="@@billing.hub.sentTable.emptyTitle" />
+                <lf-empty-state
+                  icon="mark_email_read"
+                  title="No sent invoices"
+                  i18n-title="@@billing.hub.sentTable.emptyTitle"
+                />
               </td>
             </tr>
           }
@@ -172,14 +229,25 @@
               <td>{{ invoice.dueDate }}</td>
               <td>{{ invoice.grandTotal - invoice.amountPaid | lfCurrency }}</td>
               <td class="billing-hub__row-actions">
-                <button mat-button type="button" (click)="recordPayment(invoice)" i18n="@@billing.hub.overdueTable.recordPaymentButton">
+                <button
+                  mat-button
+                  type="button"
+                  (click)="recordPayment(invoice)"
+                  i18n="@@billing.hub.overdueTable.recordPaymentButton"
+                >
                   Record payment
                 </button>
               </td>
             </tr>
           } @empty {
             <tr>
-              <td colspan="5"><lf-empty-state icon="event_busy" title="Nothing overdue" i18n-title="@@billing.hub.overdueTable.emptyTitle" /></td>
+              <td colspan="5">
+                <lf-empty-state
+                  icon="event_busy"
+                  title="Nothing overdue"
+                  i18n-title="@@billing.hub.overdueTable.emptyTitle"
+                />
+              </td>
             </tr>
           }
         </tbody>
@@ -189,7 +257,8 @@
     <mat-tab label="Payments" i18n-label="@@billing.hub.paymentsTabLabel">
       <div class="billing-hub__payments-tab">
         <button mat-flat-button color="primary" type="button" (click)="recordPayment()">
-          <mat-icon>payments</mat-icon> <span i18n="@@billing.hub.paymentsTab.recordPaymentButton">Record payment</span>
+          <mat-icon>payments</mat-icon>
+          <span i18n="@@billing.hub.paymentsTab.recordPaymentButton">Record payment</span>
         </button>
         <lf-empty-state
           icon="receipt_long"
@@ -215,7 +284,12 @@
       <div class="billing-hub__trust-tab">
         <mat-form-field appearance="outline" class="billing-hub__client-search">
           <mat-label i18n="@@billing.hub.trust.clientSearchLabel">Find a client</mat-label>
-          <input matInput [formControl]="clientSearchControl" placeholder="Search by name" i18n-placeholder="@@billing.hub.trust.clientSearchPlaceholder" />
+          <input
+            matInput
+            [formControl]="clientSearchControl"
+            placeholder="Search by name"
+            i18n-placeholder="@@billing.hub.trust.clientSearchPlaceholder"
+          />
           <mat-icon matPrefix>search</mat-icon>
         </mat-form-field>
 
@@ -226,7 +300,12 @@
                 <button mat-button type="button" (click)="openTrustLedger(client)">
                   {{ client.displayName ?? client.legalName ?? client.id }}
                 </button>
-                <button mat-button type="button" (click)="openStatement(client)" i18n="@@billing.hub.trust.viewStatementButton">
+                <button
+                  mat-button
+                  type="button"
+                  (click)="openStatement(client)"
+                  i18n="@@billing.hub.trust.viewStatementButton"
+                >
                   View statement
                 </button>
               </li>

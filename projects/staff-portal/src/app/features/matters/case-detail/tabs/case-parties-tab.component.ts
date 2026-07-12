@@ -79,8 +79,11 @@ function toInput(value: PartyFormValue): CasePartyInput {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load parties"
+          i18n-title="@@matters.casePartiesTab.loadErrorTitle"
           message="Something went wrong while loading parties & advocates."
+          i18n-message="@@matters.casePartiesTab.loadErrorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@matters.casePartiesTab.retryButton"
           (cta)="load()"
         />
       } @else {
@@ -88,17 +91,19 @@ function toInput(value: PartyFormValue): CasePartyInput {
           <lf-empty-state
             icon="groups"
             title="No parties added yet"
+            i18n-title="@@matters.casePartiesTab.emptyTitle"
             ctaLabel="Add party"
+            i18n-ctaLabel="@@matters.casePartiesTab.addPartyButton"
             (cta)="startAdd()"
           />
         } @else {
           <table class="parties-tab__table">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Advocate</th>
-                <th>Contact</th>
+                <th i18n="@@matters.casePartiesTab.nameColumn">Name</th>
+                <th i18n="@@matters.casePartiesTab.roleColumn">Role</th>
+                <th i18n="@@matters.casePartiesTab.advocateColumn">Advocate</th>
+                <th i18n="@@matters.casePartiesTab.contactColumn">Contact</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -110,23 +115,34 @@ function toInput(value: PartyFormValue): CasePartyInput {
                     <td colspan="6">
                       <form [formGroup]="editForm!" class="parties-tab__form">
                         <mat-form-field appearance="outline">
-                          <mat-label>Name</mat-label>
+                          <mat-label i18n="@@matters.casePartiesTab.nameLabel">Name</mat-label>
                           <input matInput formControlName="name" />
                         </mat-form-field>
                         <mat-form-field appearance="outline">
-                          <mat-label>Role</mat-label>
+                          <mat-label i18n="@@matters.casePartiesTab.roleLabel">Role</mat-label>
                           <input matInput formControlName="partyRole" placeholder="Petitioner" />
                         </mat-form-field>
                         <mat-form-field appearance="outline">
-                          <mat-label>Advocate name</mat-label>
+                          <mat-label i18n="@@matters.casePartiesTab.advocateNameLabel"
+                            >Advocate name</mat-label
+                          >
                           <input matInput formControlName="advocateName" />
                         </mat-form-field>
                         <mat-form-field appearance="outline">
-                          <mat-label>Contact</mat-label>
+                          <mat-label i18n="@@matters.casePartiesTab.contactLabel"
+                            >Contact</mat-label
+                          >
                           <input matInput formControlName="contact" />
                         </mat-form-field>
                         <div class="parties-tab__form-actions">
-                          <button mat-button type="button" (click)="cancelEdit()">Cancel</button>
+                          <button
+                            mat-button
+                            type="button"
+                            (click)="cancelEdit()"
+                            i18n="@@matters.casePartiesTab.cancelButton"
+                          >
+                            Cancel
+                          </button>
                           <button
                             mat-flat-button
                             color="primary"
@@ -137,7 +153,7 @@ function toInput(value: PartyFormValue): CasePartyInput {
                             @if (saving()) {
                               <mat-spinner diameter="18" />
                             } @else {
-                              Save
+                              <span i18n="@@matters.casePartiesTab.saveButton">Save</span>
                             }
                           </button>
                         </div>
@@ -158,6 +174,7 @@ function toInput(value: PartyFormValue): CasePartyInput {
                         mat-icon-button
                         type="button"
                         aria-label="Edit party"
+                        i18n-aria-label="@@matters.casePartiesTab.editPartyAriaLabel"
                         (click)="startEdit(party)"
                       >
                         <mat-icon>edit</mat-icon>
@@ -168,6 +185,7 @@ function toInput(value: PartyFormValue): CasePartyInput {
                         mat-icon-button
                         type="button"
                         aria-label="Delete party"
+                        i18n-aria-label="@@matters.casePartiesTab.deletePartyAriaLabel"
                         (click)="deleteParty(party)"
                       >
                         <mat-icon>delete</mat-icon>
@@ -183,32 +201,43 @@ function toInput(value: PartyFormValue): CasePartyInput {
         @if (addingNew()) {
           <form [formGroup]="addForm" class="parties-tab__form parties-tab__form--add">
             <mat-form-field appearance="outline">
-              <mat-label>Name</mat-label>
+              <mat-label i18n="@@matters.casePartiesTab.nameLabel">Name</mat-label>
               <input matInput formControlName="name" />
               @if (addForm.controls.name.hasError('required') && addForm.controls.name.touched) {
-                <mat-error>Name is required.</mat-error>
+                <mat-error i18n="@@matters.casePartiesTab.nameRequiredError"
+                  >Name is required.</mat-error
+                >
               }
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Role</mat-label>
+              <mat-label i18n="@@matters.casePartiesTab.roleLabel">Role</mat-label>
               <input matInput formControlName="partyRole" placeholder="Petitioner" />
               @if (
                 addForm.controls.partyRole.hasError('required') &&
                 addForm.controls.partyRole.touched
               ) {
-                <mat-error>Role is required.</mat-error>
+                <mat-error i18n="@@matters.casePartiesTab.roleRequiredError"
+                  >Role is required.</mat-error
+                >
               }
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Advocate name</mat-label>
+              <mat-label i18n="@@matters.casePartiesTab.advocateNameLabel">Advocate name</mat-label>
               <input matInput formControlName="advocateName" />
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>Contact</mat-label>
+              <mat-label i18n="@@matters.casePartiesTab.contactLabel">Contact</mat-label>
               <input matInput formControlName="contact" />
             </mat-form-field>
             <div class="parties-tab__form-actions">
-              <button mat-button type="button" (click)="cancelAdd()">Cancel</button>
+              <button
+                mat-button
+                type="button"
+                (click)="cancelAdd()"
+                i18n="@@matters.casePartiesTab.cancelButton"
+              >
+                Cancel
+              </button>
               <button
                 mat-flat-button
                 color="primary"
@@ -219,7 +248,7 @@ function toInput(value: PartyFormValue): CasePartyInput {
                 @if (saving()) {
                   <mat-spinner diameter="18" />
                 } @else {
-                  Add party
+                  <span i18n="@@matters.casePartiesTab.addPartyButton">Add party</span>
                 }
               </button>
             </div>
@@ -230,7 +259,7 @@ function toInput(value: PartyFormValue): CasePartyInput {
         } @else if (parties().length > 0) {
           <button mat-stroked-button type="button" (click)="startAdd()">
             <mat-icon>add</mat-icon>
-            Add party
+            <span i18n="@@matters.casePartiesTab.addPartyButton">Add party</span>
           </button>
         }
       }

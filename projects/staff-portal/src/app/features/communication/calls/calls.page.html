@@ -12,16 +12,25 @@
       </mat-autocomplete>
     </mat-form-field>
     <button mat-flat-button color="primary" type="button" (click)="openLogDialog()">
-      <mat-icon>call</mat-icon> <span i18n="@@communication.calls.logCallButton">Log / click-to-call</span>
+      <mat-icon>call</mat-icon>
+      <span i18n="@@communication.calls.logCallButton">Log / click-to-call</span>
     </button>
   </div>
 
   @if (!activeClient()) {
-    <lf-empty-state icon="call" title="Pick a client to see call history" i18n-title="@@communication.calls.pickClientEmptyState" />
+    <lf-empty-state
+      icon="call"
+      title="Pick a client to see call history"
+      i18n-title="@@communication.calls.pickClientEmptyState"
+    />
   } @else if (loading()) {
     <mat-progress-bar mode="indeterminate" />
   } @else if (calls().length === 0) {
-    <lf-empty-state icon="call" title="No calls logged for this client yet" i18n-title="@@communication.calls.noCallsEmptyState" />
+    <lf-empty-state
+      icon="call"
+      title="No calls logged for this client yet"
+      i18n-title="@@communication.calls.noCallsEmptyState"
+    />
   } @else {
     <ul class="calls__list">
       @for (call of calls(); track call.id) {
@@ -34,7 +43,9 @@
             }
             <span class="calls__meta">{{ call.occurredAt | date: 'MMM d, y h:mm a' }}</span>
             @if (call.recordingBlobPath) {
-              <span class="calls__meta" i18n="@@communication.calls.recordingAvailableLabel">Recording available</span>
+              <span class="calls__meta" i18n="@@communication.calls.recordingAvailableLabel"
+                >Recording available</span
+              >
             }
           </div>
         </li>

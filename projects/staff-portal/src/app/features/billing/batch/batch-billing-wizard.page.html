@@ -1,17 +1,26 @@
 <div class="batch-billing-wizard">
   <header class="batch-billing-wizard__header">
     <h1 i18n="@@billing.batchWizard.title">Batch billing wizard</h1>
-    <a mat-stroked-button routerLink="/billing"><mat-icon>arrow_back</mat-icon> <span i18n="@@billing.batchWizard.backLink">Back to Billing</span></a>
+    <a mat-stroked-button routerLink="/billing"
+      ><mat-icon>arrow_back</mat-icon>
+      <span i18n="@@billing.batchWizard.backLink">Back to Billing</span></a
+    >
   </header>
 
   <mat-stepper orientation="horizontal" linear>
-    <mat-step [stepControl]="filterForm" label="Filter" i18n-label="@@billing.batchWizard.filterStepLabel">
+    <mat-step
+      [stepControl]="filterForm"
+      label="Filter"
+      i18n-label="@@billing.batchWizard.filterStepLabel"
+    >
       <form [formGroup]="filterForm" class="batch-billing-wizard__form">
         <mat-form-field appearance="outline" class="batch-billing-wizard__field">
           <mat-label i18n="@@billing.batchWizard.minWipLabel">Minimum WIP</mat-label>
           <input matInput type="number" formControlName="minWip" min="0" step="0.01" />
           @if (filterForm.controls.minWip.hasError('required')) {
-            <mat-error i18n="@@billing.batchWizard.minWipRequiredError">Minimum WIP is required.</mat-error>
+            <mat-error i18n="@@billing.batchWizard.minWipRequiredError"
+              >Minimum WIP is required.</mat-error
+            >
           }
         </mat-form-field>
 
@@ -21,7 +30,9 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="batch-billing-wizard__field">
-          <mat-label i18n="@@billing.batchWizard.matterTypeIdLabel">Matter type id (optional)</mat-label>
+          <mat-label i18n="@@billing.batchWizard.matterTypeIdLabel"
+            >Matter type id (optional)</mat-label
+          >
           <input matInput formControlName="matterTypeId" />
         </mat-form-field>
 
@@ -34,7 +45,15 @@
       </form>
 
       <div class="batch-billing-wizard__step-actions">
-        <button mat-flat-button color="primary" type="button" matStepperNext i18n="@@billing.batchWizard.nextButton">Next</button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          matStepperNext
+          i18n="@@billing.batchWizard.nextButton"
+        >
+          Next
+        </button>
       </div>
     </mat-step>
 
@@ -53,8 +72,22 @@
       </div>
 
       <div class="batch-billing-wizard__step-actions">
-        <button mat-button type="button" matStepperPrevious i18n="@@billing.batchWizard.backButton1">Back</button>
-        <button mat-flat-button color="primary" type="button" (click)="generate()" matStepperNext i18n="@@billing.batchWizard.generateButton">
+        <button
+          mat-button
+          type="button"
+          matStepperPrevious
+          i18n="@@billing.batchWizard.backButton1"
+        >
+          Back
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          (click)="generate()"
+          matStepperNext
+          i18n="@@billing.batchWizard.generateButton"
+        >
           Generate
         </button>
       </div>
@@ -64,7 +97,9 @@
       @if (generating()) {
         <div class="batch-billing-wizard__loading">
           <mat-spinner diameter="32" />
-          <p i18n="@@billing.batchWizard.generatingMessage">Generating drafts — this can take up to a minute for large batches.</p>
+          <p i18n="@@billing.batchWizard.generatingMessage">
+            Generating drafts — this can take up to a minute for large batches.
+          </p>
         </div>
       } @else if (errorMessage()) {
         <p class="batch-billing-wizard__error">{{ errorMessage() }}</p>
@@ -97,7 +132,9 @@
               </tr>
             } @empty {
               <tr>
-                <td colspan="3" i18n="@@billing.batchWizard.noMattersMatched">No matters matched this filter.</td>
+                <td colspan="3" i18n="@@billing.batchWizard.noMattersMatched">
+                  No matters matched this filter.
+                </td>
               </tr>
             }
           </tbody>
@@ -109,7 +146,14 @@
       }
 
       <div class="batch-billing-wizard__step-actions">
-        <button mat-button type="button" matStepperPrevious i18n="@@billing.batchWizard.backButton2">Back</button>
+        <button
+          mat-button
+          type="button"
+          matStepperPrevious
+          i18n="@@billing.batchWizard.backButton2"
+        >
+          Back
+        </button>
       </div>
     </mat-step>
   </mat-stepper>

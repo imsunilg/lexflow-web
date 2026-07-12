@@ -1,18 +1,36 @@
-<h2 mat-dialog-title i18n="@@documents.signatureWizard.title">Send "{{ data.document.title }}" for signature</h2>
+<h2 mat-dialog-title i18n="@@documents.signatureWizard.title">
+  Send "{{ data.document.title }}" for signature
+</h2>
 <mat-dialog-content>
   <mat-stepper orientation="horizontal" linear="false" class="lf-signature-wizard">
-    <mat-step [completed]="canProceedToSigners()" label="Provider" i18n-label="@@documents.signatureWizard.providerStepLabel">
+    <mat-step
+      [completed]="canProceedToSigners()"
+      label="Provider"
+      i18n-label="@@documents.signatureWizard.providerStepLabel"
+    >
       <mat-radio-group [formControl]="providerControl" class="lf-signature-wizard__providers">
         @for (provider of providers; track provider) {
           <mat-radio-button [value]="provider">{{ provider }}</mat-radio-button>
         }
       </mat-radio-group>
       <div class="lf-signature-wizard__step-actions">
-        <button mat-flat-button color="primary" matStepperNext type="button" i18n="@@documents.signatureWizard.nextButton1">Next</button>
+        <button
+          mat-flat-button
+          color="primary"
+          matStepperNext
+          type="button"
+          i18n="@@documents.signatureWizard.nextButton1"
+        >
+          Next
+        </button>
       </div>
     </mat-step>
 
-    <mat-step [completed]="canProceedToReview()" label="Signers" i18n-label="@@documents.signatureWizard.signersStepLabel">
+    <mat-step
+      [completed]="canProceedToReview()"
+      label="Signers"
+      i18n-label="@@documents.signatureWizard.signersStepLabel"
+    >
       <div class="lf-signature-wizard__signers">
         @for (signer of signers.controls; track signer; let i = $index) {
           <div class="lf-signature-wizard__signer-row" [formGroup]="signer">
@@ -24,7 +42,9 @@
               <mat-label i18n="@@documents.signatureWizard.signerEmailLabel">Email</mat-label>
               <input matInput type="email" formControlName="email" />
               @if (signer.controls.email.hasError('email')) {
-                <mat-error i18n="@@documents.signatureWizard.signerEmailInvalidError">Enter a valid email.</mat-error>
+                <mat-error i18n="@@documents.signatureWizard.signerEmailInvalidError"
+                  >Enter a valid email.</mat-error
+                >
               }
             </mat-form-field>
             <mat-form-field appearance="outline" class="lf-signature-wizard__order">
@@ -44,11 +64,19 @@
           </div>
         }
         <button mat-stroked-button type="button" (click)="addSigner()">
-          <mat-icon>add</mat-icon> <ng-container i18n="@@documents.signatureWizard.addSignerButton">Add signer</ng-container>
+          <mat-icon>add</mat-icon>
+          <ng-container i18n="@@documents.signatureWizard.addSignerButton">Add signer</ng-container>
         </button>
       </div>
       <div class="lf-signature-wizard__step-actions">
-        <button mat-button matStepperPrevious type="button" i18n="@@documents.signatureWizard.backButton1">Back</button>
+        <button
+          mat-button
+          matStepperPrevious
+          type="button"
+          i18n="@@documents.signatureWizard.backButton1"
+        >
+          Back
+        </button>
         <button
           mat-flat-button
           color="primary"
@@ -65,13 +93,20 @@
     <mat-step label="Review & send" i18n-label="@@documents.signatureWizard.reviewStepLabel">
       @if (envelope(); as sent) {
         <div class="lf-signature-wizard__result">
-          <p class="lf-signature-wizard__label" i18n="@@documents.signatureWizard.envelopeStatusLabel">Envelope status: {{ sent.status }}</p>
+          <p
+            class="lf-signature-wizard__label"
+            i18n="@@documents.signatureWizard.envelopeStatusLabel"
+          >
+            Envelope status: {{ sent.status }}
+          </p>
           <ul class="lf-signature-wizard__signer-status">
             @for (signer of sent.signers; track signer.id) {
               <li>
                 {{ signer.name }} ({{ signer.email }}) — {{ signer.status }}
                 @if (signer.signedAt) {
-                  <ng-container i18n="@@documents.signatureWizard.signedAtLabel">· signed {{ signer.signedAt }}</ng-container>
+                  <ng-container i18n="@@documents.signatureWizard.signedAtLabel"
+                    >· signed {{ signer.signedAt }}</ng-container
+                  >
                 }
               </li>
             }
@@ -79,7 +114,10 @@
         </div>
       } @else {
         <div class="lf-signature-wizard__review">
-          <p><strong i18n="@@documents.signatureWizard.providerLabel">Provider:</strong> {{ providerControl.value }}</p>
+          <p>
+            <strong i18n="@@documents.signatureWizard.providerLabel">Provider:</strong>
+            {{ providerControl.value }}
+          </p>
           <ul>
             @for (signer of signers.controls; track signer) {
               <li i18n="@@documents.signatureWizard.signerOrderItem">
@@ -94,7 +132,14 @@
           }
 
           <div class="lf-signature-wizard__step-actions">
-            <button mat-button matStepperPrevious type="button" i18n="@@documents.signatureWizard.backButton2">Back</button>
+            <button
+              mat-button
+              matStepperPrevious
+              type="button"
+              i18n="@@documents.signatureWizard.backButton2"
+            >
+              Back
+            </button>
             <button
               mat-flat-button
               color="primary"
@@ -112,5 +157,12 @@
   </mat-stepper>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button type="button" [mat-dialog-close]="envelope() ?? undefined" i18n="@@documents.signatureWizard.closeButton">Close</button>
+  <button
+    mat-button
+    type="button"
+    [mat-dialog-close]="envelope() ?? undefined"
+    i18n="@@documents.signatureWizard.closeButton"
+  >
+    Close
+  </button>
 </mat-dialog-actions>

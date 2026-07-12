@@ -2,7 +2,11 @@
 
 <mat-dialog-content class="lf-merge-content">
   <mat-stepper orientation="horizontal" linear #stepper>
-    <mat-step [completed]="canProceedToReview" label="Fill in details" i18n-label="@@documents.mergeWizard.fillDetailsStepLabel">
+    <mat-step
+      [completed]="canProceedToReview"
+      label="Fill in details"
+      i18n-label="@@documents.mergeWizard.fillDetailsStepLabel"
+    >
       <div class="lf-merge-step">
         <mat-form-field appearance="outline">
           <mat-label i18n="@@documents.mergeWizard.matterLabel">Matter</mat-label>
@@ -55,7 +59,9 @@
       <div class="lf-merge-step">
         <div class="lf-merge-review">
           <div class="lf-merge-review__row">
-            <span class="lf-merge-review__label" i18n="@@documents.mergeWizard.matterReviewLabel">Matter</span>
+            <span class="lf-merge-review__label" i18n="@@documents.mergeWizard.matterReviewLabel"
+              >Matter</span
+            >
             <span>{{ matterDisplay(selectedMatter()) }}</span>
           </div>
           @for (field of data.template.fields; track field.name) {
@@ -80,7 +86,14 @@
         }
 
         <div class="lf-merge-step__actions">
-          <button mat-button type="button" matStepperPrevious i18n="@@documents.mergeWizard.backButton">Back</button>
+          <button
+            mat-button
+            type="button"
+            matStepperPrevious
+            i18n="@@documents.mergeWizard.backButton"
+          >
+            Back
+          </button>
           <button
             mat-flat-button
             color="primary"
@@ -101,5 +114,12 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button type="button" [mat-dialog-close]="undefined" i18n="@@documents.mergeWizard.cancelButton">Cancel</button>
+  <button
+    mat-button
+    type="button"
+    [mat-dialog-close]="undefined"
+    i18n="@@documents.mergeWizard.cancelButton"
+  >
+    Cancel
+  </button>
 </mat-dialog-actions>

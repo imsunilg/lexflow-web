@@ -41,6 +41,7 @@ function formatElapsed(totalSeconds: number): string {
       [class.timer-chip--running]="runningTimer() && !runningTimer()!.isPaused"
       [matMenuTriggerFor]="menu"
       aria-label="Timer"
+      i18n-aria-label="@@time.timerChip.ariaLabel"
       [matTooltip]="matterLabel() ?? 'No matter linked'"
     >
       <mat-icon>timer</mat-icon>
@@ -53,20 +54,24 @@ function formatElapsed(totalSeconds: number): string {
     <mat-menu #menu="matMenu">
       @if (!runningTimer()) {
         <button mat-menu-item type="button" (click)="openStartDialog()">
-          <mat-icon>play_arrow</mat-icon> Start timer
+          <mat-icon>play_arrow</mat-icon>
+          <span i18n="@@time.timerChip.startAction">Start timer</span>
         </button>
       } @else {
         @if (runningTimer()!.isPaused) {
           <button mat-menu-item type="button" (click)="resume()">
-            <mat-icon>play_arrow</mat-icon> Resume
+            <mat-icon>play_arrow</mat-icon>
+            <span i18n="@@time.timerChip.resumeAction">Resume</span>
           </button>
         } @else {
           <button mat-menu-item type="button" (click)="pause()">
-            <mat-icon>pause</mat-icon> Pause
+            <mat-icon>pause</mat-icon>
+            <span i18n="@@time.timerChip.pauseAction">Pause</span>
           </button>
         }
         <button mat-menu-item type="button" (click)="openStopDialog()">
-          <mat-icon>stop</mat-icon> Stop
+          <mat-icon>stop</mat-icon>
+          <span i18n="@@time.timerChip.stopAction">Stop</span>
         </button>
       }
     </mat-menu>

@@ -9,10 +9,14 @@
 
     @if (account(); as a) {
       <div class="trust-ledger__balance">
-        <span class="trust-ledger__balance-label" i18n="@@billing.trustLedger.currentBalanceLabel">Current balance</span>
+        <span class="trust-ledger__balance-label" i18n="@@billing.trustLedger.currentBalanceLabel"
+          >Current balance</span
+        >
         <span class="trust-ledger__balance-value">{{ a.currentBalance | lfCurrency }}</span>
         @if (a.bankRef) {
-          <span class="trust-ledger__bank-ref" i18n="@@billing.trustLedger.bankRefLabel">Bank ref: {{ a.bankRef }}</span>
+          <span class="trust-ledger__bank-ref" i18n="@@billing.trustLedger.bankRefLabel"
+            >Bank ref: {{ a.bankRef }}</span
+          >
         }
       </div>
     }
@@ -29,10 +33,12 @@
 
   <div class="trust-ledger__actions">
     <button mat-stroked-button type="button" (click)="depositFormOpen.set(!depositFormOpen())">
-      <mat-icon>add_circle</mat-icon> <span i18n="@@billing.trustLedger.depositButton">Deposit</span>
+      <mat-icon>add_circle</mat-icon>
+      <span i18n="@@billing.trustLedger.depositButton">Deposit</span>
     </button>
     <button mat-stroked-button type="button" (click)="disburseFormOpen.set(!disburseFormOpen())">
-      <mat-icon>remove_circle</mat-icon> <span i18n="@@billing.trustLedger.disburseButton">Disburse</span>
+      <mat-icon>remove_circle</mat-icon>
+      <span i18n="@@billing.trustLedger.disburseButton">Disburse</span>
     </button>
   </div>
 
@@ -47,7 +53,9 @@
         <input matInput formControlName="purpose" />
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label i18n="@@billing.trustLedger.depositAuthRefLabel">Authorization ref (optional)</mat-label>
+        <mat-label i18n="@@billing.trustLedger.depositAuthRefLabel"
+          >Authorization ref (optional)</mat-label
+        >
         <input matInput formControlName="authorizationRef" />
       </mat-form-field>
       <button
@@ -77,11 +85,15 @@
         <input matInput formControlName="purpose" />
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label i18n="@@billing.trustLedger.disburseInvoiceIdLabel">Invoice ID (optional — trust-to-invoice application)</mat-label>
+        <mat-label i18n="@@billing.trustLedger.disburseInvoiceIdLabel"
+          >Invoice ID (optional — trust-to-invoice application)</mat-label
+        >
         <input matInput formControlName="invoiceId" />
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label i18n="@@billing.trustLedger.disburseAuthRefLabel">Authorization ref (required)</mat-label>
+        <mat-label i18n="@@billing.trustLedger.disburseAuthRefLabel"
+          >Authorization ref (required)</mat-label
+        >
         <input matInput formControlName="authorizationRef" />
       </mat-form-field>
       <button
@@ -101,7 +113,11 @@
   }
 
   @if (entries().length === 0 && !loading()) {
-    <lf-empty-state icon="account_balance" title="No trust ledger entries yet" i18n-title="@@billing.trustLedger.emptyTitle" />
+    <lf-empty-state
+      icon="account_balance"
+      title="No trust ledger entries yet"
+      i18n-title="@@billing.trustLedger.emptyTitle"
+    />
   } @else {
     <table class="trust-ledger__table">
       <thead>
@@ -128,7 +144,14 @@
             <td>{{ entry.createdAt | date: 'medium' }}</td>
             <td>
               @if (entry.kind !== 'Reversal') {
-                <button mat-button type="button" (click)="reverse(entry)" i18n="@@billing.trustLedger.reverseButton">Reverse</button>
+                <button
+                  mat-button
+                  type="button"
+                  (click)="reverse(entry)"
+                  i18n="@@billing.trustLedger.reverseButton"
+                >
+                  Reverse
+                </button>
               }
             </td>
           </tr>

@@ -18,18 +18,38 @@ import { MatInputModule } from '@angular/material/input';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2 mat-dialog-title>Add tags</h2>
+    <h2 mat-dialog-title i18n="@@documents.bulkTagDialog.title">Add tags</h2>
     <mat-dialog-content>
       <form [formGroup]="form">
         <mat-form-field appearance="outline" style="width: 100%">
-          <mat-label>Tags (comma-separated)</mat-label>
-          <input matInput formControlName="tags" placeholder="Evidence, Reviewed" />
+          <mat-label i18n="@@documents.bulkTagDialog.tagsLabel">Tags (comma-separated)</mat-label>
+          <input
+            matInput
+            formControlName="tags"
+            placeholder="Evidence, Reviewed"
+            i18n-placeholder="@@documents.bulkTagDialog.tagsPlaceholder"
+          />
         </mat-form-field>
       </form>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
-      <button mat-flat-button color="primary" type="button" (click)="submit()">Apply</button>
+      <button
+        mat-button
+        type="button"
+        [mat-dialog-close]="undefined"
+        i18n="@@documents.bulkTagDialog.cancelButton"
+      >
+        Cancel
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        (click)="submit()"
+        i18n="@@documents.bulkTagDialog.applyButton"
+      >
+        Apply
+      </button>
     </mat-dialog-actions>
   `,
 })

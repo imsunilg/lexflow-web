@@ -35,7 +35,9 @@
                 <span class="lf-gallery-card__badge">{{ template.category }}</span>
               }
             </div>
-            <span class="lf-gallery-card__version" i18n="@@documents.templateGallery.versionLabel">v{{ template.version }}</span>
+            <span class="lf-gallery-card__version" i18n="@@documents.templateGallery.versionLabel"
+              >v{{ template.version }}</span
+            >
           </mat-card-content>
         </mat-card>
       }
@@ -44,5 +46,12 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button type="button" [mat-dialog-close]="undefined" i18n="@@documents.templateGallery.cancelButton">Cancel</button>
+  <button
+    mat-button
+    type="button"
+    [mat-dialog-close]="undefined"
+    i18n="@@documents.templateGallery.cancelButton"
+  >
+    Cancel
+  </button>
 </mat-dialog-actions>

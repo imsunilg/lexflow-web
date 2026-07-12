@@ -17,7 +17,14 @@
   @if (loading()) {
     <mat-progress-bar mode="indeterminate" />
   } @else if (rules().length === 0) {
-    <lf-empty-state icon="bolt" title="No rules yet" ctaLabel="New rule" i18n-title="@@admin.workflowRulesList.emptyTitle" i18n-ctaLabel="@@admin.workflowRulesList.emptyCta" (cta)="openNew()" />
+    <lf-empty-state
+      icon="bolt"
+      title="No rules yet"
+      ctaLabel="New rule"
+      i18n-title="@@admin.workflowRulesList.emptyTitle"
+      i18n-ctaLabel="@@admin.workflowRulesList.emptyCta"
+      (cta)="openNew()"
+    />
   } @else {
     <table class="workflow-rules-list__table">
       <thead>

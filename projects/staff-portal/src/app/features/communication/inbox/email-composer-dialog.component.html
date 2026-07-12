@@ -8,13 +8,20 @@
       }
     </mat-select>
     @if (data.mailboxes.length === 0) {
-      <mat-hint i18n="@@communication.emailComposer.noMailboxesHint">No known mailboxes — connect one first.</mat-hint>
+      <mat-hint i18n="@@communication.emailComposer.noMailboxesHint"
+        >No known mailboxes — connect one first.</mat-hint
+      >
     }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label i18n="@@communication.emailComposer.toLabel">To</mat-label>
-    <input matInput [formControl]="toAddresses" placeholder="comma-separated addresses" i18n-placeholder="@@communication.emailComposer.toPlaceholder" />
+    <input
+      matInput
+      [formControl]="toAddresses"
+      placeholder="comma-separated addresses"
+      i18n-placeholder="@@communication.emailComposer.toPlaceholder"
+    />
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -24,7 +31,9 @@
 
   @if (!isReply) {
     <mat-form-field appearance="outline">
-      <mat-label i18n="@@communication.emailComposer.matterOptionalLabel">Matter (optional)</mat-label>
+      <mat-label i18n="@@communication.emailComposer.matterOptionalLabel"
+        >Matter (optional)</mat-label
+      >
       <input matInput [formControl]="matterControl" [matAutocomplete]="matterAuto" />
       <mat-autocomplete #matterAuto="matAutocomplete" (optionSelected)="onMatterSelected($event)">
         @for (matter of matterResults(); track matter.id) {
@@ -35,9 +44,13 @@
   }
 
   <mat-form-field appearance="outline">
-    <mat-label i18n="@@communication.emailComposer.templateOptionalLabel">Template (optional)</mat-label>
+    <mat-label i18n="@@communication.emailComposer.templateOptionalLabel"
+      >Template (optional)</mat-label
+    >
     <mat-select [formControl]="selectedTemplateId">
-      <mat-option [value]="null" i18n="@@communication.emailComposer.noTemplateOption">None — write freeform</mat-option>
+      <mat-option [value]="null" i18n="@@communication.emailComposer.noTemplateOption"
+        >None — write freeform</mat-option
+      >
       @for (template of templates(); track template.id) {
         <mat-option [value]="template.id">{{ template.name }}</mat-option>
       }
@@ -59,13 +72,29 @@
   }
 
   <div class="composer__preview">
-    <span class="composer__preview-label" i18n="@@communication.emailComposer.mergePreviewLabel">Merge preview (this is exactly what will be sent):</span>
+    <span class="composer__preview-label" i18n="@@communication.emailComposer.mergePreviewLabel"
+      >Merge preview (this is exactly what will be sent):</span
+    >
     <p class="composer__preview-body">{{ mergedPreview() }}</p>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button type="button" (click)="cancel()" i18n="@@communication.emailComposer.cancelButton">Cancel</button>
-  <button mat-flat-button color="primary" type="button" [disabled]="submitting" (click)="send()" i18n="@@communication.emailComposer.sendButton">
+  <button
+    mat-button
+    type="button"
+    (click)="cancel()"
+    i18n="@@communication.emailComposer.cancelButton"
+  >
+    Cancel
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    type="button"
+    [disabled]="submitting"
+    (click)="send()"
+    i18n="@@communication.emailComposer.sendButton"
+  >
     Send
   </button>
 </mat-dialog-actions>

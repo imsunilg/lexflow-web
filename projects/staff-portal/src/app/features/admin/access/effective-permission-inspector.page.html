@@ -19,9 +19,17 @@
   @if (loading()) {
     <mat-progress-bar mode="indeterminate" />
   } @else if (!userControl.value) {
-    <lf-empty-state icon="search" title="Pick a user to see their effective permissions" i18n-title="@@admin.permissionInspector.pickUserEmptyTitle" />
+    <lf-empty-state
+      icon="search"
+      title="Pick a user to see their effective permissions"
+      i18n-title="@@admin.permissionInspector.pickUserEmptyTitle"
+    />
   } @else if (groupedExplanations().length === 0) {
-    <lf-empty-state icon="block" title="This user has no effective permissions" i18n-title="@@admin.permissionInspector.noPermissionsEmptyTitle" />
+    <lf-empty-state
+      icon="block"
+      title="This user has no effective permissions"
+      i18n-title="@@admin.permissionInspector.noPermissionsEmptyTitle"
+    />
   } @else {
     @for (group of groupedExplanations(); track group[0]) {
       <section class="inspector__group">

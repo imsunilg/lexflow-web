@@ -16,6 +16,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #timesheetActive="routerLinkActive"
         [active]="timesheetActive.isActive"
+        i18n="@@time.timeTabs.timesheet"
       >
         Timesheet
       </a>
@@ -25,6 +26,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #entriesActive="routerLinkActive"
         [active]="entriesActive.isActive"
+        i18n="@@time.timeTabs.entries"
       >
         Entries
       </a>
@@ -34,6 +36,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #approvalsActive="routerLinkActive"
         [active]="approvalsActive.isActive"
+        i18n="@@time.timeTabs.approvals"
       >
         Approvals
       </a>
@@ -43,6 +46,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         routerLinkActive
         #utilizationActive="routerLinkActive"
         [active]="utilizationActive.isActive"
+        i18n="@@time.timeTabs.utilization"
       >
         Utilization
       </a>

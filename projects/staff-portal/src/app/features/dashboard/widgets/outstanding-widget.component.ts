@@ -16,18 +16,28 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
   imports: [DashboardWidgetComponent, EmptyStateComponent, LfCurrencyPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-dashboard-widget title="Outstanding Payments" [loading]="loading()" (refresh)="load()">
+    <lf-dashboard-widget
+      title="Outstanding Payments"
+      i18n-title="@@dashboard.outstandingWidget.title"
+      [loading]="loading()"
+      (refresh)="load()"
+    >
       @if (error()) {
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load outstanding payments"
+          i18n-title="@@dashboard.outstandingWidget.errorTitle"
           message="Something went wrong."
+          i18n-message="@@dashboard.outstandingWidget.errorMessage"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@dashboard.outstandingWidget.retryLabel"
           (cta)="load()"
         />
       } @else if (data(); as summary) {
         <div class="outstanding-total">
-          <span class="outstanding-total__label">Total Outstanding</span>
+          <span class="outstanding-total__label" i18n="@@dashboard.outstandingWidget.totalLabel"
+            >Total Outstanding</span
+          >
           <span class="outstanding-total__value">{{
             summary.total | lfCurrency: summary.currency
           }}</span>
@@ -36,7 +46,11 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
         <ul class="outstanding-buckets">
           @for (bucket of summary.buckets; track bucket.label) {
             <li class="outstanding-buckets__row">
-              <span class="outstanding-buckets__label">{{ bucket.label }} days</span>
+              <span
+                class="outstanding-buckets__label"
+                i18n="@@dashboard.outstandingWidget.bucketDaysLabel"
+                >{{ bucket.label }} days</span
+              >
               <span class="outstanding-buckets__bar-track">
                 <span
                   class="outstanding-buckets__bar"
@@ -51,7 +65,12 @@ import { DashboardWidgetBase } from './dashboard-widget-base';
         </ul>
 
         @if (summary.topDebtors.length > 0) {
-          <h4 class="outstanding-debtors__heading">Top debtors</h4>
+          <h4
+            class="outstanding-debtors__heading"
+            i18n="@@dashboard.outstandingWidget.topDebtorsHeading"
+          >
+            Top debtors
+          </h4>
           <ul class="outstanding-debtors">
             @for (debtor of summary.topDebtors; track debtor.clientId) {
               <li class="outstanding-debtors__row">

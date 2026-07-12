@@ -132,15 +132,53 @@
                     min="0"
                     [formControl]="editHours"
                   />
-                  <mat-checkbox [formControl]="editBillable" i18n="@@time.entryList.editBillableCheckbox">Billable</mat-checkbox>
+                  <mat-checkbox
+                    [formControl]="editBillable"
+                    i18n="@@time.entryList.editBillableCheckbox"
+                    >Billable</mat-checkbox
+                  >
                 </div>
-                <button mat-button type="button" (click)="saveEdit(entry)" i18n="@@time.entryList.saveButton">Save</button>
-                <button mat-button type="button" (click)="cancelEdit()" i18n="@@time.entryList.cancelButton">Cancel</button>
+                <button
+                  mat-button
+                  type="button"
+                  (click)="saveEdit(entry)"
+                  i18n="@@time.entryList.saveButton"
+                >
+                  Save
+                </button>
+                <button
+                  mat-button
+                  type="button"
+                  (click)="cancelEdit()"
+                  i18n="@@time.entryList.cancelButton"
+                >
+                  Cancel
+                </button>
               } @else {
                 @if (entry.status === 'Draft') {
-                  <button mat-button type="button" (click)="startEdit(entry)" i18n="@@time.entryList.editButton">Edit</button>
-                  <button mat-button type="button" (click)="submitOne(entry)" i18n="@@time.entryList.submitButton">Submit</button>
-                  <button mat-button color="warn" type="button" (click)="deleteEntry(entry)" i18n="@@time.entryList.deleteButton">
+                  <button
+                    mat-button
+                    type="button"
+                    (click)="startEdit(entry)"
+                    i18n="@@time.entryList.editButton"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    mat-button
+                    type="button"
+                    (click)="submitOne(entry)"
+                    i18n="@@time.entryList.submitButton"
+                  >
+                    Submit
+                  </button>
+                  <button
+                    mat-button
+                    color="warn"
+                    type="button"
+                    (click)="deleteEntry(entry)"
+                    i18n="@@time.entryList.deleteButton"
+                  >
                     Delete
                   </button>
                 }
