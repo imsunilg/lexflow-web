@@ -1,7 +1,7 @@
 <div class="reminder-policy">
   <div class="reminder-policy__banner" role="note">
     <mat-icon>info</mat-icon>
-    <span>
+    <span i18n="@@calendar.reminderPolicyTab.banner">
       These defaults aren't applied server-side yet — only per-event reminder overrides exist on the
       backend today. What you set here is staged locally in this browser pending a real
       reminder-policy API; add a matching per-event reminder in the event dialog for it to actually
@@ -12,7 +12,7 @@
   <div class="reminder-policy__toolbar">
     <button mat-stroked-button type="button" (click)="resetToDefaults()">
       <mat-icon>restore</mat-icon>
-      Reset to PRD defaults
+      <span i18n="@@calendar.reminderPolicyTab.resetButton">Reset to PRD defaults</span>
     </button>
   </div>
 
@@ -22,18 +22,20 @@
         <h2>{{ kind }}</h2>
         <button mat-button type="button" (click)="addRule(kind)">
           <mat-icon>add</mat-icon>
-          Add reminder
+          <span i18n="@@calendar.reminderPolicyTab.addReminderButton">Add reminder</span>
         </button>
       </div>
 
       @if (rulesFor(kind).length === 0) {
-        <p class="reminder-policy__empty">No reminders configured for {{ kind }}.</p>
+        <p class="reminder-policy__empty" i18n="@@calendar.reminderPolicyTab.emptyForKind">
+          No reminders configured for {{ kind }}.
+        </p>
       }
 
       @for (rule of rulesFor(kind); track rule.id) {
         <div class="reminder-policy__rule">
           <mat-form-field appearance="outline" class="reminder-policy__offset">
-            <mat-label>Days before</mat-label>
+            <mat-label i18n="@@calendar.reminderPolicyTab.daysBeforeLabel">Days before</mat-label>
             <input
               matInput
               type="number"
@@ -50,13 +52,15 @@
               $event.checked ? setFixedTime(kind, rule.id, '07:00') : clearFixedTime(kind, rule.id)
             "
             matTooltip="Fire at a fixed local time instead of the event's own start time (e.g. same-day 07:00 court-local)"
+            i18n-matTooltip="@@calendar.reminderPolicyTab.fixedTimeTooltip"
+            i18n="@@calendar.reminderPolicyTab.fixedTimeLabel"
           >
             Fixed time
           </mat-slide-toggle>
 
           @if (rule.fixedTime !== null) {
             <mat-form-field appearance="outline" class="reminder-policy__time">
-              <mat-label>At</mat-label>
+              <mat-label i18n="@@calendar.reminderPolicyTab.atLabel">At</mat-label>
               <input
                 matInput
                 type="time"
@@ -83,6 +87,7 @@
             mat-icon-button
             type="button"
             matTooltip="Remove this reminder"
+            i18n-matTooltip="@@calendar.reminderPolicyTab.removeTooltip"
             (click)="removeRule(kind, rule.id)"
           >
             <mat-icon>delete</mat-icon>

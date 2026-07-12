@@ -1,28 +1,30 @@
 <div class="billing-hub">
   <header class="billing-hub__header">
-    <h1>Billing</h1>
+    <h1 i18n="@@billing.hub.title">Billing</h1>
     <div class="billing-hub__actions">
       <a mat-stroked-button routerLink="/billing/aging"
-        ><mat-icon>bar_chart</mat-icon> Aging report</a
+        ><mat-icon>bar_chart</mat-icon> <span i18n="@@billing.hub.agingReportLink">Aging report</span></a
       >
       <a mat-stroked-button routerLink="/billing/reconciliation">
-        <mat-icon>fact_check</mat-icon> Reconciliation
+        <mat-icon>fact_check</mat-icon> <span i18n="@@billing.hub.reconciliationLink">Reconciliation</span>
       </a>
       <a mat-stroked-button routerLink="/billing/batch"
-        ><mat-icon>playlist_add_check</mat-icon> Batch bill</a
+        ><mat-icon>playlist_add_check</mat-icon> <span i18n="@@billing.hub.batchBillLink">Batch bill</span></a
       >
       <button mat-flat-button color="primary" type="button" (click)="newInvoice()">
-        <mat-icon>add</mat-icon> New invoice
+        <mat-icon>add</mat-icon> <span i18n="@@billing.hub.newInvoiceButton">New invoice</span>
       </button>
     </div>
   </header>
 
   <mat-tab-group>
-    <mat-tab label="WIP">
+    <mat-tab label="WIP" i18n-label="@@billing.hub.wipTabLabel">
       <lf-empty-state
         icon="pending_actions"
         title="WIP detail isn't available here yet"
+        i18n-title="@@billing.hub.wipEmptyTitle"
         message="There's no dedicated unbilled-time/expense listing endpoint. Check a matter's Financial Summary tab for its current WIP total, or use Batch bill to invoice everything above a WIP threshold."
+        i18n-message="@@billing.hub.wipEmptyMessage"
       />
     </mat-tab>
 
@@ -30,9 +32,9 @@
       <table class="billing-hub__table">
         <thead>
           <tr>
-            <th>Number</th>
-            <th>Matter</th>
-            <th>Total</th>
+            <th i18n="@@billing.hub.draftTable.numberHeader">Number</th>
+            <th i18n="@@billing.hub.draftTable.matterHeader">Matter</th>
+            <th i18n="@@billing.hub.draftTable.totalHeader">Total</th>
             <th></th>
           </tr>
         </thead>
@@ -47,15 +49,15 @@
               <td>{{ invoice.matterId }}</td>
               <td>{{ invoice.grandTotal | lfCurrency }}</td>
               <td class="billing-hub__row-actions">
-                <button mat-button type="button" (click)="submit(invoice)">Submit</button>
-                <button mat-button color="warn" type="button" (click)="voidInvoice(invoice)">
+                <button mat-button type="button" (click)="submit(invoice)" i18n="@@billing.hub.draftTable.submitButton">Submit</button>
+                <button mat-button color="warn" type="button" (click)="voidInvoice(invoice)" i18n="@@billing.hub.draftTable.voidButton">
                   Void
                 </button>
               </td>
             </tr>
           } @empty {
             <tr>
-              <td colspan="4"><lf-empty-state icon="description" title="No draft invoices" /></td>
+              <td colspan="4"><lf-empty-state icon="description" title="No draft invoices" i18n-title="@@billing.hub.draftTable.emptyTitle" /></td>
             </tr>
           }
         </tbody>
@@ -66,9 +68,9 @@
       <table class="billing-hub__table">
         <thead>
           <tr>
-            <th>Number</th>
-            <th>Matter</th>
-            <th>Total</th>
+            <th i18n="@@billing.hub.approvalsTable.numberHeader">Number</th>
+            <th i18n="@@billing.hub.approvalsTable.matterHeader">Matter</th>
+            <th i18n="@@billing.hub.approvalsTable.totalHeader">Total</th>
             <th></th>
           </tr>
         </thead>
@@ -83,10 +85,10 @@
               <td>{{ invoice.matterId }}</td>
               <td>{{ invoice.grandTotal | lfCurrency }}</td>
               <td class="billing-hub__row-actions">
-                <button mat-button color="primary" type="button" (click)="approve(invoice)">
+                <button mat-button color="primary" type="button" (click)="approve(invoice)" i18n="@@billing.hub.approvalsTable.approveButton">
                   Approve
                 </button>
-                <button mat-button color="warn" type="button" (click)="reject(invoice)">
+                <button mat-button color="warn" type="button" (click)="reject(invoice)" i18n="@@billing.hub.approvalsTable.rejectButton">
                   Reject
                 </button>
               </td>
@@ -94,7 +96,7 @@
           } @empty {
             <tr>
               <td colspan="4">
-                <lf-empty-state icon="task_alt" title="Nothing awaiting approval" />
+                <lf-empty-state icon="task_alt" title="Nothing awaiting approval" i18n-title="@@billing.hub.approvalsTable.emptyTitle" />
               </td>
             </tr>
           }
@@ -106,10 +108,10 @@
       <table class="billing-hub__table">
         <thead>
           <tr>
-            <th>Number</th>
-            <th>Matter</th>
-            <th>Total</th>
-            <th>Paid</th>
+            <th i18n="@@billing.hub.sentTable.numberHeader">Number</th>
+            <th i18n="@@billing.hub.sentTable.matterHeader">Matter</th>
+            <th i18n="@@billing.hub.sentTable.totalHeader">Total</th>
+            <th i18n="@@billing.hub.sentTable.paidHeader">Paid</th>
             <th></th>
           </tr>
         </thead>
@@ -125,13 +127,13 @@
               <td>{{ invoice.grandTotal | lfCurrency }}</td>
               <td>{{ invoice.amountPaid | lfCurrency }}</td>
               <td class="billing-hub__row-actions">
-                <button mat-button type="button" (click)="recordPayment(invoice)">
+                <button mat-button type="button" (click)="recordPayment(invoice)" i18n="@@billing.hub.sentTable.recordPaymentButton">
                   Record payment
                 </button>
-                <button mat-button type="button" (click)="createCreditNote(invoice)">
+                <button mat-button type="button" (click)="createCreditNote(invoice)" i18n="@@billing.hub.sentTable.creditNoteButton">
                   Credit note
                 </button>
-                <button mat-button type="button" (click)="muteReminders(invoice)">
+                <button mat-button type="button" (click)="muteReminders(invoice)" i18n="@@billing.hub.sentTable.muteRemindersButton">
                   Mute reminders
                 </button>
               </td>
@@ -139,7 +141,7 @@
           } @empty {
             <tr>
               <td colspan="5">
-                <lf-empty-state icon="mark_email_read" title="No sent invoices" />
+                <lf-empty-state icon="mark_email_read" title="No sent invoices" i18n-title="@@billing.hub.sentTable.emptyTitle" />
               </td>
             </tr>
           }
@@ -151,10 +153,10 @@
       <table class="billing-hub__table">
         <thead>
           <tr>
-            <th>Number</th>
-            <th>Matter</th>
-            <th>Due</th>
-            <th>Outstanding</th>
+            <th i18n="@@billing.hub.overdueTable.numberHeader">Number</th>
+            <th i18n="@@billing.hub.overdueTable.matterHeader">Matter</th>
+            <th i18n="@@billing.hub.overdueTable.dueHeader">Due</th>
+            <th i18n="@@billing.hub.overdueTable.outstandingHeader">Outstanding</th>
             <th></th>
           </tr>
         </thead>
@@ -170,46 +172,50 @@
               <td>{{ invoice.dueDate }}</td>
               <td>{{ invoice.grandTotal - invoice.amountPaid | lfCurrency }}</td>
               <td class="billing-hub__row-actions">
-                <button mat-button type="button" (click)="recordPayment(invoice)">
+                <button mat-button type="button" (click)="recordPayment(invoice)" i18n="@@billing.hub.overdueTable.recordPaymentButton">
                   Record payment
                 </button>
               </td>
             </tr>
           } @empty {
             <tr>
-              <td colspan="5"><lf-empty-state icon="event_busy" title="Nothing overdue" /></td>
+              <td colspan="5"><lf-empty-state icon="event_busy" title="Nothing overdue" i18n-title="@@billing.hub.overdueTable.emptyTitle" /></td>
             </tr>
           }
         </tbody>
       </table>
     </mat-tab>
 
-    <mat-tab label="Payments">
+    <mat-tab label="Payments" i18n-label="@@billing.hub.paymentsTabLabel">
       <div class="billing-hub__payments-tab">
         <button mat-flat-button color="primary" type="button" (click)="recordPayment()">
-          <mat-icon>payments</mat-icon> Record payment
+          <mat-icon>payments</mat-icon> <span i18n="@@billing.hub.paymentsTab.recordPaymentButton">Record payment</span>
         </button>
         <lf-empty-state
           icon="receipt_long"
           title="Payment history isn't listable in aggregate yet"
+          i18n-title="@@billing.hub.paymentsTab.emptyTitle"
           message="There's no aggregate payments-list endpoint. Open a client's Statement (search below) to see their payment history."
+          i18n-message="@@billing.hub.paymentsTab.emptyMessage"
         />
       </div>
     </mat-tab>
 
-    <mat-tab label="Credit Notes">
+    <mat-tab label="Credit Notes" i18n-label="@@billing.hub.creditNotesTabLabel">
       <lf-empty-state
         icon="request_quote"
         title="Credit notes aren't listable in aggregate yet"
+        i18n-title="@@billing.hub.creditNotesTab.emptyTitle"
         message="There's no aggregate credit-notes endpoint. Issue one from an invoice's row action; it applies against that invoice directly."
+        i18n-message="@@billing.hub.creditNotesTab.emptyMessage"
       />
     </mat-tab>
 
-    <mat-tab label="Trust">
+    <mat-tab label="Trust" i18n-label="@@billing.hub.trustTabLabel">
       <div class="billing-hub__trust-tab">
         <mat-form-field appearance="outline" class="billing-hub__client-search">
-          <mat-label>Find a client</mat-label>
-          <input matInput [formControl]="clientSearchControl" placeholder="Search by name" />
+          <mat-label i18n="@@billing.hub.trust.clientSearchLabel">Find a client</mat-label>
+          <input matInput [formControl]="clientSearchControl" placeholder="Search by name" i18n-placeholder="@@billing.hub.trust.clientSearchPlaceholder" />
           <mat-icon matPrefix>search</mat-icon>
         </mat-form-field>
 
@@ -220,7 +226,7 @@
                 <button mat-button type="button" (click)="openTrustLedger(client)">
                   {{ client.displayName ?? client.legalName ?? client.id }}
                 </button>
-                <button mat-button type="button" (click)="openStatement(client)">
+                <button mat-button type="button" (click)="openStatement(client)" i18n="@@billing.hub.trust.viewStatementButton">
                   View statement
                 </button>
               </li>

@@ -1,77 +1,77 @@
 <div class="client-create-page">
   <header class="client-create-page__toolbar">
-    <h1 class="client-create-page__title">New client</h1>
-    <button mat-button type="button" (click)="cancel()">Cancel</button>
+    <h1 class="client-create-page__title" i18n="@@clients.createStepper.title">New client</h1>
+    <button mat-button type="button" (click)="cancel()" i18n="@@clients.createStepper.cancelButton">Cancel</button>
   </header>
 
   <mat-stepper linear class="client-create-page__stepper">
-    <mat-step [stepControl]="basicForm" label="Basic">
+    <mat-step [stepControl]="basicForm" label="Basic" i18n-label="@@clients.createStepper.basicStepLabel">
       <form [formGroup]="basicForm" class="client-create-page__form">
         <mat-button-toggle-group formControlName="type" class="client-create-page__wide">
-          <mat-button-toggle value="Individual">Individual</mat-button-toggle>
-          <mat-button-toggle value="Corporate">Corporate</mat-button-toggle>
+          <mat-button-toggle value="Individual" i18n="@@clients.createStepper.individualToggle">Individual</mat-button-toggle>
+          <mat-button-toggle value="Corporate" i18n="@@clients.createStepper.corporateToggle">Corporate</mat-button-toggle>
         </mat-button-toggle-group>
 
         @if (!clientTypeIsCorporate()) {
           <mat-form-field appearance="outline">
-            <mat-label>First name</mat-label>
+            <mat-label i18n="@@clients.createStepper.firstNameLabel">First name</mat-label>
             <input matInput formControlName="firstName" />
             @if (
               basicForm.controls.firstName.hasError('required') &&
               basicForm.controls.firstName.touched
             ) {
-              <mat-error>First name is required.</mat-error>
+              <mat-error i18n="@@clients.createStepper.firstNameRequiredError">First name is required.</mat-error>
             }
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Last name</mat-label>
+            <mat-label i18n="@@clients.createStepper.lastNameLabel">Last name</mat-label>
             <input matInput formControlName="lastName" />
           </mat-form-field>
         } @else {
           <mat-form-field appearance="outline" class="client-create-page__wide">
-            <mat-label>Legal name</mat-label>
+            <mat-label i18n="@@clients.createStepper.legalNameLabel">Legal name</mat-label>
             <input matInput formControlName="legalName" />
             @if (
               basicForm.controls.legalName.hasError('required') &&
               basicForm.controls.legalName.touched
             ) {
-              <mat-error>Legal name is required.</mat-error>
+              <mat-error i18n="@@clients.createStepper.legalNameRequiredError">Legal name is required.</mat-error>
             }
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>GSTIN</mat-label>
+            <mat-label i18n="@@clients.createStepper.gstinLabel">GSTIN</mat-label>
             <input matInput formControlName="gstin" />
             @if (basicForm.controls.gstin.hasError('pattern') && basicForm.controls.gstin.touched) {
-              <mat-error>Enter a valid GSTIN.</mat-error>
+              <mat-error i18n="@@clients.createStepper.gstinInvalidError">Enter a valid GSTIN.</mat-error>
             }
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>CIN</mat-label>
+            <mat-label i18n="@@clients.createStepper.cinLabel">CIN</mat-label>
             <input matInput formControlName="cin" />
             @if (basicForm.controls.cin.hasError('pattern') && basicForm.controls.cin.touched) {
-              <mat-error>Enter a valid 21-character CIN.</mat-error>
+              <mat-error i18n="@@clients.createStepper.cinInvalidError">Enter a valid 21-character CIN.</mat-error>
             }
           </mat-form-field>
         }
 
         <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
+          <mat-label i18n="@@clients.createStepper.emailLabel">Email</mat-label>
           <input matInput type="email" formControlName="email" />
           @if (basicForm.controls.email.hasError('pattern') && basicForm.controls.email.touched) {
-            <mat-error>Enter a valid email address.</mat-error>
+            <mat-error i18n="@@clients.createStepper.emailInvalidError">Enter a valid email address.</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Phone</mat-label>
+          <mat-label i18n="@@clients.createStepper.phoneLabel">Phone</mat-label>
           <input matInput formControlName="phoneE164" placeholder="+919812345678" />
           @if (
             basicForm.controls.phoneE164.hasError('pattern') && basicForm.controls.phoneE164.touched
           ) {
-            <mat-error>Use international format, e.g. +919812345678.</mat-error>
+            <mat-error i18n="@@clients.createStepper.phoneInvalidError">Use international format, e.g. +919812345678.</mat-error>
           }
         </mat-form-field>
 
@@ -79,7 +79,7 @@
           basicForm.hasError('atLeastOneRequired') &&
           (basicForm.controls.email.touched || basicForm.controls.phoneE164.touched)
         ) {
-          <p class="client-create-page__error" role="alert">
+          <p class="client-create-page__error" role="alert" i18n="@@clients.createStepper.emailOrPhoneRequiredError">
             At least one of phone or email is required.
           </p>
         }
@@ -91,21 +91,22 @@
           matStepperNext
           type="button"
           [disabled]="basicForm.invalid"
+          i18n="@@clients.createStepper.nextButton1"
         >
           Next
         </button>
       </div>
     </mat-step>
 
-    <mat-step label="KYC">
-      <p class="client-create-page__hint">
+    <mat-step label="KYC" i18n-label="@@clients.createStepper.kycStepLabel">
+      <p class="client-create-page__hint" i18n="@@clients.createStepper.kycHint">
         You'll upload the actual identity document files after the client is created — this step
         just lets you plan out which documents are expected.
       </p>
 
       <form [formGroup]="documentForm" class="client-create-page__form">
         <mat-form-field appearance="outline">
-          <mat-label>Document kind</mat-label>
+          <mat-label i18n="@@clients.createStepper.docKindLabel">Document kind</mat-label>
           <mat-select formControlName="docKind">
             @for (kind of docKinds; track kind) {
               <mat-option [value]="kind">{{ kind }}</mat-option>
@@ -114,12 +115,12 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Document number</mat-label>
+          <mat-label i18n="@@clients.createStepper.docNumberLabel">Document number</mat-label>
           <input matInput formControlName="docNumber" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Expiry date</mat-label>
+          <mat-label i18n="@@clients.createStepper.expiryDateLabel">Expiry date</mat-label>
           <input matInput [matDatepicker]="expiryPicker" formControlName="expiryDate" />
           <mat-datepicker-toggle matIconSuffix [for]="expiryPicker" />
           <mat-datepicker #expiryPicker />
@@ -128,7 +129,7 @@
         <div class="client-create-page__add-row">
           <button mat-stroked-button type="button" (click)="addDocument()">
             <mat-icon>add</mat-icon>
-            Add document
+            <ng-container i18n="@@clients.createStepper.addDocumentButton">Add document</ng-container>
           </button>
         </div>
       </form>
@@ -139,7 +140,7 @@
             <li class="client-create-page__staged-item">
               <span>{{ doc.docKind }} — {{ doc.docNumber }}</span>
               @if (doc.expiryDate) {
-                <span class="client-create-page__staged-meta">
+                <span class="client-create-page__staged-meta" i18n="@@clients.createStepper.docExpiresLabel">
                   Expires {{ doc.expiryDate | date: 'mediumDate' }}
                 </span>
               }
@@ -152,16 +153,16 @@
       }
 
       <div class="client-create-page__step-actions">
-        <button mat-button matStepperPrevious type="button">Back</button>
-        <button mat-flat-button color="primary" matStepperNext type="button">Next</button>
+        <button mat-button matStepperPrevious type="button" i18n="@@clients.createStepper.backButton1">Back</button>
+        <button mat-flat-button color="primary" matStepperNext type="button" i18n="@@clients.createStepper.nextButton2">Next</button>
       </div>
     </mat-step>
 
-    <mat-step label="Addresses">
-      <h3 class="client-create-page__section-title">Addresses</h3>
+    <mat-step label="Addresses" i18n-label="@@clients.createStepper.addressesStepLabel">
+      <h3 class="client-create-page__section-title" i18n="@@clients.createStepper.addressesHeading">Addresses</h3>
       <form [formGroup]="addressForm" class="client-create-page__form">
         <mat-form-field appearance="outline">
-          <mat-label>Kind</mat-label>
+          <mat-label i18n="@@clients.createStepper.addressKindLabel">Kind</mat-label>
           <mat-select formControlName="kind">
             @for (kind of addressKinds; track kind) {
               <mat-option [value]="kind">{{ kind }}</mat-option>
@@ -170,41 +171,41 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="client-create-page__wide">
-          <mat-label>Line 1</mat-label>
+          <mat-label i18n="@@clients.createStepper.line1Label">Line 1</mat-label>
           <input matInput formControlName="line1" />
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="client-create-page__wide">
-          <mat-label>Line 2</mat-label>
+          <mat-label i18n="@@clients.createStepper.line2Label">Line 2</mat-label>
           <input matInput formControlName="line2" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>City</mat-label>
+          <mat-label i18n="@@clients.createStepper.cityLabel">City</mat-label>
           <input matInput formControlName="city" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>State code</mat-label>
+          <mat-label i18n="@@clients.createStepper.stateCodeLabel">State code</mat-label>
           <input matInput formControlName="stateCode" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Postal code</mat-label>
+          <mat-label i18n="@@clients.createStepper.postalCodeLabel">Postal code</mat-label>
           <input matInput formControlName="postal" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Country</mat-label>
+          <mat-label i18n="@@clients.createStepper.countryLabel">Country</mat-label>
           <input matInput formControlName="country" />
         </mat-form-field>
 
-        <mat-checkbox formControlName="isPrimaryOfKind">Primary of this kind</mat-checkbox>
+        <mat-checkbox formControlName="isPrimaryOfKind" i18n="@@clients.createStepper.primaryOfKindCheckbox">Primary of this kind</mat-checkbox>
 
         <div class="client-create-page__add-row">
           <button mat-stroked-button type="button" (click)="addAddress()">
             <mat-icon>add</mat-icon>
-            Add address
+            <ng-container i18n="@@clients.createStepper.addAddressButton">Add address</ng-container>
           </button>
         </div>
       </form>
@@ -217,7 +218,7 @@
                 {{ address.kind }} — {{ address.line1
                 }}{{ address.city ? ', ' + address.city : '' }}
                 @if (address.isPrimaryOfKind) {
-                  <span class="client-create-page__staged-meta">(primary)</span>
+                  <span class="client-create-page__staged-meta" i18n="@@clients.createStepper.primaryAddressMeta">(primary)</span>
                 }
               </span>
               <button mat-icon-button type="button" (click)="removeAddress($index)">
@@ -229,34 +230,34 @@
       }
 
       @if (clientTypeIsCorporate()) {
-        <h3 class="client-create-page__section-title">Contact persons</h3>
+        <h3 class="client-create-page__section-title" i18n="@@clients.createStepper.contactPersonsHeading">Contact persons</h3>
         <form [formGroup]="contactForm" class="client-create-page__form">
           <mat-form-field appearance="outline">
-            <mat-label>Name</mat-label>
+            <mat-label i18n="@@clients.createStepper.contactNameLabel">Name</mat-label>
             <input matInput formControlName="name" />
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Designation</mat-label>
+            <mat-label i18n="@@clients.createStepper.contactDesignationLabel">Designation</mat-label>
             <input matInput formControlName="designation" />
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
+            <mat-label i18n="@@clients.createStepper.contactEmailLabel">Email</mat-label>
             <input matInput formControlName="email" />
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Phone</mat-label>
+            <mat-label i18n="@@clients.createStepper.contactPhoneLabel">Phone</mat-label>
             <input matInput formControlName="phone" />
           </mat-form-field>
 
-          <mat-checkbox formControlName="isPrimary">Primary contact</mat-checkbox>
+          <mat-checkbox formControlName="isPrimary" i18n="@@clients.createStepper.primaryContactCheckbox">Primary contact</mat-checkbox>
 
           <div class="client-create-page__add-row">
             <button mat-stroked-button type="button" (click)="addContact()">
               <mat-icon>add</mat-icon>
-              Add contact
+              <ng-container i18n="@@clients.createStepper.addContactButton">Add contact</ng-container>
             </button>
           </div>
         </form>
@@ -271,7 +272,7 @@
                     <span class="client-create-page__staged-meta">({{ contact.designation }})</span>
                   }
                   @if (contact.isPrimary) {
-                    <span class="client-create-page__staged-meta">primary</span>
+                    <span class="client-create-page__staged-meta" i18n="@@clients.createStepper.primaryContactMeta">primary</span>
                   }
                 </span>
                 <button mat-icon-button type="button" (click)="removeContact($index)">
@@ -283,38 +284,40 @@
         }
 
         @if (stagedContacts().length === 0) {
-          <p class="client-create-page__error" role="alert">
+          <p class="client-create-page__error" role="alert" i18n="@@clients.createStepper.contactRequiredError">
             Corporate clients need at least one contact person before continuing.
           </p>
         }
       }
 
       <div class="client-create-page__step-actions">
-        <button mat-button matStepperPrevious type="button">Back</button>
+        <button mat-button matStepperPrevious type="button" i18n="@@clients.createStepper.backButton2">Back</button>
         <button
           mat-flat-button
           color="primary"
           matStepperNext
           type="button"
           [disabled]="!canProceedFromAddressesStep()"
+          i18n="@@clients.createStepper.nextButton3"
         >
           Next
         </button>
       </div>
     </mat-step>
 
-    <mat-step label="Portal">
+    <mat-step label="Portal" i18n-label="@@clients.createStepper.portalStepLabel">
       <p
         class="client-create-page__hint"
         [matTooltip]="
           hasEmail() ? '' : 'Portal access requires a verified email — add an email in Basic first.'
         "
+        i18n="@@clients.createStepper.portalHint"
       >
         Portal access requires the client to have a verified email — skip this if no email was
         provided in Basic.
       </p>
 
-      <mat-checkbox [formControl]="portalControl" [disabled]="!hasEmail()">
+      <mat-checkbox [formControl]="portalControl" [disabled]="!hasEmail()" i18n="@@clients.createStepper.enablePortalCheckbox">
         Enable client portal access
       </mat-checkbox>
 
@@ -323,7 +326,7 @@
       }
 
       <div class="client-create-page__step-actions">
-        <button mat-button matStepperPrevious type="button" [disabled]="saving()">Back</button>
+        <button mat-button matStepperPrevious type="button" [disabled]="saving()" i18n="@@clients.createStepper.backButton3">Back</button>
         <button
           mat-flat-button
           color="primary"
@@ -334,7 +337,7 @@
           @if (saving()) {
             <mat-spinner diameter="20" />
           } @else {
-            Create client
+            <ng-container i18n="@@clients.createStepper.createClientButton">Create client</ng-container>
           }
         </button>
       </div>

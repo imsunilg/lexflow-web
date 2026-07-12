@@ -1,9 +1,9 @@
 <div class="aging">
   <header class="aging__header">
-    <h1>Aging report</h1>
+    <h1 i18n="@@billing.agingReport.title">Aging report</h1>
     <div class="aging__controls">
       <mat-form-field appearance="outline">
-        <mat-label>As of</mat-label>
+        <mat-label i18n="@@billing.agingReport.asOfLabel">As of</mat-label>
         <input matInput [matDatepicker]="asOfPicker" [formControl]="asOfControl" />
         <mat-datepicker-toggle matIconSuffix [for]="asOfPicker" />
         <mat-datepicker #asOfPicker />
@@ -12,7 +12,7 @@
         @if (loading()) {
           <mat-spinner diameter="20" />
         } @else {
-          Refresh
+          <span i18n="@@billing.agingReport.refreshButton">Refresh</span>
         }
       </button>
     </div>
@@ -24,7 +24,7 @@
 
   @if (report(); as r) {
     <table class="aging__table">
-      <caption class="sr-only">
+      <caption class="sr-only" i18n="@@billing.agingReport.tableCaption">
         Accounts receivable aging bucket amounts
       </caption>
       <tbody>
@@ -48,10 +48,10 @@
 
     <section class="aging__total">
       <div class="aging__total-row">
-        <span>Total AR</span>
+        <span i18n="@@billing.agingReport.totalArLabel">Total AR</span>
         <strong>{{ r.total | lfCurrency }}</strong>
       </div>
-      <p class="aging__check" [class.aging__check--fail]="!reconciles()">
+      <p class="aging__check" [class.aging__check--fail]="!reconciles()" i18n="@@billing.agingReport.reconcileCheck">
         Buckets sum to {{ bucketsSum() | lfCurrency }}
         @if (reconciles()) {
           — matches total (AC-B6 ✓)

@@ -1,0 +1,91 @@
+<lf-admin-tabs />
+
+<div class="audit-page">
+  <header class="audit-page__header">
+    <h1 i18n="@@admin.auditLog.title">Audit log</h1>
+    <p class="audit-page__note" role="note" i18n="@@admin.auditLog.note">
+      Shows settings and payment-gateway changes only — a system-wide audit log covering every
+      entity in the app isn't available yet. There's no filtering by actor or date, and IP/User
+      Agent aren't included in this feed.
+    </p>
+  </header>
+
+  <div class="audit-page__controls">
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@admin.auditLog.sectionLabel">Section</mat-label>
+      <input matInput [formControl]="sectionControl" placeholder="e.g. smtp, sms_gateway, stripe" i18n-placeholder="@@admin.auditLog.sectionPlaceholder" />
+    </mat-form-field>
+    <button mat-flat-button color="primary" type="button" [disabled]="loading()" (click)="search()">
+      @if (loading()) {
+        <mat-spinner diameter="20" />
+      } @else {
+        <ng-container i18n="@@admin.auditLog.searchButton">Search</ng-container>
+      }
+    </button>
+  </div>
+
+  @if (errorMessage()) {
+    <p class="audit-page__error" role="alert">{{ errorMessage() }}</p>
+  }
+
+  @if (loaded() && !loading()) {
+    @if (rows().length === 0) {
+      <lf-empty-state
+        icon="fact_check"
+        title="No audit entries"
+        message="No settings or gateway changes matched this filter."
+        i18n-title="@@admin.auditLog.emptyTitle"
+        i18n-message="@@admin.auditLog.emptyMessage"
+      />
+    } @else {
+      <table class="audit-page__table">
+        <thead>
+          <tr>
+            <th i18n="@@admin.auditLog.colAt">At</th>
+            <th i18n="@@admin.auditLog.colActor">Actor</th>
+            <th i18n="@@admin.auditLog.colAction">Action</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of rows(); track row.entry.id) {
+            <tr>
+              <td>{{ row.entry.at | date: 'medium' }}</td>
+              <td>{{ row.actorLabel }}</td>
+              <td>{{ row.entry.action }}</td>
+              <td>
+                <button mat-button type="button" (click)="toggleDiff(row.entry.id)">
+                  {{ expandedId() === row.entry.id ? 'Hide diff' : 'View diff' }}
+                </button>
+              </td>
+            </tr>
+            @if (expandedId() === row.entry.id) {
+              <tr class="audit-page__diff-row">
+                <td colspan="4">
+                  <div class="audit-page__diff">
+                    <div class="audit-page__diff-col">
+                      <h3 i18n="@@admin.auditLog.diffBefore">Before</h3>
+                      @if (row.beforePretty) {
+                        <pre>{{ row.beforePretty }}</pre>
+                      } @else {
+                        <p class="audit-page__diff-empty">—</p>
+                      }
+                    </div>
+                    <div class="audit-page__diff-col">
+                      <h3 i18n="@@admin.auditLog.diffAfter">After</h3>
+                      @if (row.afterPretty) {
+                        <pre>{{ row.afterPretty }}</pre>
+                      } @else {
+                        <p class="audit-page__diff-empty">—</p>
+                      }
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    }
+  }
+</div>

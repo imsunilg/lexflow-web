@@ -4,25 +4,26 @@
   @if (loading()) {
     <div class="lf-preview-state">
       <mat-spinner diameter="40"></mat-spinner>
-      <p>Loading preview…</p>
+      <p i18n="@@documents.pdfPreview.loadingText">Loading preview…</p>
     </div>
   } @else if (loadFailed()) {
     <div class="lf-preview-state">
       <mat-icon>error_outline</mat-icon>
-      <p>Preview unavailable, download to view</p>
-      <a mat-flat-button color="primary" [href]="downloadUrl" target="_blank" rel="noopener">
+      <p i18n="@@documents.pdfPreview.unavailableText">Preview unavailable, download to view</p>
+      <a mat-flat-button color="primary" [href]="downloadUrl" target="_blank" rel="noopener" i18n="@@documents.pdfPreview.downloadLink">
         Download
       </a>
     </div>
   } @else {
     <div class="lf-preview-toolbar">
       <mat-form-field appearance="outline" class="lf-preview-search">
-        <mat-label>Search in document</mat-label>
+        <mat-label i18n="@@documents.pdfPreview.searchInDocumentLabel">Search in document</mat-label>
         <input
           matInput
           [formControl]="searchControl"
           (keydown.enter)="runSearch()"
           placeholder="Find text…"
+          i18n-placeholder="@@documents.pdfPreview.findTextPlaceholder"
         />
         @if (searchControl.value) {
           <button matSuffix mat-icon-button type="button" (click)="clearSearch()">
@@ -30,23 +31,23 @@
           </button>
         }
       </mat-form-field>
-      <button mat-stroked-button type="button" [disabled]="searching()" (click)="runSearch()">
+      <button mat-stroked-button type="button" [disabled]="searching()" (click)="runSearch()" i18n="@@documents.pdfPreview.searchButton">
         Search
       </button>
       @if (hasSearched()) {
         <div class="lf-preview-match-nav">
           @if (matches().length > 0) {
-            <span class="lf-preview-match-count">
+            <span class="lf-preview-match-count" i18n="@@documents.pdfPreview.matchCountLabel">
               {{ currentMatchIndex() + 1 }} of {{ matches().length }}
             </span>
-            <button mat-icon-button type="button" (click)="prevMatch()" matTooltip="Previous match">
+            <button mat-icon-button type="button" (click)="prevMatch()" matTooltip="Previous match" i18n-matTooltip="@@documents.pdfPreview.previousMatchTooltip">
               <mat-icon>keyboard_arrow_up</mat-icon>
             </button>
-            <button mat-icon-button type="button" (click)="nextMatch()" matTooltip="Next match">
+            <button mat-icon-button type="button" (click)="nextMatch()" matTooltip="Next match" i18n-matTooltip="@@documents.pdfPreview.nextMatchTooltip">
               <mat-icon>keyboard_arrow_down</mat-icon>
             </button>
           } @else {
-            <span class="lf-preview-match-count">No matches</span>
+            <span class="lf-preview-match-count" i18n="@@documents.pdfPreview.noMatchesLabel">No matches</span>
           }
         </div>
       }
@@ -56,7 +57,7 @@
       <button mat-icon-button type="button" [disabled]="currentPage() <= 1" (click)="prevPage()">
         <mat-icon>chevron_left</mat-icon>
       </button>
-      <span>Page {{ currentPage() }} of {{ numPages() }}</span>
+      <span i18n="@@documents.pdfPreview.pageOfLabel">Page {{ currentPage() }} of {{ numPages() }}</span>
       <button
         mat-icon-button
         type="button"
@@ -80,5 +81,5 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button type="button" [mat-dialog-close]="undefined">Close</button>
+  <button mat-button type="button" [mat-dialog-close]="undefined" i18n="@@documents.pdfPreview.closeButton">Close</button>
 </mat-dialog-actions>

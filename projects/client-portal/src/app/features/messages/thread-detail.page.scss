@@ -1,0 +1,63 @@
+.thread-detail-page {
+  padding: var(--lf-space-3);
+  padding-bottom: calc(var(--lf-space-6) + 56px);
+  max-width: var(--lf-content-max-width);
+  margin: 0 auto;
+
+  h1 {
+    font-family: var(--lf-font-portal-heading);
+    margin: 0 0 var(--lf-space-1);
+  }
+
+  &__banner {
+    color: var(--lf-on-surface-variant);
+    margin: 0 0 var(--lf-space-2);
+  }
+
+  &__messages {
+    list-style: none;
+    margin: 0 0 var(--lf-space-3);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--lf-space-1);
+
+    li {
+      padding: var(--lf-space-1) var(--lf-space-2);
+      border-radius: var(--lf-radius);
+      background: var(--lf-surface);
+      box-shadow: var(--lf-elevation-1);
+      max-width: 70%;
+
+      p {
+        margin: 4px 0;
+      }
+    }
+  }
+
+  &__message--mine {
+    align-self: flex-end;
+    background: var(--lf-primary-container);
+  }
+
+  &__sender {
+    font-size: var(--lf-text-sm);
+    font-weight: 600;
+    color: var(--lf-on-surface-variant);
+  }
+
+  &__time {
+    font-size: var(--lf-text-xs);
+    color: var(--lf-on-surface-variant);
+  }
+
+  &__composer {
+    display: flex;
+    gap: var(--lf-space-1);
+    align-items: flex-start;
+
+    mat-form-field {
+      flex: 1;
+    }
+  }
+}

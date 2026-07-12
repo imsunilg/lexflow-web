@@ -13,9 +13,9 @@ import {
   CLIENT_ADDRESS_KINDS,
   Client,
   ClientAddress,
-  ClientCommunication,
   ClientSummary,
   ClientsService,
+  CommunicationTimelineComponent,
   EmptyStateComponent,
   LfCurrencyPipe,
   StatusChipComponent,
@@ -37,9 +37,10 @@ import { RelationshipGraphComponent } from './relationship-graph.component';
  * about the client record itself" (profile, contacts, addresses, KYC,
  * relationships), since none of those has its own tab slot in the PRD's
  * list. Matters/Invoices/Documents/Contracts/Notes render honest empty
- * states: the backend's own `ClientSummaryDto`/communications endpoint
- * already return zeros/empty lists for these because the Legal/Fin/DMS/Comm
- * modules haven't shipped yet (per `IClientService.cs`'s own comments).
+ * states: the backend's own `ClientSummaryDto` already returns zeros for
+ * these because the Legal/Fin/DMS modules hadn't shipped when Module 3 was
+ * built (per `IClientService.cs`'s own comments). Communication now renders
+ * the real, shared `CommunicationTimelineComponent` (PRD Module 11).
  */
 @Component({
   selector: 'lf-staff-client-detail-page',
@@ -53,6 +54,7 @@ import { RelationshipGraphComponent } from './relationship-graph.component';
     MatProgressBarModule,
     MatSelectModule,
     MatTabsModule,
+    CommunicationTimelineComponent,
     EmptyStateComponent,
     LfCurrencyPipe,
     StatusChipComponent,
@@ -79,10 +81,6 @@ export class ClientDetailPage {
   readonly addresses = signal<ClientAddress[]>([]);
   readonly addressKinds = CLIENT_ADDRESS_KINDS;
   readonly addingAddress = signal(false);
-
-  readonly communications = signal<ClientCommunication[]>([]);
-  readonly communicationsLoading = signal(false);
-  readonly channelFilter = new FormControl('', { nonNullable: true });
 
   readonly addressForm = new FormGroup({
     kind: new FormControl(CLIENT_ADDRESS_KINDS[0], { nonNullable: true }),
@@ -178,21 +176,6 @@ export class ClientDetailPage {
           isPrimaryOfKind: false,
         });
       });
-  }
-
-  loadCommunications(): void {
-    const client = this.client();
-    if (!client) {
-      return;
-    }
-    this.communicationsLoading.set(true);
-    this.clientsService.communications(client.id, this.channelFilter.value || undefined).subscribe({
-      next: (items) => {
-        this.communications.set(items);
-        this.communicationsLoading.set(false);
-      },
-      error: () => this.communicationsLoading.set(false),
-    });
   }
 
   onPortalToggled(updated: Client): void {

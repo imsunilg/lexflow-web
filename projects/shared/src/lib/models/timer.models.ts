@@ -1,3 +1,23 @@
+export interface StartTimerRequest {
+  matterId?: string | null;
+  activityCodeId?: string | null;
+  contextRef?: string | null;
+}
+
+/**
+ * `POST /timers/stop` — the server, not the client, computes elapsed duration
+ * and rounding (a hardcoded 6-minute increment, `TimeTrackingService.
+ * RoundingIncrementMinutes` — not configurable, not exposed via any
+ * endpoint). The client only supplies billing metadata; there is no
+ * `duration`/`roundedMinutes` field to send here.
+ */
+export interface StopTimerRequest {
+  billable: boolean;
+  narrative?: string | null;
+  internalNote?: string | null;
+  activityCodeId?: string | null;
+}
+
 /** `GET /timers/current` response shape (`RunningTimerDto`, PRD Module 9/§18 `running_timers`). `null` when no timer is running. */
 export interface RunningTimer {
   userId: string;

@@ -1,0 +1,75 @@
+<div class="kb-home">
+  <lf-kb-tabs />
+
+  <div class="kb-home__search">
+    <mat-form-field appearance="outline" class="kb-home__search-field">
+      <mat-label i18n="@@kb.home.searchLabel">Search Acts, judgments, articles…</mat-label>
+      <input matInput [formControl]="query" placeholder="e.g. IPC 420, (2023) 5 SCC 1" i18n-placeholder="@@kb.home.searchPlaceholder" />
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  @if (searching()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  @if (result(); as r) {
+    @if (r.directSection) {
+      <button
+        type="button"
+        class="kb-home__direct-card"
+        [routerLink]="['/knowledge-base/acts', r.directSection.actId]"
+        [queryParams]="{ sectionId: r.directSection.id }"
+      >
+        <mat-icon>menu_book</mat-icon>
+        <span i18n="@@kb.home.directSectionLabel">Section {{ r.directSection.number }} — {{ r.directSection.title }}</span>
+      </button>
+    }
+    @if (r.directJudgment) {
+      <button
+        type="button"
+        class="kb-home__direct-card"
+        [routerLink]="['/knowledge-base/judgments', r.directJudgment.id]"
+      >
+        <mat-icon>balance</mat-icon>
+        <span>{{ r.directJudgment.citation }}</span>
+      </button>
+    }
+
+    @if (r.isFreeformFallback && r.hits.length === 0) {
+      <lf-empty-state icon="search_off" title="No results" i18n-title="@@kb.home.noResultsEmptyState" />
+    } @else if (r.hits.length > 0) {
+      <ul class="kb-home__hits">
+        @for (hit of r.hits; track hit.kind + hit.id) {
+          <li>
+            <button type="button" class="kb-home__hit-row" (click)="openHit(hit)">
+              <mat-icon>{{ iconFor(hit.kind) }}</mat-icon>
+              <span>{{ hit.title }}</span>
+              <span class="kb-home__hit-kind">{{ hit.kind }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+    }
+  }
+
+  <section class="kb-home__bookmarks">
+    <h2 i18n="@@kb.home.bookmarksTitle">My bookmarks</h2>
+    @if (bookmarksLoading()) {
+      <mat-progress-bar mode="indeterminate" />
+    } @else if (bookmarks().length === 0) {
+      <lf-empty-state icon="bookmark" title="No bookmarks yet" i18n-title="@@kb.home.noBookmarksEmptyState" />
+    } @else {
+      <ul class="kb-home__hits">
+        @for (row of bookmarks(); track row.bookmark.id) {
+          <li>
+            <button type="button" class="kb-home__hit-row" (click)="openBookmark(row)">
+              <mat-icon>{{ iconFor(row.bookmark.kbRefKind) }}</mat-icon>
+              <span>{{ row.label }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+    }
+  </section>
+</div>

@@ -1,0 +1,50 @@
+<div class="workflow-rules-list">
+  <lf-admin-tabs />
+
+  <header class="workflow-rules-list__header">
+    <h1 i18n="@@admin.workflowRulesList.title">Workflow rules</h1>
+    <div class="workflow-rules-list__actions">
+      <button mat-stroked-button type="button" [disabled]="seeding()" (click)="seedDefaults()">
+        <ng-container i18n="@@admin.workflowRulesList.seedButton">Seed default rules</ng-container>
+      </button>
+      <button mat-flat-button color="primary" type="button" (click)="openNew()">
+        <mat-icon>add</mat-icon>
+        <ng-container i18n="@@admin.workflowRulesList.newRuleButton">New rule</ng-container>
+      </button>
+    </div>
+  </header>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (rules().length === 0) {
+    <lf-empty-state icon="bolt" title="No rules yet" ctaLabel="New rule" i18n-title="@@admin.workflowRulesList.emptyTitle" i18n-ctaLabel="@@admin.workflowRulesList.emptyCta" (cta)="openNew()" />
+  } @else {
+    <table class="workflow-rules-list__table">
+      <thead>
+        <tr>
+          <th i18n="@@admin.workflowRulesList.colName">Name</th>
+          <th i18n="@@admin.workflowRulesList.colTrigger">Trigger</th>
+          <th i18n="@@admin.workflowRulesList.colActive">Active</th>
+          <th i18n="@@admin.workflowRulesList.colRunOrder">Run order</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (rule of rules(); track rule.id) {
+          <tr
+            class="workflow-rules-list__row"
+            role="button"
+            tabindex="0"
+            (click)="openRule(rule)"
+            (keydown.enter)="openRule(rule)"
+            (keydown.space)="openRule(rule)"
+          >
+            <td>{{ rule.name }}</td>
+            <td>{{ rule.triggerEvent }}</td>
+            <td>{{ rule.active ? 'Yes' : 'No' }}</td>
+            <td>{{ rule.runOrder }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

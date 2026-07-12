@@ -1,0 +1,109 @@
+<div class="home-page">
+  <h1><span i18n="@@portal.home.welcome">Welcome</span>{{ user() ? ', ' + user()!.name : '' }}</h1>
+
+  <section class="home-page__section">
+    <h2 i18n="@@portal.home.mattersTitle">My matters</h2>
+    @if (mattersLoading()) {
+      <mat-progress-bar mode="indeterminate" />
+    } @else if (matters().length === 0) {
+      <lf-empty-state
+        icon="gavel"
+        title="No matters yet"
+        i18n-title="@@portal.home.mattersEmptyTitle"
+      />
+    } @else {
+      <div class="home-page__cards">
+        @for (matter of matters(); track matter.id) {
+          <a class="home-page__card" [routerLink]="['/matters', matter.id]">
+            <div class="home-page__card-header">
+              <span class="home-page__card-number">{{ matter.number }}</span>
+              <lf-status-chip [label]="matter.status" />
+            </div>
+            <p class="home-page__card-title">{{ matter.title }}</p>
+            @if (matter.nextHearingDate) {
+              <p class="home-page__card-meta">
+                <span i18n="@@portal.home.nextHearingLabel">Next hearing:</span>
+                {{ matter.nextHearingDate }}
+              </p>
+            }
+            @if (matter.responsibleLawyerName) {
+              <p class="home-page__card-meta">
+                <span i18n="@@portal.home.lawyerLabel">Lawyer:</span>
+                {{ matter.responsibleLawyerName }}
+              </p>
+            }
+          </a>
+        }
+      </div>
+    }
+  </section>
+
+  <section class="home-page__section">
+    <h2 i18n="@@portal.home.invoicesTitle">Unpaid invoices</h2>
+    @if (invoicesLoading()) {
+      <mat-progress-bar mode="indeterminate" />
+    } @else if (unpaidInvoices().length === 0) {
+      <lf-empty-state
+        icon="receipt_long"
+        title="No unpaid invoices"
+        i18n-title="@@portal.home.invoicesEmptyTitle"
+      />
+    } @else {
+      <ul class="home-page__list">
+        @for (invoice of unpaidInvoices(); track invoice.id) {
+          <li>
+            <a routerLink="/invoices">
+              <span>{{ invoice.number }}</span>
+              <span>{{ invoice.openBalance | lfCurrency: invoice.currency }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+    }
+  </section>
+
+  <section class="home-page__section">
+    <h2 i18n="@@portal.home.documentsTitle">Recent documents</h2>
+    @if (documentsLoading()) {
+      <mat-progress-bar mode="indeterminate" />
+    } @else if (recentDocuments().length === 0) {
+      <lf-empty-state
+        icon="folder"
+        title="No documents shared yet"
+        i18n-title="@@portal.home.documentsEmptyTitle"
+      />
+    } @else {
+      <ul class="home-page__list">
+        @for (document of recentDocuments(); track document.id) {
+          <li>
+            <a routerLink="/documents">
+              <mat-icon>description</mat-icon>
+              <span>{{ document.title }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+    }
+  </section>
+
+  <section class="home-page__section">
+    <h2 i18n="@@portal.home.appointmentTitle">Next appointment</h2>
+    @if (appointmentsLoading()) {
+      <mat-progress-bar mode="indeterminate" />
+    } @else if (!nextAppointment()) {
+      <lf-empty-state
+        icon="event"
+        title="No upcoming appointments"
+        i18n-title="@@portal.home.appointmentEmptyTitle"
+        ctaLabel="Request one"
+        i18n-ctaLabel="@@portal.home.appointmentEmptyCta"
+        (cta)="goToAppointments()"
+      />
+    } @else {
+      <p class="home-page__appointment">
+        {{ nextAppointment()!.requestedStart | date: 'medium' }} —
+        <lf-status-chip [label]="nextAppointment()!.status" />
+      </p>
+    }
+  </section>
+</div>

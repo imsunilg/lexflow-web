@@ -1,0 +1,39 @@
+<h2 mat-dialog-title i18n="@@tasks.applyTemplateDialog.title">Apply "{{ data.template.name }}" to a matter</h2>
+
+<mat-dialog-content class="apply-template">
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@tasks.applyTemplateDialog.matterLabel">Matter</mat-label>
+    <input matInput [formControl]="matterControl" [matAutocomplete]="matterAuto" required />
+    <mat-autocomplete #matterAuto="matAutocomplete" (optionSelected)="onMatterSelected($event)">
+      @for (matter of matterResults(); track matter.id) {
+        <mat-option [value]="matterLabel(matter)">{{ matterLabel(matter) }}</mat-option>
+      }
+    </mat-autocomplete>
+    @if (matterControl.invalid && matterControl.touched) {
+      <mat-error i18n="@@tasks.applyTemplateDialog.selectMatterError">Select a matter.</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@tasks.applyTemplateDialog.anchorDateLabel">Anchor date</mat-label>
+    <input matInput [matDatepicker]="anchorPicker" [formControl]="anchorDate" />
+    <mat-datepicker-toggle matIconSuffix [for]="anchorPicker" />
+    <mat-datepicker #anchorPicker />
+    <mat-hint i18n="@@tasks.applyTemplateDialog.anchorDateHint">Each item's due date = this date + its relative due days.</mat-hint>
+  </mat-form-field>
+
+  @if (error) {
+    <p class="apply-template__error">{{ error }}</p>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()" i18n="@@tasks.applyTemplateDialog.cancelButton">Cancel</button>
+  <button mat-flat-button color="primary" type="button" [disabled]="submitting" (click)="submit()">
+    @if (submitting) {
+      <mat-spinner diameter="18" />
+    } @else {
+      <span i18n="@@tasks.applyTemplateDialog.applyButton">Apply</span>
+    }
+  </button>
+</mat-dialog-actions>

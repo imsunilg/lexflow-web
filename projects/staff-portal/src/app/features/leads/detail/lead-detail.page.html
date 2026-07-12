@@ -5,7 +5,9 @@
     <lf-empty-state
       icon="error_outline"
       title="Couldn't load this lead"
+      i18n-title="@@leads.detail.errorTitle"
       ctaLabel="Retry"
+      i18n-ctaLabel="@@leads.detail.errorRetry"
       (cta)="load()"
     />
   } @else if (lead(); as currentLead) {
@@ -16,83 +18,91 @@
           <h1 class="pane__title">{{ currentLead.firstName }} {{ currentLead.lastName }}</h1>
           <button mat-stroked-button type="button" (click)="editLead()">
             <mat-icon>edit</mat-icon>
-            Edit
+            <span i18n="@@leads.detail.editButton">Edit</span>
           </button>
         </header>
 
         <div class="profile-field">
-          <span class="profile-field__label">Number</span>
+          <span class="profile-field__label" i18n="@@leads.detail.numberLabel">Number</span>
           <span class="profile-field__value">{{ currentLead.number }}</span>
         </div>
 
         @if (currentLead.company) {
           <div class="profile-field">
-            <span class="profile-field__label">Company</span>
+            <span class="profile-field__label" i18n="@@leads.detail.companyLabel">Company</span>
             <span class="profile-field__value">{{ currentLead.company }}</span>
           </div>
         }
 
         @if (currentLead.email) {
           <div class="profile-field">
-            <span class="profile-field__label">Email</span>
+            <span class="profile-field__label" i18n="@@leads.detail.emailLabel">Email</span>
             <span class="profile-field__value">{{ currentLead.email }}</span>
           </div>
         }
 
         @if (currentLead.phoneE164) {
           <div class="profile-field">
-            <span class="profile-field__label">Phone</span>
+            <span class="profile-field__label" i18n="@@leads.detail.phoneLabel">Phone</span>
             <span class="profile-field__value">{{ currentLead.phoneE164 }}</span>
           </div>
         }
 
         @if (currentLead.sourceId) {
           <div class="profile-field">
-            <span class="profile-field__label">Source</span>
+            <span class="profile-field__label" i18n="@@leads.detail.sourceLabel">Source</span>
             <span class="profile-field__value">{{ currentLead.sourceId }}</span>
           </div>
         }
 
         @if (currentLead.practiceAreaId) {
           <div class="profile-field">
-            <span class="profile-field__label">Practice area</span>
+            <span class="profile-field__label" i18n="@@leads.detail.practiceAreaLabel"
+              >Practice area</span
+            >
             <span class="profile-field__value">{{ currentLead.practiceAreaId }}</span>
           </div>
         }
 
         @if (currentLead.issueSummary) {
           <div class="profile-field">
-            <span class="profile-field__label">Issue summary</span>
+            <span class="profile-field__label" i18n="@@leads.detail.issueSummaryLabel"
+              >Issue summary</span
+            >
             <span class="profile-field__value">{{ currentLead.issueSummary }}</span>
           </div>
         }
 
         @if (currentLead.opposingParty) {
           <div class="profile-field">
-            <span class="profile-field__label">Opposing party</span>
+            <span class="profile-field__label" i18n="@@leads.detail.opposingPartyLabel"
+              >Opposing party</span
+            >
             <span class="profile-field__value">{{ currentLead.opposingParty }}</span>
           </div>
         }
 
         @if (currentLead.budgetBand) {
           <div class="profile-field">
-            <span class="profile-field__label">Budget band</span>
+            <span class="profile-field__label" i18n="@@leads.detail.budgetBandLabel"
+              >Budget band</span
+            >
             <span class="profile-field__value">{{ currentLead.budgetBand }}</span>
           </div>
         }
 
         <div class="profile-field">
-          <span class="profile-field__label">Stage</span>
+          <span class="profile-field__label" i18n="@@leads.detail.stageLabel">Stage</span>
           <lf-status-chip [label]="currentLead.stage" />
         </div>
 
         <div class="profile-field">
-          <span class="profile-field__label">Score</span>
+          <span class="profile-field__label" i18n="@@leads.detail.scoreLabel">Score</span>
           <span class="profile-field__value">{{ currentLead.score }}/100</span>
         </div>
 
         <div class="profile-field">
-          <span class="profile-field__label">Status</span>
+          <span class="profile-field__label" i18n="@@leads.detail.statusLabel">Status</span>
           <lf-status-chip [label]="currentLead.status" />
         </div>
       </section>
@@ -100,25 +110,25 @@
       <!-- Activity timeline pane -->
       <section class="pane pane--timeline">
         <header class="pane__header pane__header--actions">
-          <h2 class="pane__subtitle">Activity</h2>
+          <h2 class="pane__subtitle" i18n="@@leads.detail.activityHeader">Activity</h2>
           <div class="pane__actions">
             <button mat-stroked-button type="button" (click)="logActivity('call')">
               <mat-icon>call</mat-icon>
-              Log call
+              <span i18n="@@leads.detail.logCallButton">Log call</span>
             </button>
             <button mat-stroked-button type="button" (click)="logActivity('meeting')">
               <mat-icon>groups</mat-icon>
-              Log meeting
+              <span i18n="@@leads.detail.logMeetingButton">Log meeting</span>
             </button>
             <button mat-stroked-button type="button" (click)="logActivity('note')">
               <mat-icon>note</mat-icon>
-              Add note
+              <span i18n="@@leads.detail.addNoteButton">Add note</span>
             </button>
           </div>
         </header>
 
         @if (timeline().length === 0) {
-          <lf-empty-state icon="history" title="No activity yet" />
+          <lf-empty-state icon="history" title="No activity yet" i18n-title="@@leads.detail.noActivityTitle" />
         } @else {
           <ul class="timeline">
             @for (item of timeline(); track item.at + item.kind) {
@@ -138,7 +148,7 @@
                   @case ('stage') {
                     <mat-icon class="timeline-item__icon">swap_horiz</mat-icon>
                     <div class="timeline-item__body">
-                      <p class="timeline-item__summary">
+                      <p class="timeline-item__summary" i18n="@@leads.detail.stageChangeSummary">
                         Moved from {{ item.entry.fromStage ?? '(none)' }} to
                         {{ item.entry.toStage }}
                       </p>
@@ -154,20 +164,24 @@
 
       <!-- Next-action panel -->
       <section class="pane pane--actions">
-        <h2 class="pane__subtitle">Next action</h2>
+        <h2 class="pane__subtitle" i18n="@@leads.detail.nextActionHeader">Next action</h2>
 
         <div class="sla-info">
           @if (currentLead.firstContactedAt) {
-            <p>First contacted {{ currentLead.firstContactedAt | date: 'short' }}</p>
+            <p i18n="@@leads.detail.firstContactedMessage">
+              First contacted {{ currentLead.firstContactedAt | date: 'short' }}
+            </p>
           } @else if (currentLead.slaFirstContactDueAt) {
-            <p>First contact due {{ currentLead.slaFirstContactDueAt | date: 'short' }}</p>
+            <p i18n="@@leads.detail.firstContactDueMessage">
+              First contact due {{ currentLead.slaFirstContactDueAt | date: 'short' }}
+            </p>
           } @else {
-            <p>No SLA set</p>
+            <p i18n="@@leads.detail.noSlaMessage">No SLA set</p>
           }
         </div>
 
         <mat-form-field appearance="outline" class="stage-select">
-          <mat-label>Change stage</mat-label>
+          <mat-label i18n="@@leads.detail.changeStageLabel">Change stage</mat-label>
           <mat-select [formControl]="stageControl" (selectionChange)="changeStage()">
             @for (stage of stages; track stage) {
               <mat-option [value]="stage">{{ stage }}</mat-option>
@@ -184,16 +198,30 @@
 
         <div class="action-buttons">
           @if (currentLead.status === 'Open') {
-            <button mat-flat-button color="primary" type="button" (click)="convert()">
+            <button
+              mat-flat-button
+              color="primary"
+              type="button"
+              (click)="convert()"
+              i18n="@@leads.detail.convertButton"
+            >
               Convert
             </button>
-            <button mat-stroked-button color="warn" type="button" (click)="markLost()">
+            <button
+              mat-stroked-button
+              color="warn"
+              type="button"
+              (click)="markLost()"
+              i18n="@@leads.detail.markLostButton"
+            >
               Mark lost
             </button>
           }
 
           @if (currentLead.status === 'Converted') {
-            <p class="converted-note">Converted to client {{ currentLead.convertedClientId }}</p>
+            <p class="converted-note" i18n="@@leads.detail.convertedNote">
+              Converted to client {{ currentLead.convertedClientId }}
+            </p>
           }
         </div>
       </section>

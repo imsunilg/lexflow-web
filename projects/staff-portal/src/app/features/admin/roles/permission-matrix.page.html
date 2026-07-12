@@ -1,0 +1,42 @@
+<div class="permission-matrix">
+  <lf-admin-tabs />
+
+  <header class="permission-matrix__header">
+    <h1 i18n="@@admin.permissionMatrix.title">Permission matrix</h1>
+    <a mat-button [routerLink]="['/admin/roles']">
+      <mat-icon>arrow_back</mat-icon>
+      <ng-container i18n="@@admin.permissionMatrix.backLink">Back to roles</ng-container>
+    </a>
+  </header>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else {
+    <div class="permission-matrix__scroll">
+      <table class="permission-matrix__table">
+        <thead>
+          <tr>
+            <th class="permission-matrix__perm-col" i18n="@@admin.permissionMatrix.colPermission">Permission</th>
+            @for (role of roles(); track role.id) {
+              <th>{{ role.name }}</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of rows(); track row.entry.id) {
+            <tr>
+              <td class="permission-matrix__perm-col">{{ row.entry.key }}</td>
+              @for (granted of row.grants; track $index) {
+                <td class="permission-matrix__cell">
+                  @if (granted) {
+                    <mat-icon class="permission-matrix__yes">check</mat-icon>
+                  }
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

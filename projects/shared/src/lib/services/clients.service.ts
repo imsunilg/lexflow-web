@@ -7,7 +7,6 @@ import {
   Client,
   ClientAddress,
   ClientAddressInput,
-  ClientCommunication,
   ClientContact,
   ClientContactInput,
   ClientFilter,
@@ -244,26 +243,6 @@ export class ClientsService {
     return this.http
       .get<ApiSuccessEnvelope<ClientPortalUser[]>>(
         `${this.baseUrl}/clients/${clientId}/portal-users`,
-      )
-      .pipe(map((envelope) => envelope.data));
-  }
-
-  // Communications
-
-  communications(
-    clientId: string,
-    channel?: string,
-    from?: string,
-    to?: string,
-  ): Observable<ClientCommunication[]> {
-    let params = new HttpParams();
-    if (channel) params = params.set('channel', channel);
-    if (from) params = params.set('from', from);
-    if (to) params = params.set('to', to);
-    return this.http
-      .get<ApiSuccessEnvelope<ClientCommunication[]>>(
-        `${this.baseUrl}/clients/${clientId}/communications`,
-        { params },
       )
       .pipe(map((envelope) => envelope.data));
   }

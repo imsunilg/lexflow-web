@@ -115,14 +115,6 @@ export interface AddClientRelationshipRequest {
   relationType: ClientRelationshipType;
 }
 
-export interface ClientCommunication {
-  id: string;
-  channel: string;
-  at: string;
-  subject: string | null;
-  snippet: string | null;
-}
-
 export interface ClientSummary {
   openMatters: number;
   lifetimeBilled: number;

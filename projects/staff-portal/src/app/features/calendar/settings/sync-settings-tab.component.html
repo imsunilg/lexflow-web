@@ -1,7 +1,7 @@
 <div class="sync-settings">
   <div class="sync-settings__banner" role="note">
     <mat-icon>info</mat-icon>
-    <span>
+    <span i18n="@@calendar.syncSettingsTab.banner">
       Connection status isn't available yet — this panel can only start a new connection. Account
       management (disconnect, resync) will appear here once the backend exposes an accounts-listing
       endpoint.
@@ -34,9 +34,10 @@
             type="button"
             disabled
             matTooltip="No account is known to be connected client-side (no accounts-listing endpoint exists yet), so there is no accountId to disconnect."
+            i18n-matTooltip="@@calendar.syncSettingsTab.disconnectTooltip"
           >
             <mat-icon>link_off</mat-icon>
-            Disconnect
+            <span i18n="@@calendar.syncSettingsTab.disconnectButton">Disconnect</span>
           </button>
         </div>
       </div>
@@ -44,8 +45,8 @@
   </div>
 
   <div class="sync-settings__privacy">
-    <h2>Privacy level</h2>
-    <p class="sync-settings__hint">
+    <h2 i18n="@@calendar.syncSettingsTab.privacyLevelTitle">Privacy level</h2>
+    <p class="sync-settings__hint" i18n="@@calendar.syncSettingsTab.privacyHint">
       Controls how much detail external busy blocks show inside LexFlow. This choice is saved in
       this browser only — no backend field exists yet to store it per account.
     </p>
@@ -54,8 +55,12 @@
       [value]="privacyLevel()"
       (change)="setPrivacyLevel($event.value)"
     >
-      <mat-radio-button value="freeBusy">Free/busy only</mat-radio-button>
-      <mat-radio-button value="fullDetail">Full detail</mat-radio-button>
+      <mat-radio-button value="freeBusy" i18n="@@calendar.syncSettingsTab.freeBusyLabel"
+        >Free/busy only</mat-radio-button
+      >
+      <mat-radio-button value="fullDetail" i18n="@@calendar.syncSettingsTab.fullDetailLabel"
+        >Full detail</mat-radio-button
+      >
     </mat-radio-group>
   </div>
 </div>

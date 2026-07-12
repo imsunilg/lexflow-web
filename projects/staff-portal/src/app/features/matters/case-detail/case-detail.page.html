@@ -5,7 +5,9 @@
     <lf-empty-state
       icon="error_outline"
       title="Couldn't load this case"
+      i18n-title="@@matters.caseDetail.errorTitle"
       ctaLabel="Retry"
+      i18n-ctaLabel="@@matters.caseDetail.retryButton"
       (cta)="load()"
     />
   } @else {
@@ -19,14 +21,14 @@
       </div>
 
       @if (nextHearingCountdown(); as countdown) {
-        <span class="case-detail__countdown" [attr.data-tone]="countdown.tone">
+        <span class="case-detail__countdown" [attr.data-tone]="countdown.tone" i18n="@@matters.caseDetail.nextHearingLabel">
           Next hearing: {{ countdown.label }}
         </span>
       }
     </header>
 
     <mat-tab-group>
-      <mat-tab label="Hearings">
+      <mat-tab label="Hearings" i18n-label="@@matters.caseDetail.hearingsTab">
         <div class="case-detail__tab-content">
           <lf-case-hearings-tab
             [caseId]="courtCase()!.id"
@@ -35,40 +37,40 @@
         </div>
       </mat-tab>
 
-      <mat-tab label="Orders">
+      <mat-tab label="Orders" i18n-label="@@matters.caseDetail.ordersTab">
         <div class="case-detail__tab-content">
           <lf-case-orders-tab [caseId]="courtCase()!.id" />
         </div>
       </mat-tab>
 
-      <mat-tab label="Parties & Advocates">
+      <mat-tab label="Parties & Advocates" i18n-label="@@matters.caseDetail.partiesTab">
         <div class="case-detail__tab-content">
           <lf-case-parties-tab [caseId]="courtCase()!.id" />
         </div>
       </mat-tab>
 
-      <mat-tab label="Evidence">
+      <mat-tab label="Evidence" i18n-label="@@matters.caseDetail.evidenceTab">
         <div class="case-detail__tab-content">
           <lf-case-evidence-tab [caseId]="courtCase()!.id" />
         </div>
       </mat-tab>
 
-      <mat-tab label="Witnesses">
+      <mat-tab label="Witnesses" i18n-label="@@matters.caseDetail.witnessesTab">
         <div class="case-detail__tab-content">
           <lf-case-witnesses-tab [caseId]="courtCase()!.id" />
         </div>
       </mat-tab>
 
-      <mat-tab label="Arguments">
+      <mat-tab label="Arguments" i18n-label="@@matters.caseDetail.argumentsTab">
         <div class="case-detail__tab-content">
           <lf-case-arguments-tab [caseId]="courtCase()!.id" />
         </div>
       </mat-tab>
 
-      <mat-tab label="Timeline">
+      <mat-tab label="Timeline" i18n-label="@@matters.caseDetail.timelineTab">
         <div class="case-detail__tab-content">
           @if (timelineRows().length === 0) {
-            <lf-empty-state icon="timeline" title="No timeline entries yet" />
+            <lf-empty-state icon="timeline" title="No timeline entries yet" i18n-title="@@matters.caseDetail.timelineEmptyTitle" />
           } @else {
             <ul class="case-detail__timeline">
               @for (row of timelineRows(); track $index) {

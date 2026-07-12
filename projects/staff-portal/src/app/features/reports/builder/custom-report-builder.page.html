@@ -1,0 +1,242 @@
+<div class="custom-report-builder">
+  <lf-reports-tabs />
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  <mat-stepper orientation="horizontal" linear="false">
+    <mat-step [stepControl]="basicsForm" label="Base entity" i18n-label="@@reports.customBuilder.baseEntityStepLabel">
+      <form [formGroup]="basicsForm" class="custom-report-builder__form">
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@reports.customBuilder.reportNameLabel">Report name</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@reports.customBuilder.baseEntityLabel">Base entity</mat-label>
+          <mat-select formControlName="baseEntity">
+            @for (entity of baseEntities; track entity) {
+              <mat-option [value]="entity">{{ entity }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <div class="custom-report-builder__step-actions">
+        <button mat-flat-button color="primary" type="button" matStepperNext i18n="@@reports.customBuilder.nextButton1">Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step label="Columns" i18n-label="@@reports.customBuilder.columnsStepLabel">
+      <h3 i18n="@@reports.customBuilder.columnsHeading">Columns</h3>
+      <div class="custom-report-builder__checklist">
+        @for (field of fields(); track field.key) {
+          <mat-checkbox
+            [checked]="selectedColumns().has(field.key)"
+            (change)="toggleColumn(field.key)"
+          >
+            {{ field.label }}
+          </mat-checkbox>
+        }
+      </div>
+
+      <h3 i18n="@@reports.customBuilder.groupByHeading">Group by</h3>
+      <div class="custom-report-builder__checklist">
+        @for (field of fields(); track field.key) {
+          <mat-checkbox [checked]="groupBy().has(field.key)" (change)="toggleGroupBy(field.key)">
+            {{ field.label }}
+          </mat-checkbox>
+        }
+      </div>
+
+      <h3 i18n="@@reports.customBuilder.aggregatesHeading">Aggregates</h3>
+      @for (agg of aggregates(); track $index) {
+        <div class="custom-report-builder__row">
+          <mat-form-field appearance="outline">
+            <mat-label i18n="@@reports.customBuilder.aggregateFieldLabel">Field</mat-label>
+            <mat-select
+              [value]="agg.field"
+              (selectionChange)="updateAggregate($index, { field: $event.value })"
+            >
+              @for (field of fields(); track field.key) {
+                <mat-option [value]="field.key">{{ field.label }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label i18n="@@reports.customBuilder.aggregateFunctionLabel">Function</mat-label>
+            <mat-select
+              [value]="agg.function"
+              (selectionChange)="updateAggregate($index, { function: $event.value })"
+            >
+              @for (fn of aggregateFunctions; track fn) {
+                <mat-option [value]="fn">{{ fn }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <button mat-icon-button type="button" (click)="removeAggregate($index)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      }
+      <button mat-stroked-button type="button" (click)="addAggregate()" i18n="@@reports.customBuilder.addAggregateButton">Add aggregate</button>
+
+      <div class="custom-report-builder__step-actions">
+        <button mat-button type="button" matStepperPrevious i18n="@@reports.customBuilder.backButton1">Back</button>
+        <button mat-flat-button color="primary" type="button" matStepperNext i18n="@@reports.customBuilder.nextButton2">Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step label="Filters &amp; sort" i18n-label="@@reports.customBuilder.filtersSortStepLabel">
+      <h3 i18n="@@reports.customBuilder.filtersHeading">Filters</h3>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@reports.customBuilder.matchLabel">Match</mat-label>
+        <mat-select [formControl]="filterLogic">
+          <mat-option value="AND" i18n="@@reports.customBuilder.matchAllOption">All of (AND)</mat-option>
+          <mat-option value="OR" i18n="@@reports.customBuilder.matchAnyOption">Any of (OR)</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      @for (filter of filters(); track $index) {
+        <div class="custom-report-builder__row">
+          <mat-form-field appearance="outline">
+            <mat-label i18n="@@reports.customBuilder.filterFieldLabel">Field</mat-label>
+            <mat-select
+              [value]="filter.field"
+              (selectionChange)="updateFilter($index, { field: $event.value })"
+            >
+              @for (field of fields(); track field.key) {
+                <mat-option [value]="field.key">{{ field.label }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label i18n="@@reports.customBuilder.filterOperatorLabel">Operator</mat-label>
+            <mat-select
+              [value]="filter.operator"
+              (selectionChange)="updateFilter($index, { operator: $event.value })"
+            >
+              @for (op of filterOperators; track op) {
+                <mat-option [value]="op">{{ op }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label i18n="@@reports.customBuilder.filterValueLabel">Value</mat-label>
+            <input
+              matInput
+              [value]="filter.value"
+              (input)="updateFilter($index, { value: $any($event.target).value })"
+            />
+          </mat-form-field>
+          <button mat-icon-button type="button" (click)="removeFilter($index)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      }
+      <button mat-stroked-button type="button" (click)="addFilter()" i18n="@@reports.customBuilder.addFilterButton">Add filter</button>
+
+      <h3 i18n="@@reports.customBuilder.sortHeading">Sort</h3>
+      @for (s of sort(); track $index) {
+        <div class="custom-report-builder__row">
+          <mat-form-field appearance="outline">
+            <mat-label i18n="@@reports.customBuilder.sortFieldLabel">Field</mat-label>
+            <mat-select
+              [value]="s.field"
+              (selectionChange)="updateSort($index, { field: $event.value })"
+            >
+              @for (field of fields(); track field.key) {
+                <mat-option [value]="field.key">{{ field.label }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <mat-checkbox
+            [checked]="s.descending"
+            (change)="updateSort($index, { descending: $event.checked })"
+            i18n="@@reports.customBuilder.descendingLabel"
+          >
+            Descending
+          </mat-checkbox>
+          <button mat-icon-button type="button" (click)="removeSort($index)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      }
+      <button mat-stroked-button type="button" (click)="addSort()" i18n="@@reports.customBuilder.addSortButton">Add sort</button>
+
+      <div class="custom-report-builder__step-actions">
+        <button mat-button type="button" matStepperPrevious i18n="@@reports.customBuilder.backButton2">Back</button>
+        <button mat-flat-button color="primary" type="button" matStepperNext i18n="@@reports.customBuilder.nextButton3">Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step label="Save &amp; preview" i18n-label="@@reports.customBuilder.savePreviewStepLabel">
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@reports.customBuilder.visibilityLabel">Visibility</mat-label>
+        <mat-select [formControl]="basicsForm.controls.visibility">
+          @for (v of visibilities; track v) {
+            <mat-option [value]="v">{{ v }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      @if (saveError()) {
+        <p class="custom-report-builder__error">{{ saveError() }}</p>
+      }
+
+      <div class="custom-report-builder__step-actions">
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          [disabled]="saving()"
+          (click)="save()"
+        >
+          {{ definitionId() ? 'Save changes' : 'Save' }}
+        </button>
+        @if (definitionId()) {
+          <button mat-stroked-button type="button" [disabled]="running()" (click)="preview()" i18n="@@reports.customBuilder.previewButton">
+            Preview
+          </button>
+          <button mat-stroked-button type="button" (click)="openInViewer()" i18n="@@reports.customBuilder.openInViewerButton">
+            Open in report viewer
+          </button>
+        }
+      </div>
+
+      @if (running()) {
+        <mat-progress-bar mode="indeterminate" />
+      }
+      @if (runError()) {
+        <p class="custom-report-builder__error">{{ runError() }}</p>
+      }
+
+      @if (previewResult()) {
+        <div class="custom-report-builder__preview">
+          <table>
+            <thead>
+              <tr>
+                @for (col of previewResult()!.columns; track col) {
+                  <th>{{ col }}</th>
+                }
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of previewResult()!.rows; track $index) {
+                <tr>
+                  @for (cell of row; track $index) {
+                    <td>{{ cell }}</td>
+                  }
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+
+      <div class="custom-report-builder__step-actions">
+        <button mat-button type="button" matStepperPrevious i18n="@@reports.customBuilder.backButton3">Back</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

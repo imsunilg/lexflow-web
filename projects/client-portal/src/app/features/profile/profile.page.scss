@@ -1,0 +1,41 @@
+.profile-page {
+  padding: var(--lf-space-3);
+  padding-bottom: calc(var(--lf-space-6) + 56px);
+  max-width: var(--lf-content-max-width);
+  margin: 0 auto;
+
+  h1 {
+    font-family: var(--lf-font-portal-heading);
+    margin: 0 0 var(--lf-space-3);
+  }
+
+  &__info {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--lf-space-1) var(--lf-space-2);
+    margin: 0 0 var(--lf-space-3);
+
+    dt {
+      color: var(--lf-on-surface-variant);
+    }
+
+    dd {
+      margin: 0;
+      font-weight: 600;
+    }
+  }
+
+  &__section {
+    margin-bottom: var(--lf-space-3);
+
+    h2 {
+      font-size: var(--lf-text-lg);
+      margin: 0 0 var(--lf-space-1);
+    }
+  }
+
+  &__hint {
+    color: var(--lf-on-surface-variant);
+    margin: 0;
+  }
+}

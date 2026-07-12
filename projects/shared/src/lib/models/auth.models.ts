@@ -11,6 +11,7 @@ export interface CurrentUser {
 
 /** Shape of `GET /permissions/catalog` — the full permission-key catalog (PRD §21). */
 export interface PermissionCatalogEntry {
+  id: string;
   key: string;
   module: string;
   action: string;

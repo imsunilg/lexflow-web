@@ -1,8 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { interval, map, switchMap, tap } from 'rxjs';
+import { Observable, interval, map, switchMap, tap } from 'rxjs';
 import { ApiSuccessEnvelope } from '../models/api-envelope.models';
-import { RunningTimer, TimerPushEvent } from '../models/timer.models';
+import { TimeEntry } from '../models/time-entry.models';
+import {
+  RunningTimer,
+  StartTimerRequest,
+  StopTimerRequest,
+  TimerPushEvent,
+} from '../models/timer.models';
 import { API_BASE_URL } from './api-base-url.token';
 import { RealtimeHubService } from './realtime-hub.service';
 
@@ -91,5 +97,43 @@ export class TimerService {
   clear(): void {
     this.currentSignal.set(null);
     this.localTickSignal.set(0);
+  }
+
+  /** Starting a new timer while one is already running returns 409 (block setting) or auto-pauses the prior one — either way, re-poll to reflect the server's actual resulting state. */
+  start(request: StartTimerRequest): Observable<RunningTimer> {
+    return this.http
+      .post<ApiSuccessEnvelope<RunningTimer>>(`${this.baseUrl}/timers/start`, request)
+      .pipe(
+        map((envelope) => envelope.data),
+        tap((timer) => this.currentSignal.set(timer)),
+      );
+  }
+
+  pause(): Observable<RunningTimer> {
+    return this.http
+      .post<ApiSuccessEnvelope<RunningTimer>>(`${this.baseUrl}/timers/pause`, {})
+      .pipe(
+        map((envelope) => envelope.data),
+        tap((timer) => this.currentSignal.set(timer)),
+      );
+  }
+
+  resume(): Observable<RunningTimer> {
+    return this.http
+      .post<ApiSuccessEnvelope<RunningTimer>>(`${this.baseUrl}/timers/resume`, {})
+      .pipe(
+        map((envelope) => envelope.data),
+        tap((timer) => this.currentSignal.set(timer)),
+      );
+  }
+
+  /** Returns the resulting Draft `TimeEntry` — duration/rounding are server-computed, see `StopTimerRequest`'s doc comment. */
+  stop(request: StopTimerRequest): Observable<TimeEntry> {
+    return this.http
+      .post<ApiSuccessEnvelope<TimeEntry>>(`${this.baseUrl}/timers/stop`, request)
+      .pipe(
+        map((envelope) => envelope.data),
+        tap(() => this.clear()),
+      );
   }
 }

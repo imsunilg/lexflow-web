@@ -1,0 +1,32 @@
+<div class="profile-page">
+  <h1 i18n="@@portal.profile.title">Profile</h1>
+
+  @if (user()) {
+    <dl class="profile-page__info">
+      <dt i18n="@@portal.profile.nameLabel">Name</dt>
+      <dd>{{ user()!.name }}</dd>
+      <dt i18n="@@portal.profile.emailLabel">Email</dt>
+      <dd>{{ user()!.email }}</dd>
+    </dl>
+  }
+
+  <section class="profile-page__section">
+    <h2 i18n="@@portal.profile.preferencesTitle">Preferences</h2>
+    <p class="profile-page__hint" i18n="@@portal.profile.preferencesHint">
+      Notification and language preferences aren't available yet — the portal API has no preferences
+      endpoint to save them to.
+    </p>
+  </section>
+
+  <section class="profile-page__section">
+    <h2 i18n="@@portal.profile.securityTitle">Security</h2>
+    <p class="profile-page__hint" i18n="@@portal.profile.securityHint">
+      Password changes go through "Forgot password" on the sign-in page. Two-factor authentication
+      and session management aren't available for portal accounts yet.
+    </p>
+  </section>
+
+  <button mat-stroked-button type="button" (click)="signOut()">
+    <span i18n="@@portal.profile.signOutButton">Sign out</span>
+  </button>
+</div>

@@ -1,0 +1,48 @@
+<div class="inspector">
+  <lf-admin-tabs />
+
+  <h1 i18n="@@admin.permissionInspector.title">Effective-permission inspector</h1>
+  <p class="inspector__hint" i18n="@@admin.permissionInspector.hint">
+    Explains everything this user can currently do and why — not scoped to a single resource (the
+    underlying endpoint accepts a resource filter but always returns the full trace).
+  </p>
+
+  <mat-form-field appearance="outline" class="inspector__picker">
+    <mat-label i18n="@@admin.permissionInspector.userLabel">User</mat-label>
+    <mat-select [formControl]="userControl">
+      @for (user of users(); track user.id) {
+        <mat-option [value]="user.id">{{ user.name }} ({{ user.email }})</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (!userControl.value) {
+    <lf-empty-state icon="search" title="Pick a user to see their effective permissions" i18n-title="@@admin.permissionInspector.pickUserEmptyTitle" />
+  } @else if (groupedExplanations().length === 0) {
+    <lf-empty-state icon="block" title="This user has no effective permissions" i18n-title="@@admin.permissionInspector.noPermissionsEmptyTitle" />
+  } @else {
+    @for (group of groupedExplanations(); track group[0]) {
+      <section class="inspector__group">
+        <h2>{{ group[0] }}</h2>
+        @for (explanation of group[1]; track explanation.key) {
+          <div class="inspector__row">
+            <div class="inspector__key">
+              <span class="inspector__perm-key">{{ explanation.key }}</span>
+              <span class="inspector__scope">{{ explanation.scope }}</span>
+            </div>
+            <ul class="inspector__sources">
+              @for (source of explanation.sources; track source.sourceId) {
+                <li>
+                  <mat-icon>{{ source.sourceType === 'role' ? 'badge' : 'bolt' }}</mat-icon>
+                  {{ sourceLabel(source) }}
+                </li>
+              }
+            </ul>
+          </div>
+        }
+      </section>
+    }
+  }
+</div>

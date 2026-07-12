@@ -10,7 +10,9 @@ import { PlaceholderPageComponent } from '../../shared/placeholder-page/placehol
   template: `
     <app-placeholder-page
       title="403 — Access denied"
+      i18n-title="@@auth.forbidden.title"
       description="You don't have permission to view this page. Request access from your administrator."
+      i18n-description="@@auth.forbidden.description"
     />
   `,
 })

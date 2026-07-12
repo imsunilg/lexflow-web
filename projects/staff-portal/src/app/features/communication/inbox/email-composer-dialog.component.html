@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>{{ isReply ? 'Reply' : 'New email' }}</h2>
+<mat-dialog-content class="composer">
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@communication.emailComposer.fromMailboxLabel">From mailbox</mat-label>
+    <mat-select [formControl]="mailboxId">
+      @for (mailbox of data.mailboxes; track mailbox.id) {
+        <mat-option [value]="mailbox.id">{{ mailbox.label }}</mat-option>
+      }
+    </mat-select>
+    @if (data.mailboxes.length === 0) {
+      <mat-hint i18n="@@communication.emailComposer.noMailboxesHint">No known mailboxes — connect one first.</mat-hint>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@communication.emailComposer.toLabel">To</mat-label>
+    <input matInput [formControl]="toAddresses" placeholder="comma-separated addresses" i18n-placeholder="@@communication.emailComposer.toPlaceholder" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@communication.emailComposer.subjectLabel">Subject</mat-label>
+    <input matInput [formControl]="subject" />
+  </mat-form-field>
+
+  @if (!isReply) {
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@communication.emailComposer.matterOptionalLabel">Matter (optional)</mat-label>
+      <input matInput [formControl]="matterControl" [matAutocomplete]="matterAuto" />
+      <mat-autocomplete #matterAuto="matAutocomplete" (optionSelected)="onMatterSelected($event)">
+        @for (matter of matterResults(); track matter.id) {
+          <mat-option [value]="matterLabel(matter)">{{ matterLabel(matter) }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+  }
+
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@communication.emailComposer.templateOptionalLabel">Template (optional)</mat-label>
+    <mat-select [formControl]="selectedTemplateId">
+      <mat-option [value]="null" i18n="@@communication.emailComposer.noTemplateOption">None — write freeform</mat-option>
+      @for (template of templates(); track template.id) {
+        <mat-option [value]="template.id">{{ template.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  @if (!selectedTemplate()) {
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@communication.emailComposer.bodyLabel">Body</mat-label>
+      <textarea matInput [formControl]="body" rows="6"></textarea>
+    </mat-form-field>
+  } @else {
+    @for (name of variableNames(); track name) {
+      <mat-form-field appearance="outline">
+        <mat-label>{{ name }}</mat-label>
+        <input matInput (input)="onVariableInput(name, $any($event.target).value)" />
+      </mat-form-field>
+    }
+  }
+
+  <div class="composer__preview">
+    <span class="composer__preview-label" i18n="@@communication.emailComposer.mergePreviewLabel">Merge preview (this is exactly what will be sent):</span>
+    <p class="composer__preview-body">{{ mergedPreview() }}</p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()" i18n="@@communication.emailComposer.cancelButton">Cancel</button>
+  <button mat-flat-button color="primary" type="button" [disabled]="submitting" (click)="send()" i18n="@@communication.emailComposer.sendButton">
+    Send
+  </button>
+</mat-dialog-actions>

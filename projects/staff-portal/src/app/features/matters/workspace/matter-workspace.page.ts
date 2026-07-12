@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { forkJoin, map, of, switchMap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,6 +8,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  AiContextService,
+  CommunicationTimelineComponent,
   CourtCase,
   CourtCasesService,
   EmptyStateComponent,
@@ -25,6 +27,7 @@ import { MatterBillingTabComponent } from './tabs/matter-billing-tab.component';
 import { MatterDocumentsTabComponent } from './tabs/matter-documents-tab.component';
 import { MatterNotesTabComponent } from './tabs/matter-notes-tab.component';
 import { MatterPartiesTabComponent } from './tabs/matter-parties-tab.component';
+import { MatterResearchTabComponent } from './tabs/matter-research-tab.component';
 import { MatterTasksTabComponent } from './tabs/matter-tasks-tab.component';
 import { MatterTimeExpensesTabComponent } from './tabs/matter-time-expenses-tab.component';
 
@@ -35,11 +38,17 @@ interface HearingWithCase {
 
 /**
  * Matter workspace (PRD Module 4): header (number, title, status/priority
- * chips, next-hearing countdown) + all 10 tabs (Overview · Court Cases ·
+ * chips, next-hearing countdown) + 12 tabs (Overview · Court Cases ·
  * Hearings · Documents & Evidence · Tasks · Time & Expenses · Billing ·
- * Notes · Parties · Activity). "Hearings" has no matter-scoped API of its
- * own (hearings are only queryable per court case) — this aggregates
- * hearings across every court case under the matter client-side.
+ * Notes · Parties · Activity · Communication · Research). "Hearings" has no
+ * matter-scoped API of its own (hearings are only queryable per court case)
+ * — this aggregates hearings across every court case under the matter
+ * client-side. "Communication" (PRD Module 11) has no matter-scoped API
+ * either — `GET /comm/timeline` only accepts `clientId`, so this tab passes
+ * the matter's own `clientId` via `CommunicationTimelineComponent`'s
+ * `matterScoped` flag, which renders an explicit note about that.
+ * "Research" (PRD Module 12) hosts the KB pin dialog and lists this matter's
+ * pinned KB items via the real `GET /matters/{id}/kb-pins` endpoint.
  */
 @Component({
   selector: 'lf-staff-matter-workspace-page',
@@ -50,6 +59,7 @@ interface HearingWithCase {
     MatProgressBarModule,
     MatTabsModule,
     MatTooltipModule,
+    CommunicationTimelineComponent,
     EmptyStateComponent,
     StatusChipComponent,
     ImportantDatesPanelComponent,
@@ -58,6 +68,7 @@ interface HearingWithCase {
     MatterDocumentsTabComponent,
     MatterNotesTabComponent,
     MatterPartiesTabComponent,
+    MatterResearchTabComponent,
     MatterTasksTabComponent,
     MatterTimeExpensesTabComponent,
   ],
@@ -71,6 +82,8 @@ export class MatterWorkspacePage {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly dialog = inject(MatDialog);
+  private readonly aiContext = inject(AiContextService);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly loading = signal(true);
   readonly error = signal(false);
@@ -86,6 +99,7 @@ export class MatterWorkspacePage {
 
   constructor() {
     this.load();
+    this.destroyRef.onDestroy(() => this.aiContext.clear());
   }
 
   load(): void {
@@ -96,6 +110,7 @@ export class MatterWorkspacePage {
       return;
     }
 
+    this.aiContext.setMatter(id);
     this.loading.set(true);
     this.error.set(false);
 

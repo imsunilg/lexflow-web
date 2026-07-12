@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Template gallery</h2>
+<h2 mat-dialog-title i18n="@@documents.templateGallery.title">Template gallery</h2>
 
 <mat-dialog-content class="lf-gallery-content">
   @if (loading()) {
@@ -9,15 +9,20 @@
     <lf-empty-state
       icon="error_outline"
       title="Couldn't load templates"
+      i18n-title="@@documents.templateGallery.errorTitle"
       message="Something went wrong loading the template library."
+      i18n-message="@@documents.templateGallery.errorMessage"
       ctaLabel="Retry"
+      i18n-ctaLabel="@@documents.templateGallery.retryButton"
       (cta)="load()"
     ></lf-empty-state>
   } @else if (templates().length === 0) {
     <lf-empty-state
       icon="description"
       title="No templates yet"
+      i18n-title="@@documents.templateGallery.noTemplatesTitle"
       message="Firm template library is empty. Ask an admin to add merge templates."
+      i18n-message="@@documents.templateGallery.noTemplatesMessage"
     ></lf-empty-state>
   } @else {
     <div class="lf-gallery-grid">
@@ -30,7 +35,7 @@
                 <span class="lf-gallery-card__badge">{{ template.category }}</span>
               }
             </div>
-            <span class="lf-gallery-card__version">v{{ template.version }}</span>
+            <span class="lf-gallery-card__version" i18n="@@documents.templateGallery.versionLabel">v{{ template.version }}</span>
           </mat-card-content>
         </mat-card>
       }
@@ -39,5 +44,5 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+  <button mat-button type="button" [mat-dialog-close]="undefined" i18n="@@documents.templateGallery.cancelButton">Cancel</button>
 </mat-dialog-actions>

@@ -1,0 +1,44 @@
+<div class="calls">
+  <lf-comm-tabs />
+
+  <div class="calls__toolbar">
+    <mat-form-field appearance="outline" class="calls__client-field">
+      <mat-label i18n="@@communication.calls.clientLabel">Client</mat-label>
+      <input matInput [formControl]="clientControl" [matAutocomplete]="clientAuto" />
+      <mat-autocomplete #clientAuto="matAutocomplete" (optionSelected)="onClientSelected($event)">
+        @for (client of clientResults(); track client.id) {
+          <mat-option [value]="client.label">{{ client.label }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+    <button mat-flat-button color="primary" type="button" (click)="openLogDialog()">
+      <mat-icon>call</mat-icon> <span i18n="@@communication.calls.logCallButton">Log / click-to-call</span>
+    </button>
+  </div>
+
+  @if (!activeClient()) {
+    <lf-empty-state icon="call" title="Pick a client to see call history" i18n-title="@@communication.calls.pickClientEmptyState" />
+  } @else if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (calls().length === 0) {
+    <lf-empty-state icon="call" title="No calls logged for this client yet" i18n-title="@@communication.calls.noCallsEmptyState" />
+  } @else {
+    <ul class="calls__list">
+      @for (call of calls(); track call.id) {
+        <li class="calls__row">
+          <mat-icon>{{ call.direction === 'Inbound' ? 'call_received' : 'call_made' }}</mat-icon>
+          <div class="calls__body">
+            <span>{{ call.direction }} · {{ call.durationSec }}s</span>
+            @if (call.summary) {
+              <p>{{ call.summary }}</p>
+            }
+            <span class="calls__meta">{{ call.occurredAt | date: 'MMM d, y h:mm a' }}</span>
+            @if (call.recordingBlobPath) {
+              <span class="calls__meta" i18n="@@communication.calls.recordingAvailableLabel">Recording available</span>
+            }
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</div>

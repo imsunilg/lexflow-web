@@ -2,10 +2,10 @@
   <lf-leads-tabs />
 
   <header class="kanban-page__toolbar">
-    <h1 class="kanban-page__title">Leads</h1>
+    <h1 class="kanban-page__title" i18n="@@leads.kanban.title">Leads</h1>
     <button mat-flat-button color="primary" type="button" (click)="createLead()">
       <mat-icon>add</mat-icon>
-      New lead
+      <span i18n="@@leads.kanban.newLeadButton">New lead</span>
     </button>
   </header>
 
@@ -15,8 +15,11 @@
     <lf-empty-state
       icon="person_add"
       title="No leads yet"
+      i18n-title="@@leads.kanban.emptyTitle"
       message="Capture your first lead to start the pipeline."
+      i18n-message="@@leads.kanban.emptyMessage"
       ctaLabel="New lead"
+      i18n-ctaLabel="@@leads.kanban.emptyCta"
       (cta)="createLead()"
     />
   } @else {
@@ -53,7 +56,9 @@
                 }
                 <div class="kanban-card__meta">
                   <span>{{ lead.number }}</span>
-                  <span class="kanban-card__aging">{{ aging(lead).days }}d in stage</span>
+                  <span class="kanban-card__aging" i18n="@@leads.kanban.agingLabel"
+                    >{{ aging(lead).days }}d in stage</span
+                  >
                 </div>
               </div>
             }

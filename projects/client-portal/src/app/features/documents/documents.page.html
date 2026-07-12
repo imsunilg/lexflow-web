@@ -1,0 +1,69 @@
+<div class="documents-page">
+  <h1 i18n="@@portal.documents.title">Documents</h1>
+
+  <section class="documents-page__section">
+    <h2 i18n="@@portal.documents.sharedTitle">Shared with you</h2>
+    @if (loading()) {
+      <mat-progress-bar mode="indeterminate" />
+    } @else if (documents().length === 0) {
+      <lf-empty-state
+        icon="folder"
+        title="No documents shared yet"
+        i18n-title="@@portal.documents.emptyTitle"
+      />
+    } @else {
+      <ul class="documents-page__list">
+        @for (document of documents(); track document.id) {
+          <li>
+            <mat-icon>description</mat-icon>
+            <span class="documents-page__list-title">{{ document.title }}</span>
+            <span class="documents-page__list-meta">{{ document.docType }}</span>
+            <button
+              mat-icon-button
+              type="button"
+              (click)="download(document)"
+              aria-label="Download"
+              i18n-aria-label="@@portal.documents.downloadAriaLabel"
+            >
+              <mat-icon>download</mat-icon>
+            </button>
+          </li>
+        }
+      </ul>
+    }
+  </section>
+
+  <section class="documents-page__section">
+    <h2 i18n="@@portal.documents.uploadTitle">Upload to firm</h2>
+    <form [formGroup]="uploadForm" class="documents-page__upload-form" (ngSubmit)="upload()">
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@portal.documents.matterLabel">Matter</mat-label>
+        <mat-select formControlName="matterId">
+          @for (matter of matters(); track matter.id) {
+            <mat-option [value]="matter.id">{{ matter.number }} — {{ matter.title }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@portal.documents.titleLabel">Title</mat-label>
+        <input matInput formControlName="title" />
+      </mat-form-field>
+
+      <input type="file" (change)="onFileSelected($event)" />
+      @if (fileTooLarge()) {
+        <p class="documents-page__error" i18n="@@portal.documents.tooLargeError">
+          File is larger than 25 MB.
+        </p>
+      }
+
+      @if (uploading()) {
+        <mat-progress-bar mode="indeterminate" />
+      }
+
+      <button mat-flat-button color="primary" type="submit" [disabled]="uploading()">
+        <span i18n="@@portal.documents.uploadButton">Upload</span>
+      </button>
+    </form>
+  </section>
+</div>

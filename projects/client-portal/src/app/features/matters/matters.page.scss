@@ -1,0 +1,50 @@
+.matters-page {
+  padding: var(--lf-space-3);
+  padding-bottom: calc(var(--lf-space-6) + 56px);
+  max-width: var(--lf-content-max-width);
+  margin: 0 auto;
+
+  h1 {
+    font-family: var(--lf-font-portal-heading);
+    margin: 0 0 var(--lf-space-3);
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--lf-space-2);
+  }
+
+  &__card {
+    display: block;
+    padding: var(--lf-space-2);
+    border-radius: var(--lf-radius);
+    background: var(--lf-surface);
+    box-shadow: var(--lf-elevation-1);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &__card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--lf-space-1);
+  }
+
+  &__card-number {
+    font-size: var(--lf-text-sm);
+    color: var(--lf-on-surface-variant);
+  }
+
+  &__card-title {
+    font-weight: 600;
+    margin: 0 0 var(--lf-space-1);
+  }
+
+  &__card-meta {
+    font-size: var(--lf-text-sm);
+    color: var(--lf-on-surface-variant);
+    margin: 0;
+  }
+}

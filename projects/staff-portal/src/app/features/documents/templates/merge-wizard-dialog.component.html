@@ -1,16 +1,17 @@
-<h2 mat-dialog-title>Generate "{{ data.template.name }}"</h2>
+<h2 mat-dialog-title i18n="@@documents.mergeWizard.title">Generate "{{ data.template.name }}"</h2>
 
 <mat-dialog-content class="lf-merge-content">
   <mat-stepper orientation="horizontal" linear #stepper>
-    <mat-step [completed]="canProceedToReview" label="Fill in details">
+    <mat-step [completed]="canProceedToReview" label="Fill in details" i18n-label="@@documents.mergeWizard.fillDetailsStepLabel">
       <div class="lf-merge-step">
         <mat-form-field appearance="outline">
-          <mat-label>Matter</mat-label>
+          <mat-label i18n="@@documents.mergeWizard.matterLabel">Matter</mat-label>
           <input
             matInput
             [formControl]="matterControl"
             [matAutocomplete]="matterAuto"
             placeholder="Search matters by number or title…"
+            i18n-placeholder="@@documents.mergeWizard.matterSearchPlaceholder"
           />
           <mat-autocomplete
             #matterAuto="matAutocomplete"
@@ -42,6 +43,7 @@
             type="button"
             [disabled]="!canProceedToReview"
             matStepperNext
+            i18n="@@documents.mergeWizard.nextButton"
           >
             Next
           </button>
@@ -49,11 +51,11 @@
       </div>
     </mat-step>
 
-    <mat-step label="Review & generate">
+    <mat-step label="Review & generate" i18n-label="@@documents.mergeWizard.reviewStepLabel">
       <div class="lf-merge-step">
         <div class="lf-merge-review">
           <div class="lf-merge-review__row">
-            <span class="lf-merge-review__label">Matter</span>
+            <span class="lf-merge-review__label" i18n="@@documents.mergeWizard.matterReviewLabel">Matter</span>
             <span>{{ matterDisplay(selectedMatter()) }}</span>
           </div>
           @for (field of data.template.fields; track field.name) {
@@ -78,7 +80,7 @@
         }
 
         <div class="lf-merge-step__actions">
-          <button mat-button type="button" matStepperPrevious>Back</button>
+          <button mat-button type="button" matStepperPrevious i18n="@@documents.mergeWizard.backButton">Back</button>
           <button
             mat-flat-button
             color="primary"
@@ -89,7 +91,7 @@
             @if (submitting()) {
               <mat-spinner diameter="18"></mat-spinner>
             } @else {
-              Generate
+              <ng-container i18n="@@documents.mergeWizard.generateButton">Generate</ng-container>
             }
           </button>
         </div>
@@ -99,5 +101,5 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+  <button mat-button type="button" [mat-dialog-close]="undefined" i18n="@@documents.mergeWizard.cancelButton">Cancel</button>
 </mat-dialog-actions>

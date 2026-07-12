@@ -1,0 +1,154 @@
+<div class="entries">
+  <lf-time-tabs />
+
+  <header class="entries__header">
+    <h1 i18n="@@time.entryList.heading">Time entries</h1>
+  </header>
+
+  <div class="entries__filters">
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@time.entryList.statusLabel">Status</mat-label>
+      <mat-select [formControl]="statusControl">
+        <mat-option value="" i18n="@@time.entryList.allStatusesOption">All statuses</mat-option>
+        @for (status of statuses; track status) {
+          <mat-option [value]="status">{{ status }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@time.entryList.billableLabel">Billable</mat-label>
+      <mat-select [formControl]="billableControl">
+        <mat-option value="all" i18n="@@time.entryList.billableAllOption">All</mat-option>
+        <mat-option value="yes" i18n="@@time.entryList.billableYesOption">Billable</mat-option>
+        <mat-option value="no" i18n="@@time.entryList.billableNoOption">Non-billable</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="entries__matter-filter">
+      <mat-label i18n="@@time.entryList.matterLabel">Matter</mat-label>
+      <input matInput [formControl]="matterControl" [matAutocomplete]="matterAuto" />
+      <mat-autocomplete #matterAuto="matAutocomplete" (optionSelected)="onMatterSelected($event)">
+        @for (matter of matterResults(); track matter.id) {
+          <mat-option [value]="matter.number + ' — ' + matter.title">
+            {{ matter.number }} — {{ matter.title }}
+          </mat-option>
+        }
+      </mat-autocomplete>
+      @if (matterControl.value) {
+        <button matSuffix mat-icon-button type="button" (click)="clearMatterFilter()">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+
+    <lf-date-range-picker
+      label="Date range"
+      i18n-label="@@time.entryList.dateRangeLabel"
+      (rangeChange)="onDateRangeChange($event)"
+    />
+  </div>
+
+  @if (draftVisibleIds().length > 0) {
+    <div class="entries__bulk-bar">
+      <mat-checkbox
+        [checked]="allDraftsSelected()"
+        (change)="toggleSelectAllDrafts($event.checked)"
+        i18n="@@time.entryList.selectAllDraftsCheckbox"
+      >
+        Select all visible drafts ({{ draftVisibleIds().length }})
+      </mat-checkbox>
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        [disabled]="selectedIds().size === 0"
+        (click)="bulkSubmit()"
+        i18n="@@time.entryList.submitSelectedButton"
+      >
+        Submit selected ({{ selectedIds().size }})
+      </button>
+    </div>
+  }
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (visibleEntries().length === 0) {
+    <lf-empty-state
+      icon="schedule"
+      title="No time entries match these filters"
+      i18n-title="@@time.entryList.emptyTitle"
+      message="Adjust the filters above or log time from the timesheet grid."
+      i18n-message="@@time.entryList.emptyMessage"
+    />
+  } @else {
+    <table class="entries__table">
+      <thead>
+        <tr>
+          <th></th>
+          <th i18n="@@time.entryList.dateColumn">Date</th>
+          <th i18n="@@time.entryList.matterColumn">Matter</th>
+          <th i18n="@@time.entryList.hoursColumn">Hours</th>
+          <th i18n="@@time.entryList.billableColumn">Billable</th>
+          <th i18n="@@time.entryList.narrativeColumn">Narrative</th>
+          <th i18n="@@time.entryList.amountColumn">Amount</th>
+          <th i18n="@@time.entryList.statusColumn">Status</th>
+          <th i18n="@@time.entryList.actionsColumn">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (entry of visibleEntries(); track entry.id) {
+          <tr>
+            <td>
+              @if (entry.status === 'Draft') {
+                <mat-checkbox
+                  [checked]="isSelected(entry.id)"
+                  (change)="toggleSelect(entry.id, $event.checked)"
+                />
+              }
+            </td>
+            <td>{{ entry.entryDate }}</td>
+            <td>{{ matterLabel(entry.matterId) }}</td>
+            <td class="entries__hours">{{ hours(entry) }}h</td>
+            <td>{{ entry.billable ? 'Yes' : 'No' }}</td>
+            <td class="entries__narrative">
+              @if (editingId() === entry.id) {
+                <input class="entries__edit-narrative" type="text" [formControl]="editNarrative" />
+              } @else {
+                {{ narrativePreview(entry) }}
+              }
+            </td>
+            <td class="entries__amount">{{ entry.amountSnapshot | lfCurrency }}</td>
+            <td>
+              <lf-status-chip [label]="entry.status" [toneOverride]="statusTone(entry.status)" />
+            </td>
+            <td class="entries__actions">
+              @if (editingId() === entry.id) {
+                <div class="entries__edit-fields">
+                  <input
+                    class="entries__edit-hours"
+                    type="number"
+                    step="0.25"
+                    min="0"
+                    [formControl]="editHours"
+                  />
+                  <mat-checkbox [formControl]="editBillable" i18n="@@time.entryList.editBillableCheckbox">Billable</mat-checkbox>
+                </div>
+                <button mat-button type="button" (click)="saveEdit(entry)" i18n="@@time.entryList.saveButton">Save</button>
+                <button mat-button type="button" (click)="cancelEdit()" i18n="@@time.entryList.cancelButton">Cancel</button>
+              } @else {
+                @if (entry.status === 'Draft') {
+                  <button mat-button type="button" (click)="startEdit(entry)" i18n="@@time.entryList.editButton">Edit</button>
+                  <button mat-button type="button" (click)="submitOne(entry)" i18n="@@time.entryList.submitButton">Submit</button>
+                  <button mat-button color="warn" type="button" (click)="deleteEntry(entry)" i18n="@@time.entryList.deleteButton">
+                    Delete
+                  </button>
+                }
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

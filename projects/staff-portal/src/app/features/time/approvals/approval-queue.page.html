@@ -1,0 +1,101 @@
+<div class="approvals">
+  <lf-time-tabs />
+
+  <header class="approvals__header">
+    <h1 i18n="@@time.approvalQueue.heading">Approval queue</h1>
+    <button
+      mat-stroked-button
+      type="button"
+      [disabled]="loading()"
+      (click)="load()"
+      i18n="@@time.approvalQueue.refreshButton"
+    >
+      Refresh
+    </button>
+  </header>
+
+  @if (errorMessage()) {
+    <p class="approvals__error" role="alert">{{ errorMessage() }}</p>
+  }
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (entries().length === 0) {
+    <lf-empty-state
+      icon="fact_check"
+      title="No submitted entries"
+      i18n-title="@@time.approvalQueue.emptyTitle"
+      message="Time entries submitted for approval will show up here."
+      i18n-message="@@time.approvalQueue.emptyMessage"
+    />
+  } @else {
+    <div class="approvals__bulk-bar">
+      <mat-checkbox
+        [checked]="allSelected()"
+        (change)="toggleSelectAll($event.checked)"
+        i18n="@@time.approvalQueue.selectAllCheckbox"
+      >
+        Select all ({{ entries().length }})
+      </mat-checkbox>
+      <div class="approvals__bulk-actions">
+        @if (processing()) {
+          <mat-progress-bar mode="indeterminate" class="approvals__bulk-progress" />
+        }
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          [disabled]="selectedIds().size === 0 || processing()"
+          (click)="approveSelected()"
+          i18n="@@time.approvalQueue.approveSelectedButton"
+        >
+          Approve selected ({{ selectedIds().size }})
+        </button>
+        <button
+          mat-stroked-button
+          color="warn"
+          type="button"
+          [disabled]="selectedIds().size === 0 || processing()"
+          (click)="rejectSelected()"
+          i18n="@@time.approvalQueue.rejectSelectedButton"
+        >
+          Reject selected ({{ selectedIds().size }})
+        </button>
+      </div>
+    </div>
+
+    <table class="approvals__table">
+      <thead>
+        <tr>
+          <th></th>
+          <th i18n="@@time.approvalQueue.userColumn">User</th>
+          <th i18n="@@time.approvalQueue.matterColumn">Matter</th>
+          <th i18n="@@time.approvalQueue.dateColumn">Date</th>
+          <th i18n="@@time.approvalQueue.hoursColumn">Hours</th>
+          <th i18n="@@time.approvalQueue.billableColumn">Billable</th>
+          <th i18n="@@time.approvalQueue.narrativeColumn">Narrative</th>
+          <th i18n="@@time.approvalQueue.amountColumn">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (entry of entries(); track entry.id) {
+          <tr>
+            <td>
+              <mat-checkbox
+                [checked]="isSelected(entry.id)"
+                (change)="toggleSelect(entry.id, $event.checked)"
+              />
+            </td>
+            <td>{{ entry.userId }}</td>
+            <td>{{ entry.matterId }}</td>
+            <td>{{ entry.entryDate }}</td>
+            <td class="approvals__hours">{{ hours(entry) }}h</td>
+            <td>{{ entry.billable ? 'Yes' : 'No' }}</td>
+            <td class="approvals__narrative">{{ entry.narrative ?? '—' }}</td>
+            <td class="approvals__amount">{{ entry.amountSnapshot | lfCurrency }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

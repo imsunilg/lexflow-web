@@ -1,0 +1,125 @@
+<h2 mat-dialog-title i18n="@@tasks.taskComposer.title">New task</h2>
+<mat-dialog-content class="composer">
+  <section class="composer__smart">
+    <mat-form-field appearance="outline" class="composer__smart-field">
+      <mat-label i18n="@@tasks.taskComposer.smartParseLabel">Smart parse</mat-label>
+      <input
+        matInput
+        [formControl]="smartText"
+        placeholder="File written statement for MAT-042 by next Friday @Aditi !high"
+        i18n-placeholder="@@tasks.taskComposer.smartParsePlaceholder"
+        (keydown.enter)="runSmartParse()"
+      />
+      <mat-hint i18n="@@tasks.taskComposer.smartParseHint"
+        >Recognizes !priority, @mention, MATTER-CODE, and today/tomorrow/next &lt;day&gt;/in N
+        days</mat-hint
+      >
+    </mat-form-field>
+    <button mat-stroked-button type="button" (click)="runSmartParse()" [disabled]="parsing()">
+      @if (parsing()) {
+        <mat-spinner diameter="18" />
+      } @else {
+        <mat-icon>auto_fix_high</mat-icon>
+      }
+      <span i18n="@@tasks.taskComposer.parseButton">Parse</span>
+    </button>
+  </section>
+
+  @if (parseError()) {
+    <p class="composer__parse-error">{{ parseError() }}</p>
+  }
+
+  @if (parsePreview(); as preview) {
+    <div class="composer__preview">
+      <span class="composer__preview-title" i18n="@@tasks.taskComposer.parsedLabel">Parsed:</span>
+      <span class="composer__preview-chip">{{ preview.title }}</span>
+      @if (preview.matterNumber) {
+        <span class="composer__preview-chip">{{ preview.matterNumber }}</span>
+      }
+      @if (preview.assigneeMention) {
+        <span class="composer__preview-chip">{{ preview.assigneeMention }}</span>
+      }
+      @if (preview.dueAt) {
+        <span class="composer__preview-chip" i18n="@@tasks.taskComposer.dueLabel">Due {{ preview.dueAt | date: 'MMM d, y' }}</span>
+      }
+      <span class="composer__preview-chip">{{ preview.priority }}</span>
+      <span class="composer__preview-note" i18n="@@tasks.taskComposer.reviewNote"
+        >Review the fields below before creating — this preview is not submitted as-is.</span
+      >
+    </div>
+  }
+
+  <form class="composer__form">
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@tasks.taskComposer.titleLabel">Title</mat-label>
+      <input matInput [formControl]="title" maxlength="300" />
+      @if (title.invalid && title.touched) {
+        <mat-error i18n="@@tasks.taskComposer.titleLengthError">3–300 characters required.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@tasks.taskComposer.descriptionLabel">Description</mat-label>
+      <textarea matInput [formControl]="description" rows="3"></textarea>
+    </mat-form-field>
+
+    <div class="composer__row">
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@tasks.taskComposer.matterLabel">Matter</mat-label>
+        <input matInput [formControl]="matterControl" [matAutocomplete]="matterAuto" />
+        <mat-autocomplete #matterAuto="matAutocomplete" (optionSelected)="onMatterSelected($event)">
+          @for (matter of matterResults(); track matter.id) {
+            <mat-option [value]="matterLabel(matter)">{{ matterLabel(matter) }}</mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@tasks.taskComposer.ownerLabel">Owner</mat-label>
+        <input matInput [formControl]="ownerControl" [matAutocomplete]="ownerAuto" />
+        <mat-autocomplete #ownerAuto="matAutocomplete" (optionSelected)="onOwnerSelected($event)">
+          @for (user of ownerResults(); track user.id) {
+            <mat-option [value]="user.name">{{ user.name }}</mat-option>
+          }
+        </mat-autocomplete>
+        @if (ownerLookupUnavailable()) {
+          <mat-hint i18n="@@tasks.taskComposer.ownerLookupHint">No user directory access — owner can be assigned later.</mat-hint>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="composer__row">
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@tasks.taskComposer.dueDateLabel">Due date</mat-label>
+        <input matInput [matDatepicker]="picker" [formControl]="dueAt" />
+        <mat-datepicker-toggle matIconSuffix [for]="picker" />
+        <mat-datepicker #picker />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@tasks.taskComposer.priorityLabel">Priority</mat-label>
+        <mat-select [formControl]="priority">
+          @for (p of priorities; track p) {
+            <mat-option [value]="p">{{ p }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@tasks.taskComposer.categoryLabel">Category</mat-label>
+        <mat-select [formControl]="category">
+          <mat-option [value]="null" i18n="@@tasks.taskComposer.noCategoryOption">None</mat-option>
+          @for (c of categories; track c) {
+            <mat-option [value]="c">{{ c }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()" i18n="@@tasks.taskComposer.cancelButton">Cancel</button>
+  <button mat-flat-button color="primary" type="button" [disabled]="submitting" (click)="submit()" i18n="@@tasks.taskComposer.createButton">
+    Create task
+  </button>
+</mat-dialog-actions>

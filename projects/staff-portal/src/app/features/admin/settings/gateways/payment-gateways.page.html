@@ -1,0 +1,74 @@
+<div class="payment-gateways">
+  <lf-admin-tabs />
+
+  <header class="payment-gateways__header">
+    <h1 i18n="@@admin.paymentGateways.title">Payment gateways</h1>
+  </header>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else {
+    <div class="payment-gateways__list">
+      @for (state of providerStates(); track state.provider) {
+        <div class="payment-gateways__card">
+          <div class="payment-gateways__card-header">
+            <h2>{{ state.label }}</h2>
+            @if (state.config) {
+              <span
+                class="payment-gateways__status"
+                [class.payment-gateways__status--enabled]="state.config.isEnabled"
+              >
+                {{ state.config.isEnabled ? 'Enabled' : 'Disabled' }}
+              </span>
+            }
+          </div>
+          <p class="payment-gateways__meta" i18n="@@admin.paymentGateways.secretMeta">
+            Secret: {{ state.config?.hasSecret ? 'Set' : 'Not set' }}
+            @if (state.config) {
+              &middot; {{ state.config.isTestMode ? 'Test mode' : 'Live mode' }}
+            }
+          </p>
+
+          <form class="payment-gateways__form" [formGroup]="state.form">
+            <mat-form-field appearance="outline" class="payment-gateways__wide">
+              <mat-label i18n="@@admin.paymentGateways.configLabel">Config (JSON)</mat-label>
+              <textarea matInput formControlName="configJson" rows="4"></textarea>
+              <mat-hint i18n="@@admin.paymentGateways.configHint">Public provider fields — e.g. publishable/API key, account ID.</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label i18n="@@admin.paymentGateways.secretLabel">Secret (optional)</mat-label>
+              <input
+                matInput
+                type="password"
+                formControlName="secret"
+                autocomplete="new-password"
+              />
+              <mat-hint i18n="@@admin.paymentGateways.secretHint">Only sent if rotating — leave blank to keep the saved secret.</mat-hint>
+            </mat-form-field>
+            <mat-checkbox formControlName="isTestMode" i18n="@@admin.paymentGateways.testModeCheckbox">Test mode</mat-checkbox>
+          </form>
+
+          <div class="payment-gateways__actions">
+            <button
+              mat-stroked-button
+              type="button"
+              [disabled]="state.verifying || state.saving"
+              (click)="verify(state, false)"
+            >
+              {{ state.verifying ? 'Verifying…' : 'Verify only' }}
+            </button>
+            <button
+              mat-flat-button
+              color="primary"
+              type="button"
+              [disabled]="state.verifying || state.saving"
+              (click)="verify(state, true)"
+            >
+              {{ state.saving ? 'Saving…' : 'Verify & save' }}
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

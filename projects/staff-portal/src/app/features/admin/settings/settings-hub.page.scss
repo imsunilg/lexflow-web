@@ -1,0 +1,49 @@
+.settings-hub {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  height: 100%;
+}
+
+.settings-hub__header {
+  h1 {
+    font-size: var(--lf-text-lg);
+    margin: 0;
+  }
+}
+
+.settings-hub__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+
+  h2 {
+    font-size: var(--lf-text-sm);
+    font-weight: 600;
+    color: var(--lf-on-surface-variant);
+    margin: 0;
+  }
+}
+
+.settings-hub__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--lf-space-2);
+}
+
+.settings-hub__card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+
+  mat-card {
+    height: 100%;
+  }
+
+  mat-card-content {
+    display: flex;
+    align-items: center;
+    gap: var(--lf-space-1);
+    padding: var(--lf-space-1) 0;
+  }
+}

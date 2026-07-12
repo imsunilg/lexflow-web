@@ -1,0 +1,64 @@
+<div class="chat-dock" [class.chat-dock--expanded]="expanded()">
+  <button
+    mat-flat-button
+    color="primary"
+    type="button"
+    class="chat-dock__toggle"
+    (click)="toggle()"
+  >
+    <mat-icon [matBadge]="totalUnread() || null" matBadgeColor="warn" matBadgeSize="small">
+      chat
+    </mat-icon>
+    @if (!expanded()) {
+      <span i18n="@@communication.chatDock.toggleLabel">Chat</span>
+    }
+  </button>
+
+  @if (expanded()) {
+    <div class="chat-dock__panel">
+      <div class="chat-dock__channels">
+        @for (channel of channels(); track channel.id) {
+          <button
+            type="button"
+            class="chat-dock__channel"
+            [class.chat-dock__channel--active]="activeChannelId() === channel.id"
+            (click)="openChannel(channel)"
+          >
+            <span>{{ channelLabel(channel) }}</span>
+            @if (unreadByChannel()[channel.id]; as unread) {
+              <span class="chat-dock__unread-badge">{{ unread }}</span>
+            }
+          </button>
+        }
+      </div>
+
+      <div class="chat-dock__messages">
+        @if (!activeChannel()) {
+          <p class="chat-dock__hint" i18n="@@communication.chatDock.pickChannelHint">Pick a channel to start chatting.</p>
+        } @else {
+          @for (message of messages(); track message.id) {
+            <div class="chat-dock__message" [class.chat-dock__message--mine]="isMine(message)">
+              <p>{{ message.body }}</p>
+              <span class="chat-dock__message-meta">{{ message.sentAt | date: 'h:mm a' }}</span>
+            </div>
+          }
+        }
+      </div>
+
+      @if (activeChannel()) {
+        <div class="chat-dock__composer">
+          <input
+            matInput
+            [formControl]="newMessage"
+            placeholder="Message…"
+            i18n-placeholder="@@communication.chatDock.messagePlaceholder"
+            (keydown.enter)="send()"
+          />
+          <button mat-icon-button type="button" (click)="send()">
+            <mat-icon>send</mat-icon>
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>

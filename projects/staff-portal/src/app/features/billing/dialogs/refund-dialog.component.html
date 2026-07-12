@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Refund payment</h2>
+<h2 mat-dialog-title i18n="@@billing.refundDialog.title">Refund payment</h2>
 <mat-dialog-content class="refund-dialog">
-  <p class="refund-dialog__payment">
+  <p class="refund-dialog__payment" i18n="@@billing.refundDialog.paymentSummary">
     Payment {{ data.payment.receiptNumber ?? data.payment.id }} — amount
     {{ data.payment.amount | lfCurrency }}
   </p>
@@ -11,25 +11,25 @@
 
   <form [formGroup]="form" class="refund-dialog__form">
     <mat-form-field appearance="outline" class="refund-dialog__field">
-      <mat-label>Amount</mat-label>
+      <mat-label i18n="@@billing.refundDialog.amountLabel">Amount</mat-label>
       <input matInput type="number" formControlName="amount" min="0.01" step="0.01" />
       @if (form.controls.amount.hasError('max')) {
-        <mat-error>Cannot exceed the original payment amount.</mat-error>
+        <mat-error i18n="@@billing.refundDialog.amountMaxError">Cannot exceed the original payment amount.</mat-error>
       }
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="refund-dialog__field">
-      <mat-label>Reason</mat-label>
+      <mat-label i18n="@@billing.refundDialog.reasonLabel">Reason</mat-label>
       <textarea matInput formControlName="reason" rows="3"></textarea>
       @if (form.controls.reason.hasError('required')) {
-        <mat-error>Reason is required.</mat-error>
+        <mat-error i18n="@@billing.refundDialog.reasonRequiredError">Reason is required.</mat-error>
       }
     </mat-form-field>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button type="button" (click)="cancel()">Cancel</button>
+  <button mat-button type="button" (click)="cancel()" i18n="@@billing.refundDialog.cancelButton">Cancel</button>
   <button
     mat-flat-button
     color="warn"
@@ -40,7 +40,7 @@
     @if (saving()) {
       <mat-spinner diameter="18" />
     } @else {
-      Refund
+      <span i18n="@@billing.refundDialog.submitButton">Refund</span>
     }
   </button>
 </mat-dialog-actions>

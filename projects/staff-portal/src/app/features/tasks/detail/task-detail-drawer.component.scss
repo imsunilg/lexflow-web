@@ -1,0 +1,134 @@
+.detail {
+  min-width: 520px;
+  max-width: 640px;
+}
+
+.detail--loading {
+  padding: var(--lf-space-3);
+  text-align: center;
+}
+
+.detail__number {
+  font-size: var(--lf-text-sm);
+  color: var(--lf-on-surface-variant);
+  margin-left: var(--lf-space-1);
+}
+
+.detail__recurrence-badge {
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+  background: var(--lf-surface-variant);
+  padding: 4px 10px;
+  border-radius: var(--lf-radius);
+  display: inline-block;
+}
+
+.detail__section {
+  padding: var(--lf-space-2) 0;
+  border-bottom: 1px solid var(--lf-surface-variant);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  h3 {
+    margin: 0 0 var(--lf-space-1);
+    font-size: var(--lf-text-sm);
+    text-transform: uppercase;
+    color: var(--lf-on-surface-variant);
+  }
+}
+
+.detail__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--lf-space-2);
+  font-size: var(--lf-text-sm);
+  color: var(--lf-on-surface-variant);
+}
+
+.detail__description {
+  white-space: pre-wrap;
+}
+
+.detail__status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: var(--lf-space-1) 0;
+}
+
+.detail__status--active {
+  background: var(--lf-primary);
+  color: var(--lf-on-primary);
+}
+
+.detail__error {
+  color: var(--lf-error);
+  font-size: var(--lf-text-sm);
+}
+
+.detail__hint {
+  color: var(--lf-on-surface-variant);
+  font-size: var(--lf-text-xs);
+}
+
+.detail__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: var(--lf-space-1);
+}
+
+.detail__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px 2px 10px;
+  border-radius: 999px;
+  background: var(--lf-surface-variant);
+  font-size: var(--lf-text-xs);
+
+  button {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.detail__add-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--lf-space-1);
+}
+
+.detail__grow {
+  flex: 1;
+}
+
+.detail__checklist-item {
+  display: block;
+}
+
+.detail__mandatory {
+  color: var(--lf-error);
+}
+
+.detail__comment {
+  padding: var(--lf-space-1) 0;
+
+  p {
+    margin: 2px 0 0;
+  }
+}
+
+.detail__comment-meta {
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+}

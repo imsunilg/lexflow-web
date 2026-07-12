@@ -1,0 +1,56 @@
+.appointments-page {
+  padding: var(--lf-space-3);
+  padding-bottom: calc(var(--lf-space-6) + 56px);
+  max-width: var(--lf-content-max-width);
+  margin: 0 auto;
+
+  h1 {
+    font-family: var(--lf-font-portal-heading);
+    margin: 0 0 var(--lf-space-3);
+  }
+
+  &__section {
+    margin-bottom: var(--lf-space-4);
+
+    h2 {
+      font-size: var(--lf-text-lg);
+      margin: 0 0 var(--lf-space-1);
+    }
+  }
+
+  &__hint {
+    color: var(--lf-on-surface-variant);
+    margin: 0 0 var(--lf-space-2);
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--lf-space-1);
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--lf-space-1) var(--lf-space-2);
+      border-radius: var(--lf-radius);
+      background: var(--lf-surface);
+      box-shadow: var(--lf-elevation-1);
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--lf-space-1);
+    max-width: 480px;
+  }
+
+  &__error {
+    color: var(--lf-error);
+    margin: 0;
+  }
+}

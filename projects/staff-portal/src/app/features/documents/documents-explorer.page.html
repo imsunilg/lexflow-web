@@ -1,8 +1,8 @@
 <div class="explorer">
   <aside class="explorer__sidebar">
     <div class="explorer__sidebar-header">
-      <h2>Folders</h2>
-      <button mat-icon-button type="button" matTooltip="New folder" (click)="openCreateFolder()">
+      <h2 i18n="@@documents.explorer.foldersHeading">Folders</h2>
+      <button mat-icon-button type="button" matTooltip="New folder" i18n-matTooltip="@@documents.explorer.newFolderTooltip" (click)="openCreateFolder()">
         <mat-icon>create_new_folder</mat-icon>
       </button>
     </div>
@@ -15,7 +15,7 @@
 
   <main class="explorer__main">
     <header class="explorer__toolbar">
-      <nav class="explorer__breadcrumbs" aria-label="Breadcrumb">
+      <nav class="explorer__breadcrumbs" aria-label="Breadcrumb" i18n-aria-label="@@documents.explorer.breadcrumbAriaLabel">
         @for (crumb of breadcrumbs(); track crumb.id ?? 'root'; let last = $last) {
           <button
             type="button"
@@ -33,15 +33,15 @@
 
       <div class="explorer__toolbar-actions">
         <mat-form-field appearance="outline" class="explorer__search">
-          <mat-label>Search documents</mat-label>
+          <mat-label i18n="@@documents.explorer.searchDocumentsLabel">Search documents</mat-label>
           <input matInput [formControl]="searchControl" />
           <mat-icon matPrefix>search</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="explorer__type-filter">
-          <mat-label>Type</mat-label>
+          <mat-label i18n="@@documents.explorer.typeLabel">Type</mat-label>
           <mat-select [formControl]="docTypeFilter">
-            <mat-option [value]="null">All types</mat-option>
+            <mat-option [value]="null" i18n="@@documents.explorer.allTypesOption">All types</mat-option>
             @for (type of docTypes; track type) {
               <mat-option [value]="type">{{ type }}</mat-option>
             }
@@ -54,10 +54,10 @@
         </mat-button-toggle-group>
 
         <button mat-stroked-button type="button" (click)="openTemplateGallery()">
-          <mat-icon>description</mat-icon> From template
+          <mat-icon>description</mat-icon> <ng-container i18n="@@documents.explorer.fromTemplateButton">From template</ng-container>
         </button>
         <button mat-flat-button color="primary" type="button" (click)="openUpload()">
-          <mat-icon>upload</mat-icon> Upload
+          <mat-icon>upload</mat-icon> <ng-container i18n="@@documents.explorer.uploadButton">Upload</ng-container>
         </button>
       </div>
     </header>
@@ -71,26 +71,26 @@
 
     @if (selectedCount() > 0) {
       <div class="explorer__bulk-toolbar">
-        <span>{{ selectedCount() }} selected</span>
+        <span i18n="@@documents.explorer.selectedCountLabel">{{ selectedCount() }} selected</span>
         <button mat-button type="button" (click)="bulkMove()">
-          <mat-icon>drive_file_move</mat-icon> Move
+          <mat-icon>drive_file_move</mat-icon> <ng-container i18n="@@documents.explorer.moveButton">Move</ng-container>
         </button>
-        <button mat-button type="button" (click)="bulkTag()"><mat-icon>label</mat-icon> Tag</button>
+        <button mat-button type="button" (click)="bulkTag()"><mat-icon>label</mat-icon> <ng-container i18n="@@documents.explorer.tagButton">Tag</ng-container></button>
         <button mat-button type="button" (click)="bulkDownloadZip()">
-          <mat-icon>archive</mat-icon> Download ZIP
+          <mat-icon>archive</mat-icon> <ng-container i18n="@@documents.explorer.downloadZipButton">Download ZIP</ng-container>
         </button>
         <button mat-button type="button" color="warn" (click)="bulkDelete()">
-          <mat-icon>delete</mat-icon> Delete
+          <mat-icon>delete</mat-icon> <ng-container i18n="@@documents.explorer.deleteButton">Delete</ng-container>
         </button>
-        <button mat-button type="button" (click)="clearSelection()">Clear</button>
+        <button mat-button type="button" (click)="clearSelection()" i18n="@@documents.explorer.clearSelectionButton">Clear</button>
       </div>
     }
 
     @if (searchResults(); as hits) {
       <section class="explorer__search-results">
-        <h3>Search results for "{{ searchControl.value }}"</h3>
+        <h3 i18n="@@documents.explorer.searchResultsHeading">Search results for "{{ searchControl.value }}"</h3>
         @if (hits.length === 0) {
-          <lf-empty-state icon="search_off" title="No matching documents" />
+          <lf-empty-state icon="search_off" title="No matching documents" i18n-title="@@documents.explorer.noMatchingDocumentsTitle" />
         } @else {
           <ul class="explorer__search-list">
             @for (hit of hits; track hit.documentId) {
@@ -111,7 +111,9 @@
       <lf-empty-state
         icon="folder_open"
         title="This folder is empty"
+        i18n-title="@@documents.explorer.emptyFolderTitle"
         ctaLabel="Upload"
+        i18n-ctaLabel="@@documents.explorer.uploadCta"
         (cta)="openUpload()"
       />
     } @else if (viewMode() === 'grid') {
@@ -136,16 +138,16 @@
             </button>
             <mat-menu #rowMenu="matMenu">
               <button mat-menu-item type="button" (click)="openDetail(doc)">
-                <mat-icon>info</mat-icon> Details
+                <mat-icon>info</mat-icon> <ng-container i18n="@@documents.explorer.detailsMenuItem">Details</ng-container>
               </button>
               <button mat-menu-item type="button" (click)="openPreview(doc)">
-                <mat-icon>visibility</mat-icon> Preview
+                <mat-icon>visibility</mat-icon> <ng-container i18n="@@documents.explorer.previewMenuItem">Preview</ng-container>
               </button>
               <button mat-menu-item type="button" (click)="openShare(doc)">
-                <mat-icon>share</mat-icon> Share
+                <mat-icon>share</mat-icon> <ng-container i18n="@@documents.explorer.shareMenuItem">Share</ng-container>
               </button>
               <button mat-menu-item type="button" (click)="openSign(doc)">
-                <mat-icon>draw</mat-icon> Send for signature
+                <mat-icon>draw</mat-icon> <ng-container i18n="@@documents.explorer.sendForSignatureMenuItem">Send for signature</ng-container>
               </button>
             </mat-menu>
           </div>
@@ -156,9 +158,9 @@
         <thead>
           <tr>
             <th></th>
-            <th>Title</th>
-            <th>Type</th>
-            <th>Confidentiality</th>
+            <th i18n="@@documents.explorer.titleColumn">Title</th>
+            <th i18n="@@documents.explorer.typeColumn">Type</th>
+            <th i18n="@@documents.explorer.confidentialityColumn">Confidentiality</th>
             <th></th>
           </tr>
         </thead>

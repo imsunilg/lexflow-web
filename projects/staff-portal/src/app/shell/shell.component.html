@@ -43,16 +43,7 @@
 
       <span class="shell__spacer"></span>
 
-      <button
-        mat-stroked-button
-        type="button"
-        class="shell__timer-chip"
-        [class.shell__timer-chip--running]="runningTimer() && !runningTimer()!.isPaused"
-        aria-label="Timer"
-      >
-        <mat-icon>timer</mat-icon>
-        <span>{{ timerDisplay() }}</span>
-      </button>
+      <lf-timer-chip />
 
       <button mat-icon-button type="button" [matMenuTriggerFor]="quickAdd" aria-label="Quick add">
         <mat-icon>add</mat-icon>
@@ -111,8 +102,13 @@
       </mat-menu>
     </header>
 
+    <lf-offline-banner />
+
     <main class="shell__content">
       <router-outlet />
     </main>
   </div>
+
+  <lf-chat-dock />
+  <lf-ai-assistant-dock />
 </div>

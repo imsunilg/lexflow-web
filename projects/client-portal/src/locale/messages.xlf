@@ -1,9 +1,689 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
   <file id="ngi18n" original="ng.template">
+    <unit id="portal.appointments.title">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/appointments/appointments.page.html:2,4</note>
+      </notes>
+      <segment>
+        <source>Appointments</source>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.requestsTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/appointments/appointments.page.html:5,7</note>
+      </notes>
+      <segment>
+        <source>Your requests</source>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.emptyTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/appointments/appointments.page.html:11,12</note>
+      </notes>
+      <segment>
+        <source>No appointments yet</source>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.newTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/appointments/appointments.page.html:27,28</note>
+      </notes>
+      <segment>
+        <source>Request a new appointment</source>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.lawyerIdHint">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/appointments/appointments.page.html:29,33</note>
+      </notes>
+      <segment>
+        <source> Your firm needs to share the specific lawyer&apos;s portal ID with you before you can submit a request — there&apos;s no lookup for it in this app yet. </source>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.matterLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/appointments/appointments.page.html:35,36</note>
+      </notes>
+      <segment>
+        <source>Matter</source>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.lawyerIdLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/appointments/appointments.page.html:44,45</note>
+      </notes>
+      <segment>
+        <source>Lawyer ID</source>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.startLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/appointments/appointments.page.html:49,50</note>
+      </notes>
+      <segment>
+        <source>Start</source>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.endLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/appointments/appointments.page.html:54,55</note>
+      </notes>
+      <segment>
+        <source>End</source>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.notesLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/appointments/appointments.page.html:59,60</note>
+      </notes>
+      <segment>
+        <source>Notes (optional)</source>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.submitButton">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/appointments/appointments.page.html:72,75</note>
+      </notes>
+      <segment>
+        <source>Request appointment</source>
+      </segment>
+    </unit>
+    <unit id="auth.forgotPassword.title">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/forgot-password.page.html:3,6</note>
+      </notes>
+      <segment>
+        <source>Forgot password</source>
+      </segment>
+    </unit>
+    <unit id="auth.forgotPassword.subtitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/forgot-password.page.html:7,9</note>
+      </notes>
+      <segment>
+        <source> Enter your firm code and email — we&apos;ll send a reset link if an account matches. </source>
+      </segment>
+    </unit>
+    <unit id="auth.forgotPassword.tenantLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/forgot-password.page.html:11,12</note>
+      </notes>
+      <segment>
+        <source>Firm code</source>
+      </segment>
+    </unit>
+    <unit id="auth.forgotPassword.emailLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/forgot-password.page.html:15,16</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="auth.forgotPassword.submitButton">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/forgot-password.page.html:19,22</note>
+      </notes>
+      <segment>
+        <source>Send reset link</source>
+      </segment>
+    </unit>
+    <unit id="auth.forgotPassword.confirmation">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/forgot-password.page.html:24,28</note>
+      </notes>
+      <segment>
+        <source> If an account matches, a reset link has been sent to that email. </source>
+      </segment>
+    </unit>
+    <unit id="auth.forgotPassword.backLink">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/forgot-password.page.html:29,33</note>
+      </notes>
+      <segment>
+        <source> Back to sign in </source>
+      </segment>
+    </unit>
+    <unit id="auth.login.title">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/login.page.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Sign in</source>
+      </segment>
+    </unit>
+    <unit id="auth.login.subtitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/login.page.html:5,8</note>
+      </notes>
+      <segment>
+        <source> Access your matters, invoices, and documents. </source>
+      </segment>
+    </unit>
+    <unit id="auth.login.tenantLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/login.page.html:10,11</note>
+      </notes>
+      <segment>
+        <source>Firm code</source>
+      </segment>
+    </unit>
+    <unit id="auth.login.emailLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/login.page.html:15,16</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="auth.login.passwordLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/login.page.html:20,22</note>
+      </notes>
+      <segment>
+        <source>Password</source>
+      </segment>
+    </unit>
+    <unit id="auth.login.submitButton">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/login.page.html:38,42</note>
+      </notes>
+      <segment>
+        <source>Sign in</source>
+      </segment>
+    </unit>
+    <unit id="auth.login.forgotLink">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/login.page.html:43,47</note>
+      </notes>
+      <segment>
+        <source> Forgot password? </source>
+      </segment>
+    </unit>
+    <unit id="auth.resetPassword.title">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/reset-password.page.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Set your password</source>
+      </segment>
+    </unit>
+    <unit id="auth.resetPassword.subtitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/reset-password.page.html:5,8</note>
+      </notes>
+      <segment>
+        <source> Choose a password to finish setting up your portal account. </source>
+      </segment>
+    </unit>
+    <unit id="auth.resetPassword.newPasswordLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/reset-password.page.html:10,11</note>
+      </notes>
+      <segment>
+        <source>New password</source>
+      </segment>
+    </unit>
+    <unit id="auth.resetPassword.submitButton">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/reset-password.page.html:19,23</note>
+      </notes>
+      <segment>
+        <source>Set password</source>
+      </segment>
+    </unit>
+    <unit id="auth.resetPassword.backLink">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/auth/reset-password.page.html:24,28</note>
+      </notes>
+      <segment>
+        <source> Back to sign in </source>
+      </segment>
+    </unit>
+    <unit id="portal.documents.title">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/documents/documents.page.html:2,4</note>
+      </notes>
+      <segment>
+        <source>Documents</source>
+      </segment>
+    </unit>
+    <unit id="portal.documents.sharedTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/documents/documents.page.html:5,7</note>
+      </notes>
+      <segment>
+        <source>Shared with you</source>
+      </segment>
+    </unit>
+    <unit id="portal.documents.emptyTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/documents/documents.page.html:11,12</note>
+      </notes>
+      <segment>
+        <source>No documents shared yet</source>
+      </segment>
+    </unit>
+    <unit id="portal.documents.downloadAriaLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/documents/documents.page.html:25,26</note>
+      </notes>
+      <segment>
+        <source>Download</source>
+      </segment>
+    </unit>
+    <unit id="portal.documents.uploadTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/documents/documents.page.html:37,38</note>
+      </notes>
+      <segment>
+        <source>Upload to firm</source>
+      </segment>
+    </unit>
+    <unit id="portal.documents.matterLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/documents/documents.page.html:40,41</note>
+      </notes>
+      <segment>
+        <source>Matter</source>
+      </segment>
+    </unit>
+    <unit id="portal.documents.titleLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/documents/documents.page.html:49,50</note>
+      </notes>
+      <segment>
+        <source>Title</source>
+      </segment>
+    </unit>
+    <unit id="portal.documents.tooLargeError">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/documents/documents.page.html:56,60</note>
+      </notes>
+      <segment>
+        <source> File is larger than 25 MB. </source>
+      </segment>
+    </unit>
+    <unit id="portal.documents.uploadButton">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/documents/documents.page.html:65,68</note>
+      </notes>
+      <segment>
+        <source>Upload</source>
+      </segment>
+    </unit>
+    <unit id="portal.home.welcome">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/home/home.page.html:2</note>
+      </notes>
+      <segment>
+        <source>Welcome</source>
+      </segment>
+    </unit>
+    <unit id="portal.home.mattersTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/home/home.page.html:5,7</note>
+      </notes>
+      <segment>
+        <source>My matters</source>
+      </segment>
+    </unit>
+    <unit id="portal.home.mattersEmptyTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/home/home.page.html:11,12</note>
+      </notes>
+      <segment>
+        <source>No matters yet</source>
+      </segment>
+    </unit>
+    <unit id="portal.home.nextHearingLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/home/home.page.html:25,26</note>
+      </notes>
+      <segment>
+        <source>Next hearing:</source>
+      </segment>
+    </unit>
+    <unit id="portal.home.lawyerLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/home/home.page.html:31,32</note>
+      </notes>
+      <segment>
+        <source>Lawyer:</source>
+      </segment>
+    </unit>
+    <unit id="portal.home.invoicesTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/home/home.page.html:42,44</note>
+      </notes>
+      <segment>
+        <source>Unpaid invoices</source>
+      </segment>
+    </unit>
+    <unit id="portal.home.invoicesEmptyTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/home/home.page.html:48,49</note>
+      </notes>
+      <segment>
+        <source>No unpaid invoices</source>
+      </segment>
+    </unit>
+    <unit id="portal.home.documentsTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/home/home.page.html:66,68</note>
+      </notes>
+      <segment>
+        <source>Recent documents</source>
+      </segment>
+    </unit>
+    <unit id="portal.home.documentsEmptyTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/home/home.page.html:72,73</note>
+      </notes>
+      <segment>
+        <source>No documents shared yet</source>
+      </segment>
+    </unit>
+    <unit id="portal.home.appointmentTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/home/home.page.html:90,92</note>
+      </notes>
+      <segment>
+        <source>Next appointment</source>
+      </segment>
+    </unit>
+    <unit id="portal.home.appointmentEmptyTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/home/home.page.html:96,97</note>
+      </notes>
+      <segment>
+        <source>No upcoming appointments</source>
+      </segment>
+    </unit>
+    <unit id="portal.home.appointmentEmptyCta">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/home/home.page.html:98,99</note>
+      </notes>
+      <segment>
+        <source>Request one</source>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.title">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/invoices/invoices.page.html:2,3</note>
+      </notes>
+      <segment>
+        <source>Invoices</source>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.hint">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/invoices/invoices.page.html:4,8</note>
+      </notes>
+      <segment>
+        <source> Invoice PDFs, receipts, and account statements aren&apos;t available for download here yet — only the summary below. </source>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.emptyTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/invoices/invoices.page.html:13,14</note>
+      </notes>
+      <segment>
+        <source>No invoices yet</source>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.colNumber">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/invoices/invoices.page.html:20,21</note>
+      </notes>
+      <segment>
+        <source>Number</source>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.colStatus">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/invoices/invoices.page.html:21,22</note>
+      </notes>
+      <segment>
+        <source>Status</source>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.colIssueDate">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/invoices/invoices.page.html:22,23</note>
+      </notes>
+      <segment>
+        <source>Issue date</source>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.colDueDate">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/invoices/invoices.page.html:23,24</note>
+      </notes>
+      <segment>
+        <source>Due date</source>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.colTotal">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/invoices/invoices.page.html:24,25</note>
+      </notes>
+      <segment>
+        <source>Total</source>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.colBalance">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/invoices/invoices.page.html:25,28</note>
+      </notes>
+      <segment>
+        <source>Balance</source>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.payNowButton">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/invoices/invoices.page.html:48,50</note>
+      </notes>
+      <segment>
+        <source>Pay now</source>
+      </segment>
+    </unit>
+    <unit id="portal.matterTimeline.notFoundTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/matters/matter-timeline.page.html:7,8</note>
+      </notes>
+      <segment>
+        <source>Matter not found</source>
+      </segment>
+    </unit>
+    <unit id="portal.matterTimeline.emptyTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/matters/matter-timeline.page.html:20,21</note>
+      </notes>
+      <segment>
+        <source>No timeline entries yet</source>
+      </segment>
+    </unit>
+    <unit id="portal.matters.title">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/matters/matters.page.html:2,5</note>
+      </notes>
+      <segment>
+        <source>Matters</source>
+      </segment>
+    </unit>
+    <unit id="portal.matters.emptyTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/matters/matters.page.html:7</note>
+      </notes>
+      <segment>
+        <source>No matters yet</source>
+      </segment>
+    </unit>
+    <unit id="portal.matters.nextHearingLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/matters/matters.page.html:19,20</note>
+      </notes>
+      <segment>
+        <source>Next hearing:</source>
+      </segment>
+    </unit>
+    <unit id="portal.matters.lawyerLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/matters/matters.page.html:25,26</note>
+      </notes>
+      <segment>
+        <source>Lawyer:</source>
+      </segment>
+    </unit>
+    <unit id="portal.messages.title">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/messages/messages.page.html:2,5</note>
+      </notes>
+      <segment>
+        <source>Messages</source>
+      </segment>
+    </unit>
+    <unit id="portal.messages.emptyTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/messages/messages.page.html:9,10</note>
+      </notes>
+      <segment>
+        <source>No conversations yet</source>
+      </segment>
+    </unit>
+    <unit id="portal.threadDetail.title">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/messages/thread-detail.page.html:2,3</note>
+      </notes>
+      <segment>
+        <source>Conversation</source>
+      </segment>
+    </unit>
+    <unit id="portal.threadDetail.responseTimeBanner">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/messages/thread-detail.page.html:4,8</note>
+      </notes>
+      <segment>
+        <source> Our team typically replies within one business day. </source>
+      </segment>
+    </unit>
+    <unit id="portal.threadDetail.emptyTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/messages/thread-detail.page.html:12,13</note>
+      </notes>
+      <segment>
+        <source>No messages yet</source>
+      </segment>
+    </unit>
+    <unit id="portal.threadDetail.messageLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/messages/thread-detail.page.html:29,30</note>
+      </notes>
+      <segment>
+        <source>Message</source>
+      </segment>
+    </unit>
+    <unit id="portal.threadDetail.sendButton">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/messages/thread-detail.page.html:33,37</note>
+      </notes>
+      <segment>
+        <source>Send</source>
+      </segment>
+    </unit>
+    <unit id="portal.profile.title">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/profile/profile.page.html:2,5</note>
+      </notes>
+      <segment>
+        <source>Profile</source>
+      </segment>
+    </unit>
+    <unit id="portal.profile.nameLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/profile/profile.page.html:6,7</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="portal.profile.emailLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/profile/profile.page.html:8,9</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="portal.profile.preferencesTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/profile/profile.page.html:14,15</note>
+      </notes>
+      <segment>
+        <source>Preferences</source>
+      </segment>
+    </unit>
+    <unit id="portal.profile.preferencesHint">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/profile/profile.page.html:16,21</note>
+      </notes>
+      <segment>
+        <source> Notification and language preferences aren&apos;t available yet — the portal API has no preferences endpoint to save them to. </source>
+      </segment>
+    </unit>
+    <unit id="portal.profile.securityTitle">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/profile/profile.page.html:22,23</note>
+      </notes>
+      <segment>
+        <source>Security</source>
+      </segment>
+    </unit>
+    <unit id="portal.profile.securityHint">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/profile/profile.page.html:24,29</note>
+      </notes>
+      <segment>
+        <source> Password changes go through &quot;Forgot password&quot; on the sign-in page. Two-factor authentication and session management aren&apos;t available for portal accounts yet. </source>
+      </segment>
+    </unit>
+    <unit id="portal.profile.signOutButton">
+      <notes>
+        <note category="location">projects/client-portal/src/app/features/profile/profile.page.html:30,33</note>
+      </notes>
+      <segment>
+        <source>Sign out</source>
+      </segment>
+    </unit>
+    <unit id="shell.topbar.languageAriaLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:8</note>
+      </notes>
+      <segment>
+        <source>Language</source>
+      </segment>
+    </unit>
+    <unit id="shell.topbar.notificationsAriaLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:13,14</note>
+      </notes>
+      <segment>
+        <source>Notifications</source>
+      </segment>
+    </unit>
+    <unit id="shell.topbar.accountAriaLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:22</note>
+      </notes>
+      <segment>
+        <source>Account</source>
+      </segment>
+    </unit>
     <unit id="shell.account.profile">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:15,16</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:27,28</note>
       </notes>
       <segment>
         <source>Profile</source>
@@ -11,10 +691,74 @@
     </unit>
     <unit id="shell.account.signOut">
       <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:16,18</note>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:28,30</note>
       </notes>
       <segment>
         <source>Sign out</source>
+      </segment>
+    </unit>
+    <unit id="shell.bottomNav.ariaLabel">
+      <notes>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:40,41</note>
+      </notes>
+      <segment>
+        <source>Portal navigation</source>
+      </segment>
+    </unit>
+    <unit id="shell.nav.home">
+      <notes>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:53,55</note>
+      </notes>
+      <segment>
+        <source>Home</source>
+      </segment>
+    </unit>
+    <unit id="shell.nav.matters">
+      <notes>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:56,58</note>
+      </notes>
+      <segment>
+        <source>Matters</source>
+      </segment>
+    </unit>
+    <unit id="shell.nav.invoices">
+      <notes>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:59,61</note>
+      </notes>
+      <segment>
+        <source>Invoices</source>
+      </segment>
+    </unit>
+    <unit id="shell.nav.documents">
+      <notes>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:62,64</note>
+      </notes>
+      <segment>
+        <source>Documents</source>
+      </segment>
+    </unit>
+    <unit id="shell.nav.appointments">
+      <notes>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:65,67</note>
+      </notes>
+      <segment>
+        <source>Appointments</source>
+      </segment>
+    </unit>
+    <unit id="shell.nav.messages">
+      <notes>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:68,70</note>
+      </notes>
+      <segment>
+        <source>Messages</source>
+      </segment>
+    </unit>
+    <unit id="shell.nav.profile">
+      <notes>
+        <note category="location">projects/client-portal/src/app/shell/shell.component.html:71,73</note>
+      </notes>
+      <segment>
+        <source>Profile</source>
       </segment>
     </unit>
   </file>

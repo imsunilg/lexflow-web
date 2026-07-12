@@ -1,0 +1,76 @@
+<div class="appointments-page">
+  <h1 i18n="@@portal.appointments.title">Appointments</h1>
+
+  <section class="appointments-page__section">
+    <h2 i18n="@@portal.appointments.requestsTitle">Your requests</h2>
+    @if (loading()) {
+      <mat-progress-bar mode="indeterminate" />
+    } @else if (appointments().length === 0) {
+      <lf-empty-state
+        icon="event"
+        title="No appointments yet"
+        i18n-title="@@portal.appointments.emptyTitle"
+      />
+    } @else {
+      <ul class="appointments-page__list">
+        @for (appointment of appointments(); track appointment.id) {
+          <li>
+            <span>{{ appointment.requestedStart | date: 'medium' }}</span>
+            <lf-status-chip [label]="appointment.status" />
+          </li>
+        }
+      </ul>
+    }
+  </section>
+
+  <section class="appointments-page__section">
+    <h2 i18n="@@portal.appointments.newTitle">Request a new appointment</h2>
+    <p class="appointments-page__hint" i18n="@@portal.appointments.lawyerIdHint">
+      Your firm needs to share the specific lawyer's portal ID with you before you can submit a
+      request — there's no lookup for it in this app yet.
+    </p>
+
+    <form [formGroup]="form" class="appointments-page__form" (ngSubmit)="submit()">
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@portal.appointments.matterLabel">Matter</mat-label>
+        <mat-select formControlName="matterId">
+          @for (matter of matters(); track matter.id) {
+            <mat-option [value]="matter.id">{{ matter.number }} — {{ matter.title }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@portal.appointments.lawyerIdLabel">Lawyer ID</mat-label>
+        <input matInput formControlName="lawyerId" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@portal.appointments.startLabel">Start</mat-label>
+        <input matInput type="datetime-local" formControlName="requestedStart" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@portal.appointments.endLabel">End</mat-label>
+        <input matInput type="datetime-local" formControlName="requestedEnd" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@portal.appointments.notesLabel">Notes (optional)</mat-label>
+        <textarea matInput formControlName="notes" rows="3"></textarea>
+      </mat-form-field>
+
+      @if (error()) {
+        <p class="appointments-page__error">{{ error() }}</p>
+      }
+
+      @if (submitting()) {
+        <mat-progress-bar mode="indeterminate" />
+      }
+
+      <button mat-flat-button color="primary" type="submit" [disabled]="submitting()">
+        <span i18n="@@portal.appointments.submitButton">Request appointment</span>
+      </button>
+    </form>
+  </section>
+</div>

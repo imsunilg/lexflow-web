@@ -1,0 +1,144 @@
+.inbox {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.inbox__panes {
+  display: grid;
+  grid-template-columns: 240px 320px 1fr;
+  gap: var(--lf-space-2);
+  flex: 1;
+  min-height: 0;
+  padding-top: var(--lf-space-2);
+}
+
+.inbox__pane {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+  overflow-y: auto;
+}
+
+.inbox__pane--filters {
+  border-right: 1px solid var(--lf-surface-variant);
+  padding-right: var(--lf-space-2);
+}
+
+.inbox__pane--threads {
+  border-right: 1px solid var(--lf-surface-variant);
+  padding-right: var(--lf-space-2);
+}
+
+.inbox__active-filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--lf-surface-variant);
+  border-radius: var(--lf-radius);
+  padding: 4px 8px;
+  font-size: var(--lf-text-sm);
+}
+
+.inbox__mailboxes-title {
+  margin: var(--lf-space-1) 0 0;
+  font-size: var(--lf-text-sm);
+  color: var(--lf-on-surface-variant);
+}
+
+.inbox__hint {
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+  margin: 0;
+}
+
+.inbox__mailbox-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--lf-text-sm);
+}
+
+.inbox__thread-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.inbox__thread-row {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--lf-space-1);
+  border: none;
+  background: transparent;
+  border-radius: var(--lf-radius);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--lf-surface-variant);
+  }
+}
+
+.inbox__thread-row--active {
+  background: var(--lf-surface-variant);
+}
+
+.inbox__thread-meta {
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+}
+
+.inbox__matter-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--lf-surface-variant);
+  border-radius: var(--lf-radius);
+  padding: 6px 10px;
+  font-size: var(--lf-text-sm);
+}
+
+.inbox__message-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+}
+
+.inbox__message {
+  padding: var(--lf-space-1);
+  border-radius: var(--lf-radius);
+  background: var(--lf-surface-variant);
+}
+
+.inbox__message--outbound {
+  background: color-mix(in srgb, var(--lf-primary) 8%, var(--lf-surface-variant));
+}
+
+.inbox__message-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+}
+
+.inbox__message-body {
+  font-size: var(--lf-text-sm);
+  margin-top: 4px;
+}
+
+.inbox__message-attachment {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+}

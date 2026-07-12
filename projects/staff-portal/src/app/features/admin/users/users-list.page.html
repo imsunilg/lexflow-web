@@ -1,0 +1,43 @@
+<div class="users-list">
+  <lf-admin-tabs />
+
+  <header class="users-list__header">
+    <h1 i18n="@@admin.usersList.title">Users</h1>
+    <button mat-flat-button color="primary" type="button" (click)="openInvite()">
+      <mat-icon>person_add</mat-icon>
+      <ng-container i18n="@@admin.usersList.inviteButton">Invite user</ng-container>
+    </button>
+  </header>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (users().length === 0) {
+    <lf-empty-state icon="group" title="No users yet" ctaLabel="Invite user" i18n-title="@@admin.usersList.emptyTitle" i18n-ctaLabel="@@admin.usersList.emptyCta" (cta)="openInvite()" />
+  } @else {
+    <table class="users-list__table">
+      <thead>
+        <tr>
+          <th i18n="@@admin.usersList.colName">Name</th>
+          <th i18n="@@admin.usersList.colEmail">Email</th>
+          <th i18n="@@admin.usersList.colStatus">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users(); track user.id) {
+          <tr
+            class="users-list__row"
+            role="button"
+            tabindex="0"
+            (click)="openUser(user)"
+            (keydown.enter)="openUser(user)"
+            (keydown.space)="openUser(user)"
+          >
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.status }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

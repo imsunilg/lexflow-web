@@ -1,0 +1,26 @@
+<div class="article-list">
+  <lf-kb-tabs />
+
+  <div class="article-list__toolbar">
+    <button mat-flat-button color="primary" type="button" (click)="createArticle()">
+      <mat-icon>add</mat-icon> <span i18n="@@kb.articleList.newArticleButton">New article</span>
+    </button>
+  </div>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (articles().length === 0) {
+    <lf-empty-state icon="article" title="No articles yet" i18n-title="@@kb.articleList.noArticlesEmptyState" />
+  } @else {
+    <ul class="article-list__list">
+      @for (article of articles(); track article.id) {
+        <li>
+          <button type="button" class="article-list__row" (click)="openArticle(article)">
+            <span>{{ article.title }}</span>
+            <lf-status-chip [label]="article.status" />
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</div>

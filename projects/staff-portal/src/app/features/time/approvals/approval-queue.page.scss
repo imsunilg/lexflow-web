@@ -1,0 +1,73 @@
+.approvals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-3);
+}
+
+.approvals__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lf-space-2);
+
+  h1 {
+    margin: 0;
+    font-size: var(--lf-text-lg, 20px);
+  }
+}
+
+.approvals__error {
+  color: var(--lf-error);
+}
+
+.approvals__bulk-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-1) var(--lf-space-2);
+  background: var(--lf-surface-variant);
+  border-radius: 8px;
+}
+
+.approvals__bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+}
+
+.approvals__bulk-progress {
+  width: 80px;
+}
+
+.approvals__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--lf-text-sm);
+
+  th,
+  td {
+    padding: var(--lf-space-1);
+    text-align: left;
+    border-bottom: 1px solid var(--lf-surface-variant);
+    vertical-align: middle;
+  }
+
+  th {
+    font-weight: 600;
+    color: var(--lf-on-surface-variant);
+    font-size: var(--lf-text-xs);
+  }
+}
+
+.approvals__hours,
+.approvals__amount {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.approvals__narrative {
+  max-width: 320px;
+}

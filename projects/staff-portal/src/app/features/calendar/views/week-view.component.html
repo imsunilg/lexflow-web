@@ -7,7 +7,7 @@
   </div>
 
   <div class="week-view__all-day-row" cdkDropListGroup>
-    <div class="week-view__gutter">All-day</div>
+    <div class="week-view__gutter" i18n="@@calendar.weekView.allDayLabel">All-day</div>
     @for (day of days(); track day.getTime()) {
       <div
         class="week-view__all-day-cell"

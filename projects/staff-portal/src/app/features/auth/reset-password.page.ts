@@ -43,19 +43,21 @@ export function passwordsMatchValidator(): ValidatorFn {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-staff-auth-card title="Choose a new password">
+    <lf-staff-auth-card title="Choose a new password" i18n-title="@@auth.resetPassword.title">
       @if (!token()) {
-        <p class="auth-error" role="alert">
+        <p class="auth-error" role="alert" i18n="@@auth.resetPassword.missingTokenMessage">
           This reset link is missing its token. Request a new one from the sign-in page.
         </p>
-        <a class="auth-link" routerLink="/forgot-password">Request a new link</a>
+        <a class="auth-link" routerLink="/forgot-password" i18n="@@auth.resetPassword.requestNewLinkLink"
+          >Request a new link</a
+        >
       } @else if (succeeded()) {
-        <p>Your password has been reset. You can now sign in.</p>
-        <a class="auth-link" routerLink="/login">Sign in</a>
+        <p i18n="@@auth.resetPassword.successMessage">Your password has been reset. You can now sign in.</p>
+        <a class="auth-link" routerLink="/login" i18n="@@auth.resetPassword.signInLink">Sign in</a>
       } @else {
         <form [formGroup]="form" (ngSubmit)="submit()">
           <mat-form-field appearance="outline" class="auth-field">
-            <mat-label>New password</mat-label>
+            <mat-label i18n="@@auth.resetPassword.newPasswordLabel">New password</mat-label>
             <input
               matInput
               type="password"
@@ -65,17 +67,17 @@ export function passwordsMatchValidator(): ValidatorFn {
             @if (
               form.controls.newPassword.hasError('required') && form.controls.newPassword.touched
             ) {
-              <mat-error>New password is required.</mat-error>
+              <mat-error i18n="@@auth.resetPassword.newPasswordRequiredError">New password is required.</mat-error>
             }
             @if (
               form.controls.newPassword.hasError('minlength') && form.controls.newPassword.touched
             ) {
-              <mat-error>Password must be at least 10 characters.</mat-error>
+              <mat-error i18n="@@auth.resetPassword.passwordMinLengthError">Password must be at least 10 characters.</mat-error>
             }
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="auth-field">
-            <mat-label>Confirm password</mat-label>
+            <mat-label i18n="@@auth.resetPassword.confirmPasswordLabel">Confirm password</mat-label>
             <input
               matInput
               type="password"
@@ -86,12 +88,12 @@ export function passwordsMatchValidator(): ValidatorFn {
               form.controls.confirmPassword.hasError('required') &&
               form.controls.confirmPassword.touched
             ) {
-              <mat-error>Confirm your new password.</mat-error>
+              <mat-error i18n="@@auth.resetPassword.confirmPasswordRequiredError">Confirm your new password.</mat-error>
             }
           </mat-form-field>
 
           @if (form.hasError('passwordsMismatch') && form.controls.confirmPassword.touched) {
-            <p class="auth-error" role="alert">Passwords don't match.</p>
+            <p class="auth-error" role="alert" i18n="@@auth.resetPassword.passwordsMismatchError">Passwords don't match.</p>
           }
 
           @if (errorMessage()) {
@@ -108,7 +110,7 @@ export function passwordsMatchValidator(): ValidatorFn {
             @if (submitting()) {
               <mat-spinner diameter="20" />
             } @else {
-              Reset password
+              <ng-container i18n="@@auth.resetPassword.resetPasswordButton">Reset password</ng-container>
             }
           </button>
         </form>

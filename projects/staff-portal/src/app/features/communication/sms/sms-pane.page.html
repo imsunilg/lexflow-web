@@ -1,0 +1,95 @@
+<div class="sms-pane">
+  <lf-comm-tabs />
+
+  <div class="sms-pane__toolbar">
+    <mat-form-field appearance="outline" class="sms-pane__client-field">
+      <mat-label i18n="@@communication.smsPane.clientLabel">Client</mat-label>
+      <input matInput [formControl]="clientControl" [matAutocomplete]="clientAuto" />
+      <mat-autocomplete #clientAuto="matAutocomplete" (optionSelected)="onClientSelected($event)">
+        @for (client of clientResults(); track client.id) {
+          <mat-option [value]="client.label">{{ client.label }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  @if (!activeClient()) {
+    <lf-empty-state icon="sms" title="Pick a client to see SMS history" i18n-title="@@communication.smsPane.pickClientEmptyState" />
+  } @else {
+    @if (loading()) {
+      <mat-progress-bar mode="indeterminate" />
+    } @else if (messages().length === 0) {
+      <lf-empty-state icon="sms" title="No SMS messages for this client yet" i18n-title="@@communication.smsPane.noMessagesEmptyState" />
+    } @else {
+      <div class="sms-pane__history">
+        @for (message of messages(); track message.id) {
+          <div
+            class="sms-pane__message"
+            [class.sms-pane__message--mine]="message.direction === 'Outbound'"
+          >
+            <p>{{ message.body }}</p>
+            <span class="sms-pane__message-meta">
+              {{ message.status }} · {{ message.sentAt | date: 'MMM d, h:mm a' }}
+            </span>
+          </div>
+        }
+      </div>
+    }
+
+    <div class="sms-pane__composer">
+      <h3 i18n="@@communication.smsPane.sendSmsTitle">Send SMS</h3>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@communication.smsPane.toNumberLabel">To number</mat-label>
+        <input matInput [formControl]="toNumber" placeholder="+91XXXXXXXXXX" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@communication.smsPane.templateLabel">Template</mat-label>
+        <mat-select [formControl]="selectedTemplateId">
+          <mat-option [value]="null" i18n="@@communication.smsPane.noTemplateOption">None — write freeform</mat-option>
+          @for (template of templates(); track template.id) {
+            <mat-option [value]="template.id">{{ template.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      @if (isFreeform()) {
+        <p class="sms-pane__dlt-warning" i18n="@@communication.smsPane.dltWarning">
+          <mat-icon>warning</mat-icon>
+          Freeform sends may be rejected: DLT enforcement is on by default for this tenant, and a
+          message without a template is usually rejected with "DLT template required."
+        </p>
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@communication.smsPane.bodyLabel">Body</mat-label>
+          <textarea matInput [formControl]="freeformBody" rows="4"></textarea>
+        </mat-form-field>
+      } @else {
+        @for (name of variableNames(); track name) {
+          <mat-form-field appearance="outline">
+            <mat-label>{{ name }}</mat-label>
+            <input matInput (input)="onVariableInput(name, $any($event.target).value)" />
+          </mat-form-field>
+        }
+      }
+
+      <div class="sms-pane__preview">
+        <span class="sms-pane__preview-label" i18n="@@communication.smsPane.mergePreviewLabel"
+          >Merge preview (local mirror — the server does its own substitution):</span
+        >
+        <p class="sms-pane__preview-body">{{ mergedPreview() }}</p>
+      </div>
+
+      @if (sendError()) {
+        <p class="sms-pane__send-error">
+          <mat-icon>error</mat-icon>
+          {{ sendError() }}
+        </p>
+      }
+
+      <button mat-flat-button color="primary" type="button" [disabled]="sending()" (click)="send()" i18n="@@communication.smsPane.sendButton">
+        Send
+      </button>
+    </div>
+  }
+</div>

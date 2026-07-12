@@ -1,0 +1,89 @@
+<div class="board">
+  <lf-tasks-tabs />
+
+  <header class="board__header">
+    <div class="board__filters">
+      @if (canSeeTeam()) {
+        <mat-slide-toggle [formControl]="mineOnly" i18n="@@tasks.kanbanBoard.mineOnlyToggle">Mine only</mat-slide-toggle>
+      }
+      <mat-form-field appearance="outline" class="board__filter-field">
+        <mat-label i18n="@@tasks.kanbanBoard.priorityLabel">Priority</mat-label>
+        <mat-select [formControl]="priorityFilter">
+          <mat-option [value]="null" i18n="@@tasks.kanbanBoard.anyPriorityOption">Any</mat-option>
+          @for (p of priorities; track p) {
+            <mat-option [value]="p">{{ p }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="board__filter-field">
+        <mat-label i18n="@@tasks.kanbanBoard.categoryLabel">Category</mat-label>
+        <mat-select [formControl]="categoryFilter">
+          <mat-option [value]="null" i18n="@@tasks.kanbanBoard.anyCategoryOption">Any</mat-option>
+          @for (c of categories; track c) {
+            <mat-option [value]="c">{{ c }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-slide-toggle [formControl]="overdueOnly" i18n="@@tasks.kanbanBoard.overdueOnlyToggle">Overdue only</mat-slide-toggle>
+    </div>
+
+    <button mat-flat-button color="primary" type="button" (click)="openComposer()">
+      <mat-icon>add</mat-icon> <span i18n="@@tasks.kanbanBoard.newTaskButton">New task</span>
+    </button>
+  </header>
+
+  @if (dropError()) {
+    <p class="board__drop-error">{{ dropError() }}</p>
+  }
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (tasks().length === 0) {
+    <lf-empty-state
+      icon="checklist"
+      title="No tasks match these filters"
+      message="Create a task to get started."
+      i18n-title="@@tasks.kanbanBoard.noTasksEmptyStateTitle"
+      i18n-message="@@tasks.kanbanBoard.noTasksEmptyStateMessage"
+    />
+  } @else {
+    <div class="board__columns" cdkDropListGroup>
+      @for (column of columns(); track column.status) {
+        <div class="board__column">
+          <h2 class="board__column-title">{{ column.status }} ({{ column.tasks.length }})</h2>
+          <div
+            class="board__column-body"
+            cdkDropList
+            [id]="dropListId(column.status)"
+            [cdkDropListData]="column.tasks"
+            (cdkDropListDropped)="onDrop($event, column.status)"
+          >
+            @for (task of column.tasks; track task.id) {
+              <div
+                class="board__card"
+                cdkDrag
+                [cdkDragData]="task"
+                role="button"
+                tabindex="0"
+                (click)="openDetail(task.id)"
+                (keydown.enter)="openDetail(task.id)"
+              >
+                <span class="board__card-title">{{ task.title }}</span>
+                <div class="board__card-meta">
+                  <span class="board__card-priority" [attr.data-priority]="task.priority">{{
+                    task.priority
+                  }}</span>
+                  @if (task.dueAt) {
+                    <span [class.board__card-overdue]="isOverdue(task)">
+                      {{ task.dueAt | date: 'MMM d' }}
+                    </span>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

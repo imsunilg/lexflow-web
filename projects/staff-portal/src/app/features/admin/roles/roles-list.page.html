@@ -1,0 +1,53 @@
+<div class="roles-list">
+  <lf-admin-tabs />
+
+  <header class="roles-list__header">
+    <h1 i18n="@@admin.rolesList.title">Roles</h1>
+    <div class="roles-list__actions">
+      <a mat-stroked-button [routerLink]="['/admin/roles/matrix']" i18n="@@admin.rolesList.permissionMatrixLink">Permission matrix</a>
+      <button mat-flat-button color="primary" type="button" (click)="openNew()">
+        <mat-icon>add</mat-icon>
+        <ng-container i18n="@@admin.rolesList.newRoleButton">New custom role</ng-container>
+      </button>
+    </div>
+  </header>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (roles().length === 0) {
+    <lf-empty-state icon="admin_panel_settings" title="No roles" i18n-title="@@admin.rolesList.emptyTitle" />
+  } @else {
+    <table class="roles-list__table">
+      <thead>
+        <tr>
+          <th i18n="@@admin.rolesList.colName">Name</th>
+          <th i18n="@@admin.rolesList.colKey">Key</th>
+          <th i18n="@@admin.rolesList.colType">Type</th>
+          <th i18n="@@admin.rolesList.colPermissions">Permissions</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (role of roles(); track role.id) {
+          <tr>
+            <td>{{ role.name }}</td>
+            <td>{{ role.key }}</td>
+            <td>{{ role.isSystem ? 'System' : 'Custom' }}</td>
+            <td>{{ role.permissionIds.length }}</td>
+            <td>
+              <button
+                mat-icon-button
+                type="button"
+                [disabled]="role.isSystem"
+                [matTooltip]="role.isSystem ? 'System roles cannot be edited' : 'Edit'"
+                (click)="openEdit(role)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

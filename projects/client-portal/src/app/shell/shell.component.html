@@ -1,27 +1,45 @@
 <div class="portal-shell">
   <mat-toolbar class="portal-shell__topbar">
-    <span class="portal-shell__brand">LexFlow</span>
+    @if (branding()?.logoUrl) {
+      <img class="portal-shell__logo" [src]="branding()!.logoUrl" alt="" />
+    }
+    <span class="portal-shell__brand">{{ firmName() }}</span>
     <span class="portal-shell__spacer"></span>
-    <button mat-icon-button aria-label="Language">
+    <button mat-icon-button aria-label="Language" i18n-aria-label="@@shell.topbar.languageAriaLabel">
       <mat-icon>translate</mat-icon>
     </button>
-    <button mat-icon-button aria-label="Notifications">
+    <button
+      mat-icon-button
+      aria-label="Notifications"
+      i18n-aria-label="@@shell.topbar.notificationsAriaLabel"
+    >
       <mat-icon>notifications</mat-icon>
     </button>
-    <button mat-icon-button [matMenuTriggerFor]="profileMenu" aria-label="Account">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="profileMenu"
+      aria-label="Account"
+      i18n-aria-label="@@shell.topbar.accountAriaLabel"
+    >
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #profileMenu="matMenu">
       <a mat-menu-item routerLink="profile" i18n="@@shell.account.profile">Profile</a>
-      <button mat-menu-item i18n="@@shell.account.signOut">Sign out</button>
+      <button mat-menu-item (click)="signOut()" i18n="@@shell.account.signOut">Sign out</button>
     </mat-menu>
   </mat-toolbar>
+
+  <lf-offline-banner />
 
   <main class="portal-shell__content">
     <router-outlet />
   </main>
 
-  <nav class="portal-shell__bottom-nav" aria-label="Portal navigation">
+  <nav
+    class="portal-shell__bottom-nav"
+    aria-label="Portal navigation"
+    i18n-aria-label="@@shell.bottomNav.ariaLabel"
+  >
     @for (item of navItems; track item.path) {
       <a
         class="portal-shell__nav-item"
@@ -29,7 +47,31 @@
         routerLinkActive="portal-shell__nav-item--active"
       >
         <mat-icon>{{ item.icon }}</mat-icon>
-        <span>{{ item.label }}</span>
+        <span [attr.data-label]="item.path">
+          @switch (item.path) {
+            @case ('home') {
+              <span i18n="@@shell.nav.home">Home</span>
+            }
+            @case ('matters') {
+              <span i18n="@@shell.nav.matters">Matters</span>
+            }
+            @case ('invoices') {
+              <span i18n="@@shell.nav.invoices">Invoices</span>
+            }
+            @case ('documents') {
+              <span i18n="@@shell.nav.documents">Documents</span>
+            }
+            @case ('appointments') {
+              <span i18n="@@shell.nav.appointments">Appointments</span>
+            }
+            @case ('messages') {
+              <span i18n="@@shell.nav.messages">Messages</span>
+            }
+            @case ('profile') {
+              <span i18n="@@shell.nav.profile">Profile</span>
+            }
+          }
+        </span>
       </a>
     }
   </nav>

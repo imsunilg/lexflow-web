@@ -5,7 +5,9 @@
     <lf-empty-state
       icon="error_outline"
       title="Couldn't load this client"
+      i18n-title="@@clients.detail.errorTitle"
       ctaLabel="Retry"
+      i18n-ctaLabel="@@clients.detail.retryButton"
       (cta)="load()"
     />
   } @else {
@@ -15,69 +17,69 @@
         <lf-status-chip [label]="client()!.type" toneOverride="info" />
         <lf-status-chip [label]="client()!.status" />
         @if (client()!.portalEnabled) {
-          <lf-status-chip label="Portal on" toneOverride="success" />
+          <lf-status-chip label="Portal on" i18n-label="@@clients.detail.portalOnChip" toneOverride="success" />
         } @else {
-          <lf-status-chip label="Portal off" toneOverride="neutral" />
+          <lf-status-chip label="Portal off" i18n-label="@@clients.detail.portalOffChip" toneOverride="neutral" />
         }
       </div>
 
       <div class="client-detail__header-chips">
         @if (summary()) {
-          <span class="client-detail__chip client-detail__chip--outstanding">
+          <span class="client-detail__chip client-detail__chip--outstanding" i18n="@@clients.detail.outstandingChip">
             Outstanding: {{ summary()!.outstanding | lfCurrency }}
           </span>
-          <span class="client-detail__chip client-detail__chip--trust">
+          <span class="client-detail__chip client-detail__chip--trust" i18n="@@clients.detail.trustChip">
             Trust: {{ summary()!.trustBalance | lfCurrency }}
           </span>
         }
         <button mat-stroked-button type="button" (click)="openMergeDialog()">
           <mat-icon>call_merge</mat-icon>
-          Merge duplicate
+          <ng-container i18n="@@clients.detail.mergeDuplicateButton">Merge duplicate</ng-container>
         </button>
       </div>
     </header>
 
     <mat-tab-group>
-      <mat-tab label="Overview">
+      <mat-tab label="Overview" i18n-label="@@clients.detail.overviewTab">
         <div class="client-detail__tab-content">
           <section class="client-detail__profile">
-            <h2>Profile</h2>
+            <h2 i18n="@@clients.detail.profileHeading">Profile</h2>
             <dl class="client-detail__profile-grid">
-              <dt>Number</dt>
+              <dt i18n="@@clients.detail.numberTerm">Number</dt>
               <dd>{{ client()!.number }}</dd>
-              <dt>Email</dt>
+              <dt i18n="@@clients.detail.emailTerm">Email</dt>
               <dd>{{ client()!.email || '—' }}</dd>
-              <dt>Phone</dt>
+              <dt i18n="@@clients.detail.phoneTerm">Phone</dt>
               <dd>{{ client()!.phoneE164 || '—' }}</dd>
               @if (client()!.type === 'Corporate') {
-                <dt>GSTIN</dt>
+                <dt i18n="@@clients.detail.gstinTerm">GSTIN</dt>
                 <dd>{{ client()!.gstin || '—' }}</dd>
-                <dt>CIN</dt>
+                <dt i18n="@@clients.detail.cinTerm">CIN</dt>
                 <dd>{{ client()!.cin || '—' }}</dd>
               }
-              <dt>Credit limit</dt>
+              <dt i18n="@@clients.detail.creditLimitTerm">Credit limit</dt>
               <dd>{{ client()!.creditLimit ?? '—' }}</dd>
             </dl>
           </section>
 
           @if (client()!.type === 'Corporate') {
             <section>
-              <h2>Contact persons</h2>
+              <h2 i18n="@@clients.detail.contactPersonsHeading">Contact persons</h2>
               <lf-contact-sub-grid [clientId]="client()!.id" />
             </section>
           }
 
           <section>
-            <h2>Addresses</h2>
+            <h2 i18n="@@clients.detail.addressesHeading">Addresses</h2>
             @if (addresses().length === 0) {
-              <p class="client-detail__hint">No addresses yet.</p>
+              <p class="client-detail__hint" i18n="@@clients.detail.noAddressesHint">No addresses yet.</p>
             } @else {
               <ul class="client-detail__address-list">
                 @for (address of addresses(); track address.id) {
                   <li>
                     <strong>{{ address.kind }}</strong>
                     @if (address.isPrimaryOfKind) {
-                      <span> (primary)</span>
+                      <span i18n="@@clients.detail.primaryAddressLabel"> (primary)</span>
                     }
                     — {{ address.line1 }}
                     @if (address.line2) {
@@ -92,13 +94,13 @@
             }
 
             @if (!addingAddress()) {
-              <button mat-stroked-button type="button" (click)="addingAddress.set(true)">
+              <button mat-stroked-button type="button" (click)="addingAddress.set(true)" i18n="@@clients.detail.addAddressButton">
                 Add address
               </button>
             } @else {
               <form [formGroup]="addressForm" class="client-detail__address-form">
                 <mat-form-field appearance="outline">
-                  <mat-label>Kind</mat-label>
+                  <mat-label i18n="@@clients.detail.addressKindLabel">Kind</mat-label>
                   <mat-select formControlName="kind">
                     @for (kind of addressKinds; track kind) {
                       <mat-option [value]="kind">{{ kind }}</mat-option>
@@ -106,18 +108,18 @@
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
-                  <mat-label>Line 1</mat-label>
+                  <mat-label i18n="@@clients.detail.line1Label">Line 1</mat-label>
                   <input matInput formControlName="line1" />
                 </mat-form-field>
                 <mat-form-field appearance="outline">
-                  <mat-label>City</mat-label>
+                  <mat-label i18n="@@clients.detail.cityLabel">City</mat-label>
                   <input matInput formControlName="city" />
                 </mat-form-field>
                 <div class="client-detail__form-actions">
-                  <button mat-button type="button" (click)="addingAddress.set(false)">
+                  <button mat-button type="button" (click)="addingAddress.set(false)" i18n="@@clients.detail.cancelButton">
                     Cancel
                   </button>
-                  <button mat-flat-button color="primary" type="button" (click)="addAddress()">
+                  <button mat-flat-button color="primary" type="button" (click)="addAddress()" i18n="@@clients.detail.saveButton">
                     Save
                   </button>
                 </div>
@@ -126,18 +128,18 @@
           </section>
 
           <section>
-            <h2>Identity documents (KYC)</h2>
+            <h2 i18n="@@clients.detail.kycHeading">Identity documents (KYC)</h2>
             <lf-kyc-document-manager [clientId]="client()!.id" />
           </section>
 
           <section>
-            <h2>Relationships</h2>
+            <h2 i18n="@@clients.detail.relationshipsHeading">Relationships</h2>
             <lf-relationship-graph [client]="client()!" />
           </section>
         </div>
       </mat-tab>
 
-      <mat-tab label="Matters">
+      <mat-tab label="Matters" i18n-label="@@clients.detail.mattersTab">
         <div class="client-detail__tab-content">
           <lf-empty-state
             icon="gavel"
@@ -147,88 +149,68 @@
                 : 'No matters yet'
             "
             message="The Legal module isn't built in this environment yet, so matter details can't be listed here."
+            i18n-message="@@clients.detail.mattersEmptyMessage"
           />
         </div>
       </mat-tab>
 
-      <mat-tab label="Invoices & Payments">
+      <mat-tab label="Invoices & Payments" i18n-label="@@clients.detail.invoicesTab">
         <div class="client-detail__tab-content">
           <lf-empty-state
             icon="receipt_long"
             title="No invoices yet"
+            i18n-title="@@clients.detail.noInvoicesTitle"
             message="The Billing module isn't built in this environment yet."
+            i18n-message="@@clients.detail.billingNotBuiltMessage"
           />
         </div>
       </mat-tab>
 
-      <mat-tab label="Documents">
+      <mat-tab label="Documents" i18n-label="@@clients.detail.documentsTab">
         <div class="client-detail__tab-content">
           <lf-empty-state
             icon="folder"
             title="No documents yet"
+            i18n-title="@@clients.detail.noDocumentsTitle"
             message="The Documents module isn't built in this environment yet."
+            i18n-message="@@clients.detail.documentsNotBuiltMessage"
           />
         </div>
       </mat-tab>
 
-      <mat-tab label="Contracts">
+      <mat-tab label="Contracts" i18n-label="@@clients.detail.contractsTab">
         <div class="client-detail__tab-content">
           <lf-empty-state
             icon="description"
             title="No contracts yet"
+            i18n-title="@@clients.detail.noContractsTitle"
             message="The Contracts module isn't built in this environment yet."
+            i18n-message="@@clients.detail.contractsNotBuiltMessage"
           />
         </div>
       </mat-tab>
 
-      <mat-tab label="Communication">
+      <mat-tab label="Communication" i18n-label="@@clients.detail.communicationTab">
         <div class="client-detail__tab-content">
-          <div class="client-detail__comm-filter">
-            <mat-form-field appearance="outline">
-              <mat-label>Channel</mat-label>
-              <mat-select [formControl]="channelFilter" (selectionChange)="loadCommunications()">
-                <mat-option value="">All</mat-option>
-                <mat-option value="Email">Email</mat-option>
-                <mat-option value="Sms">SMS</mat-option>
-                <mat-option value="WhatsApp">WhatsApp</mat-option>
-                <mat-option value="Call">Call</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <button mat-stroked-button type="button" (click)="loadCommunications()">Load</button>
-          </div>
-
-          @if (communicationsLoading()) {
-            <mat-progress-bar mode="indeterminate" />
-          } @else if (communications().length === 0) {
-            <lf-empty-state
-              icon="forum"
-              title="No communications recorded"
-              message="Merged emails/SMS/WhatsApp/calls will appear here once the Communication module ships."
-            />
-          } @else {
-            <ul class="client-detail__comm-list">
-              @for (item of communications(); track item.id) {
-                <li>
-                  <strong>{{ item.channel }}</strong> — {{ item.subject || item.snippet }}
-                  <span class="client-detail__hint">{{ item.at }}</span>
-                </li>
-              }
-            </ul>
+          @if (client(); as c) {
+            <lf-communication-timeline [clientId]="c.id" />
           }
         </div>
       </mat-tab>
 
-      <mat-tab label="Notes">
+      <mat-tab label="Notes" i18n-label="@@clients.detail.notesTab">
         <div class="client-detail__tab-content">
           <lf-empty-state
             icon="note"
             title="Notes aren't available yet"
+            i18n-title="@@clients.detail.notesNotAvailableTitle"
             message="No shared notes API exists in this environment yet."
+            i18n-message="@@clients.detail.notesNotAvailableMessage"
           />
         </div>
       </mat-tab>
 
-      <mat-tab label="Portal">
+      <mat-tab label="Portal" i18n-label="@@clients.detail.portalTab">
         <div class="client-detail__tab-content">
           <lf-portal-access-manager
             [clientId]="client()!.id"

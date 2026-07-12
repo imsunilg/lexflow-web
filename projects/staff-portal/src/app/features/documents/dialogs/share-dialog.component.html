@@ -1,16 +1,16 @@
-<h2 mat-dialog-title>Share "{{ data.document.title }}"</h2>
+<h2 mat-dialog-title i18n="@@documents.shareDialog.title">Share "{{ data.document.title }}"</h2>
 <mat-dialog-content>
   <mat-tab-group>
-    <mat-tab label="External Link">
+    <mat-tab label="External Link" i18n-label="@@documents.shareDialog.externalLinkTab">
       <div class="lf-share-dialog__tab">
         @if (isPrivileged()) {
-          <p class="lf-share-dialog__banner lf-share-dialog__banner--error" role="alert">
+          <p class="lf-share-dialog__banner lf-share-dialog__banner--error" role="alert" i18n="@@documents.shareDialog.privilegedBanner">
             Privileged documents cannot get external share links.
           </p>
         } @else if (createdLink(); as link) {
           <div class="lf-share-dialog__result">
             <mat-form-field appearance="outline" class="lf-share-dialog__wide">
-              <mat-label>Share link</mat-label>
+              <mat-label i18n="@@documents.shareDialog.shareLinkLabel">Share link</mat-label>
               <input matInput readonly [value]="shareUrl(link)" />
               <button
                 mat-icon-button
@@ -18,15 +18,16 @@
                 type="button"
                 (click)="copyLink()"
                 aria-label="Copy link"
+                i18n-aria-label="@@documents.shareDialog.copyLinkAriaLabel"
               >
                 <mat-icon>content_copy</mat-icon>
               </button>
             </mat-form-field>
             @if (copied()) {
-              <p class="lf-share-dialog__hint">Copied to clipboard.</p>
+              <p class="lf-share-dialog__hint" i18n="@@documents.shareDialog.copiedHint">Copied to clipboard.</p>
             }
-            <p class="lf-share-dialog__hint">Expires {{ link.expiresAt | date: 'medium' }}.</p>
-            <p class="lf-share-dialog__hint">
+            <p class="lf-share-dialog__hint" i18n="@@documents.shareDialog.expiresHint">Expires {{ link.expiresAt | date: 'medium' }}.</p>
+            <p class="lf-share-dialog__hint" i18n="@@documents.shareDialog.sessionOnlyHint">
               Only links created in this session are shown here — there is no endpoint to list
               previously created links.
             </p>
@@ -36,6 +37,7 @@
               type="button"
               [disabled]="revoking()"
               (click)="revokeLink()"
+              i18n="@@documents.shareDialog.revokeLinkButton"
             >
               Revoke link
             </button>
@@ -43,7 +45,7 @@
         } @else {
           <form [formGroup]="form" class="lf-share-dialog__form">
             <mat-form-field appearance="outline">
-              <mat-label>Expires</mat-label>
+              <mat-label i18n="@@documents.shareDialog.expiresLabel">Expires</mat-label>
               <input
                 matInput
                 [matDatepicker]="expiryPicker"
@@ -52,23 +54,23 @@
               />
               <mat-datepicker-toggle matIconSuffix [for]="expiryPicker" />
               <mat-datepicker #expiryPicker />
-              <mat-hint>Up to 30 days from today</mat-hint>
+              <mat-hint i18n="@@documents.shareDialog.expiresHintText">Up to 30 days from today</mat-hint>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-              <mat-label>Password (optional)</mat-label>
+              <mat-label i18n="@@documents.shareDialog.passwordLabel">Password (optional)</mat-label>
               <input matInput type="password" formControlName="password" />
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-              <mat-label>Max downloads (optional)</mat-label>
+              <mat-label i18n="@@documents.shareDialog.maxDownloadsLabel">Max downloads (optional)</mat-label>
               <input matInput type="number" min="1" formControlName="maxDownloads" />
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-              <mat-label>Watermark recipient email (optional)</mat-label>
+              <mat-label i18n="@@documents.shareDialog.watermarkEmailLabel">Watermark recipient email (optional)</mat-label>
               <input matInput type="email" formControlName="watermarkEmail" />
-              <mat-hint>Produces watermark text "Prepared for {{ '{' }}email{{ '}' }}"</mat-hint>
+              <mat-hint i18n="@@documents.shareDialog.watermarkHint">Produces watermark text "Prepared for {{ '{' }}email{{ '}' }}"</mat-hint>
             </mat-form-field>
 
             @if (errorMessage()) {
@@ -83,6 +85,7 @@
               type="button"
               [disabled]="creating() || form.invalid"
               (click)="createLink()"
+              i18n="@@documents.shareDialog.createLinkButton"
             >
               Create link
             </button>
@@ -91,9 +94,9 @@
       </div>
     </mat-tab>
 
-    <mat-tab label="Team Access">
+    <mat-tab label="Team Access" i18n-label="@@documents.shareDialog.teamAccessTab">
       <div class="lf-share-dialog__tab">
-        <p class="lf-share-dialog__banner">
+        <p class="lf-share-dialog__banner" i18n="@@documents.shareDialog.teamAccessBanner">
           Internal user/team permissions aren't available yet. The database has a
           `document_permissions` table, but no confirmed backend endpoint exposes it, so this dialog
           can't offer a real Viewer/Editor assignment form here.
@@ -101,12 +104,12 @@
       </div>
     </mat-tab>
 
-    <mat-tab label="Client Portal">
+    <mat-tab label="Client Portal" i18n-label="@@documents.shareDialog.clientPortalTab">
       <div class="lf-share-dialog__tab">
-        <p class="lf-share-dialog__label">
+        <p class="lf-share-dialog__label" i18n="@@documents.shareDialog.portalStatusLabel">
           Portal status: {{ data.document.portalPublished ? 'Published' : 'Not published' }}
         </p>
-        <p class="lf-share-dialog__banner">
+        <p class="lf-share-dialog__banner" i18n="@@documents.shareDialog.portalReadOnlyBanner">
           There is no confirmed "publish to portal" toggle endpoint yet, so this value is shown
           read-only rather than editable.
         </p>
@@ -115,5 +118,5 @@
   </mat-tab-group>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button type="button" [mat-dialog-close]="undefined">Close</button>
+  <button mat-button type="button" [mat-dialog-close]="undefined" i18n="@@documents.shareDialog.closeButton">Close</button>
 </mat-dialog-actions>

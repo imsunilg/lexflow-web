@@ -1,0 +1,117 @@
+<div class="article-editor">
+  <lf-kb-tabs />
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else {
+    <div class="article-editor__header">
+      <h1>{{ isNew ? 'New article' : article()?.title }}</h1>
+      @if (article()) {
+        <span class="article-editor__status">{{ article()!.status }}</span>
+      }
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@kb.articleEditor.titleLabel">Title</mat-label>
+      <input matInput [formControl]="title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@kb.articleEditor.bodyLabel">Body</mat-label>
+      <textarea matInput [formControl]="body" rows="10"></textarea>
+    </mat-form-field>
+
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      [disabled]="saving() || !canContribute"
+      (click)="save()"
+      i18n="@@kb.articleEditor.saveButton"
+    >
+      Save
+    </button>
+
+    @if (article(); as a) {
+      <section class="article-editor__tags">
+        <h2 i18n="@@kb.articleEditor.tagsTitle">Tags</h2>
+        <p class="article-editor__hint" i18n="@@kb.articleEditor.attachedTagsHint">
+          Attached this session: {{ sessionTags().length === 0 ? 'none yet' : '' }}
+          (there's no endpoint to list tags attached in a previous session).
+        </p>
+        <mat-chip-set>
+          @for (tag of sessionTags(); track tag) {
+            <mat-chip (removed)="removeTag(tag)">
+              {{ tag }}
+              <button matChipRemove><mat-icon>cancel</mat-icon></button>
+            </mat-chip>
+          }
+        </mat-chip-set>
+        <div class="article-editor__add-tag">
+          <mat-form-field appearance="outline">
+            <mat-label i18n="@@kb.articleEditor.addTagLabel">Add tag</mat-label>
+            <input matInput [formControl]="newTagName" (keydown.enter)="addTag()" />
+          </mat-form-field>
+          <button mat-stroked-button type="button" (click)="addTag()" i18n="@@kb.articleEditor.addButton">Add</button>
+        </div>
+      </section>
+
+      <section class="article-editor__workflow">
+        <h2 i18n="@@kb.articleEditor.workflowTitle">Workflow</h2>
+
+        @if (workflowError()) {
+          <p class="article-editor__error">{{ workflowError() }}</p>
+        }
+
+        @if (a.status === 'Draft' && canContribute) {
+          <button mat-stroked-button type="button" (click)="submit()" i18n="@@kb.articleEditor.submitForReviewButton">Submit for review</button>
+        }
+
+        @if (a.status === 'InReview' && canReview) {
+          <div class="article-editor__reviewer-row">
+            <mat-form-field appearance="outline">
+              <mat-label i18n="@@kb.articleEditor.reviewerLabel">Reviewer</mat-label>
+              <input matInput [formControl]="reviewerControl" [matAutocomplete]="reviewerAuto" />
+              <mat-autocomplete
+                #reviewerAuto="matAutocomplete"
+                (optionSelected)="onReviewerSelected($event)"
+              >
+                @for (user of reviewerResults(); track user.id) {
+                  <mat-option [value]="user.name">{{ user.name }}</mat-option>
+                }
+              </mat-autocomplete>
+              @if (userLookupUnavailable()) {
+                <mat-hint i18n="@@kb.articleEditor.noUserDirectoryHint">No user directory access.</mat-hint>
+              }
+            </mat-form-field>
+            <button mat-flat-button color="primary" type="button" (click)="approve()" i18n="@@kb.articleEditor.approvePublishButton">
+              Approve &amp; publish
+            </button>
+            <button mat-button type="button" (click)="sendBack()" i18n="@@kb.articleEditor.sendBackButton">Send back to Draft</button>
+          </div>
+          <p class="article-editor__hint" i18n="@@kb.articleEditor.publishingRequirementsHint">
+            Publishing requires at least one tag and a reviewer who isn't the author — both are
+            enforced by the server even if this editor's tag tracking is incomplete.
+          </p>
+        }
+
+        @if (a.status === 'Published') {
+          <p class="article-editor__hint" i18n="@@kb.articleEditor.publishedNote">
+            Published {{ a.publishedAt }} (version {{ a.version }}).
+          </p>
+        }
+      </section>
+
+      @if (versions().length > 0) {
+        <section class="article-editor__versions">
+          <h2 i18n="@@kb.articleEditor.versionHistoryTitle">Version history</h2>
+          <ul>
+            @for (version of versions(); track version.id) {
+              <li>v{{ version.versionNo }} — {{ version.createdAt }}</li>
+            }
+          </ul>
+        </section>
+      }
+    }
+  }
+</div>

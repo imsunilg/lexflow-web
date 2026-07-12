@@ -28,33 +28,40 @@ import { AuthCardComponent } from './auth-card.component';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-staff-auth-card title="Reset your password" subtitle="We'll email you a reset link">
+    <lf-staff-auth-card
+      title="Reset your password"
+      i18n-title="@@auth.forgotPassword.title"
+      subtitle="We'll email you a reset link"
+      i18n-subtitle="@@auth.forgotPassword.subtitle"
+    >
       @if (submitted()) {
-        <p>
+        <p i18n="@@auth.forgotPassword.submittedMessage">
           If an account matching those details exists, we've sent a password-reset link to that
           email address. It expires in 30 minutes.
         </p>
-        <a class="auth-link" routerLink="/login">Back to sign in</a>
+        <a class="auth-link" routerLink="/login" i18n="@@auth.forgotPassword.backToSignInLink"
+          >Back to sign in</a
+        >
       } @else {
         <form [formGroup]="form" (ngSubmit)="submit()">
           <mat-form-field appearance="outline" class="auth-field">
-            <mat-label>Firm workspace</mat-label>
+            <mat-label i18n="@@auth.forgotPassword.workspaceLabel">Firm workspace</mat-label>
             <input matInput formControlName="tenantSlug" autocomplete="organization" />
             @if (
               form.controls.tenantSlug.hasError('required') && form.controls.tenantSlug.touched
             ) {
-              <mat-error>Workspace is required.</mat-error>
+              <mat-error i18n="@@auth.forgotPassword.workspaceRequiredError">Workspace is required.</mat-error>
             }
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="auth-field">
-            <mat-label>Email</mat-label>
+            <mat-label i18n="@@auth.forgotPassword.emailLabel">Email</mat-label>
             <input matInput type="email" formControlName="email" autocomplete="username" />
             @if (form.controls.email.hasError('required') && form.controls.email.touched) {
-              <mat-error>Email is required.</mat-error>
+              <mat-error i18n="@@auth.forgotPassword.emailRequiredError">Email is required.</mat-error>
             }
             @if (form.controls.email.hasError('email') && form.controls.email.touched) {
-              <mat-error>Enter a valid email.</mat-error>
+              <mat-error i18n="@@auth.forgotPassword.emailInvalidError">Enter a valid email.</mat-error>
             }
           </mat-form-field>
 
@@ -68,11 +75,13 @@ import { AuthCardComponent } from './auth-card.component';
             @if (submitting()) {
               <mat-spinner diameter="20" />
             } @else {
-              Send reset link
+              <ng-container i18n="@@auth.forgotPassword.sendResetLinkButton">Send reset link</ng-container>
             }
           </button>
 
-          <a class="auth-link" routerLink="/login">Back to sign in</a>
+          <a class="auth-link" routerLink="/login" i18n="@@auth.forgotPassword.backToSignInLinkForm"
+            >Back to sign in</a
+          >
         </form>
       }
     </lf-staff-auth-card>

@@ -1,11 +1,12 @@
 <div class="clients-list-page">
   <header class="clients-list-page__toolbar">
-    <h1 class="clients-list-page__title">Clients</h1>
+    <h1 class="clients-list-page__title" i18n="@@clients.list.title">Clients</h1>
     <div class="clients-list-page__toolbar-actions">
       <mat-button-toggle-group
         [value]="viewMode()"
         (change)="setViewMode($event.value)"
         aria-label="View mode"
+        i18n-aria-label="@@clients.list.viewModeAriaLabel"
       >
         <mat-button-toggle value="table">
           <mat-icon>table_rows</mat-icon>
@@ -16,22 +17,22 @@
       </mat-button-toggle-group>
       <button mat-flat-button color="primary" type="button" (click)="createClient()">
         <mat-icon>add</mat-icon>
-        New client
+        <ng-container i18n="@@clients.list.newClientButton">New client</ng-container>
       </button>
     </div>
   </header>
 
   <form class="clients-list-page__filters" [formGroup]="form">
     <mat-form-field appearance="outline" class="clients-list-page__search">
-      <mat-label>Search</mat-label>
-      <input matInput formControlName="q" placeholder="Name, number, email, phone" />
+      <mat-label i18n="@@clients.list.searchLabel">Search</mat-label>
+      <input matInput formControlName="q" placeholder="Name, number, email, phone" i18n-placeholder="@@clients.list.searchPlaceholder" />
       <mat-icon matIconSuffix>search</mat-icon>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Type</mat-label>
+      <mat-label i18n="@@clients.list.typeLabel">Type</mat-label>
       <mat-select formControlName="type" (selectionChange)="load()">
-        <mat-option value="">All types</mat-option>
+        <mat-option value="" i18n="@@clients.list.allTypesOption">All types</mat-option>
         @for (type of types; track type) {
           <mat-option [value]="type">{{ type }}</mat-option>
         }
@@ -39,9 +40,9 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Status</mat-label>
+      <mat-label i18n="@@clients.list.statusLabel">Status</mat-label>
       <mat-select formControlName="status" (selectionChange)="load()">
-        <mat-option value="">All statuses</mat-option>
+        <mat-option value="" i18n="@@clients.list.allStatusesOption">All statuses</mat-option>
         @for (status of statuses; track status) {
           <mat-option [value]="status">{{ status }}</mat-option>
         }
@@ -50,18 +51,19 @@
 
     <button mat-button type="button" (click)="clearFilters()">
       <mat-icon>filter_alt_off</mat-icon>
-      Clear filters
+      <ng-container i18n="@@clients.list.clearFiltersButton">Clear filters</ng-container>
     </button>
   </form>
 
   <div class="clients-list-page__body">
-    <nav class="clients-list-page__alpha-index" aria-label="Jump to letter">
+    <nav class="clients-list-page__alpha-index" aria-label="Jump to letter" i18n-aria-label="@@clients.list.jumpToLetterAriaLabel">
       <button
         mat-icon-button
         type="button"
         class="clients-list-page__alpha-btn"
         [class.clients-list-page__alpha-btn--active]="activeLetter() === null"
         (click)="clearLetter()"
+        i18n="@@clients.list.allLettersButton"
       >
         All
       </button>
@@ -84,15 +86,20 @@
         <lf-empty-state
           icon="error_outline"
           title="Couldn't load clients"
+          i18n-title="@@clients.list.errorTitle"
           ctaLabel="Retry"
+          i18n-ctaLabel="@@clients.list.retryButton"
           (cta)="load()"
         />
       } @else if (!loading() && rows().length === 0) {
         <lf-empty-state
           icon="person_search"
           title="No clients match these filters"
+          i18n-title="@@clients.list.emptyTitle"
           message="Try adjusting or clearing your filters."
+          i18n-message="@@clients.list.emptyMessage"
           ctaLabel="Clear filters"
+          i18n-ctaLabel="@@clients.list.clearFiltersCta"
           (cta)="clearFilters()"
         />
       } @else if (viewMode() === 'table') {
@@ -114,7 +121,7 @@
               <div class="clients-list-page__card-type">{{ client.type }}</div>
               <div class="clients-list-page__card-contact">{{ client.email ?? '—' }}</div>
               <div class="clients-list-page__card-contact">{{ client.phoneE164 ?? '—' }}</div>
-              <div class="clients-list-page__card-portal">
+              <div class="clients-list-page__card-portal" i18n="@@clients.list.portalCardLabel">
                 Portal: {{ client.portalEnabled ? '✓' : '—' }}
               </div>
             </button>

@@ -1,14 +1,29 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PlaceholderPageComponent } from '../../shared/placeholder-page/placeholder-page.component';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { RouterLink } from '@angular/router';
+import { EmptyStateComponent, StatusChipComponent } from 'shared';
+import { PortalMatterSummary } from '../../core/models/portal.models';
+import { PortalMattersService } from '../../core/services/portal-matters.service';
 
+/** Matters list (PRD Module 17 step 3) — each card links to its sanitized timeline. */
 @Component({
   selector: 'lf-portal-matters-page',
   standalone: true,
-  imports: [PlaceholderPageComponent],
+  imports: [RouterLink, MatProgressBarModule, EmptyStateComponent, StatusChipComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<app-placeholder-page
-    title="Matters"
-    description="Sanitized matter timeline: hearings + published milestones only (PRD Module 17)."
-  />`,
+  templateUrl: './matters.page.html',
+  styleUrl: './matters.page.scss',
 })
-export class MattersPage {}
+export class MattersPage {
+  private readonly mattersService = inject(PortalMattersService);
+
+  readonly loading = signal(true);
+  readonly matters = signal<PortalMatterSummary[]>([]);
+
+  constructor() {
+    this.mattersService.getMyMatters().subscribe((matters) => {
+      this.matters.set(matters);
+      this.loading.set(false);
+    });
+  }
+}

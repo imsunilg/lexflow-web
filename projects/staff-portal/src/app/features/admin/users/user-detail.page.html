@@ -1,0 +1,123 @@
+<div class="user-detail">
+  <lf-admin-tabs />
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (!user()) {
+    <p i18n="@@admin.userDetail.notFound">User not found.</p>
+  } @else {
+    <header class="user-detail__header">
+      <div>
+        <h1>{{ user()!.name }}</h1>
+        <p class="user-detail__email" i18n="@@admin.userDetail.emailStatusLine">{{ user()!.email }} · {{ user()!.status }}</p>
+      </div>
+      <div class="user-detail__actions">
+        @if (user()!.status === 'Active') {
+          <button mat-stroked-button type="button" [disabled]="busy()" (click)="suspend()">
+            <ng-container i18n="@@admin.userDetail.suspendButton">Suspend</ng-container>
+          </button>
+          <button
+            mat-stroked-button
+            color="warn"
+            type="button"
+            [disabled]="busy()"
+            (click)="deactivate()"
+          >
+            <ng-container i18n="@@admin.userDetail.deactivateButton">Deactivate…</ng-container>
+          </button>
+        }
+        @if (user()!.status === 'Suspended') {
+          <button mat-stroked-button type="button" [disabled]="busy()" (click)="reactivate()">
+            <ng-container i18n="@@admin.userDetail.reactivateButton">Reactivate</ng-container>
+          </button>
+          <button
+            mat-stroked-button
+            color="warn"
+            type="button"
+            [disabled]="busy()"
+            (click)="deactivate()"
+          >
+            <ng-container i18n="@@admin.userDetail.deactivateButton2">Deactivate…</ng-container>
+          </button>
+        }
+      </div>
+    </header>
+
+    <nav class="user-detail__links">
+      <a [routerLink]="['/admin/access']" [queryParams]="{ userId: userId }" i18n="@@admin.userDetail.permissionInspectorLink">
+        Why can this user do X? (effective-permission inspector)
+      </a>
+      <a [routerLink]="['/admin/access/sessions']" i18n="@@admin.userDetail.sessionsLink">View sessions & login history</a>
+    </nav>
+
+    <form class="user-detail__form" [formGroup]="form">
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.userDetail.nameLabel">Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.userDetail.designationLabel">Designation</mat-label>
+        <input matInput formControlName="designation" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.userDetail.barEnrollmentLabel">Bar enrollment no.</mat-label>
+        <input matInput formControlName="barEnrollmentNo" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.userDetail.phoneLabel">Phone</mat-label>
+        <input matInput formControlName="phone" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.userDetail.costRateLabel">Hourly cost rate</mat-label>
+        <input matInput type="number" formControlName="costRate" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.userDetail.branchLabel">Branch</mat-label>
+        <mat-select formControlName="branchId">
+          <mat-option [value]="null" i18n="@@admin.userDetail.branchNoneOption">(none)</mat-option>
+          @for (branch of branches(); track branch.id) {
+            <mat-option [value]="branch.id">{{ branch.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.userDetail.departmentLabel">Department</mat-label>
+        <mat-select formControlName="departmentId">
+          <mat-option [value]="null" i18n="@@admin.userDetail.departmentNoneOption">(none)</mat-option>
+          @for (department of departments(); track department.id) {
+            <mat-option [value]="department.id">{{ department.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.userDetail.tzLabel">Timezone</mat-label>
+        <input matInput formControlName="tz" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.userDetail.localeLabel">Locale</mat-label>
+        <input matInput formControlName="locale" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="user-detail__prefs">
+        <mat-label i18n="@@admin.userDetail.notificationPrefsLabel">Notification preferences (JSON)</mat-label>
+        <textarea matInput formControlName="notificationPrefsJson" rows="3"></textarea>
+        <mat-hint i18n="@@admin.userDetail.notificationPrefsHint">
+          Write-only — the server never returns current preferences, so this sets new ones rather
+          than editing existing ones.
+        </mat-hint>
+      </mat-form-field>
+    </form>
+
+    <button mat-flat-button color="primary" type="button" [disabled]="saving()" (click)="save()">
+      <ng-container i18n="@@admin.userDetail.saveButton">Save</ng-container>
+    </button>
+  }
+</div>

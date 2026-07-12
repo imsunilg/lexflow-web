@@ -1,0 +1,166 @@
+<div class="report-viewer">
+  <lf-reports-tabs />
+
+  @if (loadingMeta()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (!catalogItem() && !definition()) {
+    <lf-empty-state icon="query_stats" title="Report not found" i18n-title="@@reports.viewer.reportNotFoundTitle" />
+  } @else {
+    <header class="report-viewer__header">
+      <h1>{{ reportTitle() }}</h1>
+      @if (catalogItem()?.requiresFinancialPermission) {
+        <span
+          class="report-viewer__badge"
+          matTooltip="This report contains financial data and requires the reports.financial permission."
+          i18n-matTooltip="@@reports.viewer.financialBadgeTooltip"
+          i18n="@@reports.viewer.financialBadge"
+        >
+          Financial
+        </span>
+      }
+    </header>
+
+    @if (!isCustom) {
+      <form class="report-viewer__params" [formGroup]="paramsForm">
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@reports.viewer.dateFromLabel">Date from</mat-label>
+          <input matInput [matDatepicker]="fromPicker" formControlName="dateFrom" />
+          <mat-datepicker-toggle matIconSuffix [for]="fromPicker" />
+          <mat-datepicker #fromPicker />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@reports.viewer.dateToLabel">Date to</mat-label>
+          <input matInput [matDatepicker]="toPicker" formControlName="dateTo" />
+          <mat-datepicker-toggle matIconSuffix [for]="toPicker" />
+          <mat-datepicker #toPicker />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@reports.viewer.clientLabel">Client</mat-label>
+          <input matInput [formControl]="clientControl" [matAutocomplete]="clientAuto" />
+          <mat-autocomplete
+            #clientAuto="matAutocomplete"
+            (optionSelected)="onClientSelected($event)"
+          >
+            @for (client of clientResults(); track client.id) {
+              <mat-option [value]="clientLabel(client)">{{ clientLabel(client) }}</mat-option>
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          [disabled]="running()"
+          (click)="run()"
+          i18n="@@reports.viewer.runReportButton1"
+        >
+          Run report
+        </button>
+      </form>
+    } @else {
+      <div class="report-viewer__params">
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          [disabled]="running()"
+          (click)="run()"
+          i18n="@@reports.viewer.runReportButton2"
+        >
+          Run report
+        </button>
+      </div>
+    }
+
+    @if (running()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+
+    @if (runStatus() === 'Queued' || runStatus() === 'Running') {
+      <p class="report-viewer__hint" i18n="@@reports.viewer.backgroundRunHint">
+        This report is large enough to run in the background — checking every few seconds…
+      </p>
+    }
+
+    @if (errorMessage()) {
+      <p class="report-viewer__error">{{ errorMessage() }}</p>
+    }
+
+    @if (result()) {
+      <div class="report-viewer__toolbar">
+        <mat-button-toggle-group [value]="viewMode()" (change)="setViewMode($event.value)">
+          <mat-button-toggle value="table" i18n="@@reports.viewer.tableToggle">Table</mat-button-toggle>
+          <mat-button-toggle value="chart" i18n="@@reports.viewer.chartToggle">Chart</mat-button-toggle>
+        </mat-button-toggle-group>
+
+        <span class="report-viewer__row-count" i18n="@@reports.viewer.rowCountLabel">{{ rowCount() }} rows</span>
+
+        <button mat-stroked-button type="button" [matMenuTriggerFor]="exportMenu">
+          <mat-icon>download</mat-icon>
+          <span i18n="@@reports.viewer.exportButton1">Export</span>
+        </button>
+        <mat-menu #exportMenu="matMenu">
+          <button mat-menu-item type="button" (click)="export('pdf')" i18n="@@reports.viewer.exportPdfOption1">PDF</button>
+          <button mat-menu-item type="button" (click)="export('xlsx')" i18n="@@reports.viewer.exportXlsxOption1">XLSX</button>
+          <button mat-menu-item type="button" (click)="export('csv')" i18n="@@reports.viewer.exportCsvOption1">CSV</button>
+        </mat-menu>
+
+        @if (canSchedule) {
+          <button mat-stroked-button type="button" (click)="openScheduleDialog()">
+            <mat-icon>schedule</mat-icon>
+            <span i18n="@@reports.viewer.scheduleButton">Schedule</span>
+          </button>
+        }
+      </div>
+
+      @if (viewMode() === 'table') {
+        <div class="report-viewer__table-wrap">
+          <table class="report-viewer__table">
+            <thead>
+              <tr>
+                @for (col of result()!.columns; track col) {
+                  <th>{{ col }}</th>
+                }
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of result()!.rows; track $index) {
+                <tr
+                  [class.report-viewer__row--linkable]="drillDownTarget(row)"
+                  (click)="openDrillDown(row)"
+                >
+                  @for (cell of row; track $index) {
+                    <td>{{ cell }}</td>
+                  }
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      } @else {
+        <div class="report-viewer__chart-wrap">
+          <canvas #chartCanvas></canvas>
+        </div>
+      }
+    } @else if (runStatus() === 'Completed' && !running()) {
+      <div class="report-viewer__async-done">
+        <p i18n="@@reports.viewer.asyncDoneMessage">
+          Run complete — {{ rowCount() }} rows. This ran as a background job, so results are only
+          available via export.
+        </p>
+        <button mat-stroked-button type="button" [matMenuTriggerFor]="exportMenu2">
+          <mat-icon>download</mat-icon>
+          <span i18n="@@reports.viewer.exportButton2">Export</span>
+        </button>
+        <mat-menu #exportMenu2="matMenu">
+          <button mat-menu-item type="button" (click)="export('pdf')" i18n="@@reports.viewer.exportPdfOption2">PDF</button>
+          <button mat-menu-item type="button" (click)="export('xlsx')" i18n="@@reports.viewer.exportXlsxOption2">XLSX</button>
+          <button mat-menu-item type="button" (click)="export('csv')" i18n="@@reports.viewer.exportCsvOption2">CSV</button>
+        </mat-menu>
+      </div>
+    }
+  }
+</div>

@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Issue credit note</h2>
+<h2 mat-dialog-title i18n="@@billing.creditNoteDialog.title">Issue credit note</h2>
 <mat-dialog-content class="credit-note-dialog">
-  <p class="credit-note-dialog__invoice">
+  <p class="credit-note-dialog__invoice" i18n="@@billing.creditNoteDialog.invoiceSummary">
     Invoice {{ data.invoice.number ?? data.invoice.id }} — grand total
     {{ data.invoice.grandTotal | lfCurrency }}
   </p>
@@ -11,25 +11,25 @@
 
   <form [formGroup]="form" class="credit-note-dialog__form">
     <mat-form-field appearance="outline" class="credit-note-dialog__field">
-      <mat-label>Amount</mat-label>
+      <mat-label i18n="@@billing.creditNoteDialog.amountLabel">Amount</mat-label>
       <input matInput type="number" formControlName="amount" min="0.01" step="0.01" />
       @if (form.controls.amount.hasError('max')) {
-        <mat-error>Cannot exceed the invoice grand total.</mat-error>
+        <mat-error i18n="@@billing.creditNoteDialog.amountMaxError">Cannot exceed the invoice grand total.</mat-error>
       }
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="credit-note-dialog__field">
-      <mat-label>Reason</mat-label>
+      <mat-label i18n="@@billing.creditNoteDialog.reasonLabel">Reason</mat-label>
       <textarea matInput formControlName="reason" rows="3"></textarea>
       @if (form.controls.reason.hasError('required')) {
-        <mat-error>Reason is required.</mat-error>
+        <mat-error i18n="@@billing.creditNoteDialog.reasonRequiredError">Reason is required.</mat-error>
       }
     </mat-form-field>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button type="button" (click)="cancel()">Cancel</button>
+  <button mat-button type="button" (click)="cancel()" i18n="@@billing.creditNoteDialog.cancelButton">Cancel</button>
   <button
     mat-flat-button
     color="primary"
@@ -40,7 +40,7 @@
     @if (saving()) {
       <mat-spinner diameter="18" />
     } @else {
-      Issue credit note
+      <span i18n="@@billing.creditNoteDialog.submitButton">Issue credit note</span>
     }
   </button>
 </mat-dialog-actions>

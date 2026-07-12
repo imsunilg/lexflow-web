@@ -1,0 +1,65 @@
+.composer {
+  min-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+}
+
+.composer__smart {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--lf-space-1);
+}
+
+.composer__smart-field {
+  flex: 1;
+}
+
+.composer__parse-error {
+  color: var(--lf-error);
+  font-size: var(--lf-text-sm);
+  margin: 0;
+}
+
+.composer__preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: var(--lf-space-1);
+  background: var(--lf-surface-variant);
+  border-radius: var(--lf-radius);
+}
+
+.composer__preview-title {
+  font-weight: 600;
+  font-size: var(--lf-text-sm);
+}
+
+.composer__preview-chip {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--lf-surface);
+  font-size: var(--lf-text-xs);
+}
+
+.composer__preview-note {
+  width: 100%;
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+}
+
+.composer__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+}
+
+.composer__row {
+  display: flex;
+  gap: var(--lf-space-1);
+
+  mat-form-field {
+    flex: 1;
+  }
+}

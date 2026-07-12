@@ -2,25 +2,25 @@
   <header class="calendar-settings__header">
     <a mat-button routerLink="/calendar/view">
       <mat-icon>arrow_back</mat-icon>
-      Back to calendar
+      <span i18n="@@calendar.settingsPage.backButton">Back to calendar</span>
     </a>
-    <h1>Calendar settings</h1>
+    <h1 i18n="@@calendar.settingsPage.title">Calendar settings</h1>
   </header>
 
   <mat-tab-group class="calendar-settings__tabs">
-    <mat-tab label="Sync">
+    <mat-tab label="Sync" i18n-label="@@calendar.settingsPage.syncTabLabel">
       <div class="calendar-settings__tab-content">
         <lf-sync-settings-tab />
       </div>
     </mat-tab>
 
-    <mat-tab label="Reminders">
+    <mat-tab label="Reminders" i18n-label="@@calendar.settingsPage.remindersTabLabel">
       <div class="calendar-settings__tab-content">
         <lf-reminder-policy-tab />
       </div>
     </mat-tab>
 
-    <mat-tab label="ICS Export">
+    <mat-tab label="ICS Export" i18n-label="@@calendar.settingsPage.icsExportTabLabel">
       <div class="calendar-settings__tab-content">
         <lf-ics-export-tab />
       </div>

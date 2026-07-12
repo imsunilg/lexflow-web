@@ -1,0 +1,103 @@
+:host {
+  position: fixed;
+  right: calc(var(--lf-space-2) + 72px);
+  bottom: var(--lf-space-2);
+  z-index: 1000;
+}
+
+.ai-assistant-dock__fab {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: var(--lf-primary);
+  color: var(--lf-on-primary, #fff);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.ai-assistant-dock {
+  width: 360px;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--lf-surface);
+  border: 1px solid var(--lf-surface-variant);
+  border-radius: var(--lf-radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.ai-assistant-dock__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--lf-space-1) var(--lf-space-2);
+  border-bottom: 1px solid var(--lf-surface-variant);
+  font-weight: 600;
+}
+
+.ai-assistant-dock__context-note {
+  margin: 0;
+  padding: 4px var(--lf-space-2);
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+}
+
+.ai-assistant-dock__messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--lf-space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+}
+
+.ai-assistant-dock__message {
+  background: var(--lf-surface-variant);
+  border-radius: var(--lf-radius);
+  padding: var(--lf-space-1) var(--lf-space-2);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  p {
+    margin: 0;
+    white-space: pre-wrap;
+  }
+}
+
+.ai-assistant-dock__message--user {
+  background: transparent;
+  align-self: flex-end;
+  border: 1px solid var(--lf-surface-variant);
+}
+
+.ai-assistant-dock__no-authority {
+  color: var(--lf-on-surface-variant);
+  font-style: italic;
+}
+
+.ai-assistant-dock__citations {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--lf-text-sm);
+}
+
+.ai-assistant-dock__input-row {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+  padding: var(--lf-space-1) var(--lf-space-2);
+  border-top: 1px solid var(--lf-surface-variant);
+
+  input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+  }
+}

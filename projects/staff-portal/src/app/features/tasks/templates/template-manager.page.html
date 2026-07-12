@@ -1,0 +1,58 @@
+<div class="templates">
+  <lf-tasks-tabs />
+
+  <header class="templates__header">
+    <h1 i18n="@@tasks.templateManager.pageTitle">Task templates</h1>
+    <button mat-flat-button color="primary" type="button" (click)="openNewTemplate()">
+      <mat-icon>add</mat-icon> <span i18n="@@tasks.templateManager.newTemplateButton">New template</span>
+    </button>
+  </header>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (templates().length === 0) {
+    <lf-empty-state
+      icon="fact_check"
+      title="No task templates yet"
+      message="Create a template to standardize a task plan for a matter type."
+      i18n-title="@@tasks.templateManager.noTemplatesEmptyStateTitle"
+      i18n-message="@@tasks.templateManager.noTemplatesEmptyStateMessage"
+    />
+  } @else {
+    <div class="templates__list">
+      @for (template of templates(); track template.id) {
+        <div class="templates__card">
+          <div class="templates__card-header">
+            <h2 class="templates__card-title">{{ template.name }}</h2>
+            <span
+              class="templates__card-status"
+              [class.templates__card-status--inactive]="!template.isActive"
+            >
+              {{ template.isActive ? 'Active' : 'Inactive' }}
+            </span>
+          </div>
+          <p class="templates__card-meta" i18n="@@tasks.templateManager.cardMetaLabel">
+            Matter type: {{ template.matterType ?? 'Any' }} &middot;
+            {{ template.items.length }} item{{ template.items.length === 1 ? '' : 's' }}
+          </p>
+
+          <ul class="templates__items">
+            @for (item of template.items; track item.sortOrder) {
+              <li>
+                {{ item.title }}
+                <span class="templates__item-meta">
+                  ({{ item.relativeDueDays }}d{{ item.category ? ', ' + item.category : ''
+                  }}{{ item.isMandatory ? ', mandatory' : '' }})
+                </span>
+              </li>
+            }
+          </ul>
+
+          <button mat-stroked-button type="button" (click)="openApply(template)" i18n="@@tasks.templateManager.applyToMatterButton">
+            Apply to matter
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,114 @@
+.chat-dock {
+  position: fixed;
+  right: var(--lf-space-2);
+  bottom: var(--lf-space-2);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--lf-space-1);
+}
+
+.chat-dock__toggle {
+  align-self: flex-end;
+}
+
+.chat-dock__panel {
+  width: 320px;
+  height: 420px;
+  background: var(--lf-surface);
+  border-radius: var(--lf-radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-dock__channels {
+  display: flex;
+  flex-direction: column;
+  max-height: 120px;
+  overflow-y: auto;
+  border-bottom: 1px solid var(--lf-surface-variant);
+}
+
+.chat-dock__channel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-size: var(--lf-text-sm);
+
+  &:hover {
+    background: var(--lf-surface-variant);
+  }
+}
+
+.chat-dock__channel--active {
+  background: var(--lf-surface-variant);
+  font-weight: 600;
+}
+
+.chat-dock__unread-badge {
+  background: var(--lf-error);
+  color: white;
+  border-radius: 999px;
+  padding: 0 6px;
+  font-size: var(--lf-text-xs);
+}
+
+.chat-dock__messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--lf-space-1);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chat-dock__hint {
+  font-size: var(--lf-text-sm);
+  color: var(--lf-on-surface-variant);
+}
+
+.chat-dock__message {
+  align-self: flex-start;
+  background: var(--lf-surface-variant);
+  border-radius: var(--lf-radius);
+  padding: 6px 10px;
+  max-width: 80%;
+
+  p {
+    margin: 0;
+    font-size: var(--lf-text-sm);
+  }
+}
+
+.chat-dock__message--mine {
+  align-self: flex-end;
+  background: color-mix(in srgb, var(--lf-primary) 16%, var(--lf-surface-variant));
+}
+
+.chat-dock__message-meta {
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+}
+
+.chat-dock__composer {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--lf-surface-variant);
+  padding: 4px;
+
+  input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 6px;
+    background: transparent;
+  }
+}

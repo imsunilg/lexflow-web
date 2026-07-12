@@ -1,0 +1,131 @@
+.timesheet {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-3);
+}
+
+.timesheet__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--lf-space-2);
+}
+
+.timesheet__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+
+  h1 {
+    margin: 0 0 0 var(--lf-space-1);
+    font-size: var(--lf-text-lg, 20px);
+  }
+}
+
+.timesheet__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+}
+
+.timesheet__add-matter {
+  width: 260px;
+}
+
+.timesheet__grid {
+  border: 1px solid var(--lf-surface-variant);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.timesheet__grid-header,
+.timesheet__row,
+.timesheet__totals-row {
+  display: grid;
+  grid-template-columns: 220px repeat(7, 1fr) 80px;
+  align-items: center;
+}
+
+.timesheet__grid-header {
+  background: var(--lf-surface-variant);
+  font-weight: 600;
+  font-size: var(--lf-text-xs);
+}
+
+.timesheet__matter-col,
+.timesheet__day-col,
+.timesheet__total-col {
+  padding: 6px var(--lf-space-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timesheet__viewport {
+  height: 320px;
+}
+
+.timesheet__row {
+  border-top: 1px solid var(--lf-surface-variant);
+}
+
+.timesheet__cell {
+  padding: 4px;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+
+  &:focus {
+    box-shadow: inset 0 0 0 2px var(--lf-primary);
+  }
+}
+
+.timesheet__cell-input {
+  width: 100%;
+  border: 1px solid var(--lf-primary);
+  border-radius: 4px;
+  padding: 2px 4px;
+  text-align: center;
+}
+
+.timesheet__cell-value {
+  font-variant-numeric: tabular-nums;
+}
+
+.timesheet__cell-status {
+  margin-left: 4px;
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+}
+
+.timesheet__cell-empty {
+  color: var(--lf-on-surface-variant);
+}
+
+.timesheet__totals-row {
+  border-top: 2px solid var(--lf-surface-variant);
+  background: var(--lf-surface-variant);
+}
+
+.timesheet__day-total {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.timesheet__bar {
+  height: 4px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--lf-on-surface-variant) 20%, transparent);
+  overflow: hidden;
+}
+
+.timesheet__bar-fill {
+  height: 100%;
+  background: var(--lf-primary);
+}

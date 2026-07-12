@@ -1,0 +1,69 @@
+<div class="branches">
+  <lf-admin-tabs />
+
+  <header class="branches__header">
+    <h1 i18n="@@admin.branchesList.title">Branches</h1>
+    <button mat-flat-button color="primary" type="button" (click)="openNew()">
+      <mat-icon>add</mat-icon> <ng-container i18n="@@admin.branchesList.newButton">New branch</ng-container>
+    </button>
+  </header>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (branches().length === 0) {
+    <lf-empty-state
+      icon="storefront"
+      title="No branches yet"
+      message="Create a branch to scope users, numbering series, and invoicing details by office."
+      ctaLabel="New branch"
+      i18n-title="@@admin.branchesList.emptyTitle"
+      i18n-message="@@admin.branchesList.emptyMessage"
+      i18n-ctaLabel="@@admin.branchesList.emptyCta"
+      (cta)="openNew()"
+    />
+  } @else {
+    <table class="branches__table">
+      <thead>
+        <tr>
+          <th i18n="@@admin.branchesList.colName">Name</th>
+          <th i18n="@@admin.branchesList.colCode">Code</th>
+          <th i18n="@@admin.branchesList.colTimezone">Timezone</th>
+          <th i18n="@@admin.branchesList.colGstin">GSTIN</th>
+          <th i18n="@@admin.branchesList.colSeriesPrefix">Series prefix</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (branch of branches(); track branch.id) {
+          <tr>
+            <td>{{ branch.name }}</td>
+            <td>{{ branch.code }}</td>
+            <td>{{ branch.tz }}</td>
+            <td>{{ branch.gstin ?? '—' }}</td>
+            <td>{{ branch.seriesPrefix ?? '—' }}</td>
+            <td class="branches__actions">
+              <button
+                mat-icon-button
+                type="button"
+                aria-label="Edit branch"
+                i18n-aria-label="@@admin.branchesList.editAriaLabel"
+                (click)="openEdit(branch)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                type="button"
+                aria-label="Delete branch"
+                i18n-aria-label="@@admin.branchesList.deleteAriaLabel"
+                (click)="deleteBranch(branch)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

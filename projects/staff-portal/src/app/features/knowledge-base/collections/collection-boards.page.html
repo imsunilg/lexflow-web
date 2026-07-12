@@ -1,0 +1,123 @@
+<div class="collections">
+  <lf-kb-tabs />
+
+  <section class="collections__boards">
+    <div class="collections__boards-header">
+      <h2 i18n="@@kb.collections.collectionsTitle">Collections</h2>
+      <button mat-stroked-button type="button" (click)="toggleNewForm()">
+        <mat-icon>add</mat-icon>
+        <span i18n="@@kb.collections.newCollectionButton">New collection</span>
+      </button>
+    </div>
+
+    @if (showNewForm()) {
+      <div class="collections__new-form">
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@kb.collections.nameLabel">Name</mat-label>
+          <input matInput [formControl]="newName" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@kb.collections.descriptionLabel">Description (optional)</mat-label>
+          <input matInput [formControl]="newDescription" />
+        </mat-form-field>
+        <div class="collections__new-form-actions">
+          <button mat-button type="button" (click)="toggleNewForm()" i18n="@@kb.collections.cancelButton">Cancel</button>
+          <button
+            mat-flat-button
+            color="primary"
+            type="button"
+            [disabled]="creating()"
+            (click)="createCollection()"
+            i18n="@@kb.collections.createButton"
+          >
+            Create
+          </button>
+        </div>
+      </div>
+    }
+
+    @if (collectionsLoading()) {
+      <mat-progress-bar mode="indeterminate" />
+    } @else if (collections().length === 0) {
+      <lf-empty-state icon="dashboard" title="No collections yet" i18n-title="@@kb.collections.noCollectionsEmptyState" />
+    } @else {
+      <ul class="collections__board-list">
+        @for (collection of collections(); track collection.id) {
+          <li>
+            <button
+              type="button"
+              class="collections__board-chip"
+              [class.collections__board-chip--active]="selectedId() === collection.id"
+              (click)="selectCollection(collection.id)"
+            >
+              {{ collection.name }}
+            </button>
+          </li>
+        }
+      </ul>
+    }
+  </section>
+
+  @if (selectedId()) {
+    <section class="collections__items">
+      <div class="collections__items-header">
+        <h2 i18n="@@kb.collections.itemsTitle">Items</h2>
+        <button mat-stroked-button type="button" (click)="toggleAddSearch()">
+          <mat-icon>add</mat-icon>
+          <span i18n="@@kb.collections.addItemButton">Add item</span>
+        </button>
+      </div>
+
+      @if (showAddSearch()) {
+        <div class="collections__add-search">
+          <mat-form-field appearance="outline">
+            <mat-label i18n="@@kb.collections.searchLabel">Search Acts, judgments, articles…</mat-label>
+            <input matInput [formControl]="addQuery" />
+            <mat-icon matPrefix>search</mat-icon>
+          </mat-form-field>
+
+          @if (addSearching()) {
+            <mat-progress-bar mode="indeterminate" />
+          }
+
+          @if (addHits().length > 0) {
+            <ul class="collections__hits">
+              @for (hit of addHits(); track hit.kind + hit.id) {
+                <li>
+                  <button
+                    type="button"
+                    class="collections__hit-row"
+                    [disabled]="adding()"
+                    (click)="addHit(hit)"
+                  >
+                    <mat-icon>{{ iconFor(hit.kind) }}</mat-icon>
+                    <span>{{ hit.title }}</span>
+                    <span class="collections__hit-kind">{{ hit.kind }}</span>
+                  </button>
+                </li>
+              }
+            </ul>
+          }
+        </div>
+      }
+
+      @if (itemsLoading()) {
+        <mat-progress-bar mode="indeterminate" />
+      } @else if (items().length === 0) {
+        <lf-empty-state icon="widgets" title="No items in this collection yet" i18n-title="@@kb.collections.noItemsEmptyState" />
+      } @else {
+        <ul class="collections__card-grid">
+          @for (row of items(); track row.item.id) {
+            <li>
+              <button type="button" class="collections__card" (click)="openItem(row)">
+                <mat-icon>{{ iconFor(row.item.kbRefKind) }}</mat-icon>
+                <span class="collections__card-label">{{ row.label }}</span>
+                <span class="collections__card-kind">{{ row.item.kbRefKind }}</span>
+              </button>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+  }
+</div>

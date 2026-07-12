@@ -33,29 +33,34 @@ import { AuthCardComponent } from './auth-card.component';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <lf-staff-auth-card title="Sign in" subtitle="Sign in to your LexFlow workspace">
+    <lf-staff-auth-card
+      title="Sign in"
+      i18n-title="@@auth.login.title"
+      subtitle="Sign in to your LexFlow workspace"
+      i18n-subtitle="@@auth.login.subtitle"
+    >
       <form [formGroup]="form" (ngSubmit)="submit()">
         <mat-form-field appearance="outline" class="auth-field">
-          <mat-label>Firm workspace</mat-label>
+          <mat-label i18n="@@auth.login.workspaceLabel">Firm workspace</mat-label>
           <input matInput formControlName="tenantSlug" autocomplete="organization" />
           @if (form.controls.tenantSlug.hasError('required') && form.controls.tenantSlug.touched) {
-            <mat-error>Workspace is required.</mat-error>
+            <mat-error i18n="@@auth.login.workspaceRequiredError">Workspace is required.</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="auth-field">
-          <mat-label>Email</mat-label>
+          <mat-label i18n="@@auth.login.emailLabel">Email</mat-label>
           <input matInput type="email" formControlName="email" autocomplete="username" />
           @if (form.controls.email.hasError('required') && form.controls.email.touched) {
-            <mat-error>Email is required.</mat-error>
+            <mat-error i18n="@@auth.login.emailRequiredError">Email is required.</mat-error>
           }
           @if (form.controls.email.hasError('email') && form.controls.email.touched) {
-            <mat-error>Enter a valid email.</mat-error>
+            <mat-error i18n="@@auth.login.emailInvalidError">Enter a valid email.</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="auth-field">
-          <mat-label>Password</mat-label>
+          <mat-label i18n="@@auth.login.passwordLabel">Password</mat-label>
           <input
             matInput
             type="password"
@@ -63,7 +68,7 @@ import { AuthCardComponent } from './auth-card.component';
             autocomplete="current-password"
           />
           @if (form.controls.password.hasError('required') && form.controls.password.touched) {
-            <mat-error>Password is required.</mat-error>
+            <mat-error i18n="@@auth.login.passwordRequiredError">Password is required.</mat-error>
           }
         </mat-form-field>
 
@@ -81,11 +86,13 @@ import { AuthCardComponent } from './auth-card.component';
           @if (submitting()) {
             <mat-spinner diameter="20" />
           } @else {
-            Sign in
+            <ng-container i18n="@@auth.login.signInButton">Sign in</ng-container>
           }
         </button>
 
-        <a class="auth-link" routerLink="/forgot-password">Forgot password?</a>
+        <a class="auth-link" routerLink="/forgot-password" i18n="@@auth.login.forgotPasswordLink"
+          >Forgot password?</a
+        >
       </form>
     </lf-staff-auth-card>
   `,

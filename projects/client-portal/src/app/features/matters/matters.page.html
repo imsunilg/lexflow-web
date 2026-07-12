@@ -1,0 +1,33 @@
+<div class="matters-page">
+  <h1 i18n="@@portal.matters.title">Matters</h1>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (matters().length === 0) {
+    <lf-empty-state icon="gavel" title="No matters yet" i18n-title="@@portal.matters.emptyTitle" />
+  } @else {
+    <div class="matters-page__cards">
+      @for (matter of matters(); track matter.id) {
+        <a class="matters-page__card" [routerLink]="[matter.id]">
+          <div class="matters-page__card-header">
+            <span class="matters-page__card-number">{{ matter.number }}</span>
+            <lf-status-chip [label]="matter.status" />
+          </div>
+          <p class="matters-page__card-title">{{ matter.title }}</p>
+          @if (matter.nextHearingDate) {
+            <p class="matters-page__card-meta">
+              <span i18n="@@portal.matters.nextHearingLabel">Next hearing:</span>
+              {{ matter.nextHearingDate }}
+            </p>
+          }
+          @if (matter.responsibleLawyerName) {
+            <p class="matters-page__card-meta">
+              <span i18n="@@portal.matters.lawyerLabel">Lawyer:</span>
+              {{ matter.responsibleLawyerName }}
+            </p>
+          }
+        </a>
+      }
+    </div>
+  }
+</div>

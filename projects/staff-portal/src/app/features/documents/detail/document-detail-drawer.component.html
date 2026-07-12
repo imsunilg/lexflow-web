@@ -4,6 +4,7 @@
     role="button"
     tabindex="0"
     aria-label="Close detail drawer"
+    i18n-aria-label="@@documents.detailDrawer.closeDrawerAriaLabel"
     (click)="close()"
     (keydown.enter)="close()"
     (keydown.space)="close()"
@@ -12,34 +13,34 @@
   <aside class="lf-detail-drawer" [class.lf-detail-drawer--open]="true">
     <header class="lf-detail-drawer__header">
       <h2 class="lf-detail-drawer__title">{{ doc.title }}</h2>
-      <button mat-icon-button type="button" aria-label="Close" (click)="close()">
+      <button mat-icon-button type="button" aria-label="Close" i18n-aria-label="@@documents.detailDrawer.closeButtonAriaLabel" (click)="close()">
         <mat-icon>close</mat-icon>
       </button>
     </header>
 
     <div class="lf-detail-drawer__quick-actions">
       <button mat-stroked-button type="button" (click)="requestPreview()">
-        <mat-icon>visibility</mat-icon> Preview
+        <mat-icon>visibility</mat-icon> <ng-container i18n="@@documents.detailDrawer.previewButton">Preview</ng-container>
       </button>
       <button mat-stroked-button type="button" (click)="requestShare()">
-        <mat-icon>share</mat-icon> Share
+        <mat-icon>share</mat-icon> <ng-container i18n="@@documents.detailDrawer.shareButton">Share</ng-container>
       </button>
       <button mat-stroked-button type="button" (click)="requestSign()">
-        <mat-icon>draw</mat-icon> Send for signature
+        <mat-icon>draw</mat-icon> <ng-container i18n="@@documents.detailDrawer.sendForSignatureButton">Send for signature</ng-container>
       </button>
     </div>
 
     <mat-tab-group class="lf-detail-drawer__tabs">
-      <mat-tab label="Metadata">
+      <mat-tab label="Metadata" i18n-label="@@documents.detailDrawer.metadataTab">
         <div class="lf-detail-drawer__tab-content">
           <form [formGroup]="form" class="lf-detail-drawer__form">
             <mat-form-field appearance="outline">
-              <mat-label>Title</mat-label>
+              <mat-label i18n="@@documents.detailDrawer.titleLabel">Title</mat-label>
               <input matInput formControlName="title" />
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-              <mat-label>Document type</mat-label>
+              <mat-label i18n="@@documents.detailDrawer.docTypeLabel">Document type</mat-label>
               <mat-select formControlName="docType">
                 @for (type of docTypes; track type) {
                   <mat-option [value]="type">{{ type }}</mat-option>
@@ -48,7 +49,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-              <mat-label>Confidentiality</mat-label>
+              <mat-label i18n="@@documents.detailDrawer.confidentialityLabel">Confidentiality</mat-label>
               <mat-select formControlName="confidentiality">
                 @for (level of confidentialityLevels; track level) {
                   <mat-option [value]="level">{{ level }}</mat-option>
@@ -67,6 +68,7 @@
                 type="button"
                 [disabled]="saving() || form.invalid"
                 (click)="saveMetadata()"
+                i18n="@@documents.detailDrawer.saveButton"
               >
                 Save
               </button>
@@ -76,6 +78,7 @@
                 type="button"
                 [disabled]="deleting()"
                 (click)="deleteDocument()"
+                i18n="@@documents.detailDrawer.deleteButton"
               >
                 Delete
               </button>
@@ -84,7 +87,7 @@
         </div>
       </mat-tab>
 
-      <mat-tab label="Versions">
+      <mat-tab label="Versions" i18n-label="@@documents.detailDrawer.versionsTab">
         <div class="lf-detail-drawer__tab-content">
           <lf-file-uploader
             (filesSelected)="uploadNewVersion($event)"
@@ -92,12 +95,14 @@
           />
 
           @if (versionsLoading()) {
-            <p class="lf-detail-drawer__hint">Loading versions…</p>
+            <p class="lf-detail-drawer__hint" i18n="@@documents.detailDrawer.loadingVersions">Loading versions…</p>
           } @else if (versions().length === 0) {
             <lf-empty-state
               icon="history"
               title="No versions yet"
+              i18n-title="@@documents.detailDrawer.noVersionsTitle"
               message="Upload a file above to create the first version."
+              i18n-message="@@documents.detailDrawer.noVersionsMessage"
             />
           } @else {
             <ul class="lf-detail-drawer__versions">
@@ -107,7 +112,7 @@
                     <span class="lf-detail-drawer__version-no">
                       v{{ version.versionNo }}
                       @if (isCurrentVersion(version)) {
-                        <lf-status-chip label="Current" [toneOverride]="'success'" />
+                        <lf-status-chip label="Current" i18n-label="@@documents.detailDrawer.currentVersionLabel" [toneOverride]="'success'" />
                       }
                     </span>
                     <span class="lf-detail-drawer__version-meta">
@@ -118,11 +123,11 @@
                   </div>
                   <lf-status-chip [label]="version.ocrStatus" />
                   <div class="lf-detail-drawer__version-actions">
-                    <a mat-button [href]="downloadUrl(doc.id)" target="_blank" rel="noopener"
+                    <a mat-button [href]="downloadUrl(doc.id)" target="_blank" rel="noopener" i18n="@@documents.detailDrawer.downloadLink"
                       >Download</a
                     >
                     @if (!isCurrentVersion(version)) {
-                      <button mat-button type="button" (click)="restoreVersion(version.versionNo)">
+                      <button mat-button type="button" (click)="restoreVersion(version.versionNo)" i18n="@@documents.detailDrawer.restoreButton">
                         Restore
                       </button>
                     }
@@ -134,30 +139,32 @@
         </div>
       </mat-tab>
 
-      <mat-tab label="Activity">
+      <mat-tab label="Activity" i18n-label="@@documents.detailDrawer.activityTab">
         <div class="lf-detail-drawer__tab-content">
           <lf-empty-state
             icon="history_toggle_off"
             title="Activity history isn't available yet"
+            i18n-title="@@documents.detailDrawer.activityNotAvailableTitle"
             message="There is no document-activity endpoint on the backend yet, so per-view/download/print history can't be shown here. This is a confirmed backend gap, not a bug."
+            i18n-message="@@documents.detailDrawer.activityNotAvailableMessage"
           />
         </div>
       </mat-tab>
 
-      <mat-tab label="Sharing">
+      <mat-tab label="Sharing" i18n-label="@@documents.detailDrawer.sharingTab">
         <div class="lf-detail-drawer__tab-content">
           <div class="lf-detail-drawer__sharing-summary">
-            <span class="lf-detail-drawer__sharing-label">Client portal</span>
+            <span class="lf-detail-drawer__sharing-label" i18n="@@documents.detailDrawer.clientPortalLabel">Client portal</span>
             <lf-status-chip
               [label]="doc.portalPublished ? 'Published' : 'Not published'"
               [toneOverride]="doc.portalPublished ? 'success' : 'neutral'"
             />
           </div>
-          <p class="lf-detail-drawer__hint">
+          <p class="lf-detail-drawer__hint" i18n="@@documents.detailDrawer.sharingHint">
             There is no publish/unpublish toggle endpoint yet, so this reflects the current value
             read-only. Use "Manage sharing" for external links.
           </p>
-          <button mat-stroked-button type="button" (click)="requestShare()">Manage sharing</button>
+          <button mat-stroked-button type="button" (click)="requestShare()" i18n="@@documents.detailDrawer.manageSharingButton">Manage sharing</button>
         </div>
       </mat-tab>
     </mat-tab-group>

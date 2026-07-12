@@ -1,14 +1,30 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PlaceholderPageComponent } from '../../shared/placeholder-page/placeholder-page.component';
+import { DatePipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { RouterLink } from '@angular/router';
+import { EmptyStateComponent } from 'shared';
+import { PortalMessageThread } from '../../core/models/portal.models';
+import { PortalMessagesService } from '../../core/services/portal-messages.service';
 
+/** Message threads (PRD Module 17 step 7) — secure, matter-scoped, not email. */
 @Component({
   selector: 'lf-portal-messages-page',
   standalone: true,
-  imports: [PlaceholderPageComponent],
+  imports: [DatePipe, RouterLink, MatProgressBarModule, EmptyStateComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<app-placeholder-page
-    title="Messages"
-    description="Secure threaded messaging with the firm team, per matter (PRD Module 17)."
-  />`,
+  templateUrl: './messages.page.html',
+  styleUrl: './messages.page.scss',
 })
-export class MessagesPage {}
+export class MessagesPage {
+  private readonly messagesService = inject(PortalMessagesService);
+
+  readonly loading = signal(true);
+  readonly threads = signal<PortalMessageThread[]>([]);
+
+  constructor() {
+    this.messagesService.listThreads().subscribe((threads) => {
+      this.threads.set(threads);
+      this.loading.set(false);
+    });
+  }
+}

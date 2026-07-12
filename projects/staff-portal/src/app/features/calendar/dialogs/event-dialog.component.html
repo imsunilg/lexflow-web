@@ -2,7 +2,7 @@
 <mat-dialog-content>
   <form [formGroup]="form" class="event-form">
     <mat-form-field appearance="outline">
-      <mat-label>Type</mat-label>
+      <mat-label i18n="@@calendar.eventDialog.typeLabel">Type</mat-label>
       <mat-select formControlName="kind">
         @for (kind of kinds; track kind) {
           <mat-option [value]="kind">{{ kind }}</mat-option>
@@ -11,35 +11,38 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="event-form__title">
-      <mat-label>Title</mat-label>
+      <mat-label i18n="@@calendar.eventDialog.titleLabel">Title</mat-label>
       <input matInput formControlName="title" />
     </mat-form-field>
 
-    <mat-slide-toggle formControlName="allDay" class="event-form__all-day"
+    <mat-slide-toggle
+      formControlName="allDay"
+      class="event-form__all-day"
+      i18n="@@calendar.eventDialog.allDayLabel"
       >All day</mat-slide-toggle
     >
 
     <mat-form-field appearance="outline">
-      <mat-label>Starts</mat-label>
+      <mat-label i18n="@@calendar.eventDialog.startsLabel">Starts</mat-label>
       <input matInput [matDatepicker]="startPicker" [formControl]="startControl" />
       <mat-datepicker-toggle matIconSuffix [for]="startPicker" />
       <mat-datepicker #startPicker />
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Ends</mat-label>
+      <mat-label i18n="@@calendar.eventDialog.endsLabel">Ends</mat-label>
       <input matInput [matDatepicker]="endPicker" [formControl]="endControl" />
       <mat-datepicker-toggle matIconSuffix [for]="endPicker" />
       <mat-datepicker #endPicker />
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Location</mat-label>
+      <mat-label i18n="@@calendar.eventDialog.locationLabel">Location</mat-label>
       <input matInput formControlName="location" />
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Video link</mat-label>
+      <mat-label i18n="@@calendar.eventDialog.videoLinkLabel">Video link</mat-label>
       <input matInput formControlName="videoLink" />
     </mat-form-field>
 
@@ -48,6 +51,7 @@
       [ngModel]="recurring()"
       [ngModelOptions]="{ standalone: true }"
       (ngModelChange)="recurring.set($event)"
+      i18n="@@calendar.eventDialog.repeatsLabel"
     >
       Repeats
     </mat-checkbox>
@@ -55,7 +59,7 @@
     @if (recurring()) {
       <div class="rrule-builder">
         <mat-form-field appearance="outline">
-          <mat-label>Frequency</mat-label>
+          <mat-label i18n="@@calendar.eventDialog.frequencyLabel">Frequency</mat-label>
           <mat-select [formControl]="recurrenceForm.controls.freq">
             @for (freq of frequencies; track freq) {
               <mat-option [value]="freq">{{ freq | titlecase }}</mat-option>
@@ -64,7 +68,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Every</mat-label>
+          <mat-label i18n="@@calendar.eventDialog.everyLabel">Every</mat-label>
           <input matInput type="number" min="1" [formControl]="recurrenceForm.controls.interval" />
         </mat-form-field>
 
@@ -91,20 +95,26 @@
           (ngModelChange)="endCondition.set($event)"
           class="rrule-builder__end"
         >
-          <mat-radio-button value="never">Never ends</mat-radio-button>
-          <mat-radio-button value="until">Until</mat-radio-button>
+          <mat-radio-button value="never" i18n="@@calendar.eventDialog.neverEndsLabel"
+            >Never ends</mat-radio-button
+          >
+          <mat-radio-button value="until" i18n="@@calendar.eventDialog.untilLabel"
+            >Until</mat-radio-button
+          >
           @if (endCondition() === 'until') {
             <mat-form-field appearance="outline">
-              <mat-label>End date</mat-label>
+              <mat-label i18n="@@calendar.eventDialog.endDateLabel">End date</mat-label>
               <input matInput [matDatepicker]="untilPicker" [formControl]="untilControl" />
               <mat-datepicker-toggle matIconSuffix [for]="untilPicker" />
               <mat-datepicker #untilPicker />
             </mat-form-field>
           }
-          <mat-radio-button value="count">After</mat-radio-button>
+          <mat-radio-button value="count" i18n="@@calendar.eventDialog.afterLabel"
+            >After</mat-radio-button
+          >
           @if (endCondition() === 'count') {
             <mat-form-field appearance="outline">
-              <mat-label>Occurrences</mat-label>
+              <mat-label i18n="@@calendar.eventDialog.occurrencesLabel">Occurrences</mat-label>
               <input matInput type="number" min="1" [formControl]="countControl" />
             </mat-form-field>
           }
@@ -112,7 +122,7 @@
 
         @if (upcomingOccurrences().length > 0) {
           <div class="rrule-builder__preview">
-            <strong>Next occurrences:</strong>
+            <strong i18n="@@calendar.eventDialog.nextOccurrencesLabel">Next occurrences:</strong>
             <ul>
               @for (date of upcomingOccurrences(); track date.getTime()) {
                 <li>{{ date | date: 'mediumDate' }}</li>
@@ -125,17 +135,18 @@
 
     <section class="event-form__section">
       <div class="event-form__section-header">
-        <strong>Attendees</strong>
+        <strong i18n="@@calendar.eventDialog.attendeesHeader">Attendees</strong>
         <button mat-button type="button" (click)="addAttendee()">
-          <mat-icon>add</mat-icon> Add
+          <mat-icon>add</mat-icon>
+          <span i18n="@@calendar.eventDialog.addAttendeeButton">Add</span>
         </button>
       </div>
       @for (control of attendees.controls; track $index) {
         <mat-form-field appearance="outline" class="event-form__row-field">
-          <mat-label>Email</mat-label>
+          <mat-label i18n="@@calendar.eventDialog.emailLabel">Email</mat-label>
           <input matInput [formControl]="control" />
           @if (control.invalid && control.touched) {
-            <mat-error>Invalid email</mat-error>
+            <mat-error i18n="@@calendar.eventDialog.invalidEmailError">Invalid email</mat-error>
           }
           <button matIconSuffix mat-icon-button type="button" (click)="removeAttendee($index)">
             <mat-icon>close</mat-icon>
@@ -146,19 +157,20 @@
 
     <section class="event-form__section">
       <div class="event-form__section-header">
-        <strong>Reminder overrides</strong>
+        <strong i18n="@@calendar.eventDialog.reminderOverridesHeader">Reminder overrides</strong>
         <button mat-button type="button" (click)="addReminder()">
-          <mat-icon>add</mat-icon> Add
+          <mat-icon>add</mat-icon>
+          <span i18n="@@calendar.eventDialog.addReminderButton">Add</span>
         </button>
       </div>
       @for (row of reminders.controls; track $index) {
         <div class="event-form__row" [formGroup]="row">
           <mat-form-field appearance="outline">
-            <mat-label>Minutes before</mat-label>
+            <mat-label i18n="@@calendar.eventDialog.minutesBeforeLabel">Minutes before</mat-label>
             <input matInput type="number" formControlName="offsetMinutes" />
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label>Channel</mat-label>
+            <mat-label i18n="@@calendar.eventDialog.channelLabel">Channel</mat-label>
             <mat-select formControlName="channel">
               @for (channel of channels; track channel) {
                 <mat-option [value]="channel">{{ channel }}</mat-option>
@@ -178,7 +190,14 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+  <button
+    mat-button
+    type="button"
+    [mat-dialog-close]="undefined"
+    i18n="@@calendar.eventDialog.cancelButton"
+  >
+    Cancel
+  </button>
   <button
     mat-flat-button
     color="primary"
@@ -189,7 +208,7 @@
     @if (saving()) {
       <mat-spinner diameter="20" />
     } @else {
-      Save
+      <span i18n="@@calendar.eventDialog.saveButton">Save</span>
     }
   </button>
 </mat-dialog-actions>

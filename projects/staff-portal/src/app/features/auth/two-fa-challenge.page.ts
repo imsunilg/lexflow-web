@@ -30,11 +30,13 @@ import { AuthCardComponent } from './auth-card.component';
   template: `
     <lf-staff-auth-card
       title="Two-factor verification"
+      i18n-title="@@auth.twoFaChallenge.title"
       subtitle="Enter the 6-digit code from your authenticator app"
+      i18n-subtitle="@@auth.twoFaChallenge.subtitle"
     >
       <form [formGroup]="form" (ngSubmit)="submit()">
         <mat-form-field appearance="outline" class="auth-field">
-          <mat-label>Verification code</mat-label>
+          <mat-label i18n="@@auth.twoFaChallenge.codeLabel">Verification code</mat-label>
           <input
             matInput
             formControlName="code"
@@ -43,10 +45,10 @@ import { AuthCardComponent } from './auth-card.component';
             maxlength="6"
           />
           @if (form.controls.code.hasError('required') && form.controls.code.touched) {
-            <mat-error>Enter the 6-digit code.</mat-error>
+            <mat-error i18n="@@auth.twoFaChallenge.codeRequiredError">Enter the 6-digit code.</mat-error>
           }
           @if (form.controls.code.hasError('pattern') && form.controls.code.touched) {
-            <mat-error>Code must be 6 digits.</mat-error>
+            <mat-error i18n="@@auth.twoFaChallenge.codePatternError">Code must be 6 digits.</mat-error>
           }
         </mat-form-field>
 
@@ -64,7 +66,7 @@ import { AuthCardComponent } from './auth-card.component';
           @if (submitting()) {
             <mat-spinner diameter="20" />
           } @else {
-            Verify
+            <ng-container i18n="@@auth.twoFaChallenge.verifyButton">Verify</ng-container>
           }
         </button>
       </form>

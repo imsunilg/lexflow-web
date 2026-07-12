@@ -5,7 +5,9 @@
     <lf-empty-state
       icon="error_outline"
       title="Couldn't load this matter"
+      i18n-title="@@matters.workspace.errorTitle"
       ctaLabel="Retry"
+      i18n-ctaLabel="@@matters.workspace.retryButton"
       (cta)="load()"
     />
   } @else {
@@ -20,6 +22,8 @@
             class="matter-workspace__countdown"
             [attr.data-tone]="countdown.tone"
             matTooltip="Next hearing countdown"
+            i18n-matTooltip="@@matters.workspace.nextHearingTooltip"
+            i18n="@@matters.workspace.nextHearingLabel"
           >
             Next hearing: {{ countdown.label }}
           </span>
@@ -32,72 +36,76 @@
           type="button"
           disabled
           matTooltip="Not available in this environment yet"
+          i18n-matTooltip="@@matters.workspace.notAvailableTooltip"
         >
           <mat-icon>schedule</mat-icon>
-          Start timer
+          <ng-container i18n="@@matters.workspace.startTimerButton">Start timer</ng-container>
         </button>
         <button
           mat-stroked-button
           type="button"
           disabled
           matTooltip="Not available in this environment yet"
+          i18n-matTooltip="@@matters.workspace.notAvailableTooltip"
         >
           <mat-icon>note_add</mat-icon>
-          Add note
+          <ng-container i18n="@@matters.workspace.addNoteButton">Add note</ng-container>
         </button>
         <button
           mat-stroked-button
           type="button"
           disabled
           matTooltip="Not available in this environment yet"
+          i18n-matTooltip="@@matters.workspace.notAvailableTooltip"
         >
           <mat-icon>upload</mat-icon>
-          Upload
+          <ng-container i18n="@@matters.workspace.uploadButton">Upload</ng-container>
         </button>
         <button
           mat-stroked-button
           type="button"
           disabled
           matTooltip="Not available in this environment yet"
+          i18n-matTooltip="@@matters.workspace.notAvailableTooltip"
         >
           <mat-icon>add_task</mat-icon>
-          New task
+          <ng-container i18n="@@matters.workspace.newTaskButton">New task</ng-container>
         </button>
 
         @if (matter()!.status === 'Open') {
-          <button mat-stroked-button type="button" (click)="putOnHold()">On hold</button>
-          <button mat-flat-button color="warn" type="button" (click)="openClosingChecklist()">
+          <button mat-stroked-button type="button" (click)="putOnHold()" i18n="@@matters.workspace.onHoldButton">On hold</button>
+          <button mat-flat-button color="warn" type="button" (click)="openClosingChecklist()" i18n="@@matters.workspace.closeMatterButton">
             Close matter
           </button>
         } @else if (matter()!.status === 'OnHold') {
-          <button mat-flat-button color="warn" type="button" (click)="openClosingChecklist()">
+          <button mat-flat-button color="warn" type="button" (click)="openClosingChecklist()" i18n="@@matters.workspace.closeMatterButton2">
             Close matter
           </button>
         } @else if (matter()!.status === 'Closed') {
-          <button mat-stroked-button type="button" (click)="reopen()">Reopen</button>
+          <button mat-stroked-button type="button" (click)="reopen()" i18n="@@matters.workspace.reopenButton">Reopen</button>
         }
       </div>
     </header>
 
     <mat-tab-group>
-      <mat-tab label="Overview">
+      <mat-tab label="Overview" i18n-label="@@matters.workspace.overviewTab">
         <div class="matter-workspace__tab-content matter-workspace__overview">
           <section class="matter-workspace__profile">
-            <h2>Details</h2>
+            <h2 i18n="@@matters.workspace.detailsHeading">Details</h2>
             <dl class="matter-workspace__profile-grid">
-              <dt>Client</dt>
+              <dt i18n="@@matters.workspace.clientTerm">Client</dt>
               <dd>{{ matter()!.clientId }}</dd>
-              <dt>Practice area</dt>
+              <dt i18n="@@matters.workspace.practiceAreaTerm">Practice area</dt>
               <dd>{{ matter()!.practiceAreaId || '—' }}</dd>
-              <dt>Branch</dt>
+              <dt i18n="@@matters.workspace.branchTerm">Branch</dt>
               <dd>{{ matter()!.branchId || '—' }}</dd>
-              <dt>Responsible lawyer</dt>
+              <dt i18n="@@matters.workspace.responsibleLawyerTerm">Responsible lawyer</dt>
               <dd>{{ matter()!.responsibleLawyerId || '—' }}</dd>
-              <dt>Opened</dt>
+              <dt i18n="@@matters.workspace.openedTerm">Opened</dt>
               <dd>{{ matter()!.openedOn }}</dd>
-              <dt>Budget</dt>
+              <dt i18n="@@matters.workspace.budgetTerm">Budget</dt>
               <dd>{{ matter()!.budget ?? '—' }}</dd>
-              <dt>Description</dt>
+              <dt i18n="@@matters.workspace.descriptionTerm">Description</dt>
               <dd>{{ matter()!.description || '—' }}</dd>
             </dl>
           </section>
@@ -108,17 +116,19 @@
         </div>
       </mat-tab>
 
-      <mat-tab label="Court Cases">
+      <mat-tab label="Court Cases" i18n-label="@@matters.workspace.courtCasesTab">
         <div class="matter-workspace__tab-content">
-          <button mat-stroked-button type="button" (click)="addCase()">Add court case</button>
+          <button mat-stroked-button type="button" (click)="addCase()" i18n="@@matters.workspace.addCourtCaseButton">Add court case</button>
 
           @if (casesLoading()) {
-            <p>Loading…</p>
+            <p i18n="@@matters.workspace.loadingCases">Loading…</p>
           } @else if (cases().length === 0) {
             <lf-empty-state
               icon="gavel"
               title="No court cases yet"
+              i18n-title="@@matters.workspace.noCourtCasesTitle"
               ctaLabel="Add court case"
+              i18n-ctaLabel="@@matters.workspace.addCourtCaseCta"
               (cta)="addCase()"
             />
           } @else {
@@ -144,12 +154,12 @@
         </div>
       </mat-tab>
 
-      <mat-tab label="Hearings">
+      <mat-tab label="Hearings" i18n-label="@@matters.workspace.hearingsTab">
         <div class="matter-workspace__tab-content">
           @if (hearingsLoading()) {
-            <p>Loading…</p>
+            <p i18n="@@matters.workspace.loadingHearings">Loading…</p>
           } @else if (upcomingHearings().length === 0) {
-            <lf-empty-state icon="event_available" title="No upcoming hearings" />
+            <lf-empty-state icon="event_available" title="No upcoming hearings" i18n-title="@@matters.workspace.noUpcomingHearingsTitle" />
           } @else {
             <ul class="matter-workspace__hearing-list">
               @for (entry of upcomingHearings(); track entry.hearing.id) {
@@ -168,45 +178,57 @@
         </div>
       </mat-tab>
 
-      <mat-tab label="Documents & Evidence">
+      <mat-tab label="Documents & Evidence" i18n-label="@@matters.workspace.documentsTab">
         <div class="matter-workspace__tab-content">
           <lf-matter-documents-tab [matterId]="matter()!.id" />
         </div>
       </mat-tab>
 
-      <mat-tab label="Tasks">
+      <mat-tab label="Tasks" i18n-label="@@matters.workspace.tasksTab">
         <div class="matter-workspace__tab-content">
           <lf-matter-tasks-tab [matterId]="matter()!.id" />
         </div>
       </mat-tab>
 
-      <mat-tab label="Time & Expenses">
+      <mat-tab label="Time & Expenses" i18n-label="@@matters.workspace.timeExpensesTab">
         <div class="matter-workspace__tab-content">
           <lf-matter-time-expenses-tab [matterId]="matter()!.id" />
         </div>
       </mat-tab>
 
-      <mat-tab label="Billing">
+      <mat-tab label="Billing" i18n-label="@@matters.workspace.billingTab">
         <div class="matter-workspace__tab-content">
           <lf-matter-billing-tab [matterId]="matter()!.id" />
         </div>
       </mat-tab>
 
-      <mat-tab label="Notes">
+      <mat-tab label="Notes" i18n-label="@@matters.workspace.notesTab">
         <div class="matter-workspace__tab-content">
           <lf-matter-notes-tab [matterId]="matter()!.id" />
         </div>
       </mat-tab>
 
-      <mat-tab label="Parties">
+      <mat-tab label="Parties" i18n-label="@@matters.workspace.partiesTab">
         <div class="matter-workspace__tab-content">
           <lf-matter-parties-tab [matterId]="matter()!.id" />
         </div>
       </mat-tab>
 
-      <mat-tab label="Activity">
+      <mat-tab label="Activity" i18n-label="@@matters.workspace.activityTab">
         <div class="matter-workspace__tab-content">
           <lf-matter-activity-tab [matterId]="matter()!.id" />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Communication" i18n-label="@@matters.workspace.communicationTab">
+        <div class="matter-workspace__tab-content">
+          <lf-communication-timeline [clientId]="matter()!.clientId" [matterScoped]="true" />
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Research" i18n-label="@@matters.workspace.researchTab">
+        <div class="matter-workspace__tab-content">
+          <lf-matter-research-tab [matterId]="matter()!.id" />
         </div>
       </mat-tab>
     </mat-tab-group>

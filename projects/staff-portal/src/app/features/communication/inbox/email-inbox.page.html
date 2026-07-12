@@ -1,0 +1,123 @@
+<div class="inbox">
+  <lf-comm-tabs />
+
+  <div class="inbox__panes">
+    <aside class="inbox__pane inbox__pane--filters">
+      <button mat-flat-button color="primary" type="button" (click)="openComposer()">
+        <mat-icon>edit</mat-icon> <span i18n="@@communication.emailInbox.newEmailButton">New email</span>
+      </button>
+
+      <mat-slide-toggle [formControl]="triageOnly" i18n="@@communication.emailInbox.triageOnlyToggle">Triage queue only</mat-slide-toggle>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@communication.emailInbox.filterByMatterLabel">Filter by matter</mat-label>
+        <input matInput [formControl]="matterControl" [matAutocomplete]="matterAuto" />
+        <mat-autocomplete #matterAuto="matAutocomplete" (optionSelected)="onMatterSelected($event)">
+          @for (matter of matterResults(); track matter.id) {
+            <mat-option [value]="matter.number + ' — ' + matter.title">
+              {{ matter.number }} — {{ matter.title }}
+            </mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+      @if (activeMatterLabel()) {
+        <div class="inbox__active-filter">
+          {{ activeMatterLabel() }}
+          <button mat-icon-button type="button" (click)="clearMatterFilter()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      }
+
+      <h3 class="inbox__mailboxes-title" i18n="@@communication.emailInbox.knownMailboxesTitle">Known mailboxes</h3>
+      @if (mailboxRegistry.mailboxes().length === 0) {
+        <p class="inbox__hint" i18n="@@communication.emailInbox.noMailboxesHint">None yet.</p>
+      }
+      <ul class="inbox__mailbox-list">
+        @for (mailbox of mailboxRegistry.mailboxes(); track mailbox.id) {
+          <li>{{ mailbox.label }}</li>
+        }
+      </ul>
+      <button mat-stroked-button type="button" (click)="openConnectMailbox()" i18n="@@communication.emailInbox.connectMailboxButton">
+        Connect mailbox
+      </button>
+    </aside>
+
+    <section class="inbox__pane inbox__pane--threads">
+      @if (threadsLoading()) {
+        <mat-progress-bar mode="indeterminate" />
+      } @else if (threads().length === 0) {
+        <lf-empty-state icon="mail" title="No threads" i18n-title="@@communication.emailInbox.noThreadsEmptyState" />
+      } @else {
+        <ul class="inbox__thread-list">
+          @for (thread of threads(); track thread.id) {
+            <li>
+              <button
+                type="button"
+                class="inbox__thread-row"
+                [class.inbox__thread-row--active]="selectedThreadId() === thread.id"
+                (click)="selectThread(thread)"
+              >
+                <strong>{{ thread.subject || '(no subject)' }}</strong>
+                <span class="inbox__thread-meta">
+                  @if (thread.lastMessageAt) {
+                    {{ thread.lastMessageAt | date: 'MMM d, h:mm a' }}
+                  }
+                  @if (!thread.matterId && !thread.clientId) {
+                    <span i18n="@@communication.emailInbox.unfiledBadge">· Unfiled</span>
+                  }
+                </span>
+              </button>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+
+    <section class="inbox__pane inbox__pane--thread">
+      @if (!selectedThread()) {
+        <lf-empty-state icon="forum" title="Select a thread" i18n-title="@@communication.emailInbox.selectThreadEmptyState" />
+      } @else {
+        <div class="inbox__matter-banner">
+          @if (selectedThread()!.matterId) {
+            <span i18n="@@communication.emailInbox.filedUnderMatter">Filed under matter {{ selectedThread()!.matterId }}</span>
+          } @else {
+            <span i18n="@@communication.emailInbox.notFiledToMatter">Not filed to a matter</span>
+            @if (activeMatterId()) {
+              <button mat-button type="button" (click)="linkToActiveMatter()" i18n="@@communication.emailInbox.linkToMatterButton">
+                Link to {{ activeMatterLabel() }}
+              </button>
+            }
+          }
+        </div>
+
+        @if (messagesLoading()) {
+          <mat-progress-bar mode="indeterminate" />
+        } @else {
+          <ul class="inbox__message-list">
+            @for (message of messages(); track message.id) {
+              <li
+                class="inbox__message"
+                [class.inbox__message--outbound]="message.direction === 'Outbound'"
+              >
+                <div class="inbox__message-meta">
+                  <span>{{ message.fromAddr }} → {{ message.toAddrs.join(', ') }}</span>
+                  <span>{{ message.sentAt | date: 'MMM d, y h:mm a' }}</span>
+                </div>
+                @if (message.bodyHtmlSanitized) {
+                  <div class="inbox__message-body" [innerHTML]="message.bodyHtmlSanitized"></div>
+                }
+                @if (message.hasAttachments) {
+                  <span class="inbox__message-attachment">
+                    <mat-icon>attach_file</mat-icon> <span i18n="@@communication.emailInbox.hasAttachmentsLabel">Has attachments</span>
+                  </span>
+                }
+              </li>
+            }
+          </ul>
+          <button mat-stroked-button type="button" (click)="openReply()" i18n="@@communication.emailInbox.replyButton">Reply</button>
+        }
+      }
+    </section>
+  </div>
+</div>

@@ -1,0 +1,115 @@
+<div class="tax-rates">
+  <lf-admin-tabs />
+
+  <header class="tax-rates__header">
+    <h1 i18n="@@admin.taxRates.title">Tax rates</h1>
+    <button mat-flat-button color="primary" type="button" (click)="toggleNewForm()">
+      <mat-icon>add</mat-icon> <ng-container i18n="@@admin.taxRates.newButton">New tax rate</ng-container>
+    </button>
+  </header>
+
+  @if (showNewForm()) {
+    <form class="tax-rates__form" [formGroup]="newForm" (ngSubmit)="createRate()">
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.taxRates.countryCodeLabel">Country code</mat-label>
+        <input matInput formControlName="countryCode" placeholder="IN" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.taxRates.taxTypeLabel">Tax type</mat-label>
+        <input matInput formControlName="taxType" required list="tax-rates-common-types" />
+        <datalist id="tax-rates-common-types">
+          @for (type of commonTaxTypes; track type) {
+            <option [value]="type"></option>
+          }
+        </datalist>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.taxRates.branchLabel">Branch (optional)</mat-label>
+        <mat-select formControlName="branchId">
+          <mat-option [value]="null" i18n="@@admin.taxRates.allBranchesOption">All branches</mat-option>
+          @for (branch of branches(); track branch.id) {
+            <mat-option [value]="branch.id">{{ branch.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-checkbox formControlName="isActive" i18n="@@admin.taxRates.activeCheckbox">Active</mat-checkbox>
+      <mat-form-field appearance="outline" class="tax-rates__wide">
+        <mat-label i18n="@@admin.taxRates.componentsLabel">Components (JSON)</mat-label>
+        <textarea matInput formControlName="componentsJson" rows="4"></textarea>
+        <mat-hint i18n="@@admin.taxRates.componentsHint"
+          >e.g. {{ '{ "rate": 18, "breakdown": [{ "label": "CGST", "pct": 9 }] }' }}</mat-hint
+        >
+      </mat-form-field>
+      <div class="tax-rates__form-actions">
+        <button mat-flat-button color="primary" type="submit" [disabled]="saving()">
+          {{ saving() ? 'Creating…' : 'Create' }}
+        </button>
+        <button mat-button type="button" (click)="toggleNewForm()" i18n="@@admin.taxRates.cancelButton">Cancel</button>
+      </div>
+    </form>
+  }
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (rates().length === 0) {
+    <lf-empty-state
+      icon="percent"
+      title="No tax rates yet"
+      message="Create a tax rate to use on invoices and quotes."
+      i18n-title="@@admin.taxRates.emptyTitle"
+      i18n-message="@@admin.taxRates.emptyMessage"
+    />
+  } @else {
+    <div class="tax-rates__list">
+      @for (rate of rates(); track rate.id) {
+        <div class="tax-rates__card">
+          @if (editingId() === rate.id) {
+            <form class="tax-rates__form" [formGroup]="editForm" (ngSubmit)="saveEdit(rate)">
+              <mat-form-field appearance="outline">
+                <mat-label i18n="@@admin.taxRates.editCountryCodeLabel">Country code</mat-label>
+                <input matInput formControlName="countryCode" required />
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label i18n="@@admin.taxRates.editTaxTypeLabel">Tax type</mat-label>
+                <input matInput formControlName="taxType" required list="tax-rates-common-types" />
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label i18n="@@admin.taxRates.editBranchLabel">Branch (optional)</mat-label>
+                <mat-select formControlName="branchId">
+                  <mat-option [value]="null" i18n="@@admin.taxRates.editAllBranchesOption">All branches</mat-option>
+                  @for (branch of branches(); track branch.id) {
+                    <mat-option [value]="branch.id">{{ branch.name }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+              <mat-checkbox formControlName="isActive" i18n="@@admin.taxRates.editActiveCheckbox">Active</mat-checkbox>
+              <mat-form-field appearance="outline" class="tax-rates__wide">
+                <mat-label i18n="@@admin.taxRates.editComponentsLabel">Components (JSON)</mat-label>
+                <textarea matInput formControlName="componentsJson" rows="4"></textarea>
+              </mat-form-field>
+              <div class="tax-rates__form-actions">
+                <button mat-flat-button color="primary" type="submit" [disabled]="saving()">
+                  {{ saving() ? 'Saving…' : 'Save' }}
+                </button>
+                <button mat-button type="button" (click)="cancelEdit()" i18n="@@admin.taxRates.editCancelButton">Cancel</button>
+              </div>
+            </form>
+          } @else {
+            <div class="tax-rates__card-header">
+              <h2>{{ rate.countryCode }} &middot; {{ rate.taxType }}</h2>
+              <span class="tax-rates__status" [class.tax-rates__status--inactive]="!rate.isActive">
+                {{ rate.isActive ? 'Active' : 'Inactive' }}
+              </span>
+            </div>
+            <p class="tax-rates__meta" i18n="@@admin.taxRates.branchMeta">Branch: {{ branchName(rate.branchId) }}</p>
+            <pre class="tax-rates__json">{{ rate.componentsJson }}</pre>
+            <div class="tax-rates__card-actions">
+              <button mat-stroked-button type="button" (click)="startEdit(rate)" i18n="@@admin.taxRates.editButton">Edit</button>
+              <button mat-stroked-button type="button" (click)="deleteRate(rate)" i18n="@@admin.taxRates.deleteButton">Delete</button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

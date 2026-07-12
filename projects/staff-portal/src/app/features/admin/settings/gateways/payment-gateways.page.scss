@@ -1,0 +1,72 @@
+.payment-gateways {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  height: 100%;
+  overflow-y: auto;
+}
+
+.payment-gateways__header {
+  h1 {
+    font-size: var(--lf-text-lg);
+    margin: 0;
+  }
+}
+
+.payment-gateways__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+}
+
+.payment-gateways__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+  background: var(--lf-surface-variant);
+  border-radius: var(--lf-radius);
+  padding: var(--lf-space-2);
+}
+
+.payment-gateways__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 {
+    font-size: var(--lf-text-base);
+    margin: 0;
+  }
+}
+
+.payment-gateways__status {
+  font-size: var(--lf-text-xs);
+  font-weight: 600;
+  color: var(--lf-on-surface-variant);
+
+  &--enabled {
+    color: var(--lf-primary);
+  }
+}
+
+.payment-gateways__meta {
+  margin: 0;
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+}
+
+.payment-gateways__form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--lf-space-2);
+  align-items: start;
+}
+
+.payment-gateways__wide {
+  grid-column: 1 / -1;
+}
+
+.payment-gateways__actions {
+  display: flex;
+  gap: var(--lf-space-1);
+}

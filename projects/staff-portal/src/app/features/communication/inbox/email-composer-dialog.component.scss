@@ -1,0 +1,24 @@
+.composer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+  min-width: 480px;
+  max-width: 560px;
+}
+
+.composer__preview {
+  background: var(--lf-surface-variant);
+  border-radius: var(--lf-radius);
+  padding: var(--lf-space-1);
+}
+
+.composer__preview-label {
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+}
+
+.composer__preview-body {
+  white-space: pre-wrap;
+  margin: 4px 0 0;
+  font-size: var(--lf-text-sm);
+}

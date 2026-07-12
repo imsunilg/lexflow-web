@@ -1,0 +1,76 @@
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  height: 100%;
+  overflow-y: auto;
+}
+
+.settings-section__header {
+  h1 {
+    font-size: var(--lf-text-lg);
+    margin: 0;
+  }
+}
+
+.settings-section__unknown {
+  color: var(--lf-on-surface-variant);
+}
+
+.settings-section__form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--lf-space-2);
+  align-items: start;
+  max-width: 960px;
+}
+
+.settings-section__wide {
+  grid-column: 1 / -1;
+}
+
+.settings-section__note {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+}
+
+.settings-section__actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: var(--lf-space-1);
+}
+
+.settings-section__test-row {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+}
+
+.settings-section__holidays {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+}
+
+.settings-section__holidays-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 {
+    font-size: var(--lf-text-sm);
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+.settings-section__holiday-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: var(--lf-space-1);
+  align-items: start;
+}

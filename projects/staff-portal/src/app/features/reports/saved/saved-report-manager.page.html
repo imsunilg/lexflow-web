@@ -1,0 +1,68 @@
+<div class="saved-report-manager">
+  <lf-reports-tabs />
+
+  <section class="saved-report-manager__section">
+    <h2 i18n="@@reports.savedManager.customReportsHeading">Custom reports</h2>
+    @if (loadingDefinitions()) {
+      <mat-progress-bar mode="indeterminate" />
+    } @else if (definitions().length === 0) {
+      <lf-empty-state
+        icon="add_chart"
+        title="No custom reports yet"
+        i18n-title="@@reports.savedManager.noCustomReportsTitle"
+        ctaLabel="Build one"
+        i18n-ctaLabel="@@reports.savedManager.buildOneCta"
+        (cta)="goToBuilder()"
+      />
+    } @else {
+      <ul class="saved-report-manager__list">
+        @for (def of definitions(); track def.id) {
+          <li
+            class="saved-report-manager__row"
+            role="button"
+            tabindex="0"
+            (click)="openDefinition(def)"
+            (keydown.enter)="openDefinition(def)"
+            (keydown.space)="openDefinition(def)"
+          >
+            <span class="saved-report-manager__name">{{ def.name }}</span>
+            <span class="saved-report-manager__meta"
+              >{{ def.baseEntity }} · {{ def.visibility }}</span
+            >
+            <button mat-icon-button type="button" (click)="editDefinition(def, $event)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button type="button" (click)="scheduleDefinition(def, $event)">
+              <mat-icon>schedule</mat-icon>
+            </button>
+          </li>
+        }
+      </ul>
+    }
+  </section>
+
+  <section class="saved-report-manager__section">
+    <h2 i18n="@@reports.savedManager.schedulesHeading">Schedules</h2>
+    @if (loadingSchedules()) {
+      <mat-progress-bar mode="indeterminate" />
+    } @else if (schedules().length === 0) {
+      <lf-empty-state icon="schedule" title="No schedules yet" i18n-title="@@reports.savedManager.noSchedulesTitle" />
+    } @else {
+      <ul class="saved-report-manager__list">
+        @for (schedule of schedules(); track schedule.id) {
+          <li class="saved-report-manager__row saved-report-manager__row--static">
+            <span class="saved-report-manager__name">
+              {{ schedule.reportKey ?? definitionName(schedule.reportDefinitionId) }}
+            </span>
+            <span class="saved-report-manager__meta">
+              {{ schedule.frequency }} · {{ schedule.format }}
+              @if (schedule.nextRunAt) {
+                · next {{ schedule.nextRunAt | date: 'medium' }}
+              }
+            </span>
+          </li>
+        }
+      </ul>
+    }
+  </section>
+</div>

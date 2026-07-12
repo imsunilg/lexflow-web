@@ -1,0 +1,144 @@
+<div class="number-series">
+  <lf-admin-tabs />
+
+  <header class="number-series__header">
+    <h1 i18n="@@admin.numberSeries.title">Number series</h1>
+    <button mat-flat-button color="primary" type="button" (click)="toggleNewForm()">
+      <mat-icon>add</mat-icon> <ng-container i18n="@@admin.numberSeries.newButton">New series</ng-container>
+    </button>
+  </header>
+
+  @if (showNewForm()) {
+    <form class="number-series__new-form" [formGroup]="newForm" (ngSubmit)="createSeries()">
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.numberSeries.seriesKeyLabel">Series key</mat-label>
+        <input matInput formControlName="seriesKey" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.numberSeries.fiscalYearLabel">Fiscal year</mat-label>
+        <input matInput type="number" formControlName="fiscalYear" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="number-series__pattern-field">
+        <mat-label i18n="@@admin.numberSeries.formatPatternLabel">Format pattern</mat-label>
+        <input matInput formControlName="formatPattern" required />
+        <mat-hint i18n="@@admin.numberSeries.formatPatternHint">
+          Tokens: {{ '{SEQ}' }} or {{ '{SEQ:n}' }} (zero-padded sequence), {{ '{SERIES}' }},
+          {{ '{FY}' }}, {{ '{BR}' }}.
+        </mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.numberSeries.branchLabel">Branch (optional)</mat-label>
+        <mat-select formControlName="branchId">
+          <mat-option [value]="null" i18n="@@admin.numberSeries.allBranchesOption">All branches</mat-option>
+          @for (branch of branches(); track branch.id) {
+            <mat-option [value]="branch.id">{{ branch.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <div class="number-series__form-actions">
+        <button mat-flat-button color="primary" type="submit" [disabled]="saving()">
+          {{ saving() ? 'Creating…' : 'Create' }}
+        </button>
+        <button mat-button type="button" (click)="toggleNewForm()" i18n="@@admin.numberSeries.cancelButton">Cancel</button>
+      </div>
+    </form>
+  }
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (series().length === 0) {
+    <lf-empty-state
+      icon="format_list_numbered"
+      title="No number series yet"
+      message="Create a series to control how document numbers are generated."
+      i18n-title="@@admin.numberSeries.emptyTitle"
+      i18n-message="@@admin.numberSeries.emptyMessage"
+    />
+  } @else {
+    <table class="number-series__table">
+      <thead>
+        <tr>
+          <th i18n="@@admin.numberSeries.colSeriesKey">Series key</th>
+          <th i18n="@@admin.numberSeries.colFiscalYear">Fiscal year</th>
+          <th i18n="@@admin.numberSeries.colBranch">Branch</th>
+          <th i18n="@@admin.numberSeries.colFormatPattern">Format pattern</th>
+          <th i18n="@@admin.numberSeries.colNextSequence">Next sequence</th>
+          <th i18n="@@admin.numberSeries.colPreview">Preview</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of series(); track item.id) {
+          <tr>
+            <td>{{ item.seriesKey }}</td>
+            <td>{{ item.fiscalYear }}</td>
+            <td>{{ branchName(item.branchId) }}</td>
+            <td>
+              @if (editingId() === item.id) {
+                <mat-form-field appearance="outline" class="number-series__inline-field">
+                  <input matInput [formControl]="patternForm" />
+                </mat-form-field>
+              } @else {
+                {{ item.formatPattern }}
+              }
+            </td>
+            <td>{{ item.nextSeq }}</td>
+            <td>{{ previewFor(item.id) }}</td>
+            <td class="number-series__row-actions">
+              @if (editingId() === item.id) {
+                <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="Save pattern"
+                  i18n-aria-label="@@admin.numberSeries.savePatternAriaLabel"
+                  [disabled]="saving()"
+                  (click)="saveEditPattern(item)"
+                >
+                  <mat-icon>check</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="Cancel"
+                  i18n-aria-label="@@admin.numberSeries.cancelPatternAriaLabel"
+                  (click)="cancelEditPattern()"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              } @else {
+                <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="Edit pattern"
+                  i18n-aria-label="@@admin.numberSeries.editPatternAriaLabel"
+                  (click)="startEditPattern(item)"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="Preview next number"
+                  i18n-aria-label="@@admin.numberSeries.previewAriaLabel"
+                  [disabled]="previewing() === item.id"
+                  (click)="previewNext(item)"
+                >
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="Delete series"
+                  i18n-aria-label="@@admin.numberSeries.deleteAriaLabel"
+                  (click)="deleteSeries(item)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

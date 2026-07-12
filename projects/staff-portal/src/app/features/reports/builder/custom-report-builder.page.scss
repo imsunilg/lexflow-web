@@ -1,0 +1,51 @@
+.custom-report-builder {
+  padding: var(--lf-space-3);
+}
+
+.custom-report-builder__form {
+  display: flex;
+  gap: var(--lf-space-2);
+  flex-wrap: wrap;
+}
+
+.custom-report-builder__checklist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--lf-space-2);
+  margin-bottom: var(--lf-space-2);
+}
+
+.custom-report-builder__row {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-2);
+  margin-bottom: var(--lf-space-1);
+}
+
+.custom-report-builder__step-actions {
+  display: flex;
+  gap: var(--lf-space-2);
+  margin: var(--lf-space-2) 0;
+}
+
+.custom-report-builder__error {
+  color: var(--lf-error);
+}
+
+.custom-report-builder__preview {
+  overflow: auto;
+  max-height: 40vh;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 6px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--lf-surface-variant);
+    white-space: nowrap;
+  }
+}

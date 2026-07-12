@@ -2,34 +2,39 @@
   <lf-leads-tabs />
 
   <header class="leads-list-page__toolbar">
-    <h1 class="leads-list-page__title">Leads</h1>
+    <h1 class="leads-list-page__title" i18n="@@leads.list.title">Leads</h1>
     <div class="leads-list-page__toolbar-actions">
       <button mat-stroked-button type="button" (click)="export('csv')">
         <mat-icon>download</mat-icon>
-        Export CSV
+        <span i18n="@@leads.list.exportCsvButton">Export CSV</span>
       </button>
       <button mat-stroked-button type="button" (click)="export('xlsx')">
         <mat-icon>download</mat-icon>
-        Export XLSX
+        <span i18n="@@leads.list.exportXlsxButton">Export XLSX</span>
       </button>
       <button mat-flat-button color="primary" type="button" (click)="createLead()">
         <mat-icon>add</mat-icon>
-        New lead
+        <span i18n="@@leads.list.newLeadButton">New lead</span>
       </button>
     </div>
   </header>
 
   <form class="leads-list-page__filters" [formGroup]="form">
     <mat-form-field appearance="outline" class="leads-list-page__search">
-      <mat-label>Search</mat-label>
-      <input matInput formControlName="q" placeholder="Name, email, phone, company" />
+      <mat-label i18n="@@leads.list.searchLabel">Search</mat-label>
+      <input
+        matInput
+        formControlName="q"
+        placeholder="Name, email, phone, company"
+        i18n-placeholder="@@leads.list.searchPlaceholder"
+      />
       <mat-icon matIconSuffix>search</mat-icon>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Stage</mat-label>
+      <mat-label i18n="@@leads.list.stageLabel">Stage</mat-label>
       <mat-select formControlName="stage" (selectionChange)="load()">
-        <mat-option value="">All stages</mat-option>
+        <mat-option value="" i18n="@@leads.list.allStagesOption">All stages</mat-option>
         @for (stage of stages; track stage) {
           <mat-option [value]="stage">{{ stage }}</mat-option>
         }
@@ -37,9 +42,9 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Source</mat-label>
+      <mat-label i18n="@@leads.list.sourceLabel">Source</mat-label>
       <mat-select formControlName="source" (selectionChange)="load()">
-        <mat-option value="">All sources</mat-option>
+        <mat-option value="" i18n="@@leads.list.allSourcesOption">All sources</mat-option>
         @for (source of sources(); track source.id) {
           <mat-option [value]="source.id">{{ source.name }}</mat-option>
         }
@@ -47,20 +52,24 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Status</mat-label>
+      <mat-label i18n="@@leads.list.statusLabel">Status</mat-label>
       <mat-select formControlName="status" (selectionChange)="load()">
-        <mat-option value="">All statuses</mat-option>
+        <mat-option value="" i18n="@@leads.list.allStatusesOption">All statuses</mat-option>
         @for (status of statuses; track status) {
           <mat-option [value]="status">{{ status }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
 
-    <lf-date-range-picker label="Created" (rangeChange)="onDateRangeChange($event)" />
+    <lf-date-range-picker
+      label="Created"
+      i18n-label="@@leads.list.createdLabel"
+      (rangeChange)="onDateRangeChange($event)"
+    />
 
     <button mat-button type="button" (click)="clearFilters()">
       <mat-icon>filter_alt_off</mat-icon>
-      Clear filters
+      <span i18n="@@leads.list.clearFiltersButton">Clear filters</span>
     </button>
   </form>
 
@@ -78,7 +87,7 @@
 
     @if (savingViewName()) {
       <mat-form-field appearance="outline" class="leads-list-page__save-view-input">
-        <mat-label>View name</mat-label>
+        <mat-label i18n="@@leads.list.viewNameLabel">View name</mat-label>
         <input matInput [formControl]="newViewName" (keydown.enter)="confirmSaveView()" />
       </mat-form-field>
       <button mat-icon-button type="button" (click)="confirmSaveView()">
@@ -90,7 +99,7 @@
     } @else {
       <button mat-button type="button" (click)="startSavingView()">
         <mat-icon>bookmark_add</mat-icon>
-        Save current filter
+        <span i18n="@@leads.list.saveFilterButton">Save current filter</span>
       </button>
     }
   </div>
@@ -99,15 +108,20 @@
     <lf-empty-state
       icon="error_outline"
       title="Couldn't load leads"
+      i18n-title="@@leads.list.errorTitle"
       ctaLabel="Retry"
+      i18n-ctaLabel="@@leads.list.errorRetry"
       (cta)="load()"
     />
   } @else if (!loading() && rows().length === 0) {
     <lf-empty-state
       icon="person_search"
       title="No leads match these filters"
+      i18n-title="@@leads.list.noMatchTitle"
       message="Try adjusting or clearing your filters."
+      i18n-message="@@leads.list.noMatchMessage"
       ctaLabel="Clear filters"
+      i18n-ctaLabel="@@leads.list.noMatchCta"
       (cta)="clearFilters()"
     />
   } @else {

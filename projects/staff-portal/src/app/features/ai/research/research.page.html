@@ -1,0 +1,79 @@
+<div class="ai-research">
+  <lf-ai-tabs />
+
+  <h1 i18n="@@ai.research.heading">Research assistant</h1>
+
+  <mat-form-field appearance="outline" class="ai-research__question">
+    <mat-label i18n="@@ai.research.questionLabel">Question</mat-label>
+    <textarea matInput [formControl]="question" rows="3"></textarea>
+    @if (question.hasError('minlength') || question.hasError('required')) {
+      <mat-hint i18n="@@ai.research.minLengthHint">At least 3 characters.</mat-hint>
+    }
+  </mat-form-field>
+
+  <div class="ai-research__controls">
+    <mat-checkbox [formControl]="webGroundedMode" i18n="@@ai.research.webGroundedCheckbox"
+      >Web-grounded mode</mat-checkbox
+    >
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      [disabled]="asking()"
+      (click)="ask()"
+      i18n="@@ai.research.askButton"
+    >
+      Ask
+    </button>
+  </div>
+  <p class="ai-research__hint" i18n="@@ai.research.webGroundedHint">
+    Web-grounded mode is accepted by the API but doesn't currently change retrieval — research
+    always draws from the firm's own Acts/Judgments/Articles either way.
+  </p>
+
+  @if (asking()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+  @if (askError()) {
+    <p class="ai-research__error">{{ askError() }}</p>
+  }
+
+  @if (result()) {
+    @if (result()!.noAuthorityFound) {
+      <lf-empty-state
+        icon="gavel"
+        title="No authority found"
+        i18n-title="@@ai.research.emptyTitle"
+        message="The assistant could not find a verifiable citation for this question."
+        i18n-message="@@ai.research.emptyMessage"
+      />
+    } @else {
+      <div class="ai-research__answer">
+        <p>{{ result()!.answer }}</p>
+
+        @if (result()!.citations.length > 0) {
+          <div class="ai-research__citations">
+            <h3 i18n="@@ai.research.citationsHeading">Citations</h3>
+            <ul>
+              @for (citation of result()!.citations; track citation.kind + citation.id) {
+                <li><lf-ai-citation-link [citation]="citation" /></li>
+              }
+            </ul>
+          </div>
+        }
+
+        <div class="ai-research__actions">
+          <lf-ai-badge [interactionId]="result()!.interactionId" />
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="copyAnswer()"
+            i18n="@@ai.research.copyAnswerButton"
+          >
+            Copy answer
+          </button>
+        </div>
+      </div>
+    }
+  }
+</div>

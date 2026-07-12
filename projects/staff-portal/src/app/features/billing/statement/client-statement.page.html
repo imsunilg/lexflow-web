@@ -1,7 +1,7 @@
 <div class="statement">
   <header class="statement__header">
     <div>
-      <h1>Client statement</h1>
+      <h1 i18n="@@billing.clientStatement.title">Client statement</h1>
       <p class="statement__subtitle">
         {{ client()?.displayName ?? client()?.legalName ?? clientId }}
       </p>
@@ -9,13 +9,13 @@
 
     <form [formGroup]="range" class="statement__range">
       <mat-form-field appearance="outline">
-        <mat-label>From</mat-label>
+        <mat-label i18n="@@billing.clientStatement.fromLabel">From</mat-label>
         <input matInput [matDatepicker]="fromPicker" formControlName="from" />
         <mat-datepicker-toggle matIconSuffix [for]="fromPicker" />
         <mat-datepicker #fromPicker />
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label>To</mat-label>
+        <mat-label i18n="@@billing.clientStatement.toLabel">To</mat-label>
         <input matInput [matDatepicker]="toPicker" formControlName="to" />
         <mat-datepicker-toggle matIconSuffix [for]="toPicker" />
         <mat-datepicker #toPicker />
@@ -24,7 +24,7 @@
         @if (loading()) {
           <mat-spinner diameter="20" />
         } @else {
-          Refresh
+          <span i18n="@@billing.clientStatement.refreshButton">Refresh</span>
         }
       </button>
     </form>
@@ -37,27 +37,27 @@
   @if (statement(); as s) {
     <section class="statement__balances">
       <div class="statement__balance">
-        <span class="statement__balance-label">Opening balance</span>
+        <span class="statement__balance-label" i18n="@@billing.clientStatement.openingBalanceLabel">Opening balance</span>
         <span class="statement__balance-value">{{ s.openingBalance | lfCurrency }}</span>
       </div>
       <div class="statement__balance">
-        <span class="statement__balance-label">Closing balance</span>
+        <span class="statement__balance-label" i18n="@@billing.clientStatement.closingBalanceLabel">Closing balance</span>
         <span class="statement__balance-value">{{ s.closingBalance | lfCurrency }}</span>
       </div>
     </section>
 
     <section class="statement__section">
-      <h2>Invoices</h2>
+      <h2 i18n="@@billing.clientStatement.invoicesHeading">Invoices</h2>
       @if (s.invoices.length === 0) {
-        <lf-empty-state icon="receipt_long" title="No invoices in this range" />
+        <lf-empty-state icon="receipt_long" title="No invoices in this range" i18n-title="@@billing.clientStatement.noInvoicesTitle" />
       } @else {
         <table class="statement__table">
           <thead>
             <tr>
-              <th>Number</th>
-              <th>Date</th>
-              <th>Total</th>
-              <th>Status</th>
+              <th i18n="@@billing.clientStatement.invoicesTable.numberHeader">Number</th>
+              <th i18n="@@billing.clientStatement.invoicesTable.dateHeader">Date</th>
+              <th i18n="@@billing.clientStatement.invoicesTable.totalHeader">Total</th>
+              <th i18n="@@billing.clientStatement.invoicesTable.statusHeader">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -79,17 +79,17 @@
     </section>
 
     <section class="statement__section">
-      <h2>Payments</h2>
+      <h2 i18n="@@billing.clientStatement.paymentsHeading">Payments</h2>
       @if (s.payments.length === 0) {
-        <lf-empty-state icon="payments" title="No payments in this range" />
+        <lf-empty-state icon="payments" title="No payments in this range" i18n-title="@@billing.clientStatement.noPaymentsTitle" />
       } @else {
         <table class="statement__table">
           <thead>
             <tr>
-              <th>Receipt</th>
-              <th>Date</th>
-              <th>Amount</th>
-              <th>Mode</th>
+              <th i18n="@@billing.clientStatement.paymentsTable.receiptHeader">Receipt</th>
+              <th i18n="@@billing.clientStatement.paymentsTable.dateHeader">Date</th>
+              <th i18n="@@billing.clientStatement.paymentsTable.amountHeader">Amount</th>
+              <th i18n="@@billing.clientStatement.paymentsTable.modeHeader">Mode</th>
               <th></th>
             </tr>
           </thead>
@@ -102,7 +102,7 @@
                 <td>{{ payment.mode }}</td>
                 <td>
                   <button mat-stroked-button type="button" (click)="refund(payment)">
-                    <mat-icon>undo</mat-icon> Refund
+                    <mat-icon>undo</mat-icon> <span i18n="@@billing.clientStatement.refundButton">Refund</span>
                   </button>
                 </td>
               </tr>
@@ -115,7 +115,9 @@
     <lf-empty-state
       icon="description"
       title="No statement loaded"
+      i18n-title="@@billing.clientStatement.noStatementTitle"
       message="Pick a date range and refresh."
+      i18n-message="@@billing.clientStatement.noStatementMessage"
     />
   }
 </div>

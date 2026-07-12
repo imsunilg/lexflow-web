@@ -1,22 +1,574 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en" trgLang="hi">
   <file id="ngi18n" original="ng.template">
+    <unit id="portal.appointments.title">
+      <segment>
+        <source>Appointments</source>
+        <target>अपॉइंटमेंट</target>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.requestsTitle">
+      <segment>
+        <source>Your requests</source>
+        <target>आपके अनुरोध</target>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.emptyTitle">
+      <segment>
+        <source>No appointments yet</source>
+        <target>अभी तक कोई अपॉइंटमेंट नहीं</target>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.newTitle">
+      <segment>
+        <source>Request a new appointment</source>
+        <target>नया अपॉइंटमेंट अनुरोध करें</target>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.lawyerIdHint">
+      <segment>
+        <source> Your firm needs to share the specific lawyer's portal ID with you before you can submit a request — there's no lookup for it in this app yet. </source>
+        <target> अनुरोध सबमिट करने से पहले आपकी फर्म को विशिष्ट वकील की पोर्टल आईडी आपके साथ साझा करनी होगी — इस ऐप में इसके लिए अभी कोई खोज सुविधा नहीं है। </target>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.matterLabel">
+      <segment>
+        <source>Matter</source>
+        <target>मैटर</target>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.lawyerIdLabel">
+      <segment>
+        <source>Lawyer ID</source>
+        <target>वकील आईडी</target>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.startLabel">
+      <segment>
+        <source>Start</source>
+        <target>प्रारंभ</target>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.endLabel">
+      <segment>
+        <source>End</source>
+        <target>समाप्ति</target>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.notesLabel">
+      <segment>
+        <source>Notes (optional)</source>
+        <target>टिप्पणियाँ (वैकल्पिक)</target>
+      </segment>
+    </unit>
+    <unit id="portal.appointments.submitButton">
+      <segment>
+        <source>Request appointment</source>
+        <target>अपॉइंटमेंट का अनुरोध करें</target>
+      </segment>
+    </unit>
+    <unit id="auth.forgotPassword.title">
+      <segment>
+        <source>Forgot password</source>
+        <target>पासवर्ड भूल गए</target>
+      </segment>
+    </unit>
+    <unit id="auth.forgotPassword.subtitle">
+      <segment>
+        <source> Enter your firm code and email — we'll send a reset link if an account matches. </source>
+        <target> अपना फर्म कोड और ईमेल दर्ज करें — यदि खाता मेल खाता है तो हम रीसेट लिंक भेजेंगे। </target>
+      </segment>
+    </unit>
+    <unit id="auth.forgotPassword.tenantLabel">
+      <segment>
+        <source>Firm code</source>
+        <target>फर्म कोड</target>
+      </segment>
+    </unit>
+    <unit id="auth.forgotPassword.emailLabel">
+      <segment>
+        <source>Email</source>
+        <target>ईमेल</target>
+      </segment>
+    </unit>
+    <unit id="auth.forgotPassword.submitButton">
+      <segment>
+        <source>Send reset link</source>
+        <target>रीसेट लिंक भेजें</target>
+      </segment>
+    </unit>
+    <unit id="auth.forgotPassword.confirmation">
+      <segment>
+        <source> If an account matches, a reset link has been sent to that email. </source>
+        <target> यदि खाता मेल खाता है, तो उस ईमेल पर रीसेट लिंक भेज दिया गया है। </target>
+      </segment>
+    </unit>
+    <unit id="auth.forgotPassword.backLink">
+      <segment>
+        <source> Back to sign in </source>
+        <target> साइन इन पर वापस जाएं </target>
+      </segment>
+    </unit>
+    <unit id="auth.login.title">
+      <segment>
+        <source>Sign in</source>
+        <target>साइन इन करें</target>
+      </segment>
+    </unit>
+    <unit id="auth.login.subtitle">
+      <segment>
+        <source> Access your matters, invoices, and documents. </source>
+        <target> अपने मैटर, इनवॉइस और दस्तावेज़ों तक पहुंचें। </target>
+      </segment>
+    </unit>
+    <unit id="auth.login.tenantLabel">
+      <segment>
+        <source>Firm code</source>
+        <target>फर्म कोड</target>
+      </segment>
+    </unit>
+    <unit id="auth.login.emailLabel">
+      <segment>
+        <source>Email</source>
+        <target>ईमेल</target>
+      </segment>
+    </unit>
+    <unit id="auth.login.passwordLabel">
+      <segment>
+        <source>Password</source>
+        <target>पासवर्ड</target>
+      </segment>
+    </unit>
+    <unit id="auth.login.submitButton">
+      <segment>
+        <source>Sign in</source>
+        <target>साइन इन करें</target>
+      </segment>
+    </unit>
+    <unit id="auth.login.forgotLink">
+      <segment>
+        <source> Forgot password? </source>
+        <target> पासवर्ड भूल गए? </target>
+      </segment>
+    </unit>
+    <unit id="auth.resetPassword.title">
+      <segment>
+        <source>Set your password</source>
+        <target>अपना पासवर्ड सेट करें</target>
+      </segment>
+    </unit>
+    <unit id="auth.resetPassword.subtitle">
+      <segment>
+        <source> Choose a password to finish setting up your portal account. </source>
+        <target> अपना पोर्टल खाता सेट करने हेतु एक पासवर्ड चुनें। </target>
+      </segment>
+    </unit>
+    <unit id="auth.resetPassword.newPasswordLabel">
+      <segment>
+        <source>New password</source>
+        <target>नया पासवर्ड</target>
+      </segment>
+    </unit>
+    <unit id="auth.resetPassword.submitButton">
+      <segment>
+        <source>Set password</source>
+        <target>पासवर्ड सेट करें</target>
+      </segment>
+    </unit>
+    <unit id="auth.resetPassword.backLink">
+      <segment>
+        <source> Back to sign in </source>
+        <target> साइन इन पर वापस जाएं </target>
+      </segment>
+    </unit>
+    <unit id="portal.documents.title">
+      <segment>
+        <source>Documents</source>
+        <target>दस्तावेज़</target>
+      </segment>
+    </unit>
+    <unit id="portal.documents.sharedTitle">
+      <segment>
+        <source>Shared with you</source>
+        <target>आपके साथ साझा किए गए</target>
+      </segment>
+    </unit>
+    <unit id="portal.documents.emptyTitle">
+      <segment>
+        <source>No documents shared yet</source>
+        <target>अभी तक कोई दस्तावेज़ साझा नहीं किया गया</target>
+      </segment>
+    </unit>
+    <unit id="portal.documents.downloadAriaLabel">
+      <segment>
+        <source>Download</source>
+        <target>डाउनलोड करें</target>
+      </segment>
+    </unit>
+    <unit id="portal.documents.uploadTitle">
+      <segment>
+        <source>Upload to firm</source>
+        <target>फर्म को अपलोड करें</target>
+      </segment>
+    </unit>
+    <unit id="portal.documents.matterLabel">
+      <segment>
+        <source>Matter</source>
+        <target>मैटर</target>
+      </segment>
+    </unit>
+    <unit id="portal.documents.titleLabel">
+      <segment>
+        <source>Title</source>
+        <target>शीर्षक</target>
+      </segment>
+    </unit>
+    <unit id="portal.documents.tooLargeError">
+      <segment>
+        <source> File is larger than 25 MB. </source>
+        <target> फ़ाइल 25 MB से बड़ी है। </target>
+      </segment>
+    </unit>
+    <unit id="portal.documents.uploadButton">
+      <segment>
+        <source>Upload</source>
+        <target>अपलोड करें</target>
+      </segment>
+    </unit>
+    <unit id="portal.home.welcome">
+      <segment>
+        <source>Welcome</source>
+        <target>स्वागत है</target>
+      </segment>
+    </unit>
+    <unit id="portal.home.mattersTitle">
+      <segment>
+        <source>My matters</source>
+        <target>मेरे मैटर</target>
+      </segment>
+    </unit>
+    <unit id="portal.home.mattersEmptyTitle">
+      <segment>
+        <source>No matters yet</source>
+        <target>अभी तक कोई मैटर नहीं</target>
+      </segment>
+    </unit>
+    <unit id="portal.home.nextHearingLabel">
+      <segment>
+        <source>Next hearing:</source>
+        <target>अगली सुनवाई:</target>
+      </segment>
+    </unit>
+    <unit id="portal.home.lawyerLabel">
+      <segment>
+        <source>Lawyer:</source>
+        <target>वकील:</target>
+      </segment>
+    </unit>
+    <unit id="portal.home.invoicesTitle">
+      <segment>
+        <source>Unpaid invoices</source>
+        <target>अवैतनिक इनवॉइस</target>
+      </segment>
+    </unit>
+    <unit id="portal.home.invoicesEmptyTitle">
+      <segment>
+        <source>No unpaid invoices</source>
+        <target>कोई अवैतनिक इनवॉइस नहीं</target>
+      </segment>
+    </unit>
+    <unit id="portal.home.documentsTitle">
+      <segment>
+        <source>Recent documents</source>
+        <target>हाल के दस्तावेज़</target>
+      </segment>
+    </unit>
+    <unit id="portal.home.documentsEmptyTitle">
+      <segment>
+        <source>No documents shared yet</source>
+        <target>अभी तक कोई दस्तावेज़ साझा नहीं किया गया</target>
+      </segment>
+    </unit>
+    <unit id="portal.home.appointmentTitle">
+      <segment>
+        <source>Next appointment</source>
+        <target>अगला अपॉइंटमेंट</target>
+      </segment>
+    </unit>
+    <unit id="portal.home.appointmentEmptyTitle">
+      <segment>
+        <source>No upcoming appointments</source>
+        <target>कोई आगामी अपॉइंटमेंट नहीं</target>
+      </segment>
+    </unit>
+    <unit id="portal.home.appointmentEmptyCta">
+      <segment>
+        <source>Request one</source>
+        <target>एक अनुरोध करें</target>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.title">
+      <segment>
+        <source>Invoices</source>
+        <target>इनवॉइस</target>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.hint">
+      <segment>
+        <source> Invoice PDFs, receipts, and account statements aren't available for download here yet — only the summary below. </source>
+        <target> इनवॉइस PDF, रसीदें और खाता विवरण अभी यहां डाउनलोड के लिए उपलब्ध नहीं हैं — केवल नीचे दिया गया सारांश उपलब्ध है। </target>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.emptyTitle">
+      <segment>
+        <source>No invoices yet</source>
+        <target>अभी तक कोई इनवॉइस नहीं</target>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.colNumber">
+      <segment>
+        <source>Number</source>
+        <target>नंबर</target>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.colStatus">
+      <segment>
+        <source>Status</source>
+        <target>स्थिति</target>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.colIssueDate">
+      <segment>
+        <source>Issue date</source>
+        <target>जारी करने की तारीख</target>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.colDueDate">
+      <segment>
+        <source>Due date</source>
+        <target>देय तिथि</target>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.colTotal">
+      <segment>
+        <source>Total</source>
+        <target>कुल</target>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.colBalance">
+      <segment>
+        <source>Balance</source>
+        <target>शेष राशि</target>
+      </segment>
+    </unit>
+    <unit id="portal.invoices.payNowButton">
+      <segment>
+        <source>Pay now</source>
+        <target>अभी भुगतान करें</target>
+      </segment>
+    </unit>
+    <unit id="portal.matterTimeline.notFoundTitle">
+      <segment>
+        <source>Matter not found</source>
+        <target>मैटर नहीं मिला</target>
+      </segment>
+    </unit>
+    <unit id="portal.matterTimeline.emptyTitle">
+      <segment>
+        <source>No timeline entries yet</source>
+        <target>अभी तक कोई टाइमलाइन प्रविष्टि नहीं</target>
+      </segment>
+    </unit>
+    <unit id="portal.matters.title">
+      <segment>
+        <source>Matters</source>
+        <target>मैटर</target>
+      </segment>
+    </unit>
+    <unit id="portal.matters.emptyTitle">
+      <segment>
+        <source>No matters yet</source>
+        <target>अभी तक कोई मैटर नहीं</target>
+      </segment>
+    </unit>
+    <unit id="portal.matters.nextHearingLabel">
+      <segment>
+        <source>Next hearing:</source>
+        <target>अगली सुनवाई:</target>
+      </segment>
+    </unit>
+    <unit id="portal.matters.lawyerLabel">
+      <segment>
+        <source>Lawyer:</source>
+        <target>वकील:</target>
+      </segment>
+    </unit>
+    <unit id="portal.messages.title">
+      <segment>
+        <source>Messages</source>
+        <target>संदेश</target>
+      </segment>
+    </unit>
+    <unit id="portal.messages.emptyTitle">
+      <segment>
+        <source>No conversations yet</source>
+        <target>अभी तक कोई बातचीत नहीं</target>
+      </segment>
+    </unit>
+    <unit id="portal.threadDetail.title">
+      <segment>
+        <source>Conversation</source>
+        <target>बातचीत</target>
+      </segment>
+    </unit>
+    <unit id="portal.threadDetail.responseTimeBanner">
+      <segment>
+        <source> Our team typically replies within one business day. </source>
+        <target> हमारी टीम आमतौर पर एक कार्यदिवस के भीतर जवाब देती है। </target>
+      </segment>
+    </unit>
+    <unit id="portal.threadDetail.emptyTitle">
+      <segment>
+        <source>No messages yet</source>
+        <target>अभी तक कोई संदेश नहीं</target>
+      </segment>
+    </unit>
+    <unit id="portal.threadDetail.messageLabel">
+      <segment>
+        <source>Message</source>
+        <target>संदेश</target>
+      </segment>
+    </unit>
+    <unit id="portal.threadDetail.sendButton">
+      <segment>
+        <source>Send</source>
+        <target>भेजें</target>
+      </segment>
+    </unit>
+    <unit id="portal.profile.title">
+      <segment>
+        <source>Profile</source>
+        <target>प्रोफ़ाइल</target>
+      </segment>
+    </unit>
+    <unit id="portal.profile.nameLabel">
+      <segment>
+        <source>Name</source>
+        <target>नाम</target>
+      </segment>
+    </unit>
+    <unit id="portal.profile.emailLabel">
+      <segment>
+        <source>Email</source>
+        <target>ईमेल</target>
+      </segment>
+    </unit>
+    <unit id="portal.profile.preferencesTitle">
+      <segment>
+        <source>Preferences</source>
+        <target>प्राथमिकताएं</target>
+      </segment>
+    </unit>
+    <unit id="portal.profile.preferencesHint">
+      <segment>
+        <source> Notification and language preferences aren't available yet — the portal API has no preferences endpoint to save them to. </source>
+        <target> सूचना और भाषा प्राथमिकताएं अभी उपलब्ध नहीं हैं — पोर्टल API के पास इन्हें सहेजने के लिए कोई प्राथमिकता एंडपॉइंट नहीं है। </target>
+      </segment>
+    </unit>
+    <unit id="portal.profile.securityTitle">
+      <segment>
+        <source>Security</source>
+        <target>सुरक्षा</target>
+      </segment>
+    </unit>
+    <unit id="portal.profile.securityHint">
+      <segment>
+        <source> Password changes go through "Forgot password" on the sign-in page. Two-factor authentication and session management aren't available for portal accounts yet. </source>
+        <target> पासवर्ड परिवर्तन साइन-इन पृष्ठ पर "पासवर्ड भूल गए" के माध्यम से होते हैं। पोर्टल खातों के लिए टू-फैक्टर प्रमाणीकरण और सत्र प्रबंधन अभी उपलब्ध नहीं हैं। </target>
+      </segment>
+    </unit>
+    <unit id="portal.profile.signOutButton">
+      <segment>
+        <source>Sign out</source>
+        <target>साइन आउट करें</target>
+      </segment>
+    </unit>
+    <unit id="shell.topbar.languageAriaLabel">
+      <segment>
+        <source>Language</source>
+        <target>भाषा</target>
+      </segment>
+    </unit>
+    <unit id="shell.topbar.notificationsAriaLabel">
+      <segment>
+        <source>Notifications</source>
+        <target>सूचनाएं</target>
+      </segment>
+    </unit>
+    <unit id="shell.topbar.accountAriaLabel">
+      <segment>
+        <source>Account</source>
+        <target>खाता</target>
+      </segment>
+    </unit>
     <unit id="shell.account.profile">
-      <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:15,16</note>
-      </notes>
       <segment>
         <source>Profile</source>
         <target>प्रोफ़ाइल</target>
       </segment>
     </unit>
     <unit id="shell.account.signOut">
-      <notes>
-        <note category="location">projects/client-portal/src/app/shell/shell.component.html:16,18</note>
-      </notes>
       <segment>
         <source>Sign out</source>
-        <target>साइन आउट</target>
+        <target>साइन आउट करें</target>
+      </segment>
+    </unit>
+    <unit id="shell.bottomNav.ariaLabel">
+      <segment>
+        <source>Portal navigation</source>
+        <target>पोर्टल नेवीगेशन</target>
+      </segment>
+    </unit>
+    <unit id="shell.nav.home">
+      <segment>
+        <source>Home</source>
+        <target>होम</target>
+      </segment>
+    </unit>
+    <unit id="shell.nav.matters">
+      <segment>
+        <source>Matters</source>
+        <target>मैटर</target>
+      </segment>
+    </unit>
+    <unit id="shell.nav.invoices">
+      <segment>
+        <source>Invoices</source>
+        <target>इनवॉइस</target>
+      </segment>
+    </unit>
+    <unit id="shell.nav.documents">
+      <segment>
+        <source>Documents</source>
+        <target>दस्तावेज़</target>
+      </segment>
+    </unit>
+    <unit id="shell.nav.appointments">
+      <segment>
+        <source>Appointments</source>
+        <target>अपॉइंटमेंट</target>
+      </segment>
+    </unit>
+    <unit id="shell.nav.messages">
+      <segment>
+        <source>Messages</source>
+        <target>संदेश</target>
+      </segment>
+    </unit>
+    <unit id="shell.nav.profile">
+      <segment>
+        <source>Profile</source>
+        <target>प्रोफ़ाइल</target>
       </segment>
     </unit>
   </file>

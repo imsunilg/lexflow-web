@@ -1,0 +1,83 @@
+<div class="act-reader">
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (!act()) {
+    <lf-empty-state icon="menu_book" title="Act not found" i18n-title="@@kb.actReader.actNotFoundEmptyState" />
+  } @else {
+    <header class="act-reader__header">
+      <h1>{{ act()!.name }}</h1>
+      @if (act()!.shortCode) {
+        <span class="act-reader__short-code">{{ act()!.shortCode }}</span>
+      }
+    </header>
+
+    <div class="act-reader__body">
+      <nav class="act-reader__tree">
+        <cdk-virtual-scroll-viewport itemSize="32" class="act-reader__tree-viewport">
+          <button
+            type="button"
+            class="act-reader__tree-row"
+            *cdkVirtualFor="let row of treeRows()"
+            [class.act-reader__tree-row--active]="row.section.id === selectedSectionId()"
+            [style.paddingLeft]="depthIndent(row.depth)"
+            (click)="selectSection(row.section)"
+          >
+            <strong>{{ row.section.number }}</strong>
+            @if (row.section.title) {
+              <span>{{ row.section.title }}</span>
+            }
+          </button>
+        </cdk-virtual-scroll-viewport>
+      </nav>
+
+      <section class="act-reader__pane">
+        @if (!selectedSection()) {
+          <lf-empty-state icon="menu_book" title="Select a section" i18n-title="@@kb.actReader.selectSectionEmptyState" />
+        } @else {
+          <div class="act-reader__pane-toolbar">
+            <button mat-icon-button type="button" (click)="stepSection(-1)">
+              <mat-icon>chevron_left</mat-icon>
+            </button>
+            <button mat-icon-button type="button" (click)="stepSection(1)">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+            <span class="act-reader__spacer"></span>
+            <mat-form-field appearance="outline" class="act-reader__as-of-field">
+              <mat-label i18n="@@kb.actReader.viewAsOfLabel">View as of</mat-label>
+              <input
+                matInput
+                [matDatepicker]="asOfPicker"
+                [ngModel]="asOfDate()"
+                (ngModelChange)="onAsOfDateChange($event)"
+              />
+              <mat-datepicker-toggle matIconSuffix [for]="asOfPicker" />
+              <mat-datepicker #asOfPicker />
+            </mat-form-field>
+            @if (asOfDate()) {
+              <button mat-button type="button" (click)="clearAsOf()" i18n="@@kb.actReader.backToCurrentButton">Back to current</button>
+            }
+            <button mat-stroked-button type="button" (click)="copyWithCitation()">
+              <mat-icon>content_copy</mat-icon> <span i18n="@@kb.actReader.copyWithCitationButton">Copy with citation</span>
+            </button>
+          </div>
+
+          @if (asOfLoading()) {
+            <mat-progress-bar mode="indeterminate" />
+          } @else if (asOfDate() && !asOfSection()) {
+            <p class="act-reader__as-of-note" i18n="@@kb.actReader.noVersionNote">
+              No version of this section was in force on that date.
+            </p>
+          } @else if (displayedSection(); as section) {
+            @if (asOfDate()) {
+              <p class="act-reader__as-of-note" i18n="@@kb.actReader.showingAsOfNote">
+                Showing text as of {{ asOfDate() | date: 'MMM d, y' }}.
+              </p>
+            }
+            <h2>{{ section.number }}. {{ section.title }}</h2>
+            <p class="act-reader__section-body">{{ section.body }}</p>
+          }
+        }
+      </section>
+    </div>
+  }
+</div>

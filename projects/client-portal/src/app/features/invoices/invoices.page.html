@@ -1,0 +1,57 @@
+<div class="invoices-page">
+  <h1 i18n="@@portal.invoices.title">Invoices</h1>
+  <p class="invoices-page__hint" i18n="@@portal.invoices.hint">
+    Invoice PDFs, receipts, and account statements aren't available for download here yet — only the
+    summary below.
+  </p>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (invoices().length === 0) {
+    <lf-empty-state
+      icon="receipt_long"
+      title="No invoices yet"
+      i18n-title="@@portal.invoices.emptyTitle"
+    />
+  } @else {
+    <table class="invoices-page__table">
+      <thead>
+        <tr>
+          <th i18n="@@portal.invoices.colNumber">Number</th>
+          <th i18n="@@portal.invoices.colStatus">Status</th>
+          <th i18n="@@portal.invoices.colIssueDate">Issue date</th>
+          <th i18n="@@portal.invoices.colDueDate">Due date</th>
+          <th i18n="@@portal.invoices.colTotal">Total</th>
+          <th i18n="@@portal.invoices.colBalance">Balance</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (invoice of invoices(); track invoice.id) {
+          <tr>
+            <td>{{ invoice.number }}</td>
+            <td><lf-status-chip [label]="invoice.status" /></td>
+            <td>{{ invoice.issueDate }}</td>
+            <td>{{ invoice.dueDate }}</td>
+            <td>{{ invoice.grandTotal | lfCurrency: invoice.currency }}</td>
+            <td>{{ invoice.openBalance | lfCurrency: invoice.currency }}</td>
+            <td>
+              @if (invoice.openBalance > 0) {
+                <button
+                  mat-flat-button
+                  color="primary"
+                  type="button"
+                  [disabled]="payingId() === invoice.id"
+                  (click)="payNow(invoice)"
+                >
+                  <mat-icon>payment</mat-icon>
+                  <span i18n="@@portal.invoices.payNowButton">Pay now</span>
+                </button>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

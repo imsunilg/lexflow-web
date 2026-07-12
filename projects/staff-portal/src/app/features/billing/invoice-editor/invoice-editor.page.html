@@ -1,6 +1,6 @@
 <div class="invoice-editor">
   <header class="invoice-editor__header">
-    <h1>{{ isNew() ? 'New invoice' : (invoice()?.number ?? 'Invoice') }}</h1>
+    <h1 i18n="@@billing.invoiceEditor.title">{{ isNew() ? 'New invoice' : (invoice()?.number ?? 'Invoice') }}</h1>
     @if (invoice(); as inv) {
       <lf-status-chip [label]="inv.status" />
     }
@@ -15,16 +15,16 @@
         @if (saving()) {
           <mat-spinner diameter="18" />
         } @else {
-          Save
+          <span i18n="@@billing.invoiceEditor.saveButton">Save</span>
         }
       </button>
       @if (invoice()?.status === 'Draft') {
-        <button mat-stroked-button type="button" (click)="submitInvoice()">
+        <button mat-stroked-button type="button" (click)="submitInvoice()" i18n="@@billing.invoiceEditor.submitButton">
           Submit for approval
         </button>
       }
       @if (invoice()?.status === 'Approved') {
-        <button mat-stroked-button type="button" (click)="sendInvoice()">Send</button>
+        <button mat-stroked-button type="button" (click)="sendInvoice()" i18n="@@billing.invoiceEditor.sendButton">Send</button>
       }
     </div>
   </header>
@@ -37,7 +37,7 @@
     <section class="invoice-editor__form-pane">
       <form [formGroup]="form" class="invoice-editor__form">
         <mat-form-field appearance="outline" class="invoice-editor__matter-field">
-          <mat-label>Matter</mat-label>
+          <mat-label i18n="@@billing.invoiceEditor.matterLabel">Matter</mat-label>
           <input
             matInput
             [formControl]="matterControl"
@@ -57,7 +57,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Issue date</mat-label>
+          <mat-label i18n="@@billing.invoiceEditor.issueDateLabel">Issue date</mat-label>
           <input
             matInput
             [matDatepicker]="issuePicker"
@@ -69,33 +69,33 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Due in (days)</mat-label>
+          <mat-label i18n="@@billing.invoiceEditor.dueInDaysLabel">Due in (days)</mat-label>
           <input matInput type="number" formControlName="dueInDays" [readonly]="!canEdit()" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Flat discount</mat-label>
+          <mat-label i18n="@@billing.invoiceEditor.discountLabel">Flat discount</mat-label>
           <input matInput type="number" formControlName="discount" [readonly]="!canEdit()" />
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="invoice-editor__time-entries">
-          <mat-label>Unbilled time-entry IDs (comma-separated)</mat-label>
+          <mat-label i18n="@@billing.invoiceEditor.timeEntryIdsLabel">Unbilled time-entry IDs (comma-separated)</mat-label>
           <input matInput formControlName="timeEntryIdsCsv" [readonly]="!canEdit()" />
-          <mat-hint>No WIP picker exists yet — paste IDs from the Time module manually.</mat-hint>
+          <mat-hint i18n="@@billing.invoiceEditor.timeEntryIdsHint">No WIP picker exists yet — paste IDs from the Time module manually.</mat-hint>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="invoice-editor__notes">
-          <mat-label>Notes</mat-label>
+          <mat-label i18n="@@billing.invoiceEditor.notesLabel">Notes</mat-label>
           <textarea matInput formControlName="notes" rows="2" [readonly]="!canEdit()"></textarea>
         </mat-form-field>
       </form>
 
       <div class="invoice-editor__line-grid">
         <div class="invoice-editor__line-grid-header">
-          <h2>Lines</h2>
+          <h2 i18n="@@billing.invoiceEditor.linesHeading">Lines</h2>
           @if (canEdit()) {
             <button mat-button type="button" (click)="addLine()">
-              <mat-icon>add</mat-icon> Add line
+              <mat-icon>add</mat-icon> <span i18n="@@billing.invoiceEditor.addLineButton">Add line</span>
             </button>
           }
         </div>
@@ -103,12 +103,12 @@
         <table class="invoice-editor__lines-table">
           <thead>
             <tr>
-              <th>Type</th>
-              <th>Description</th>
-              <th>Qty</th>
-              <th>Unit</th>
-              <th>Rate</th>
-              <th>Amount</th>
+              <th i18n="@@billing.invoiceEditor.linesTable.typeHeader">Type</th>
+              <th i18n="@@billing.invoiceEditor.linesTable.descriptionHeader">Description</th>
+              <th i18n="@@billing.invoiceEditor.linesTable.qtyHeader">Qty</th>
+              <th i18n="@@billing.invoiceEditor.linesTable.unitHeader">Unit</th>
+              <th i18n="@@billing.invoiceEditor.linesTable.rateHeader">Rate</th>
+              <th i18n="@@billing.invoiceEditor.linesTable.amountHeader">Amount</th>
               <th></th>
             </tr>
           </thead>
@@ -139,16 +139,16 @@
 
         @if (invoice(); as inv) {
           <div class="invoice-editor__saved-lines">
-            <h3>Saved lines (from last save)</h3>
+            <h3 i18n="@@billing.invoiceEditor.savedLinesHeading">Saved lines (from last save)</h3>
             <table class="invoice-editor__lines-table">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                  <th>Qty</th>
-                  <th>Rate</th>
-                  <th>Amount</th>
+                  <th i18n="@@billing.invoiceEditor.savedLinesTable.numberHeader">#</th>
+                  <th i18n="@@billing.invoiceEditor.savedLinesTable.typeHeader">Type</th>
+                  <th i18n="@@billing.invoiceEditor.savedLinesTable.descriptionHeader">Description</th>
+                  <th i18n="@@billing.invoiceEditor.savedLinesTable.qtyHeader">Qty</th>
+                  <th i18n="@@billing.invoiceEditor.savedLinesTable.rateHeader">Rate</th>
+                  <th i18n="@@billing.invoiceEditor.savedLinesTable.amountHeader">Amount</th>
                 </tr>
               </thead>
               <tbody>
@@ -170,21 +170,21 @@
 
       @if (invoice(); as inv) {
         <div class="invoice-editor__tax-panel">
-          <h3>Totals (as of last save)</h3>
+          <h3 i18n="@@billing.invoiceEditor.totalsHeading">Totals (as of last save)</h3>
           <dl>
-            <dt>Subtotal</dt>
+            <dt i18n="@@billing.invoiceEditor.subtotalLabel">Subtotal</dt>
             <dd>{{ inv.subTotal | lfCurrency }}</dd>
-            <dt>Discount</dt>
+            <dt i18n="@@billing.invoiceEditor.discountLabelTotals">Discount</dt>
             <dd>-{{ inv.discountTotal | lfCurrency }}</dd>
             @for (tax of inv.taxes; track tax.name) {
               <dt>{{ tax.name }} ({{ tax.ratePct }}%)</dt>
               <dd>{{ tax.amount | lfCurrency }}</dd>
             }
-            <dt><strong>Total</strong></dt>
+            <dt><strong i18n="@@billing.invoiceEditor.grandTotalLabel">Total</strong></dt>
             <dd>
               <strong>{{ inv.grandTotal | lfCurrency }}</strong>
             </dd>
-            <dt>Paid</dt>
+            <dt i18n="@@billing.invoiceEditor.paidLabel">Paid</dt>
             <dd>{{ inv.amountPaid | lfCurrency }}</dd>
           </dl>
         </div>
@@ -192,13 +192,13 @@
     </section>
 
     <section class="invoice-editor__preview-pane">
-      <h2>PDF preview</h2>
+      <h2 i18n="@@billing.invoiceEditor.pdfPreviewHeading">PDF preview</h2>
       @if (isNew()) {
-        <p class="invoice-editor__preview-hint">Save the invoice to generate a PDF preview.</p>
+        <p class="invoice-editor__preview-hint" i18n="@@billing.invoiceEditor.pdfPreviewSaveHint">Save the invoice to generate a PDF preview.</p>
       } @else if (pdfPreviewUrl(); as url) {
-        <iframe [src]="url" class="invoice-editor__pdf-frame" title="Invoice PDF preview"></iframe>
+        <iframe [src]="url" class="invoice-editor__pdf-frame" title="Invoice PDF preview" i18n-title="@@billing.invoiceEditor.pdfFrameTitle"></iframe>
       } @else {
-        <p class="invoice-editor__preview-hint">PDF preview unavailable.</p>
+        <p class="invoice-editor__preview-hint" i18n="@@billing.invoiceEditor.pdfPreviewUnavailable">PDF preview unavailable.</p>
       }
     </section>
   </div>

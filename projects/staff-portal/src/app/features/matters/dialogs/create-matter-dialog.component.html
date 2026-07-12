@@ -1,42 +1,42 @@
-<h2 mat-dialog-title>New matter</h2>
+<h2 mat-dialog-title i18n="@@matters.createDialog.title">New matter</h2>
 <mat-dialog-content>
   <mat-stepper linear class="create-matter__stepper">
-    <mat-step [stepControl]="detailsForm" label="Matter details">
+    <mat-step [stepControl]="detailsForm" label="Matter details" i18n-label="@@matters.createDialog.detailsStepLabel">
       <form [formGroup]="detailsForm" class="create-matter__form">
         <mat-form-field appearance="outline" class="create-matter__wide">
-          <mat-label>Client ID</mat-label>
+          <mat-label i18n="@@matters.createDialog.clientIdLabel">Client ID</mat-label>
           <input matInput formControlName="clientId" />
-          <mat-hint>Paste the client's ID (no client picker exists yet)</mat-hint>
+          <mat-hint i18n="@@matters.createDialog.clientIdHint">Paste the client's ID (no client picker exists yet)</mat-hint>
           @if (
             detailsForm.controls.clientId.hasError('required') &&
             detailsForm.controls.clientId.touched
           ) {
-            <mat-error>Client ID is required.</mat-error>
+            <mat-error i18n="@@matters.createDialog.clientIdRequiredError">Client ID is required.</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="create-matter__wide">
-          <mat-label>Title</mat-label>
+          <mat-label i18n="@@matters.createDialog.titleLabel">Title</mat-label>
           <input matInput formControlName="title" />
           @if (
             detailsForm.controls.title.hasError('required') && detailsForm.controls.title.touched
           ) {
-            <mat-error>Title is required.</mat-error>
+            <mat-error i18n="@@matters.createDialog.titleRequiredError">Title is required.</mat-error>
           }
           @if (
             detailsForm.controls.title.hasError('minlength') && detailsForm.controls.title.touched
           ) {
-            <mat-error>At least 3 characters.</mat-error>
+            <mat-error i18n="@@matters.createDialog.titleMinLengthError">At least 3 characters.</mat-error>
           }
           @if (
             detailsForm.controls.title.hasError('maxlength') && detailsForm.controls.title.touched
           ) {
-            <mat-error>At most 300 characters.</mat-error>
+            <mat-error i18n="@@matters.createDialog.titleMaxLengthError">At most 300 characters.</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Matter type</mat-label>
+          <mat-label i18n="@@matters.createDialog.matterTypeLabel">Matter type</mat-label>
           <mat-select formControlName="matterType">
             @for (type of matterTypes; track type) {
               <mat-option [value]="type">{{ type }}</mat-option>
@@ -46,12 +46,12 @@
             detailsForm.controls.matterType.hasError('required') &&
             detailsForm.controls.matterType.touched
           ) {
-            <mat-error>Matter type is required.</mat-error>
+            <mat-error i18n="@@matters.createDialog.matterTypeRequiredError">Matter type is required.</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Priority</mat-label>
+          <mat-label i18n="@@matters.createDialog.priorityLabel">Priority</mat-label>
           <mat-select formControlName="priority">
             @for (priority of priorities; track priority) {
               <mat-option [value]="priority">{{ priority }}</mat-option>
@@ -60,31 +60,31 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Practice area ID</mat-label>
+          <mat-label i18n="@@matters.createDialog.practiceAreaIdLabel">Practice area ID</mat-label>
           <input matInput formControlName="practiceAreaId" />
-          <mat-hint>No practice-area picker exists yet</mat-hint>
+          <mat-hint i18n="@@matters.createDialog.practiceAreaIdHint">No practice-area picker exists yet</mat-hint>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Branch ID</mat-label>
+          <mat-label i18n="@@matters.createDialog.branchIdLabel">Branch ID</mat-label>
           <input matInput formControlName="branchId" />
-          <mat-hint>No branch picker exists yet</mat-hint>
+          <mat-hint i18n="@@matters.createDialog.branchIdHint">No branch picker exists yet</mat-hint>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="create-matter__wide">
-          <mat-label>Responsible lawyer ID</mat-label>
+          <mat-label i18n="@@matters.createDialog.responsibleLawyerIdLabel">Responsible lawyer ID</mat-label>
           <input matInput formControlName="responsibleLawyerId" />
-          <mat-hint>No user-search picker exists yet</mat-hint>
+          <mat-hint i18n="@@matters.createDialog.responsibleLawyerIdHint">No user-search picker exists yet</mat-hint>
           @if (
             detailsForm.controls.responsibleLawyerId.hasError('required') &&
             detailsForm.controls.responsibleLawyerId.touched
           ) {
-            <mat-error>Responsible lawyer is required.</mat-error>
+            <mat-error i18n="@@matters.createDialog.responsibleLawyerRequiredError">Responsible lawyer is required.</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Opened on</mat-label>
+          <mat-label i18n="@@matters.createDialog.openedOnLabel">Opened on</mat-label>
           <input matInput [matDatepicker]="openedPicker" formControlName="openedOn" />
           <mat-datepicker-toggle matIconSuffix [for]="openedPicker" />
           <mat-datepicker #openedPicker />
@@ -92,26 +92,26 @@
             detailsForm.controls.openedOn.hasError('required') &&
             detailsForm.controls.openedOn.touched
           ) {
-            <mat-error>Open date is required.</mat-error>
+            <mat-error i18n="@@matters.createDialog.openedOnRequiredError">Open date is required.</mat-error>
           }
           @if (
             detailsForm.controls.openedOn.hasError('dateNotInFuture') &&
             detailsForm.controls.openedOn.touched
           ) {
-            <mat-error>Open date can't be in the future.</mat-error>
+            <mat-error i18n="@@matters.createDialog.openedOnFutureError">Open date can't be in the future.</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Budget</mat-label>
+          <mat-label i18n="@@matters.createDialog.budgetLabel">Budget</mat-label>
           <input matInput type="number" formControlName="budget" min="0" />
           @if (detailsForm.controls.budget.hasError('min') && detailsForm.controls.budget.touched) {
-            <mat-error>Budget can't be negative.</mat-error>
+            <mat-error i18n="@@matters.createDialog.budgetMinError">Budget can't be negative.</mat-error>
           }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="create-matter__wide">
-          <mat-label>Description</mat-label>
+          <mat-label i18n="@@matters.createDialog.descriptionLabel">Description</mat-label>
           <textarea matInput formControlName="description" rows="3"></textarea>
         </mat-form-field>
       </form>
@@ -123,16 +123,16 @@
           type="button"
           [disabled]="detailsForm.invalid"
         >
-          Next
+          <ng-container i18n="@@matters.createDialog.nextButton">Next</ng-container>
         </button>
       </div>
     </mat-step>
 
-    <mat-step label="Opposite parties & conflict check">
+    <mat-step label="Opposite parties & conflict check" i18n-label="@@matters.createDialog.partiesStepLabel">
       <div class="create-matter__parties">
         @for (control of partyControls(); track $index) {
           <mat-form-field appearance="outline" class="create-matter__wide">
-            <mat-label>Opposite party {{ $index + 1 }}</mat-label>
+            <mat-label i18n="@@matters.createDialog.oppositePartyLabel">Opposite party {{ $index + 1 }}</mat-label>
             <input matInput [formControl]="control" />
             @if (partyControls().length > 1) {
               <button matSuffix mat-icon-button type="button" (click)="removeParty($index)">
@@ -143,7 +143,7 @@
         }
         <button mat-button type="button" (click)="addParty()">
           <mat-icon>add</mat-icon>
-          Add another party
+          <ng-container i18n="@@matters.createDialog.addPartyButton">Add another party</ng-container>
         </button>
       </div>
 
@@ -157,16 +157,16 @@
           @if (checkingConflicts()) {
             <mat-spinner diameter="18" />
           } @else {
-            Check for conflicts
+            <ng-container i18n="@@matters.createDialog.checkConflictsButton">Check for conflicts</ng-container>
           }
         </button>
 
         @if (conflictCheckRun()) {
           @if (conflicts().length === 0) {
-            <p class="create-matter__conflict-clear">No conflicts found.</p>
+            <p class="create-matter__conflict-clear" i18n="@@matters.createDialog.noConflictsFound">No conflicts found.</p>
           } @else {
             <div class="create-matter__conflict-warning" role="alert">
-              <p>
+              <p i18n="@@matters.createDialog.conflictsFoundCount">
                 <strong>{{ conflicts().length }}</strong> potential conflict(s) of interest found:
               </p>
               <ul>
@@ -178,16 +178,16 @@
                 }
               </ul>
 
-              <mat-checkbox [formControl]="overrideChecked">
+              <mat-checkbox [formControl]="overrideChecked" i18n="@@matters.createDialog.overrideConflictCheckbox">
                 I've reviewed these matches and want to proceed anyway
               </mat-checkbox>
 
               @if (overrideChecked.value) {
                 <mat-form-field appearance="outline" class="create-matter__wide">
-                  <mat-label>Override reason</mat-label>
+                  <mat-label i18n="@@matters.createDialog.overrideReasonLabel">Override reason</mat-label>
                   <textarea matInput [formControl]="conflictOverrideReason" rows="2"></textarea>
                   @if (conflictOverrideReason.value.trim().length === 0) {
-                    <mat-error>A reason is required to override.</mat-error>
+                    <mat-error i18n="@@matters.createDialog.overrideReasonRequiredError">A reason is required to override.</mat-error>
                   }
                 </mat-form-field>
               }
@@ -201,7 +201,7 @@
       }
 
       <div class="create-matter__step-actions">
-        <button mat-button matStepperPrevious type="button">Back</button>
+        <button mat-button matStepperPrevious type="button" i18n="@@matters.createDialog.backButton">Back</button>
         <button
           mat-flat-button
           color="primary"
@@ -212,7 +212,7 @@
           @if (submitting()) {
             <mat-spinner diameter="20" />
           } @else {
-            Create matter
+            <ng-container i18n="@@matters.createDialog.createMatterButton">Create matter</ng-container>
           }
         </button>
       </div>
@@ -220,5 +220,5 @@
   </mat-stepper>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button type="button" [mat-dialog-close]="undefined">Cancel</button>
+  <button mat-button type="button" [mat-dialog-close]="undefined" i18n="@@matters.createDialog.cancelButton">Cancel</button>
 </mat-dialog-actions>

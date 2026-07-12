@@ -1,0 +1,45 @@
+.invoices-page {
+  padding: var(--lf-space-3);
+  padding-bottom: calc(var(--lf-space-6) + 56px);
+  max-width: var(--lf-content-max-width);
+  margin: 0 auto;
+
+  h1 {
+    font-family: var(--lf-font-portal-heading);
+    margin: 0 0 var(--lf-space-1);
+  }
+
+  &__hint {
+    color: var(--lf-on-surface-variant);
+    margin: 0 0 var(--lf-space-3);
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--lf-surface);
+    border-radius: var(--lf-radius);
+    overflow: hidden;
+
+    th,
+    td {
+      text-align: left;
+      padding: var(--lf-space-1) var(--lf-space-2);
+      border-bottom: 1px solid var(--lf-outline);
+    }
+
+    th {
+      color: var(--lf-on-surface-variant);
+      font-size: var(--lf-text-sm);
+      font-weight: 600;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    button mat-icon {
+      margin-right: 4px;
+    }
+  }
+}

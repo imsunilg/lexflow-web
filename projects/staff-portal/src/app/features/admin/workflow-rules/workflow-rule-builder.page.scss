@@ -1,0 +1,68 @@
+.rule-builder {
+  padding: var(--lf-space-3);
+}
+
+.rule-builder__form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--lf-space-2);
+}
+
+.rule-builder__row {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-2);
+  margin-bottom: var(--lf-space-1);
+}
+
+.rule-builder__step-actions {
+  display: flex;
+  gap: var(--lf-space-2);
+  margin: var(--lf-space-2) 0;
+}
+
+.rule-builder__hint {
+  color: var(--lf-on-surface-variant);
+  font-size: var(--lf-text-sm);
+}
+
+.rule-builder__error {
+  color: var(--lf-error);
+}
+
+.rule-builder__action-card {
+  border: 1px solid var(--lf-surface-variant);
+  border-radius: var(--lf-radius);
+  padding: var(--lf-space-2);
+  margin-bottom: var(--lf-space-2);
+}
+
+.rule-builder__action-header {
+  display: flex;
+  align-items: center;
+  gap: var(--lf-space-1);
+}
+
+.rule-builder__simulate {
+  margin-top: var(--lf-space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+}
+
+.rule-builder__payload {
+  width: 100%;
+  max-width: 640px;
+}
+
+.rule-builder__result {
+  background: var(--lf-surface-variant);
+  border-radius: var(--lf-radius);
+  padding: var(--lf-space-2);
+
+  pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+}

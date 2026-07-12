@@ -4,7 +4,9 @@
       <button mat-icon-button type="button" (click)="step(-1)">
         <mat-icon>chevron_left</mat-icon>
       </button>
-      <button mat-stroked-button type="button" (click)="today()">Today</button>
+      <button mat-stroked-button type="button" (click)="today()" i18n="@@calendar.page.todayButton">
+        Today
+      </button>
       <button mat-icon-button type="button" (click)="step(1)">
         <mat-icon>chevron_right</mat-icon>
       </button>
@@ -13,23 +15,33 @@
 
     <div class="calendar-page__controls">
       <mat-button-toggle-group [value]="viewMode()" (change)="setViewMode($event.value)">
-        <mat-button-toggle value="day">Day</mat-button-toggle>
-        <mat-button-toggle value="week">Week</mat-button-toggle>
-        <mat-button-toggle value="month">Month</mat-button-toggle>
-        <mat-button-toggle value="agenda">Agenda</mat-button-toggle>
+        <mat-button-toggle value="day" i18n="@@calendar.page.viewDay">Day</mat-button-toggle>
+        <mat-button-toggle value="week" i18n="@@calendar.page.viewWeek">Week</mat-button-toggle>
+        <mat-button-toggle value="month" i18n="@@calendar.page.viewMonth">Month</mat-button-toggle>
+        <mat-button-toggle value="agenda" i18n="@@calendar.page.viewAgenda">Agenda</mat-button-toggle>
       </mat-button-toggle-group>
 
       <mat-button-toggle-group [value]="scope()" (change)="setScope($event.value)">
-        <mat-button-toggle value="Me">My</mat-button-toggle>
-        <mat-button-toggle value="Team" [disabled]="!canViewTeam()">Team</mat-button-toggle>
-        <mat-button-toggle value="Firm" [disabled]="!canViewFirm()">Firm</mat-button-toggle>
+        <mat-button-toggle value="Me" i18n="@@calendar.page.scopeMe">My</mat-button-toggle>
+        <mat-button-toggle value="Team" [disabled]="!canViewTeam()" i18n="@@calendar.page.scopeTeam"
+          >Team</mat-button-toggle
+        >
+        <mat-button-toggle value="Firm" [disabled]="!canViewFirm()" i18n="@@calendar.page.scopeFirm"
+          >Firm</mat-button-toggle
+        >
       </mat-button-toggle-group>
 
       <button mat-flat-button color="primary" type="button" (click)="createEvent(anchorDate())">
-        <mat-icon>add</mat-icon> New event
+        <mat-icon>add</mat-icon>
+        <span i18n="@@calendar.page.newEventButton">New event</span>
       </button>
 
-      <a mat-icon-button routerLink="/calendar/settings" matTooltip="Sync, reminders, ICS export">
+      <a
+        mat-icon-button
+        routerLink="/calendar/settings"
+        matTooltip="Sync, reminders, ICS export"
+        i18n-matTooltip="@@calendar.page.settingsTooltip"
+      >
         <mat-icon>settings</mat-icon>
       </a>
     </div>
@@ -55,7 +67,9 @@
     <lf-empty-state
       icon="error_outline"
       title="Couldn't load the calendar"
+      i18n-title="@@calendar.page.errorTitle"
       ctaLabel="Retry"
+      i18n-ctaLabel="@@calendar.page.errorRetry"
       (cta)="load()"
     />
   } @else if (viewMode() === 'month') {
@@ -95,6 +109,7 @@
                     type="button"
                     class="month-view__more"
                     (click)="setViewMode('agenda'); anchorDate.set(cell.date)"
+                    i18n="@@calendar.page.moreButton"
                   >
                     +{{ (itemsByDay().get(cell.key) ?? []).length - 3 }} more
                   </button>

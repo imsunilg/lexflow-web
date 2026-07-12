@@ -1,0 +1,122 @@
+<div class="draft-studio">
+  <lf-ai-tabs />
+
+  <h1 i18n="@@ai.draftStudio.heading">Draft studio</h1>
+
+  <form class="draft-studio__basics" [formGroup]="basicsForm">
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@ai.draftStudio.kindLabel">Kind</mat-label>
+      <mat-select formControlName="kind">
+        @for (kind of kinds; track kind) {
+          <mat-option [value]="kind">{{ kind }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@ai.draftStudio.matterIdLabel">Matter ID</mat-label>
+      <input matInput formControlName="matterId" />
+    </mat-form-field>
+
+    <button
+      mat-stroked-button
+      type="button"
+      [disabled]="loadingMatter()"
+      (click)="loadMatterParties()"
+      i18n="@@ai.draftStudio.loadMatterPartiesButton"
+    >
+      Load matter parties
+    </button>
+  </form>
+
+  @if (loadingMatter()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  <p class="draft-studio__hint" i18n="@@ai.draftStudio.loadMatterPartiesHint">
+    "Load matter parties" is a frontend convenience that fetches the matter's client name — the AI
+    draft endpoint itself does not auto-fill parties from the matter.
+  </p>
+
+  <section class="draft-studio__intake">
+    <h2 i18n="@@ai.draftStudio.intakeHeading">Intake</h2>
+    @for (row of intakeRows(); track $index) {
+      <div class="draft-studio__intake-row">
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@ai.draftStudio.fieldLabel">Field</mat-label>
+          <input
+            matInput
+            [value]="row.key"
+            (input)="updateRowKey($index, $any($event.target).value)"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="draft-studio__intake-value">
+          <mat-label i18n="@@ai.draftStudio.valueLabel">Value</mat-label>
+          <textarea
+            matInput
+            rows="2"
+            [value]="row.value"
+            (input)="updateRowValue($index, $any($event.target).value)"
+          ></textarea>
+        </mat-form-field>
+        <button mat-icon-button type="button" (click)="removeRow($index)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    }
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="addRow()"
+      i18n="@@ai.draftStudio.addFieldButton"
+    >
+      Add field
+    </button>
+  </section>
+
+  <div class="draft-studio__generate-actions">
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      [disabled]="generating()"
+      (click)="generate()"
+    >
+      {{ result() ? 'Regenerate' : 'Generate' }}
+    </button>
+  </div>
+
+  @if (generating()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+  @if (generateError()) {
+    <p class="draft-studio__error">{{ generateError() }}</p>
+  }
+
+  @if (result()) {
+    <section class="draft-studio__editor">
+      <h2 i18n="@@ai.draftStudio.draftHeading">Draft</h2>
+      <p class="draft-studio__hint" i18n="@@ai.draftStudio.regenerateHint">
+        There's no per-section regenerate — "Regenerate" re-runs the whole draft. This text box is
+        editable before saving.
+      </p>
+      <mat-form-field appearance="outline" class="draft-studio__textarea">
+        <textarea matInput [formControl]="draftText" rows="16"></textarea>
+      </mat-form-field>
+
+      <div class="draft-studio__save-actions">
+        <lf-ai-badge [interactionId]="result()!.interactionId" />
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          [disabled]="saving()"
+          (click)="saveAsDocument()"
+          i18n="@@ai.draftStudio.saveAsDocumentButton"
+        >
+          Save as document
+        </button>
+      </div>
+    </section>
+  }
+</div>

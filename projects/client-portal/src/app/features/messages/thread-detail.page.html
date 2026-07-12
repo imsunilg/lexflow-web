@@ -1,0 +1,36 @@
+<div class="thread-detail-page">
+  <h1 i18n="@@portal.threadDetail.title">Conversation</h1>
+  <p class="thread-detail-page__banner" i18n="@@portal.threadDetail.responseTimeBanner">
+    Our team typically replies within one business day.
+  </p>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (messages().length === 0) {
+    <lf-empty-state
+      icon="forum"
+      title="No messages yet"
+      i18n-title="@@portal.threadDetail.emptyTitle"
+    />
+  } @else {
+    <ul class="thread-detail-page__messages">
+      @for (message of messages(); track message.id) {
+        <li [class.thread-detail-page__message--mine]="message.fromPortalUser">
+          <span class="thread-detail-page__sender">{{ message.senderName }}</span>
+          <p>{{ message.body }}</p>
+          <span class="thread-detail-page__time">{{ message.createdAt | date: 'short' }}</span>
+        </li>
+      }
+    </ul>
+  }
+
+  <form class="thread-detail-page__composer" (ngSubmit)="send()">
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@portal.threadDetail.messageLabel">Message</mat-label>
+      <textarea matInput [formControl]="body" rows="3"></textarea>
+    </mat-form-field>
+    <button mat-flat-button color="primary" type="submit" [disabled]="sending()">
+      <span i18n="@@portal.threadDetail.sendButton">Send</span>
+    </button>
+  </form>
+</div>

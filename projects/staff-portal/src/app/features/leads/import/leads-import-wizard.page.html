@@ -1,7 +1,7 @@
 <div class="import-page">
   <lf-leads-tabs />
 
-  <h1 class="import-page__title">Import leads</h1>
+  <h1 class="import-page__title" i18n="@@leads.import.title">Import leads</h1>
 
   @if (phase() === 'upload') {
     <lf-file-uploader accept=".csv,.xlsx" (filesSelected)="onFilesSelected($event)" />
@@ -16,12 +16,14 @@
       <p>{{ file()?.name }}</p>
 
       @if (isCsv()) {
-        <p class="import-mapping__hint">Map each column in your file to a lead field.</p>
+        <p class="import-mapping__hint" i18n="@@leads.import.mappingHint">
+          Map each column in your file to a lead field.
+        </p>
         <table class="import-mapping__table">
           <thead>
             <tr>
-              <th>Lead field</th>
-              <th>Column in your file</th>
+              <th i18n="@@leads.import.fieldColumnHeader">Lead field</th>
+              <th i18n="@@leads.import.sourceColumnHeader">Column in your file</th>
             </tr>
           </thead>
           <tbody>
@@ -33,7 +35,7 @@
                     [value]="mapping()[field]"
                     (selectionChange)="setMapping(field, $event.value)"
                   >
-                    <mat-option [value]="null">(none)</mat-option>
+                    <mat-option [value]="null" i18n="@@leads.import.noneOption">(none)</mat-option>
                     @for (header of sourceHeaders(); track $index) {
                       <mat-option [value]="$index">{{ header }}</mat-option>
                     }
@@ -45,7 +47,9 @@
         </table>
 
         @if (previewRows().length > 0) {
-          <p class="import-mapping__hint">Preview (first {{ previewRows().length }} rows):</p>
+          <p class="import-mapping__hint" i18n="@@leads.import.previewHint">
+            Preview (first {{ previewRows().length }} rows):
+          </p>
           <table class="import-mapping__preview">
             <thead>
               <tr>
@@ -66,15 +70,23 @@
           </table>
         }
       } @else {
-        <p class="import-mapping__hint">
+        <p class="import-mapping__hint" i18n="@@leads.import.xlsxHint">
           .xlsx files are uploaded as-is; columns named FirstName, LastName, Company, Email, Phone,
           IssueSummary are detected automatically.
         </p>
       }
 
       <div class="import-page__actions">
-        <button mat-button type="button" (click)="startOver()">Back</button>
-        <button mat-flat-button color="primary" type="button" (click)="confirmAndUpload()">
+        <button mat-button type="button" (click)="startOver()" i18n="@@leads.import.backButton">
+          Back
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          (click)="confirmAndUpload()"
+          i18n="@@leads.import.uploadButton"
+        >
           Upload
         </button>
       </div>
@@ -87,12 +99,12 @@
 
   @if (phase() === 'progress' && batch()) {
     <div class="import-progress">
-      <p>Importing {{ batch()!.fileName }}…</p>
+      <p i18n="@@leads.import.importingMessage">Importing {{ batch()!.fileName }}…</p>
       <mat-progress-bar
         mode="determinate"
         [value]="((batch()!.successCount + batch()!.errorCount) / (batch()!.totalRows || 1)) * 100"
       />
-      <p>
+      <p i18n="@@leads.import.rowsProcessedMessage">
         {{ batch()!.successCount + batch()!.errorCount }} / {{ batch()!.totalRows }} rows processed
       </p>
     </div>
@@ -103,24 +115,32 @@
       @if (batch()!.status === 'Completed') {
         <p class="import-result__success">
           <mat-icon>check_circle</mat-icon>
-          Imported {{ batch()!.successCount }} of {{ batch()!.totalRows }} rows.
+          <span i18n="@@leads.import.successMessage"
+            >Imported {{ batch()!.successCount }} of {{ batch()!.totalRows }} rows.</span
+          >
         </p>
       } @else {
         <p class="import-result__failure" role="alert">
           <mat-icon>error</mat-icon>
-          Import failed{{ batch()!.failureReason ? ': ' + batch()!.failureReason : '.' }}
+          <span i18n="@@leads.import.failureMessage"
+            >Import failed{{ batch()!.failureReason ? ': ' + batch()!.failureReason : '.' }}</span
+          >
         </p>
       }
 
       @if (batch()!.errorCount > 0) {
         <button mat-stroked-button type="button" (click)="downloadErrorFile()">
           <mat-icon>download</mat-icon>
-          Download error file ({{ batch()!.errorCount }} rows)
+          <span i18n="@@leads.import.downloadErrorButton"
+            >Download error file ({{ batch()!.errorCount }} rows)</span
+          >
         </button>
       }
 
       <div class="import-page__actions">
-        <button mat-button type="button" (click)="startOver()">Import another file</button>
+        <button mat-button type="button" (click)="startOver()" i18n="@@leads.import.importAnotherButton">
+          Import another file
+        </button>
       </div>
     </div>
   }

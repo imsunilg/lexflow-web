@@ -1,6 +1,6 @@
 <div class="dashboard-page">
   <header class="dashboard-page__toolbar">
-    <h1 class="dashboard-page__title">Dashboard</h1>
+    <h1 class="dashboard-page__title" i18n="@@dashboard.page.title">Dashboard</h1>
     <div class="dashboard-page__toolbar-actions">
       <lf-dashboard-date-range-selector
         [range]="analyticsRange()"
@@ -8,7 +8,7 @@
       />
       <button mat-stroked-button type="button" (click)="openCatalogDialog()">
         <mat-icon>tune</mat-icon>
-        Customize
+        <span i18n="@@dashboard.page.customizeButton">Customize</span>
       </button>
     </div>
   </header>
@@ -16,7 +16,9 @@
   @if (liveUpdatesPaused()) {
     <div class="dashboard-page__live-banner" role="status">
       <mat-icon>cloud_off</mat-icon>
-      Live updates paused — refreshing periodically instead.
+      <span i18n="@@dashboard.page.liveBanner"
+        >Live updates paused — refreshing periodically instead.</span
+      >
     </div>
   }
 
@@ -151,7 +153,9 @@
     </div>
 
     @if (visibleLayout().length === 0) {
-      <p class="dashboard-page__empty">No widgets are visible. Use "Customize" to add some.</p>
+      <p class="dashboard-page__empty" i18n="@@dashboard.page.emptyMessage">
+        No widgets are visible. Use "Customize" to add some.
+      </p>
     }
   }
 </div>

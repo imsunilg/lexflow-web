@@ -1,5 +1,5 @@
 <div class="ics-export">
-  <p class="ics-export__hint">
+  <p class="ics-export__hint" i18n="@@calendar.icsExportTab.hint">
     Subscribe to this read-only URL from any calendar app to see your LexFlow events. Anyone with
     this link can view your calendar — treat it like a password and regenerate it if it leaks.
   </p>
@@ -8,14 +8,22 @@
     <mat-spinner diameter="24" />
   } @else if (errorMessage() && !url()) {
     <p class="ics-export__error" role="alert">{{ errorMessage() }}</p>
-    <button mat-stroked-button type="button" (click)="load()">Retry</button>
+    <button mat-stroked-button type="button" (click)="load()" i18n="@@calendar.icsExportTab.retryButton">
+      Retry
+    </button>
   } @else if (url()) {
     <div class="ics-export__row">
       <mat-form-field appearance="outline" class="ics-export__field">
-        <mat-label>ICS feed URL</mat-label>
+        <mat-label i18n="@@calendar.icsExportTab.urlLabel">ICS feed URL</mat-label>
         <input matInput readonly [value]="url()" />
       </mat-form-field>
-      <button mat-stroked-button type="button" matTooltip="Copy to clipboard" (click)="copy()">
+      <button
+        mat-stroked-button
+        type="button"
+        matTooltip="Copy to clipboard"
+        i18n-matTooltip="@@calendar.icsExportTab.copyTooltip"
+        (click)="copy()"
+      >
         <mat-icon>content_copy</mat-icon>
         {{ copied() ? 'Copied!' : 'Copy' }}
       </button>
@@ -37,7 +45,7 @@
       } @else {
         <mat-icon>autorenew</mat-icon>
       }
-      Regenerate link
+      <span i18n="@@calendar.icsExportTab.regenerateButton">Regenerate link</span>
     </button>
   }
 </div>

@@ -1,0 +1,84 @@
+<div class="utilization">
+  <lf-time-tabs />
+
+  <header class="utilization__header">
+    <h1 i18n="@@time.utilization.heading">My utilization</h1>
+    <div class="utilization__controls">
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@time.utilization.fromLabel">From</mat-label>
+        <input matInput [matDatepicker]="fromPicker" [formControl]="fromControl" />
+        <mat-datepicker-toggle matIconSuffix [for]="fromPicker" />
+        <mat-datepicker #fromPicker />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@time.utilization.toLabel">To</mat-label>
+        <input matInput [matDatepicker]="toPicker" [formControl]="toControl" />
+        <mat-datepicker-toggle matIconSuffix [for]="toPicker" />
+        <mat-datepicker #toPicker />
+      </mat-form-field>
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        [disabled]="loading()"
+        (click)="load()"
+        i18n="@@time.utilization.refreshButton"
+      >
+        Refresh
+      </button>
+    </div>
+  </header>
+
+  <p class="utilization__assumption" i18n="@@time.utilization.assumptionNote">
+    Target hours are a placeholder assumption (8h × weekdays in range) — there is no real per-user
+    or firm target-hours source in the backend yet. Once one exists, this calculation should be
+    replaced.
+  </p>
+
+  @if (errorMessage()) {
+    <p class="utilization__error" role="alert">{{ errorMessage() }}</p>
+  }
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else {
+    <div class="utilization__cards">
+      <div class="utilization__card">
+        <span class="utilization__card-label" i18n="@@time.utilization.billableApprovedLabel"
+          >Billable approved hours</span
+        >
+        <strong class="utilization__card-value"
+          >{{ hoursLabel(billableApprovedMinutes()) }}h</strong
+        >
+      </div>
+      <div class="utilization__card">
+        <span class="utilization__card-label" i18n="@@time.utilization.totalLoggedLabel"
+          >Total hours logged</span
+        >
+        <strong class="utilization__card-value">{{ hoursLabel(totalLoggedMinutes()) }}h</strong>
+      </div>
+      <div class="utilization__card">
+        <span class="utilization__card-label" i18n="@@time.utilization.targetHoursLabel"
+          >Target hours</span
+        >
+        <strong class="utilization__card-value">{{ hoursLabel(targetMinutes()) }}h</strong>
+      </div>
+      <div class="utilization__card">
+        <span class="utilization__card-label" i18n="@@time.utilization.utilizationLabel"
+          >Utilization</span
+        >
+        <strong class="utilization__card-value">{{ utilizationPct() }}%</strong>
+      </div>
+    </div>
+
+    <div class="utilization__bar-section">
+      <div class="utilization__bar-track">
+        <div class="utilization__bar-fill" [style.width.%]="barWidthPct()"></div>
+      </div>
+      <span class="utilization__bar-caption" i18n="@@time.utilization.barCaption">
+        {{ hoursLabel(billableApprovedMinutes()) }}h billable approved of
+        {{ hoursLabel(targetMinutes()) }}h target ({{ utilizationPct() }}%)
+      </span>
+    </div>
+  }
+</div>

@@ -1,0 +1,65 @@
+<div class="departments">
+  <lf-admin-tabs />
+
+  <header class="departments__header">
+    <h1 i18n="@@admin.departmentsList.title">Departments</h1>
+    <button mat-flat-button color="primary" type="button" (click)="openNew()">
+      <mat-icon>add</mat-icon> <ng-container i18n="@@admin.departmentsList.newButton">New department</ng-container>
+    </button>
+  </header>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (departments().length === 0) {
+    <lf-empty-state
+      icon="apartment"
+      title="No departments yet"
+      message="Create a department to organize users by function."
+      ctaLabel="New department"
+      i18n-title="@@admin.departmentsList.emptyTitle"
+      i18n-message="@@admin.departmentsList.emptyMessage"
+      i18n-ctaLabel="@@admin.departmentsList.emptyCta"
+      (cta)="openNew()"
+    />
+  } @else {
+    <table class="departments__table">
+      <thead>
+        <tr>
+          <th i18n="@@admin.departmentsList.colName">Name</th>
+          <th i18n="@@admin.departmentsList.colCode">Code</th>
+          <th i18n="@@admin.departmentsList.colHead">Head</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (department of departments(); track department.id) {
+          <tr>
+            <td>{{ department.name }}</td>
+            <td>{{ department.code ?? '—' }}</td>
+            <td>{{ userName(department.headUserId) }}</td>
+            <td class="departments__actions">
+              <button
+                mat-icon-button
+                type="button"
+                aria-label="Edit department"
+                i18n-aria-label="@@admin.departmentsList.editAriaLabel"
+                (click)="openEdit(department)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                type="button"
+                aria-label="Delete department"
+                i18n-aria-label="@@admin.departmentsList.deleteAriaLabel"
+                (click)="deleteDepartment(department)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

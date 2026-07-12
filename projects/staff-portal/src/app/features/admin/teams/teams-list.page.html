@@ -1,0 +1,59 @@
+<div class="teams">
+  <lf-admin-tabs />
+
+  <header class="teams__header">
+    <h1 i18n="@@admin.teamsList.title">Teams</h1>
+    <button mat-flat-button color="primary" type="button" (click)="openNew()">
+      <mat-icon>add</mat-icon> <ng-container i18n="@@admin.teamsList.newButton">New team</ng-container>
+    </button>
+  </header>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (teams().length === 0) {
+    <lf-empty-state
+      icon="groups"
+      title="No teams yet"
+      message="Create a team to group users for assignment and workload views."
+      ctaLabel="New team"
+      i18n-title="@@admin.teamsList.emptyTitle"
+      i18n-message="@@admin.teamsList.emptyMessage"
+      i18n-ctaLabel="@@admin.teamsList.emptyCta"
+      (cta)="openNew()"
+    />
+  } @else {
+    <table class="teams__table">
+      <thead>
+        <tr>
+          <th i18n="@@admin.teamsList.colName">Name</th>
+          <th i18n="@@admin.teamsList.colLead">Lead</th>
+          <th i18n="@@admin.teamsList.colMembers">Members</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (team of teams(); track team.id) {
+          <tr>
+            <td>{{ team.name }}</td>
+            <td>{{ userName(team.leadUserId) }}</td>
+            <td>{{ memberCount(team) }}</td>
+            <td class="teams__actions">
+              <button mat-icon-button type="button" aria-label="Edit team" i18n-aria-label="@@admin.teamsList.editAriaLabel" (click)="openEdit(team)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                type="button"
+                aria-label="Delete team"
+                i18n-aria-label="@@admin.teamsList.deleteAriaLabel"
+                (click)="deleteTeam(team)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

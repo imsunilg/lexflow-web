@@ -1,0 +1,39 @@
+<div class="settings-hub">
+  <lf-admin-tabs />
+
+  <header class="settings-hub__header">
+    <h1 i18n="@@admin.settingsHub.title">Settings</h1>
+  </header>
+
+  <section class="settings-hub__section">
+    <h2 i18n="@@admin.settingsHub.generalSection">General</h2>
+    <div class="settings-hub__grid">
+      @for (card of sectionCards; track card.path) {
+        <a class="settings-hub__card" [routerLink]="card.path">
+          <mat-card appearance="outlined">
+            <mat-card-content>
+              <mat-icon>{{ card.icon }}</mat-icon>
+              <span>{{ card.label }}</span>
+            </mat-card-content>
+          </mat-card>
+        </a>
+      }
+    </div>
+  </section>
+
+  <section class="settings-hub__section">
+    <h2 i18n="@@admin.settingsHub.billingSection">Billing &amp; numbering</h2>
+    <div class="settings-hub__grid">
+      @for (card of collectionCards; track card.path) {
+        <a class="settings-hub__card" [routerLink]="card.path">
+          <mat-card appearance="outlined">
+            <mat-card-content>
+              <mat-icon>{{ card.icon }}</mat-icon>
+              <span>{{ card.label }}</span>
+            </mat-card-content>
+          </mat-card>
+        </a>
+      }
+    </div>
+  </section>
+</div>

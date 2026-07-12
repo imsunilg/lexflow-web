@@ -1,0 +1,153 @@
+<div class="whatsapp-pane">
+  <lf-comm-tabs />
+
+  <div class="whatsapp-pane__toolbar">
+    <mat-form-field appearance="outline" class="whatsapp-pane__client-field">
+      <mat-label i18n="@@communication.whatsappPane.clientLabel">Client</mat-label>
+      <input matInput [formControl]="clientControl" [matAutocomplete]="clientAuto" />
+      <mat-autocomplete #clientAuto="matAutocomplete" (optionSelected)="onClientSelected($event)">
+        @for (client of clientResults(); track client.id) {
+          <mat-option [value]="client.label">{{ client.label }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+
+    @if (activeClient()) {
+      <button mat-stroked-button type="button" [disabled]="optInBusy()" (click)="recordOptIn()">
+        <mat-icon>how_to_reg</mat-icon> <span i18n="@@communication.whatsappPane.recordOptInButton">Record opt-in</span>
+      </button>
+      <button mat-stroked-button type="button" [disabled]="optInBusy()" (click)="optOut()">
+        <mat-icon>block</mat-icon> <span i18n="@@communication.whatsappPane.optOutButton">Opt out</span>
+      </button>
+    }
+  </div>
+
+  @if (optInMessage()) {
+    <p class="whatsapp-pane__opt-in-message">{{ optInMessage() }}</p>
+  }
+
+  @if (!activeClient()) {
+    <lf-empty-state icon="chat" title="Pick a client to see WhatsApp history" i18n-title="@@communication.whatsappPane.pickClientEmptyState" />
+  } @else {
+    @if (loading()) {
+      <mat-progress-bar mode="indeterminate" />
+    } @else if (messages().length === 0) {
+      <lf-empty-state icon="chat" title="No WhatsApp messages for this client yet" i18n-title="@@communication.whatsappPane.noMessagesEmptyState" />
+    } @else {
+      <div class="whatsapp-pane__history">
+        @for (message of messages(); track message.id) {
+          <div
+            class="whatsapp-pane__message"
+            [class.whatsapp-pane__message--mine]="message.direction === 'Outbound'"
+          >
+            <p>{{ message.body }}</p>
+            <span class="whatsapp-pane__message-meta">
+              {{ message.status }}
+              @if (message.windowExpiresAt) {
+                · window until {{ message.windowExpiresAt | date: 'MMM d, h:mm a' }}
+              }
+            </span>
+          </div>
+        }
+      </div>
+    }
+
+    <div
+      class="whatsapp-pane__session-status"
+      [class.whatsapp-pane__session-status--open]="sessionWindowOpen()"
+    >
+      <mat-icon>{{ sessionWindowOpen() ? 'lock_open' : 'lock' }}</mat-icon>
+      @if (sessionWindowOpen()) {
+        <span i18n="@@communication.whatsappPane.sessionOpenLabel">Session window open until {{ sessionWindowExpiresAt() | date: 'h:mm a' }}</span>
+      } @else {
+        <span i18n="@@communication.whatsappPane.sessionClosedLabel">Session window closed — send a template message instead</span>
+      }
+    </div>
+
+    <div class="whatsapp-pane__composer">
+      <h3 i18n="@@communication.whatsappPane.sendMessageTitle">Send WhatsApp message</h3>
+
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@communication.whatsappPane.templateLabel">Template</mat-label>
+        <mat-select [formControl]="selectedTemplateId">
+          <mat-option [value]="null" i18n="@@communication.whatsappPane.noTemplateOption">None — session message</mat-option>
+          @for (template of templates(); track template.id) {
+            <mat-option [value]="template.id">{{ template.name }}</mat-option>
+          }
+        </mat-select>
+        <mat-hint i18n="@@communication.whatsappPane.templateHint">Template sends require an active opt-in and are usable any time.</mat-hint>
+      </mat-form-field>
+
+      @if (selectedTemplate(); as template) {
+        @for (name of variableNames(); track name) {
+          <mat-form-field appearance="outline">
+            <mat-label>{{ name }}</mat-label>
+            <input matInput (input)="onVariableInput(name, $any($event.target).value)" />
+          </mat-form-field>
+        }
+
+        <div class="whatsapp-pane__preview">
+          <span class="whatsapp-pane__preview-label" i18n="@@communication.whatsappPane.mergePreviewLabel">
+            Merge preview (local mirror — the server does its own substitution):
+          </span>
+          <p class="whatsapp-pane__preview-body">{{ mergedPreview() }}</p>
+        </div>
+
+        @if (sendError()) {
+          <p class="whatsapp-pane__send-error">
+            <mat-icon>error</mat-icon>
+            {{ sendError() }}
+          </p>
+        }
+
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          [disabled]="sending()"
+          (click)="sendTemplate()"
+          i18n="@@communication.whatsappPane.sendTemplateButton"
+        >
+          Send template
+        </button>
+      } @else {
+        <mat-form-field appearance="outline">
+          <mat-label i18n="@@communication.whatsappPane.sessionMessageLabel">Session message</mat-label>
+          <textarea
+            matInput
+            [formControl]="sessionText"
+            rows="3"
+            [disabled]="!sessionWindowOpen()"
+            placeholder="Only usable while the 24h session window is open"
+            i18n-placeholder="@@communication.whatsappPane.sessionMessagePlaceholder"
+          ></textarea>
+        </mat-form-field>
+
+        @if (!sessionWindowOpen()) {
+          <p class="whatsapp-pane__window-warning" i18n="@@communication.whatsappPane.windowWarning">
+            <mat-icon>warning</mat-icon>
+            No open session window — freeform session messages aren't allowed. Use a template above.
+          </p>
+        }
+
+        @if (sendError()) {
+          <p class="whatsapp-pane__send-error">
+            <mat-icon>error</mat-icon>
+            {{ sendError() }}
+          </p>
+        }
+
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          [disabled]="sending() || !sessionWindowOpen()"
+          (click)="sendSession()"
+          i18n="@@communication.whatsappPane.sendSessionButton"
+        >
+          Send session message
+        </button>
+      }
+    </div>
+  }
+</div>

@@ -1,21 +1,22 @@
-<h2 mat-dialog-title>Record payment</h2>
+<h2 mat-dialog-title i18n="@@billing.paymentRecordDialog.title">Record payment</h2>
 <mat-dialog-content class="payment-record-dialog">
   @if (errorMessage()) {
     <p class="payment-record-dialog__error">{{ errorMessage() }}</p>
   }
 
   @if (lockClient) {
-    <p class="payment-record-dialog__client-locked">
+    <p class="payment-record-dialog__client-locked" i18n="@@billing.paymentRecordDialog.clientLocked">
       Client: <strong>{{ data.invoice?.clientId }}</strong>
     </p>
   } @else {
     <mat-form-field appearance="outline" class="payment-record-dialog__field">
-      <mat-label>Client</mat-label>
+      <mat-label i18n="@@billing.paymentRecordDialog.clientLabel">Client</mat-label>
       <input
         matInput
         [formControl]="clientControl"
         [matAutocomplete]="clientAuto"
         placeholder="Search by name"
+        i18n-placeholder="@@billing.paymentRecordDialog.clientSearchPlaceholder"
       />
       <mat-autocomplete #clientAuto="matAutocomplete" (optionSelected)="onClientSelected($event)">
         @for (client of clientResults(); track client.id) {
@@ -29,12 +30,12 @@
 
   <form [formGroup]="form" class="payment-record-dialog__form">
     <mat-form-field appearance="outline" class="payment-record-dialog__field">
-      <mat-label>Amount</mat-label>
+      <mat-label i18n="@@billing.paymentRecordDialog.amountLabel">Amount</mat-label>
       <input matInput type="number" formControlName="amount" min="0.01" step="0.01" />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="payment-record-dialog__field">
-      <mat-label>Mode</mat-label>
+      <mat-label i18n="@@billing.paymentRecordDialog.modeLabel">Mode</mat-label>
       <mat-select formControlName="mode">
         @for (mode of paymentModes; track mode) {
           <mat-option [value]="mode">{{ mode }}</mat-option>
@@ -44,37 +45,37 @@
 
     @if (form.controls.mode.value === 'Gateway') {
       <mat-form-field appearance="outline" class="payment-record-dialog__field">
-        <mat-label>Gateway</mat-label>
-        <input matInput formControlName="gateway" placeholder="Razorpay / Stripe / PayPal" />
+        <mat-label i18n="@@billing.paymentRecordDialog.gatewayLabel">Gateway</mat-label>
+        <input matInput formControlName="gateway" placeholder="Razorpay / Stripe / PayPal" i18n-placeholder="@@billing.paymentRecordDialog.gatewayPlaceholder" />
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="payment-record-dialog__field">
-        <mat-label>Gateway reference</mat-label>
+        <mat-label i18n="@@billing.paymentRecordDialog.gatewayRefLabel">Gateway reference</mat-label>
         <input matInput formControlName="gatewayRef" />
       </mat-form-field>
     }
 
     <mat-form-field appearance="outline" class="payment-record-dialog__field">
-      <mat-label>Received on</mat-label>
+      <mat-label i18n="@@billing.paymentRecordDialog.receivedOnLabel">Received on</mat-label>
       <input matInput [matDatepicker]="receivedOnPicker" [formControl]="receivedOnControl" />
       <mat-datepicker-toggle matSuffix [for]="receivedOnPicker" />
       <mat-datepicker #receivedOnPicker />
     </mat-form-field>
 
-    <mat-checkbox formControlName="onAccount" class="payment-record-dialog__on-account">
+    <mat-checkbox formControlName="onAccount" class="payment-record-dialog__on-account" i18n="@@billing.paymentRecordDialog.onAccountLabel">
       On account (skip the ≤ allocations check for excess/unallocated amounts)
     </mat-checkbox>
   </form>
 
   <div class="payment-record-dialog__allocations">
     <div class="payment-record-dialog__allocations-header">
-      <h3>Allocations</h3>
+      <h3 i18n="@@billing.paymentRecordDialog.allocationsHeading">Allocations</h3>
       <button mat-button type="button" (click)="addAllocation()">
-        <mat-icon>add</mat-icon> Add row
+        <mat-icon>add</mat-icon> <span i18n="@@billing.paymentRecordDialog.addRowButton">Add row</span>
       </button>
     </div>
 
-    <p class="payment-record-dialog__hint">
+    <p class="payment-record-dialog__hint" i18n="@@billing.paymentRecordDialog.manualInvoiceIdsHint">
       There's no endpoint to list a client's open invoices, so invoice ids are entered manually
       here.
     </p>
@@ -82,7 +83,7 @@
     @for (row of allocations.controls; track row; let i = $index) {
       <div class="payment-record-dialog__allocation-row" [formGroup]="row">
         <mat-form-field appearance="outline" class="payment-record-dialog__field">
-          <mat-label>Invoice id</mat-label>
+          <mat-label i18n="@@billing.paymentRecordDialog.invoiceIdLabel">Invoice id</mat-label>
           <input
             matInput
             formControlName="invoiceId"
@@ -90,13 +91,14 @@
           />
         </mat-form-field>
         <mat-form-field appearance="outline" class="payment-record-dialog__field">
-          <mat-label>Amount</mat-label>
+          <mat-label i18n="@@billing.paymentRecordDialog.allocationAmountLabel">Amount</mat-label>
           <input matInput type="number" formControlName="amount" min="0.01" step="0.01" />
         </mat-form-field>
         <button
           mat-icon-button
           type="button"
           aria-label="Remove allocation row"
+          i18n-aria-label="@@billing.paymentRecordDialog.removeAllocationAriaLabel"
           (click)="removeAllocation(i)"
         >
           <mat-icon>delete</mat-icon>
@@ -104,12 +106,12 @@
       </div>
     }
 
-    <p class="payment-record-dialog__allocation-total">Allocated total: {{ allocationTotal() }}</p>
+    <p class="payment-record-dialog__allocation-total" i18n="@@billing.paymentRecordDialog.allocatedTotal">Allocated total: {{ allocationTotal() }}</p>
   </div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button type="button" (click)="cancel()">Cancel</button>
+  <button mat-button type="button" (click)="cancel()" i18n="@@billing.paymentRecordDialog.cancelButton">Cancel</button>
   <button
     mat-flat-button
     color="primary"
@@ -120,7 +122,7 @@
     @if (saving()) {
       <mat-spinner diameter="18" />
     } @else {
-      Record payment
+      <span i18n="@@billing.paymentRecordDialog.submitButton">Record payment</span>
     }
   </button>
 </mat-dialog-actions>

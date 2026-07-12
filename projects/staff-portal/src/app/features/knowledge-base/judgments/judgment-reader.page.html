@@ -1,0 +1,74 @@
+<div class="judgment-reader">
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (!judgment()) {
+    <lf-empty-state icon="balance" title="Judgment not found" i18n-title="@@kb.judgmentReader.judgmentNotFoundEmptyState" />
+  } @else {
+    <header class="judgment-reader__header">
+      <h1>{{ judgment()!.citation }}</h1>
+      <div class="judgment-reader__meta">
+        @if (judgment()!.neutralCitation) {
+          <span>{{ judgment()!.neutralCitation }}</span>
+        }
+        @if (courtName()) {
+          <span>{{ courtName() }}</span>
+        }
+        @if (judgment()!.decisionDate) {
+          <span>{{ judgment()!.decisionDate | date: 'MMM d, y' }}</span>
+        }
+        @if (judgment()!.parties) {
+          <span>{{ judgment()!.parties }}</span>
+        }
+        @if (pinCount() !== null) {
+          <span
+            matTooltip="Counts pin records, not distinct matters — pinning the same judgment twice into one matter would inflate this."
+            i18n-matTooltip="@@kb.judgmentReader.pinCountTooltip"
+            i18n="@@kb.judgmentReader.citedInLabel"
+          >
+            Cited in {{ pinCount() }} {{ pinCount() === 1 ? 'matter' : 'matters' }}
+          </span>
+        }
+      </div>
+    </header>
+
+    <div class="judgment-reader__body">
+      <section class="judgment-reader__headnote">
+        <h2 i18n="@@kb.judgmentReader.headnoteTitle">Headnote</h2>
+        @if (judgment()!.headnote) {
+          <p>{{ judgment()!.headnote }}</p>
+        } @else {
+          <p class="judgment-reader__hint" i18n="@@kb.judgmentReader.noHeadnoteHint">No headnote recorded.</p>
+        }
+        @if (judgment()!.ocrStatus === 'Failed') {
+          <p class="judgment-reader__hint" i18n="@@kb.judgmentReader.ocrFailedHint">
+            Text extraction failed for this PDF (native text-layer extraction only — not true OCR of
+            scanned pages) — searchable by metadata only.
+          </p>
+        }
+      </section>
+
+      <section class="judgment-reader__pdf">
+        @if (!judgment()!.documentId) {
+          <lf-empty-state icon="picture_as_pdf" title="No PDF attached" i18n-title="@@kb.judgmentReader.noPdfEmptyState" />
+        } @else if (pdfLoading()) {
+          <mat-spinner diameter="32" />
+        } @else if (pdfFailed()) {
+          <lf-empty-state icon="error_outline" title="Could not load the PDF" i18n-title="@@kb.judgmentReader.pdfLoadFailedEmptyState" />
+        } @else {
+          <div class="judgment-reader__pdf-toolbar">
+            <button mat-icon-button type="button" (click)="prevPage()">
+              <mat-icon>chevron_left</mat-icon>
+            </button>
+            <span i18n="@@kb.judgmentReader.pageOfLabel">Page {{ currentPage() }} / {{ numPages() }}</span>
+            <button mat-icon-button type="button" (click)="nextPage()">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+          <div class="judgment-reader__pdf-canvas-wrap">
+            <canvas #pageCanvas></canvas>
+          </div>
+        }
+      </section>
+    </div>
+  }
+</div>

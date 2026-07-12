@@ -1,0 +1,113 @@
+<div class="contract-review">
+  <lf-ai-tabs />
+
+  <h1 i18n="@@ai.contractReview.heading">Contract review</h1>
+  <p class="contract-review__hint" i18n="@@ai.contractReview.uploadHint">
+    Reviews an already-uploaded document — there's no upload-in-place here; upload the contract via
+    Documents first if it isn't already saved.
+  </p>
+
+  @if (!selectedDocument()) {
+    <mat-form-field appearance="outline" class="contract-review__search">
+      <mat-label i18n="@@ai.contractReview.searchLabel">Search documents</mat-label>
+      <input matInput [formControl]="searchControl" />
+    </mat-form-field>
+
+    @if (searching()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+
+    @if (hits().length > 0) {
+      <ul class="contract-review__hits">
+        @for (hit of hits(); track hit.documentId) {
+          <li>
+            <button type="button" class="contract-review__hit-row" (click)="selectDocument(hit)">
+              <mat-icon>description</mat-icon>
+              <span>{{ hit.title }}</span>
+            </button>
+          </li>
+        }
+      </ul>
+    }
+  } @else {
+    <div class="contract-review__selected">
+      <mat-icon>description</mat-icon>
+      <span>{{ selectedDocument()!.title }}</span>
+      <button
+        mat-button
+        type="button"
+        (click)="selectedDocument.set(null)"
+        i18n="@@ai.contractReview.changeButton"
+      >
+        Change
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        [disabled]="reviewing()"
+        (click)="runReview()"
+        i18n="@@ai.contractReview.runReviewButton"
+      >
+        Run review
+      </button>
+    </div>
+
+    @if (reviewing()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+    @if (reviewError()) {
+      <p class="contract-review__error">{{ reviewError() }}</p>
+    }
+
+    @if (result()) {
+      <table class="contract-review__table">
+        <thead>
+          <tr>
+            <th i18n="@@ai.contractReview.clauseColumn">Clause</th>
+            <th i18n="@@ai.contractReview.riskColumn">Risk</th>
+            <th i18n="@@ai.contractReview.extractedTextColumn">Extracted text</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (clause of result()!.clauses; track clause.clauseType) {
+            <tr [class.contract-review__row--high]="isHighRisk(clause)">
+              <td>{{ clause.clauseType }}</td>
+              <td>{{ clause.riskLevel ?? 'unrated' }}</td>
+              <td>{{ clause.text ?? '(not found)' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      @if (result()!.riskFlags.length > 0) {
+        <p class="contract-review__risk-flags" i18n="@@ai.contractReview.riskFlagsMessage">
+          High-risk clauses: {{ result()!.riskFlags.join(', ') }}
+        </p>
+      } @else {
+        <p class="contract-review__hint" i18n="@@ai.contractReview.noRiskFlagsMessage">
+          No high-risk clauses flagged.
+        </p>
+      }
+
+      <p class="contract-review__hint" i18n="@@ai.contractReview.playbookHint">
+        There's no tracked-changes redline docx output or configurable firm playbook — this is a
+        plain clause extraction with LLM-judged risk levels, not a rules-engine result.
+      </p>
+
+      <div class="contract-review__actions">
+        <lf-ai-badge [interactionId]="result()!.interactionId" />
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          [disabled]="saving()"
+          (click)="saveReviewNotes()"
+          i18n="@@ai.contractReview.saveReviewNotesButton"
+        >
+          Save review notes as new document version
+        </button>
+      </div>
+    }
+  }
+</div>

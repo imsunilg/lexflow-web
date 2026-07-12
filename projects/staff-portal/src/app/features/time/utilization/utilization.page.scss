@@ -1,0 +1,89 @@
+.utilization {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-2);
+  padding: var(--lf-space-3);
+}
+
+.utilization__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--lf-space-2);
+
+  h1 {
+    margin: 0;
+    font-size: var(--lf-text-lg, 20px);
+  }
+}
+
+.utilization__controls {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--lf-space-1);
+}
+
+.utilization__assumption {
+  margin: 0;
+  padding: var(--lf-space-1) var(--lf-space-2);
+  background: var(--lf-surface-variant);
+  color: var(--lf-on-surface-variant);
+  border-radius: 8px;
+  font-size: var(--lf-text-sm);
+}
+
+.utilization__error {
+  color: var(--lf-error);
+}
+
+.utilization__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--lf-space-2);
+}
+
+.utilization__card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--lf-space-2);
+  border: 1px solid var(--lf-surface-variant);
+  border-radius: 8px;
+}
+
+.utilization__card-label {
+  font-size: var(--lf-text-xs);
+  color: var(--lf-on-surface-variant);
+}
+
+.utilization__card-value {
+  font-size: var(--lf-text-lg, 20px);
+  font-variant-numeric: tabular-nums;
+}
+
+.utilization__bar-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lf-space-1);
+}
+
+.utilization__bar-track {
+  width: 100%;
+  height: 22px;
+  background: var(--lf-surface-variant);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.utilization__bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: var(--lf-success);
+  transition: width var(--lf-motion-slow);
+}
+
+.utilization__bar-caption {
+  font-size: var(--lf-text-sm);
+  color: var(--lf-on-surface-variant);
+}

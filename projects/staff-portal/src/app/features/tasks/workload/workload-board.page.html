@@ -1,0 +1,80 @@
+<div class="workload">
+  <lf-tasks-tabs />
+
+  <header class="workload__header">
+    <div class="workload__nav">
+      <button mat-icon-button type="button" (click)="stepWeek(-1)" aria-label="Previous week" i18n-aria-label="@@tasks.workloadBoard.previousWeekAriaLabel">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button mat-stroked-button type="button" (click)="thisWeek()" i18n="@@tasks.workloadBoard.thisWeekButton">This week</button>
+      <button mat-icon-button type="button" (click)="stepWeek(1)" aria-label="Next week" i18n-aria-label="@@tasks.workloadBoard.nextWeekAriaLabel">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+      <h1>{{ weekLabel() }}</h1>
+    </div>
+
+    <mat-form-field appearance="outline" class="workload__week-picker">
+      <mat-label i18n="@@tasks.workloadBoard.jumpToWeekLabel">Jump to week</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [formControl]="weekControl"
+        (dateChange)="onWeekPicked($event.value)"
+      />
+      <mat-datepicker-toggle matIconSuffix [for]="picker" />
+      <mat-datepicker #picker />
+    </mat-form-field>
+  </header>
+
+  @if (directoryUnavailable()) {
+    <p class="workload__hint" i18n="@@tasks.workloadBoard.noDirectoryHint">No user directory access — showing raw owner IDs.</p>
+  }
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (columns().length === 0) {
+    <lf-empty-state
+      icon="groups"
+      title="No task activity for this week"
+      message="No owner has any tasks in this week's window."
+      i18n-title="@@tasks.workloadBoard.noActivityEmptyStateTitle"
+      i18n-message="@@tasks.workloadBoard.noActivityEmptyStateMessage"
+    />
+  } @else {
+    <div class="workload__columns">
+      @for (column of columns(); track column.userId) {
+        <div class="workload__column">
+          <h2 class="workload__column-title">{{ column.displayName }}</h2>
+
+          <div class="workload__bar-track">
+            <div class="workload__bar-fill" [style.width.%]="column.barPct"></div>
+          </div>
+          <p class="workload__bar-label" i18n="@@tasks.workloadBoard.taskCountLabel">{{ column.workload.total }} tasks</p>
+
+          <dl class="workload__breakdown">
+            <div class="workload__stat">
+              <dt i18n="@@tasks.workloadBoard.newStatLabel">New</dt>
+              <dd>{{ column.workload.new }}</dd>
+            </div>
+            <div class="workload__stat">
+              <dt i18n="@@tasks.workloadBoard.inProgressStatLabel">In progress</dt>
+              <dd>{{ column.workload.inProgress }}</dd>
+            </div>
+            <div class="workload__stat">
+              <dt i18n="@@tasks.workloadBoard.inReviewStatLabel">In review</dt>
+              <dd>{{ column.workload.inReview }}</dd>
+            </div>
+            <div class="workload__stat">
+              <dt i18n="@@tasks.workloadBoard.doneStatLabel">Done</dt>
+              <dd>{{ column.workload.done }}</dd>
+            </div>
+          </dl>
+
+          @if (column.workload.overdue > 0) {
+            <p class="workload__overdue" i18n="@@tasks.workloadBoard.overdueLabel">{{ column.workload.overdue }} overdue</p>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

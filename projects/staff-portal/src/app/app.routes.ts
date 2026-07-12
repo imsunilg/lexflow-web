@@ -58,36 +58,41 @@ export const routes: Routes = [
       },
       {
         path: 'time',
-        loadComponent: () => import('./features/time/time.page').then((m) => m.TimePage),
+        loadChildren: () => import('./features/time/time.routes').then((m) => m.TIME_ROUTES),
       },
       {
         path: 'tasks',
-        loadComponent: () => import('./features/tasks/tasks.page').then((m) => m.TasksPage),
+        loadChildren: () => import('./features/tasks/tasks.routes').then((m) => m.TASKS_ROUTES),
       },
       {
         path: 'communication',
-        loadComponent: () =>
-          import('./features/communication/communication.page').then((m) => m.CommunicationPage),
+        loadChildren: () =>
+          import('./features/communication/communication.routes').then(
+            (m) => m.COMMUNICATION_ROUTES,
+          ),
       },
       {
         path: 'knowledge-base',
-        loadComponent: () =>
-          import('./features/knowledge-base/knowledge-base.page').then((m) => m.KnowledgeBasePage),
+        loadChildren: () =>
+          import('./features/knowledge-base/knowledge-base.routes').then(
+            (m) => m.KNOWLEDGE_BASE_ROUTES,
+          ),
       },
       {
         path: 'reports',
-        loadComponent: () => import('./features/reports/reports.page').then((m) => m.ReportsPage),
-        data: { permission: 'reports.read' },
+        loadChildren: () =>
+          import('./features/reports/reports.routes').then((m) => m.REPORTS_ROUTES),
+        data: { permission: 'reports.operational.own' },
       },
       {
         path: 'ai-studio',
-        loadComponent: () =>
-          import('./features/ai-studio/ai-studio.page').then((m) => m.AiStudioPage),
+        loadChildren: () => import('./features/ai/ai.routes').then((m) => m.AI_ROUTES),
+        data: { permission: 'ai.use.own' },
       },
       {
         path: 'admin',
-        loadComponent: () => import('./features/admin/admin.page').then((m) => m.AdminPage),
-        data: { permission: 'admin.read' },
+        loadChildren: () => import('./features/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
+        data: { permission: 'users.read.all' },
       },
     ],
   },

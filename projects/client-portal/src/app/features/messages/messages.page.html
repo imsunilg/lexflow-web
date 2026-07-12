@@ -1,0 +1,24 @@
+<div class="messages-page">
+  <h1 i18n="@@portal.messages.title">Messages</h1>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (threads().length === 0) {
+    <lf-empty-state
+      icon="forum"
+      title="No conversations yet"
+      i18n-title="@@portal.messages.emptyTitle"
+    />
+  } @else {
+    <ul class="messages-page__list">
+      @for (thread of threads(); track thread.id) {
+        <li>
+          <a [routerLink]="[thread.id]">
+            <span class="messages-page__subject">{{ thread.subject }}</span>
+            <span class="messages-page__meta">{{ thread.lastMessageAt | date: 'medium' }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</div>

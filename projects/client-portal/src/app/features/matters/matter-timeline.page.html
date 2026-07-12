@@ -1,0 +1,40 @@
+<div class="matter-timeline-page">
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (notFound()) {
+    <lf-empty-state
+      icon="error_outline"
+      title="Matter not found"
+      i18n-title="@@portal.matterTimeline.notFoundTitle"
+    />
+  } @else if (timeline()) {
+    <header class="matter-timeline-page__header">
+      <span class="matter-timeline-page__number">{{ timeline()!.number }}</span>
+      <lf-status-chip [label]="timeline()!.status" />
+    </header>
+    <h1>{{ timeline()!.title }}</h1>
+
+    @if (timeline()!.entries.length === 0) {
+      <lf-empty-state
+        icon="event_note"
+        title="No timeline entries yet"
+        i18n-title="@@portal.matterTimeline.emptyTitle"
+      />
+    } @else {
+      <ol class="matter-timeline-page__entries">
+        @for (entry of timeline()!.entries; track $index) {
+          <li>
+            <mat-icon>{{ entry.kind === 'HearingOutcome' ? 'task_alt' : 'event' }}</mat-icon>
+            <div>
+              <p class="matter-timeline-page__entry-title">{{ entry.title }}</p>
+              <p class="matter-timeline-page__entry-meta">{{ entry.at | date: 'medium' }}</p>
+              @if (entry.detail) {
+                <p class="matter-timeline-page__entry-detail">{{ entry.detail }}</p>
+              }
+            </div>
+          </li>
+        }
+      </ol>
+    }
+  }
+</div>

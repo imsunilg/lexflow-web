@@ -1,0 +1,64 @@
+<div class="reports-hub">
+  <lf-reports-tabs />
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  } @else if (catalog().length === 0) {
+    <lf-empty-state icon="query_stats" title="No reports available" i18n-title="@@reports.hub.noReportsTitle" />
+  } @else {
+    @if (favoriteItems().length > 0) {
+      <section class="reports-hub__section">
+        <h2 i18n="@@reports.hub.favoritesHeading">Favorites</h2>
+        <div class="reports-hub__grid">
+          @for (item of favoriteItems(); track item.key) {
+            <button
+              type="button"
+              class="reports-hub__card"
+              [class.reports-hub__card--locked]="isLocked(item)"
+              [matTooltip]="isLocked(item) ? 'Requires the reports.financial permission' : ''"
+              (click)="open(item)"
+            >
+              <span class="reports-hub__card-title">{{ item.name }}</span>
+              <button
+                type="button"
+                class="reports-hub__star reports-hub__star--active"
+                (click)="toggleFavorite(item.key, $event)"
+              >
+                <mat-icon>star</mat-icon>
+              </button>
+            </button>
+          }
+        </div>
+      </section>
+    }
+
+    @for (group of categorized(); track group[0]) {
+      <section class="reports-hub__section">
+        <h2>{{ group[0] }}</h2>
+        <div class="reports-hub__grid">
+          @for (item of group[1]; track item.key) {
+            <button
+              type="button"
+              class="reports-hub__card"
+              [class.reports-hub__card--locked]="isLocked(item)"
+              [matTooltip]="isLocked(item) ? 'Requires the reports.financial permission' : ''"
+              (click)="open(item)"
+            >
+              <span class="reports-hub__card-title">{{ item.name }}</span>
+              <button
+                type="button"
+                class="reports-hub__star"
+                (click)="toggleFavorite(item.key, $event)"
+              >
+                <mat-icon>{{ isFavorite(item.key) ? 'star' : 'star_border' }}</mat-icon>
+              </button>
+              @if (isLocked(item)) {
+                <mat-icon class="reports-hub__lock">lock</mat-icon>
+              }
+            </button>
+          }
+        </div>
+      </section>
+    }
+  }
+</div>

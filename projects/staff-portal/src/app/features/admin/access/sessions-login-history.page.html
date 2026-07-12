@@ -1,0 +1,165 @@
+<lf-admin-tabs />
+
+<div class="sessions-page">
+  <header class="sessions-page__header">
+    <h1 i18n="@@admin.sessionsHistory.title">Sessions &amp; login history</h1>
+    <p class="sessions-page__note" i18n="@@admin.sessionsHistory.note">
+      Sessions can only be listed per user — there is no view of every active session across the
+      firm at once.
+    </p>
+  </header>
+
+  <mat-form-field appearance="outline" class="sessions-page__user-picker">
+    <mat-label i18n="@@admin.sessionsHistory.userLabel">User</mat-label>
+    <mat-select [formControl]="userControl" (selectionChange)="onUserChange()">
+      <mat-option [value]="null" i18n="@@admin.sessionsHistory.allUsersOption">All users (login history only)</mat-option>
+      @for (user of users(); track user.id) {
+        <mat-option [value]="user.id">{{ userLabel(user) }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <section class="sessions-page__section">
+    <h2 i18n="@@admin.sessionsHistory.sessionsHeading">Sessions</h2>
+
+    @if (!userControl.value) {
+      <lf-empty-state
+        icon="devices"
+        title="Select a user"
+        message="Choose a user above to view their sessions."
+        i18n-title="@@admin.sessionsHistory.selectUserEmptyTitle"
+        i18n-message="@@admin.sessionsHistory.selectUserEmptyMessage"
+      />
+    } @else {
+      @if (sessionsError()) {
+        <p class="sessions-page__error" role="alert">{{ sessionsError() }}</p>
+      }
+
+      @if (sessionsLoading()) {
+        <div class="sessions-page__spinner">
+          <mat-spinner diameter="28" />
+        </div>
+      } @else if (sessions().length === 0) {
+        <lf-empty-state
+          icon="devices_other"
+          title="No sessions"
+          message="This user has no recorded sessions."
+          i18n-title="@@admin.sessionsHistory.noSessionsEmptyTitle"
+          i18n-message="@@admin.sessionsHistory.noSessionsEmptyMessage"
+        />
+      } @else {
+        <table class="sessions-page__table">
+          <thead>
+            <tr>
+              <th i18n="@@admin.sessionsHistory.colIp">IP</th>
+              <th i18n="@@admin.sessionsHistory.colUserAgent">User agent</th>
+              <th i18n="@@admin.sessionsHistory.colExpiresAt">Expires at</th>
+              <th i18n="@@admin.sessionsHistory.colStatus">Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (session of sessions(); track session.id) {
+              <tr>
+                <td>{{ session.ip ?? '—' }}</td>
+                <td class="sessions-page__ua">{{ session.ua ?? '—' }}</td>
+                <td>{{ session.expiresAt | date: 'medium' }}</td>
+                <td>
+                  @if (isSessionActive(session)) {
+                    <span class="sessions-page__status sessions-page__status--active" i18n="@@admin.sessionsHistory.statusActive">Active</span>
+                  } @else {
+                    <span class="sessions-page__status sessions-page__status--revoked" i18n="@@admin.sessionsHistory.statusRevoked">
+                      Revoked{{
+                        session.revokedAt ? ' ' + (session.revokedAt | date: 'short') : ''
+                      }}
+                    </span>
+                  }
+                </td>
+                <td>
+                  <button
+                    mat-stroked-button
+                    type="button"
+                    color="warn"
+                    [disabled]="!isSessionActive(session) || revokingId() === session.id"
+                    (click)="revoke(session)"
+                  >
+                    @if (revokingId() === session.id) {
+                      <mat-spinner diameter="16" />
+                    } @else {
+                      <ng-container i18n="@@admin.sessionsHistory.revokeButton">Revoke</ng-container>
+                    }
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    }
+  </section>
+
+  <section class="sessions-page__section">
+    <h2 i18n="@@admin.sessionsHistory.loginHistoryHeading">Login history</h2>
+
+    <div class="sessions-page__controls">
+      <mat-form-field appearance="outline">
+        <mat-label i18n="@@admin.sessionsHistory.fromLabel">From</mat-label>
+        <input matInput [matDatepicker]="fromPicker" [formControl]="fromControl" />
+        <mat-datepicker-toggle matIconSuffix [for]="fromPicker" />
+        <mat-datepicker #fromPicker />
+      </mat-form-field>
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        [disabled]="loginHistoryLoading()"
+        (click)="searchLoginHistory()"
+      >
+        @if (loginHistoryLoading()) {
+          <mat-spinner diameter="20" />
+        } @else {
+          <ng-container i18n="@@admin.sessionsHistory.searchButton">Search</ng-container>
+        }
+      </button>
+    </div>
+
+    @if (loginHistoryError()) {
+      <p class="sessions-page__error" role="alert">{{ loginHistoryError() }}</p>
+    }
+
+    @if (loginHistoryLoaded() && !loginHistoryLoading()) {
+      @if (loginHistory().length === 0) {
+        <lf-empty-state
+          icon="history"
+          title="No login history"
+          message="No matching login attempts were found."
+          i18n-title="@@admin.sessionsHistory.noLoginHistoryEmptyTitle"
+          i18n-message="@@admin.sessionsHistory.noLoginHistoryEmptyMessage"
+        />
+      } @else {
+        <table class="sessions-page__table">
+          <thead>
+            <tr>
+              <th i18n="@@admin.sessionsHistory.colAt">At</th>
+              <th i18n="@@admin.sessionsHistory.colIp2">IP</th>
+              <th i18n="@@admin.sessionsHistory.colUserAgent2">User agent</th>
+              <th i18n="@@admin.sessionsHistory.colResult">Result</th>
+              <th i18n="@@admin.sessionsHistory.colFailureReason">Failure reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (entry of loginHistory(); track entry.id) {
+              <tr>
+                <td>{{ entry.at | date: 'medium' }}</td>
+                <td>{{ entry.ip ?? '—' }}</td>
+                <td class="sessions-page__ua">{{ entry.ua ?? '—' }}</td>
+                <td>{{ entry.result }}</td>
+                <td>{{ entry.failureReason ?? '—' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    }
+  </section>
+</div>

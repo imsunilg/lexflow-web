@@ -16,7 +16,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { AuthService, NotificationsService, PermissionService, TimerService } from 'shared';
+import {
+  AuthService,
+  NotificationsService,
+  OfflineBannerComponent,
+  PermissionService,
+  TimerService,
+} from 'shared';
+import { AiAssistantDockComponent } from '../features/ai/ai-assistant-dock.component';
+import { ChatDockComponent } from '../features/communication/chat/chat-dock.component';
+import { TimerChipComponent } from '../features/time/timer/timer-chip.component';
 import { NAV_ITEMS } from './nav-items';
 import { SearchOverlayComponent } from './search-overlay.component';
 
@@ -39,6 +48,10 @@ import { SearchOverlayComponent } from './search-overlay.component';
     MatListModule,
     MatMenuModule,
     MatTooltipModule,
+    ChatDockComponent,
+    TimerChipComponent,
+    AiAssistantDockComponent,
+    OfflineBannerComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './shell.component.html',
@@ -61,9 +74,6 @@ export class ShellComponent {
   );
 
   readonly currentUser = this.permissionService.currentUser;
-
-  readonly runningTimer = this.timerService.current;
-  readonly timerDisplay = computed(() => formatElapsed(this.timerService.elapsedSeconds()));
 
   readonly notifications = this.notificationsService.notifications;
   readonly unreadCount = this.notificationsService.unreadCount;
@@ -111,11 +121,4 @@ export class ShellComponent {
       error: () => this.router.navigateByUrl('/login'),
     });
   }
-}
-
-function formatElapsed(totalSeconds: number): string {
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = Math.floor(totalSeconds % 60);
-  return [hours, minutes, seconds].map((n) => String(n).padStart(2, '0')).join(':');
 }
