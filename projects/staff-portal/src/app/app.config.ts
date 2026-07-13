@@ -9,9 +9,15 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
-import { authInterceptor, errorEnvelopeInterceptor, idempotencyKeyInterceptor } from 'shared';
+import {
+  API_BASE_URL,
+  authInterceptor,
+  errorEnvelopeInterceptor,
+  idempotencyKeyInterceptor,
+} from 'shared';
 
 import { routes } from './app.routes';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +26,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideNativeDateAdapter(),
+    { provide: API_BASE_URL, useValue: environment.apiBaseUrl },
     provideHttpClient(
       withInterceptors([authInterceptor, errorEnvelopeInterceptor, idempotencyKeyInterceptor]),
     ),

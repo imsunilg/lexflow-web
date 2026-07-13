@@ -17,6 +17,7 @@ import {
 } from 'shared';
 
 import { routes } from './app.routes';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,8 +27,9 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideNativeDateAdapter(),
     // Separate JWT audience `portal` per PRD §20(3)/Module 17 — distinct base path
-    // from the staff app's `/api/v1`.
-    { provide: API_BASE_URL, useValue: '/api/portal/v1' },
+    // from the staff app's `/api/v1`. `environment.apiBaseUrl` is relative in every
+    // configuration except `staging` (see environments/environment.staging.ts).
+    { provide: API_BASE_URL, useValue: environment.apiBaseUrl },
     provideHttpClient(
       withInterceptors([authInterceptor, errorEnvelopeInterceptor, idempotencyKeyInterceptor]),
     ),

@@ -187,3 +187,67 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "All required checks passed — safe to deploy."
+
+  # PRD §38: "merge to main -> staging auto-deploy." This deploys web-only
+  # changes to the shared staging environment independently of
+  # lexflow-api/lexflow-database's own pipelines — a change here shouldn't
+  # need to wait on an unrelated API/DB pipeline to reach staging. This is
+  # NOT the release gate: promoting to blue-green PRODUCTION is decided by
+  # lexflow-api's .github/workflows/release.yml, which redeploys web to this
+  # same staging environment itself (see that file) and only proceeds past
+  # its D-18/C-15 gate once that redeploy, the API's, and the DB's are all
+  # current for the exact commit being released — so a green run here is a
+  # necessary but not sufficient signal for "safe to release."
+  deploy-staging:
+    name: Deploy both apps to Azure Static Web Apps (staging)
+    needs: deploy-gate
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+
+      # Bakes the real staging API URL into the built JS (see
+      # projects/*/src/environments/environment.staging.ts for why this is a
+      # placeholder-substitution rather than a runtime-read env var — static
+      # hosting has no server to read process.env from).
+      - name: Build staff-portal (staging)
+        run: npm run build:staff-portal:staging
+      - name: Substitute staging API URL (staff-portal)
+        run: |
+          grep -rl '__LEXFLOW_STAGING_API_URL__' dist/staff-portal/browser/*.js | \
+            xargs -r sed -i "s|__LEXFLOW_STAGING_API_URL__|${{ secrets.LEXFLOW_STAGING_API_URL }}|g"
+
+      - name: Build client-portal (staging)
+        run: npm run build:client-portal:staging
+      - name: Substitute staging API URL (client-portal)
+        run: |
+          grep -rl '__LEXFLOW_STAGING_API_URL__' dist/client-portal/browser/*.js | \
+            xargs -r sed -i "s|__LEXFLOW_STAGING_API_URL__|${{ secrets.LEXFLOW_STAGING_API_URL }}|g"
+
+      - name: Deploy staff-portal
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_STAFF }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+          app_location: dist/staff-portal/browser
+          output_location: ""
+          skip_app_build: true
+          deployment_environment: staging
+
+      - name: Deploy client-portal
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CLIENT }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+          app_location: dist/client-portal/browser
+          output_location: ""
+          skip_app_build: true
+          deployment_environment: staging

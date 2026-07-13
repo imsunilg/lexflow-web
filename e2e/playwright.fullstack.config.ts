@@ -3,6 +3,16 @@ import { defineConfig, devices } from '@playwright/test';
 const STAFF_PORTAL_PORT = 4210;
 const CLIENT_PORTAL_PORT = 4310;
 
+// Set both to point this same suite at a real deployed environment (e.g.
+// staging) instead of a locally-booted docker-compose stack — see
+// lexflow-api's .github/workflows/release.yml `d18-staging-e2e` job, which
+// is the one real caller of this. Implies PW_SKIP_WEBSERVER=1 (there is
+// nothing local to boot when pointing at a remote deployment); set that
+// explicitly too so the intent is visible at the call site rather than
+// inferred here.
+const staffBaseUrl = process.env['PW_STAFF_BASE_URL'] || `http://localhost:${STAFF_PORTAL_PORT}`;
+const clientBaseUrl = process.env['PW_CLIENT_BASE_URL'] || `http://localhost:${CLIENT_PORTAL_PORT}`;
+
 /**
  * PRD §37: "E2E (Playwright: 40 critical journeys ...)". Deliberately a
  * SEPARATE config from `playwright.config.ts` (the fast, mocked-API
@@ -18,7 +28,8 @@ const CLIENT_PORTAL_PORT = 4310;
  * `localhost:8080` — the port docker-compose.yml exposes the API on. Set
  * PW_SKIP_WEBSERVER=1 to attach to dev servers you're already running
  * (e.g. `ng serve staff-portal --proxy-config e2e/proxy.fullstack.conf.json`)
- * instead.
+ * instead — or to a real deployed environment via PW_STAFF_BASE_URL/
+ * PW_CLIENT_BASE_URL above.
  */
 export default defineConfig({
   testDir: './tests-fullstack',
@@ -35,12 +46,12 @@ export default defineConfig({
     {
       name: 'staff-portal-fullstack',
       testDir: './tests-fullstack/staff-portal',
-      use: { ...devices['Desktop Chrome'], baseURL: `http://localhost:${STAFF_PORTAL_PORT}` },
+      use: { ...devices['Desktop Chrome'], baseURL: staffBaseUrl },
     },
     {
       name: 'client-portal-fullstack',
       testDir: './tests-fullstack/client-portal',
-      use: { ...devices['Desktop Chrome'], baseURL: `http://localhost:${CLIENT_PORTAL_PORT}` },
+      use: { ...devices['Desktop Chrome'], baseURL: clientBaseUrl },
     },
   ],
   webServer: process.env['PW_SKIP_WEBSERVER']
@@ -48,14 +59,14 @@ export default defineConfig({
     : [
         {
           command: `npx ng serve staff-portal --port ${STAFF_PORTAL_PORT} --proxy-config e2e/proxy.fullstack.conf.json`,
-          url: `http://localhost:${STAFF_PORTAL_PORT}`,
+          url: staffBaseUrl,
           reuseExistingServer: !process.env['CI'],
           cwd: '..',
           timeout: 180_000,
         },
         {
           command: `npx ng serve client-portal --port ${CLIENT_PORTAL_PORT} --proxy-config e2e/proxy.fullstack.conf.json`,
-          url: `http://localhost:${CLIENT_PORTAL_PORT}`,
+          url: clientBaseUrl,
           reuseExistingServer: !process.env['CI'],
           cwd: '..',
           timeout: 180_000,
